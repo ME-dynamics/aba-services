@@ -15,9 +15,12 @@
     "test": "jest"
   },
   "devDependencies": {
+    "@types/busboy": "^0.2.4",
     "@types/jest": "27.0.1",
+    "@types/minio": "^7.0.10",
     "@types/nanoid": "3.0.0",
-    "@types/node": "14.14.31",
+    "@types/node": "14.14.34",
+    "@types/sharp": "^0.28.6",
     "@types/uuid": "8.3.1",
     "@typescript-eslint/eslint-plugin": "4.30.0",
     "@typescript-eslint/parser": "4.30.0",
@@ -29,15 +32,23 @@
     "jest": "27.1.0",
     "prettier": "2.3.2",
     "rimraf": "3.0.2",
+    "sonarqube-scanner": "^2.8.1",
     "ts-jest": "27.0.5",
     "ts-node-dev": "1.1.8",
     "typedoc": "0.21.9",
     "typescript": "4.4.2"
   },
   "dependencies": {
-    "aba-node": "0.2.6",
+    "aba-node": "0.2.8",
+    "argon2": "^0.28.2",
+    "fastify-multipart": "4.0.7",
+    "file-type": "16.5.3",
+    "jose": "^3.15.5",
+    "libphonenumber-js": "^1.9.26",
     "make-promises-safe": "5.1.0",
+    "minio": "7.0.19",
     "nanoid": "3.1.25",
+    "sharp": "0.29.0",
     "uuid": "8.3.2"
   }
 }
