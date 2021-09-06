@@ -5,3 +5,4 @@ export { rowToRole } from "./rowToRole";
 export { buildSignJwt } from "./signJwt";
 export { buildOtpGen } from "./otpGen";
 export { buildTokenGen } from "./tokenGen";
+export { validatePhoneNumber } from "./validatePhoneNumber"

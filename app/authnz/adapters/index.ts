@@ -106,8 +106,9 @@ export const tokenGen = buildTokenGen({
   hash,
   nanoid,
   daysFromNow: time.daysFromNow,
-  minutesFromNow: time.minutesFromNow,
 });
+
+export { validatePhoneNumber } from "./utils"
 // init secret
 
 export const initSecret = buildInitSecret({
@@ -121,4 +122,6 @@ export const initSecret = buildInitSecret({
 
 export const createUser = buildCreateUser();
 export const sendOtpBySms = buildSendOtpBySms();
+
+
 

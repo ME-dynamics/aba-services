@@ -1,6 +1,6 @@
 import { queryGen } from "aba-node";
 
-import { IBuildInsert, IInsertSecretKeys } from "../../types";
+import { adaptersTypes } from "../../types";
 
 function insertQueryGen(): string {
   const { insertQuery } = queryGen;
@@ -19,11 +19,11 @@ function insertQueryGen(): string {
   return query;
 }
 
-export function buildInsertSecretKeys(args: IBuildInsert) {
+export function buildInsertSecretKeys(args: adaptersTypes.IBuildInsert) {
   const { insert } = args;
   const errorPath = "authnz, adapters, insert secret keys";
   const query = insertQueryGen();
-  return async function insertSecretKeys(keys: IInsertSecretKeys) {
+  return async function insertSecretKeys(keys: adaptersTypes.IInsertSecretKeys) {
     const { privateKey, publicKey } = keys;
 
     const privateResult = await insert({

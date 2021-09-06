@@ -1,6 +1,6 @@
-import { IBuildOtpGen } from "../../types";
+import { adaptersTypes } from "../../types";
 
-export function buildOtpGen(args: IBuildOtpGen) {
+export function buildOtpGen(args: adaptersTypes.IBuildOtpGen) {
   const { hash, minutesFromNow, nanoid, secureRandomNumber } = args;
   const errorPath = "authnz, adapters, utils, otp gen";
   return async function otpGen() {

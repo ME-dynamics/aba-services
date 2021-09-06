@@ -1,5 +1,5 @@
 import { queryGen } from "aba-node";
-import { IBuildFindToken, IFindToken, IMadeTokenObject } from "../../types";
+import { adaptersTypes, entityTypes } from "../../types";
 
 /**
  * generates query for find  token,
@@ -19,13 +19,13 @@ function selectQueryGen(): string {
   return query;
 }
 
-export function buildFindToken(args: IBuildFindToken) {
+export function buildFindToken(args: adaptersTypes.IBuildFindToken) {
   const { select, rowToToken } = args;
   const errorPath = "authnz, adapters, find token";
   const query = selectQueryGen();
   return async function findToken(
-    info: IFindToken
-  ): Promise<IMadeTokenObject | undefined> {
+    info: adaptersTypes.IFindToken
+  ): Promise<entityTypes.IMadeTokenObject | undefined> {
     const { otpId } = info;
     const result = await select({
       query,

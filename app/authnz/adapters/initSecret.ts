@@ -1,9 +1,9 @@
 import { ErrorFactory } from "aba-node";
-import { IBuildInitSecret, IKey } from "../types";
+import { adaptersTypes } from "../types";
 
 
 
-export function buildInitSecret(args: IBuildInitSecret) {
+export function buildInitSecret(args: adaptersTypes.IBuildInitSecret) {
   const { findSecretKeys, fromKeyLike, generateKey, insertSecretKeys } = args;
   const errorPath = "authnz, adapters, init secret";
 
@@ -30,7 +30,7 @@ export function buildInitSecret(args: IBuildInitSecret) {
         path: errorPath
       })
     }
-    const privateData: IKey = {
+    const privateData: adaptersTypes.IKey = {
       keyType: "private",
       kid: 1,
       kty: parsedPrivateKey.kty,
@@ -48,7 +48,7 @@ export function buildInitSecret(args: IBuildInitSecret) {
         path: errorPath
       })
     }
-    const publicData: IKey = {
+    const publicData: adaptersTypes.IKey = {
       keyType: "public",
       kid: 1,
       kty: parsedPublicKey.kty,

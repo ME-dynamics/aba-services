@@ -1,5 +1,5 @@
 import { queryGen } from "aba-node";
-import { IMadeRoleObject, IBuildInsert } from "../../types";
+import { adaptersTypes, entityTypes } from "../../types";
 
 function insertQueryGen(): string {
   const { insertQuery } = queryGen;
@@ -28,11 +28,11 @@ function insertQueryGen(): string {
   return query;
 }
 
-export function buildInsertRole(args: IBuildInsert) {
+export function buildInsertRole(args: adaptersTypes.IBuildInsert) {
   const { insert } = args;
   const errorPath = "authnz, adapters, insert role";
   const query = insertQueryGen();
-  return async function insertRole(roleObject: IMadeRoleObject): Promise<void> {
+  return async function insertRole(roleObject: entityTypes.IMadeRoleObject): Promise<void> {
     const {
       otpId,
       admin,

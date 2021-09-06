@@ -1,5 +1,5 @@
 import { queryGen, undefinedToNull } from "aba-node";
-import { IMadeOtpObject, IBuildInsert } from "../../types";
+import { adaptersTypes, entityTypes } from "../../types";
 
 /**
  * insert query generator for insert otp function
@@ -30,11 +30,11 @@ function insertQueryGen(): string {
   return query;
 }
 
-export function buildInsertOtp(args: IBuildInsert) {
+export function buildInsertOtp(args: adaptersTypes.IBuildInsert) {
   const { insert } = args;
   const errorPath = "authnz, adapters, insert otp";
   const query = insertQueryGen();
-  return async function insertOtp(otpObject: IMadeOtpObject): Promise<boolean> {
+  return async function insertOtp(otpObject: entityTypes.IMadeOtpObject): Promise<boolean> {
     const {
       id,
       deviceId,

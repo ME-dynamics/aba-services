@@ -1,5 +1,5 @@
 import { queryGen, ErrorFactory } from "aba-node";
-import { IBuildFindPrivateKey, IFindPrivateKeyResult } from "../../types";
+import { adaptersTypes } from "../../types";
 
 
 function selectQueryGen():string {
@@ -19,13 +19,13 @@ function selectQueryGen():string {
 
 
 
-export function buildFindPrivateKey(args: IBuildFindPrivateKey) {
+export function buildFindPrivateKey(args: adaptersTypes.IBuildFindPrivateKey) {
   const { select, rowToKey, parseKey } = args;
   const errorPath = "authnz, adapters, find secret keys";
   const query = selectQueryGen();
   return async function findPrivateKey(
 
-  ): Promise<IFindPrivateKeyResult> {
+  ): Promise<adaptersTypes.IFindPrivateKeyResult> {
     const privateRow = await select({
       query,
       params: { kid: 1 },

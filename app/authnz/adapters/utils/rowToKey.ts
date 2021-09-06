@@ -1,8 +1,8 @@
 import { nullToUndefined, types } from "aba-node";
-import { IKey } from "../../types";
+import { adaptersTypes } from "../../types";
 
 
-export function rowToKey(row: types.tRow): IKey {
+export function rowToKey(row: types.tRow): adaptersTypes.IKey {
   return {
     keyType: row.get("key_type"),
     kid: row.get("kid"),

@@ -1,5 +1,5 @@
 import { queryGen } from "aba-node";
-import { IBuildFindRole, IMadeRoleObject } from "../../types";
+import { adaptersTypes, entityTypes } from "../../types";
 
 function selectQueryGen(): string {
   const { selectQuery, operators } = queryGen;
@@ -13,13 +13,13 @@ function selectQueryGen(): string {
   return query;
 }
 
-export function buildFindRole(args: IBuildFindRole) {
+export function buildFindRole(args: adaptersTypes.IBuildFindRole) {
   const { select, rowToRole } = args;
   const errorPath = "authnz, adapters, find role";
   const query = selectQueryGen();
   return async function findRole(
     otpId: string
-  ): Promise<IMadeRoleObject | undefined> {
+  ): Promise<entityTypes.IMadeRoleObject | undefined> {
     const result = await select({
       query,
       params: { otp_id: otpId },

@@ -1,5 +1,5 @@
 import { queryGen } from "aba-node";
-import { IBuildFindOtpBy, IMadeOtpObject } from "../../types";
+import { adaptersTypes, entityTypes } from "../../types";
 
 /**
  * generates query for find otp by phone,
@@ -18,13 +18,13 @@ function selectQueryGen(): string {
   return query;
 }
 
-export function buildFindOtpByPhone(args: IBuildFindOtpBy) {
+export function buildFindOtpByPhone(args: adaptersTypes.IBuildFindOtpBy) {
   const { select, rowToOtp } = args;
   const errorPath = "authnz service, adapters, find by phone";
   const query = selectQueryGen();
   return async function findOtpByPhone(
     phoneNumber: string
-  ): Promise<IMadeOtpObject | undefined> {
+  ): Promise<entityTypes.IMadeOtpObject | undefined> {
     const result = await select({
       query,
       params: { phone_number: phoneNumber },

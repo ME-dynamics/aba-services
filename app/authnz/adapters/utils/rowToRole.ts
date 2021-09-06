@@ -1,7 +1,7 @@
 import { types } from "aba-node";
-import { IMadeRoleObject } from "../../types";
+import { entityTypes } from "../../types";
 
-export function rowToRole(row: types.tRow): IMadeRoleObject {
+export function rowToRole(row: types.tRow): entityTypes.IMadeRoleObject {
   return {
     otpId: row.get("otp_id"),
     admin: row.get("admin"),

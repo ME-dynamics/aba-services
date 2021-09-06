@@ -1,7 +1,7 @@
 import { types, nullToUndefined } from "aba-node";
-import { IMadeTokenObject } from "../../types";
+import { entityTypes } from "../../types";
 
-export function rowToToken(row: types.tRow): IMadeTokenObject {
+export function rowToToken(row: types.tRow): entityTypes.IMadeTokenObject {
   return {
     otpId: row.get("otp_id"),
     refreshToken: row.get("refresh_token"),

@@ -1,7 +1,7 @@
 import { nullToUndefined, types } from "aba-node";
-import { IMadeOtpObject } from "../../types";
+import { entityTypes } from "../../types";
 
-export function rowToOtp(row: types.tRow): IMadeOtpObject {
+export function rowToOtp(row: types.tRow): entityTypes.IMadeOtpObject {
   return {
     id: row.get("id"),
     deviceId: row.get("device_id"),

@@ -1,7 +1,7 @@
 import { queryGen } from "aba-node";
-import { IBuildInit } from "../../types";
+import { adaptersTypes } from "../../types";
 
-export function buildInitDb(args: IBuildInit) {
+export function buildInitDb(args: adaptersTypes.IBuildInit) {
   const { init } = args;
   const errorPath = "authnz service, adapters, init db";
   const { createTableQuery, createIndexQuery } = queryGen;

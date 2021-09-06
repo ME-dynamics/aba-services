@@ -1,5 +1,5 @@
 import { queryGen, undefinedToNull } from "aba-node";
-import { IBuildInsert, IMadeTokenObject } from "../../types";
+import { adaptersTypes, entityTypes } from "../../types";
 
 function insertQueryGen(): string {
   const { insertQuery } = queryGen;
@@ -25,12 +25,12 @@ function insertQueryGen(): string {
   return query;
 }
 
-export function buildInsertToken(args: IBuildInsert) {
+export function buildInsertToken(args: adaptersTypes.IBuildInsert) {
   const { insert } = args;
   const errorPath = "authnz, adapters, insert token";
   const query = insertQueryGen();
   return async function insert_token(
-    tokenObject: IMadeTokenObject
+    tokenObject: entityTypes.IMadeTokenObject
   ): Promise<boolean> {
     const {
       otpId,

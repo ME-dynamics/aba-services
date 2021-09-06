@@ -1,5 +1,5 @@
-import { IBuildSignJwt, IJwtPayload, ISignJwtResult } from "../../types";
-import { jwtIssuer } from "../../config";
+import { adaptersTypes } from "../../types";
+import { jwtIssuer, jwtExpires } from "../../config";
 
 /**
  * jose signer to create a jwt
@@ -9,15 +9,15 @@ import { jwtIssuer } from "../../config";
  * @param args jwt payload
  * @returns
  */
-export function buildSignJwt(args: IBuildSignJwt) {
+export function buildSignJwt(args: adaptersTypes.IBuildSignJwt) {
   const { Signer, findPrivateKey, nanoid, minutesFromNow } = args;
   const errorPath = "authnz, adapters, utils, sign jwt";
   return async function signJwt(
-    jwtPayload: IJwtPayload
-  ): Promise<ISignJwtResult> {
+    jwtPayload: adaptersTypes.IJwtPayload
+  ): Promise<adaptersTypes.ISignJwtResult> {
     const { privateKey } = await findPrivateKey();
     const jwtKey = nanoid(6);
-    const exp = minutesFromNow(13, errorPath) 
+    const exp = minutesFromNow(jwtExpires, errorPath) 
     const {
       userId,
       admin,
