@@ -25,3 +25,15 @@ export interface IPostRefresh {
   };
 }
 export type tPostRefresh = types.tRequest<IPostRefresh>;
+
+export interface IBuildPostCreateProvider {
+  validatePhoneNumber: (phoneNumber: string) => boolean;
+}
+
+export interface IPostCreateProvider {
+  Body: {
+    providerPhoneNumber: string;
+  };
+}
+
+export type tPostCreateProvider = types.tRequest<IPostCreateProvider>;
