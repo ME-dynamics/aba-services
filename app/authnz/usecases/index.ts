@@ -23,6 +23,7 @@ import { buildPasswordlessStart } from "./passwordlessStart";
 import { buildPasswordlessVerify } from "./passwordlessVerify";
 import { buildRefresh } from "./refresh";
 import { buildRetrievePublicKey } from "./retrievePublicKey";
+import { buildCreateProvider } from "./createProvider";
 
 export const passwordlessStart = buildPasswordlessStart({
   findOtpByPhone,
@@ -54,3 +55,10 @@ export const refresh = buildRefresh({
 });
 
 export const retrievePublicKey = buildRetrievePublicKey({ findSecretKeys });
+
+export const createProvider = buildCreateProvider({
+  findOtpByPhone,
+  findRole,
+  insertOtp,
+  insertRole,
+});
