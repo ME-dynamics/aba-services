@@ -1,8 +1,8 @@
 import { types } from "aba-node";
 import { postPasswordlessVerify } from "../controllers";
-import { tPostPasswordlessVerify } from "../types";
+import { controllerTypes } from "../types";
 export async function passwordlessVerify(
-  request: tPostPasswordlessVerify,
+  request: controllerTypes.tPostPasswordlessVerify,
   reply: types.tReply
 ) {
   try {

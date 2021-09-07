@@ -1,8 +1,8 @@
 import { types } from "aba-node";
 import { postPasswordlessStart } from "../controllers";
-import { tPostPasswordlessStart } from "../types";
+import { controllerTypes } from "../types";
 export async function passwordlessStart(
-  request: tPostPasswordlessStart,
+  request: controllerTypes.tPostPasswordlessStart,
   reply: types.tReply
 ) {
   try {
