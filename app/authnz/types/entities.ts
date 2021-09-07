@@ -64,9 +64,6 @@ export interface IMadeOtp {
     remove: () => void;
     restore: () => void;
   };
-  // action: {
-  //   generateOtp: () => Promise<IOtpGen>;
-  // };
   object: () => IMadeOtpObject;
 }
 
@@ -129,9 +126,9 @@ export type tRole =
 
 // AL ==> Access level
 
-export interface IBuildRole {
-  // empty
-}
+// export interface IBuildRole {
+//   // empty
+// }
 export interface IRole {
   otpId: string;
   admin: boolean;
@@ -169,6 +166,7 @@ export interface IMadeRole {
     customerAL: () => number;
     supportAL: () => number;
     accountantAL: () => number;
+    role: () => tRole;
     createdAt: () => Date;
     modifiedAt: () => Date;
     softDeleted: () => boolean;
