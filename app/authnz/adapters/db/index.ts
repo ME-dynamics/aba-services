@@ -3,7 +3,6 @@ export { buildFindOtpByToken } from "./findOtpByToken";
 export { buildFindPrivateKey } from "./findPrivateKey";
 export { buildFindSecretKeys } from "./findSecretKeys";
 export { buildFindRole } from "./findRole"
-export { buildFindToken } from "./findToken";
 export { buildFindTokenByUserId } from "./findTokenByUserId";
 export { buildInitDb } from "./initDb";
 export { buildInsertOtp } from "./insertOtp";

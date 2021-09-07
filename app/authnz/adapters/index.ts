@@ -10,7 +10,6 @@ import {
   buildFindOtpByToken,
   buildFindPrivateKey,
   buildFindSecretKeys,
-  buildFindToken,
   buildFindTokenByUserId,
   buildInitDb,
   buildInsertOtp,
@@ -65,10 +64,6 @@ export const findPrivateKey = buildFindPrivateKey({
 export const findSecretKeys = buildFindSecretKeys({
   select: dbClient.select,
   rowToKey,
-});
-export const findToken = buildFindToken({
-  select: dbClient.select,
-  rowToToken,
 });
 export const findTokenByUserId = buildFindTokenByUserId({
   select: dbClient.select,

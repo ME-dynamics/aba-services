@@ -13,6 +13,15 @@ export interface IBuildInit {
   init: types.tDbInitFunc;
 }
 
+// initialize admin
+
+export interface IBuildInitAdmin {
+  insert: types.tDbUpsertFunc;
+  findOtpByPhone: tFindOtpByPhoneFunc;
+  findRole: tFindRoleFunc;
+  // findAdmin: 
+}
+
 // find otp by phone | token
 
 export type tFindOtpByPhoneFunc = (
@@ -40,16 +49,7 @@ export interface IBuildInsert {
 // find token
 
 export type tRowToTokenFunc = (row: types.tRow) => IMadeTokenObject;
-export interface IBuildFindToken {
-  select: types.tDbSelectFunc;
-  rowToToken: tRowToTokenFunc;
-}
-export interface IFindToken {
-  otpId: string;
-}
-export type tFindTokenFunc = (
-  info: IFindToken
-) => Promise<IMadeTokenObject | undefined>;
+
 
 export type tInsertTokenFunc = (
   tokenObject: IMadeTokenObject
