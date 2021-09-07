@@ -3,6 +3,7 @@ import {
   startAuthnzServer,
   initDb as initAuthnzDb,
   initSecret as initAuthnzSecret,
+  initAdmin,
 } from "./app/authnz";
 import {
   initDb as initStorageDb,
@@ -15,6 +16,7 @@ export async function startService() {
   try {
     await initAuthnzDb();
     await initAuthnzSecret();
+    await initAdmin();
     await initStorageDb();
     await initPublicBucket();
     startAuthnzServer(app);

@@ -38,25 +38,31 @@ export interface IBuildInsert {
 }
 
 // find token
-
-export type tRowToTokenFunc = (row: types.tRow) => IMadeTokenObject;
-export interface IBuildFindToken {
+export interface IBuildFindTokeByUserId {
   select: types.tDbSelectFunc;
   rowToToken: tRowToTokenFunc;
 }
-export interface IFindToken {
-  otpId: string;
-}
-export type tFindTokenFunc = (
-  info: IFindToken
-) => Promise<IMadeTokenObject | undefined>;
+export type tRowToTokenFunc = (row: types.tRow) => IMadeTokenObject;
 
 export type tInsertTokenFunc = (
   tokenObject: IMadeTokenObject
 ) => Promise<boolean>;
 
-// find token by refresh token
+// find admin role
 
+export interface IBuildFindAdmins {
+  select: types.tDbSelectFunc;
+  rowToRole: tRowToRoleFunc;
+}
+
+export type tFindAdminsFunc = () => Promise<IMadeRoleObject[] | undefined>;
+
+// delete admin
+
+export interface IBuildDeleteAdmin {
+  remove: types.tDbDeleteFunc;
+}
+export type tDeleteAdminFunc = (otpId: string) => Promise<void>;
 // find private secret key
 export interface ISecretKey {
   kty: string;
