@@ -19,6 +19,7 @@ const response = {
         .prop("refreshToken", fluentSchema.string().required())
         .prop("refreshTokenExpiresAt", fluentSchema.number().required())
         .prop("jwtTokenExpiresAt", fluentSchema.number().required())
+        .prop("role", fluentSchema.string().required())
     ),
   [statusCodes.BAD_REQUEST]: errorSchema,
   [statusCodes.INTERNAL_SERVER_ERROR]: errorSchema,
