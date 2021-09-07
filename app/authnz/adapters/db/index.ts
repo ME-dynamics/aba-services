@@ -3,10 +3,11 @@ export { buildFindOtpByToken } from "./findOtpByToken";
 export { buildFindPrivateKey } from "./findPrivateKey";
 export { buildFindSecretKeys } from "./findSecretKeys";
 export { buildFindRole } from "./findRole"
-export { buildFindToken } from "./findToken";
 export { buildFindTokenByUserId } from "./findTokenByUserId";
+export { buildFindAdmins } from "./findAdmins"
 export { buildInitDb } from "./initDb";
 export { buildInsertOtp } from "./insertOtp";
 export { buildInsertSecretKeys } from "./insertSecretKeys";
 export { buildInsertToken } from "./insertToken";
 export { buildInsertRole } from "./insertRole";
+export { buildDeleteAdmin } from "./deleteAdmin"

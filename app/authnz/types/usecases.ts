@@ -6,13 +6,14 @@ import {
   tFindOtpByTokenFunc,
   tSignJwtFunc,
   tCreateUserFunc,
-  tFindTokenFunc,
   tTokenGenFunc,
   tInsertTokenFunc,
   tFindTokenByUserIdFunc,
   tInsertRoleFunc,
   tFindRoleFunc,
   tFindSecretKeysFunc,
+  tDeleteAdminFunc,
+  tFindAdminsFunc,
 } from "./adapters";
 import { otpGen } from "../adapters";
 import { tRole } from "./entities";
@@ -39,7 +40,7 @@ export interface IBuildPasswordlessVerify {
   findOtpByToken: tFindOtpByTokenFunc;
   signJwt: tSignJwtFunc;
   verifyHash: typeof verify;
-  findToken: tFindTokenFunc;
+  findTokenByUserId: tFindTokenByUserIdFunc;
   findRole: tFindRoleFunc;
   tokenGen: tTokenGenFunc;
   createUser: tCreateUserFunc;
@@ -115,4 +116,14 @@ export interface ICreateProvider {
 export interface ICreateProviderResult {
   otpId: string;
   phoneNumber: string;
+}
+
+// initialize admin
+
+export interface IBuildInitAdmin {
+  findOtpByPhone: tFindOtpByPhoneFunc;
+  insertOtp: tInsertOtpFunc;
+  insertRole: tInsertRoleFunc;
+  deleteAdmin: tDeleteAdminFunc;
+  findAdmins: tFindAdminsFunc;
 }

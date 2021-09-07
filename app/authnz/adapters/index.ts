@@ -10,7 +10,6 @@ import {
   buildFindOtpByToken,
   buildFindPrivateKey,
   buildFindSecretKeys,
-  buildFindToken,
   buildFindTokenByUserId,
   buildInitDb,
   buildInsertOtp,
@@ -18,6 +17,8 @@ import {
   buildInsertToken,
   buildFindRole,
   buildInsertRole,
+  buildDeleteAdmin,
+  buildFindAdmins,
 } from "./db";
 import {
   buildSignJwt,
@@ -66,10 +67,6 @@ export const findSecretKeys = buildFindSecretKeys({
   select: dbClient.select,
   rowToKey,
 });
-export const findToken = buildFindToken({
-  select: dbClient.select,
-  rowToToken,
-});
 export const findTokenByUserId = buildFindTokenByUserId({
   select: dbClient.select,
   rowToToken,
@@ -86,6 +83,12 @@ export const insertSecretKeys = buildInsertSecretKeys({
   insert: dbClient.insert,
 });
 export const insertToken = buildInsertToken({ insert: dbClient.insert });
+
+export const findAdmins = buildFindAdmins({
+  select: dbClient.select,
+  rowToRole,
+});
+export const deleteAdmin = buildDeleteAdmin({ remove: dbClient.delete });
 
 // utils
 export const signJwt = buildSignJwt({
@@ -108,7 +111,7 @@ export const tokenGen = buildTokenGen({
   daysFromNow: time.daysFromNow,
 });
 
-export { validatePhoneNumber } from "./utils"
+export { validatePhoneNumber } from "./utils";
 // init secret
 
 export const initSecret = buildInitSecret({
@@ -122,6 +125,3 @@ export const initSecret = buildInitSecret({
 
 export const createUser = buildCreateUser();
 export const sendOtpBySms = buildSendOtpBySms();
-
-
-
