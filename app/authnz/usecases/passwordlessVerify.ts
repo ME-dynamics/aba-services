@@ -1,13 +1,11 @@
 import { makeOtp, makeToken, makeRole } from "../entities";
 import { httpResultSuccess, httpResultClientError } from "aba-node";
 import {
-  IBuildPasswordlessVerify,
-  IPasswordlessVerify,
-  IPasswordlessVerifyResult,
-  IRole,
+  usecaseTypes,
+  entityTypes
 } from "../types";
 
-export function buildPasswordlessVerify(args: IBuildPasswordlessVerify) {
+export function buildPasswordlessVerify(args: usecaseTypes.IBuildPasswordlessVerify) {
   const {
     findOtpByToken,
     signJwt,
@@ -22,7 +20,7 @@ export function buildPasswordlessVerify(args: IBuildPasswordlessVerify) {
   } = args;
   const { ok } = httpResultSuccess;
   const { badRequest, forbidden } = httpResultClientError;
-  function roleRawObj(otpId: string): IRole {
+  function roleInput(otpId: string): entityTypes.IRole {
     return {
       otpId,
       admin: false,
@@ -42,7 +40,7 @@ export function buildPasswordlessVerify(args: IBuildPasswordlessVerify) {
       softDeleted: false,
     };
   }
-  return async function passwordlessVerify(info: IPasswordlessVerify) {
+  return async function passwordlessVerify(info: usecaseTypes.IPasswordlessVerify) {
     const { otpCode, otpToken } = info;
     const otpFound = await findOtpByToken(otpToken);
     if (!otpFound) {
@@ -70,16 +68,8 @@ export function buildPasswordlessVerify(args: IBuildPasswordlessVerify) {
     }
     otp.set.phoneConfirmed();
     const roleExists = await findRole(otp.get.id());
-    if (!roleExists) {
-      const role = makeRole(roleRawObj(otp.get.id()));
-      await insertRole(role.object());
-    }
-    // // check if user is already created
-    // if (!otp.get.userId()) {
-    //   // if no user was created, create a new user;
-    //   const { userId } = await createUser();
-    //   otp.set.userId(userId);
-    // }
+    const role = roleExists ? makeRole(roleExists) :  makeRole(roleInput(otp.get.id()));
+
     const userCreated = await createUser(otp.get.id());
     // const userId = otp.get.userId() || "none";
     // if (userId === "none") {
@@ -118,15 +108,16 @@ export function buildPasswordlessVerify(args: IBuildPasswordlessVerify) {
 
     // TODO: check for database integrity later
     // TODO: probably best to batch these queries
-    await insertOtp(otp.object());
-    await insertToken(token.object());
+    await Promise.all([insertOtp(otp.object()), insertToken(token.object()), roleExists ? undefined : insertRole(role.object())])
+    
 
-    return ok<IPasswordlessVerifyResult>({
+    return ok<usecaseTypes.IPasswordlessVerifyResult>({
       payload: {
         jwtToken: jwt,
         refreshToken,
         jwtTokenExpiresAt: jwtExp,
-        refreshTokenExpiresAt: refreshExpiresAt
+        refreshTokenExpiresAt: refreshExpiresAt,
+        role: role.get.role(),
       },
     });
   };
