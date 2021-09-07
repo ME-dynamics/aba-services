@@ -16,7 +16,7 @@ function selectQueryGen(): string {
 }
 
 
-export function buildFindTokenByUserId(args: adaptersTypes.IBuildFindToken) {
+export function buildFindTokenByUserId(args: adaptersTypes.IBuildFindTokeByUserId) {
     const { select, rowToToken } = args;
     const errorPath = "authnz, adapters, find token by user id";
     const query = selectQueryGen();
