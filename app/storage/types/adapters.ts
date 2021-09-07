@@ -23,6 +23,9 @@ export interface IUploadToMinio {
   objectName: string;
 }
 
+export interface IBuildSetPolicy {
+  minio: Client;
+}
 // utils
 export interface IBuildImageTransformer {
   sharp: typeof sharp;
