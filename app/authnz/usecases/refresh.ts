@@ -4,9 +4,9 @@ import {
   httpResultServerError,
   httpResultSuccess,
 } from "aba-node";
-import { IBuildRefresh, IRefresh, IRefreshResult } from "../types";
+import { usecaseTypes } from "../types";
 
-export function buildRefresh(args: IBuildRefresh) {
+export function buildRefresh(args: usecaseTypes.IBuildRefresh) {
   const {
     findTokenByUserId,
     findRole,
@@ -18,7 +18,7 @@ export function buildRefresh(args: IBuildRefresh) {
   const { ok } = httpResultSuccess;
   const { notFound, forbidden } = httpResultClientError;
   const { internalServerError } = httpResultServerError;
-  return async function refresh(refresh: IRefresh) {
+  return async function refresh(refresh: usecaseTypes.IRefresh) {
     const { userId, xJwtToken, xRefreshToken } = refresh;
     const tokenFound = await findTokenByUserId(userId);
     if (!tokenFound || tokenFound.softDeleted) {
@@ -69,7 +69,7 @@ export function buildRefresh(args: IBuildRefresh) {
       softDeleted: false,
     });
     await insertToken(token.object());
-    return ok<IRefreshResult>({
+    return ok<usecaseTypes.IRefreshResult>({
       payload: {
         jwtToken: jwt,
         refreshToken,

@@ -1,7 +1,9 @@
 import { httpResultClientError } from "aba-node";
-import { IBuildRetrieveSecretKeys, IPublicKey } from "../types";
+import { usecaseTypes } from "../types";
 
-export function buildRetrievePublicKey(args: IBuildRetrieveSecretKeys) {
+export function buildRetrievePublicKey(
+  args: usecaseTypes.IBuildRetrieveSecretKeys
+) {
   const { findSecretKeys } = args;
   const { notFound } = httpResultClientError;
   return async function retrievePublicKey() {
@@ -10,7 +12,7 @@ export function buildRetrievePublicKey(args: IBuildRetrieveSecretKeys) {
       return notFound({ error: "keys not found" });
     }
     const { crv, d, kty, x } = keys.publicKey;
-    const result: IPublicKey = {
+    const result: usecaseTypes.IPublicKey = {
       keys: [{ alg: "EdDSA", crv, d, kty, x }],
     };
     return result;
