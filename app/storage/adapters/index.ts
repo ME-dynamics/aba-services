@@ -12,7 +12,11 @@ import {
   buildInsertFileSession,
   buildInsertImage,
 } from "./db";
-import { buildMinioClient, buildUploadToMinio } from "./minio";
+import {
+  buildMinioClient,
+  buildUploadToMinio,
+  buildInitPublicBucket,
+} from "./minio";
 import { buildImageTransformer, rowToFileSession, rowToImage } from "./utils";
 
 const dbClient = scyllaClient({
@@ -30,6 +34,7 @@ export const uploadToMinio = buildUploadToMinio({
   minio: minioClient(),
   PassThrough,
 });
+export const initPublicBucket = buildInitPublicBucket({ minio: minioClient() });
 export const imageTransformer = buildImageTransformer({ sharp });
 export const initDb = buildInitDb({ init: dbClient.init });
 export const findFileSession = buildFindFileSession({
