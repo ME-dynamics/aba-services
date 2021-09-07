@@ -1,7 +1,7 @@
-import { IMadeRole, IRole } from "../types";
+import { entityTypes } from "../types";
 
 export function buildMakeRole() {
-  return function makeRole(role: IRole): Readonly<IMadeRole> {
+  return function makeRole(role: entityTypes.IRole): Readonly<entityTypes.IMadeRole> {
     const { otpId, createdAt = new Date(), modifiedAt = new Date() } = role;
     let {
       admin = false,
@@ -18,7 +18,30 @@ export function buildMakeRole() {
       accountantAL = 0,
       softDeleted = false,
     } = role;
+    // Getters
+    function getRole(): entityTypes.tRole {
+      if (admin) {
+        return "admin";
+      }
+      if (provider) {
+        return "provider";
+      }
+      if (assistant) {
+        return "assistant";
+      }
+      if (accountant) {
+        return "accountant";
+      }
+      if (support) {
+        return "support";
+      }
+      if (customer) {
+        return "customer";
+      }
+      return "customer";
+    }
 
+    // Setters
     function setAdmin(isAdmin: boolean) {
       admin = isAdmin;
       modifiedAt.setTime(Date.now());
@@ -75,7 +98,7 @@ export function buildMakeRole() {
       softDeleted = false;
       modifiedAt.setTime(Date.now());
     }
-    const madeRole: Readonly<IMadeRole> = {
+    const madeRole: Readonly<entityTypes.IMadeRole> = {
       get: {
         otpId: () => otpId,
         admin: () => admin,
@@ -90,6 +113,7 @@ export function buildMakeRole() {
         customerAL: () => customerAL,
         supportAL: () => supportAL,
         accountantAL: () => accountantAL,
+        role: getRole,
         createdAt: () => createdAt,
         modifiedAt: () => modifiedAt,
         softDeleted: () => softDeleted,
