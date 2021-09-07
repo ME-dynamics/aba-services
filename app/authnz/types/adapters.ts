@@ -167,7 +167,6 @@ export interface IBuildOtpGen {
 export interface IBuildTokenGen {
   nanoid: (size: number) => string;
   hash: typeof hash;
-  minutesFromNow: typeof time.minutesFromNow;
   daysFromNow: typeof time.daysFromNow;
 }
 export interface ITokenGenResult {
