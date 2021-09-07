@@ -1,4 +1,4 @@
-import { IMadeOtp, IOtp, IBuildMakeOtp } from "../types";
+import { entityTypes } from "../types";
 
 /**
  * build make otp function, injects nanoid and uuid modules
@@ -6,12 +6,12 @@ import { IMadeOtp, IOtp, IBuildMakeOtp } from "../types";
  * @param args
  * @returns
  */
-export function buildMakeOtp(args: IBuildMakeOtp) {
+export function buildMakeOtp(args: entityTypes.IBuildMakeOtp) {
   function isPermanentlyBlocked(otpCodeResendCount: number): boolean {
     return otpCodeResendCount > 9;
   }
   const { nanoid, uuid } = args;
-  return function makeOtp(otp: IOtp) {
+  return function makeOtp(otp: entityTypes.IOtp) {
     const {
       id = uuid(),
       phoneNumber,
@@ -78,7 +78,7 @@ export function buildMakeOtp(args: IBuildMakeOtp) {
       softDeleted = false;
       modifiedAt.setTime(Date.now());
     }
-    const madeOtp: Readonly<IMadeOtp> = {
+    const madeOtp: Readonly<entityTypes.IMadeOtp> = {
       get: {
         id: () => id,
         deviceId: () => deviceId,

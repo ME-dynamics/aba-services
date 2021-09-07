@@ -1,11 +1,11 @@
-import { IBuildMakeToken, IMadeToken, IToken } from "../types";
-export function buildMakeToken(args: IBuildMakeToken) {
+import { entityTypes } from "../types";
+export function buildMakeToken(args: entityTypes.IBuildMakeToken) {
   const { hoursFromNow } = args;
   const errorPath = "authnz, entities, token";
   function isPermanentlyBlocked(tokenReCreateCount: number) {
-    return tokenReCreateCount > 3;
+    return tokenReCreateCount > 6;
   }
-  return function makeToken(token: IToken) {
+  return function makeToken(token: entityTypes.IToken) {
     const {
       otpId,
       createdAt = new Date(),
@@ -30,7 +30,8 @@ export function buildMakeToken(args: IBuildMakeToken) {
   
     // check if it's blocked
     permanentBlock = isPermanentlyBlocked(tokenReCreateCount);
-
+    
+    // can create 6 token within two hours
     tokenTempBlock = new Date(hoursFromNow(2, errorPath));
 
     // * Setters
@@ -43,7 +44,7 @@ export function buildMakeToken(args: IBuildMakeToken) {
       modifiedAt.setTime(Date.now());
     }
 
-    const madeToken: Readonly<IMadeToken> = {
+    const madeToken: Readonly<entityTypes.IMadeToken> = {
       get: {
         otpId: () => otpId,
         refreshToken: () => refreshToken,
