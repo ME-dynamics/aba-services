@@ -5,20 +5,17 @@ import {
   httpResultServerError,
 } from "aba-node";
 import {
-  IBuildPasswordlessStart,
-  IMadeOtp,
-  IOtp,
-  IPasswordlessStart,
-  IPasswordlessStartResult,
+  usecaseTypes,
+  entityTypes
 } from "../types";
 
-export function buildPasswordlessStart(args: IBuildPasswordlessStart) {
+export function buildPasswordlessStart(args: usecaseTypes.IBuildPasswordlessStart) {
   const { findOtpByPhone, insertOtp, sendOtpBySms, otpGen } = args;
   const { created } = httpResultSuccess;
   const { forbidden, tooManyRequests } = httpResultClientError;
   const { internalServerError } = httpResultServerError;
 
-  function otpObj(phoneNumber: string): IOtp {
+  function otpInput(phoneNumber: string): entityTypes.IOtp {
     return {
       id: undefined,
       deviceId: undefined,
@@ -35,15 +32,16 @@ export function buildPasswordlessStart(args: IBuildPasswordlessStart) {
       softDeleted: false,
     };
   }
-  return async function passwordlessStart(info: IPasswordlessStart) {
+  return async function passwordlessStart(info: usecaseTypes.IPasswordlessStart) {
     const { phoneNumber } = info;
     // find otp in db
     const otpFound = await findOtpByPhone(phoneNumber);
     // create otp entity
-    const otp: Readonly<IMadeOtp> = otpFound
+    const otp: Readonly<entityTypes.IMadeOtp> = otpFound
       ? makeOtp(otpFound)
-      : makeOtp(otpObj(phoneNumber)); // using this function instead of spread makes it about 50 time faster !
+      : makeOtp(otpInput(phoneNumber)); // using function instead of spread makes it about 50 time faster !
     // check if it's not permanently blocked
+    // TODO: these to checks only needed when otp found
     if (otp.get.permanentBlock()) {
       return forbidden({
         error: "your number is permanently blocked",
@@ -67,14 +65,14 @@ export function buildPasswordlessStart(args: IBuildPasswordlessStart) {
     otp.set.otp(hashedOtpCode, otpToken, otpTokenValidDate, otpTempBlockDate);
 
     // check if permanent block is applied after setting new otp
+    // TODO: only when otp found
     if (otp.get.permanentBlock()) {
       return forbidden({ error: "your number in permanently blocked" });
     }
     // insert new codes to db;
     await insertOtp(otp.object());
+    
     // send otp code by sms
-    // only send sms if data was inserted
-
     const smsSent = await sendOtpBySms({ otpCode, phoneNumber });
     if (!smsSent) {
       return internalServerError({
@@ -82,7 +80,7 @@ export function buildPasswordlessStart(args: IBuildPasswordlessStart) {
       });
     }
 
-    return created<IPasswordlessStartResult>({
+    return created<usecaseTypes.IPasswordlessStartResult>({
       payload: {
         otpToken,
         deviceId: otp.get.deviceId(),
