@@ -16,7 +16,7 @@ export function buildMakeImage(args: entityTypes.IBuildMakeImage) {
     let { softDeleted } = image;
     if (access === "private" && url) {
       throw new ErrorFactory({
-        name: "urlMustNotBeDefined",
+        name: "url_must_not_be_defined",
         message: "if access is set to private, url must not be defined",
         detail: "",
         path: errorPath,
