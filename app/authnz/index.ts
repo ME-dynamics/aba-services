@@ -1,4 +1,3 @@
-
-export { initDb, initSecret } from "./adapters"
-
-export { startAuthnzServer } from "./interfaces"
+export { initDb, initSecret } from "./adapters";
+export { initAdmin } from "./usecases";
+export { startAuthnzServer } from "./interfaces";
