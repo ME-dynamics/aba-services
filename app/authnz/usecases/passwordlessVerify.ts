@@ -1,11 +1,10 @@
 import { makeOtp, makeToken, makeRole } from "../entities";
 import { httpResultSuccess, httpResultClientError } from "aba-node";
-import {
-  usecaseTypes,
-  entityTypes
-} from "../types";
+import { usecaseTypes, entityTypes } from "../types";
 
-export function buildPasswordlessVerify(args: usecaseTypes.IBuildPasswordlessVerify) {
+export function buildPasswordlessVerify(
+  args: usecaseTypes.IBuildPasswordlessVerify
+) {
   const {
     findOtpByToken,
     signJwt,
@@ -13,7 +12,7 @@ export function buildPasswordlessVerify(args: usecaseTypes.IBuildPasswordlessVer
     createUser,
     tokenGen,
     insertToken,
-    findToken,
+    findTokenByUserId,
     insertOtp,
     findRole,
     insertRole,
@@ -40,7 +39,9 @@ export function buildPasswordlessVerify(args: usecaseTypes.IBuildPasswordlessVer
       softDeleted: false,
     };
   }
-  return async function passwordlessVerify(info: usecaseTypes.IPasswordlessVerify) {
+  return async function passwordlessVerify(
+    info: usecaseTypes.IPasswordlessVerify
+  ) {
     const { otpCode, otpToken } = info;
     const otpFound = await findOtpByToken(otpToken);
     if (!otpFound) {
@@ -68,7 +69,9 @@ export function buildPasswordlessVerify(args: usecaseTypes.IBuildPasswordlessVer
     }
     otp.set.phoneConfirmed();
     const roleExists = await findRole(otp.get.id());
-    const role = roleExists ? makeRole(roleExists) :  makeRole(roleInput(otp.get.id()));
+    const role = roleExists
+      ? makeRole(roleExists)
+      : makeRole(roleInput(otp.get.id()));
 
     const userCreated = await createUser(otp.get.id());
     // const userId = otp.get.userId() || "none";
@@ -76,18 +79,18 @@ export function buildPasswordlessVerify(args: usecaseTypes.IBuildPasswordlessVer
     //   return internalServerError({ error: "internal error" });
     // }
 
-    const tokenFound = await findToken({ otpId: otp.get.id() });
+    const tokenFound = await findTokenByUserId(otp.get.id());
     if (tokenFound?.permanentBlock) {
       return forbidden({ error: "your number is permanently blocked" });
     }
     const { jwt, jwtExp, jwtKey } = await signJwt({
       userId: otp.get.id(),
-      admin: roleExists ? roleExists.admin : false,
-      provider: roleExists ? roleExists.provider : false,
-      assistant: roleExists ? roleExists.assistant : false,
-      customer: roleExists ? roleExists.customer : false,
-      accountant: roleExists ? roleExists.accountant : false,
-      support: roleExists ? roleExists.support : false,
+      admin: role.get.admin(),
+      provider: role.get.provider(),
+      assistant: role.get.assistant(),
+      customer: role.get.customer(),
+      accountant: role.get.accountant(),
+      support: role.get.support(),
     });
     const { hashedJwt, hashedRefreshToken, refreshExpiresAt, refreshToken } =
       await tokenGen(jwt);
@@ -108,8 +111,11 @@ export function buildPasswordlessVerify(args: usecaseTypes.IBuildPasswordlessVer
 
     // TODO: check for database integrity later
     // TODO: probably best to batch these queries
-    await Promise.all([insertOtp(otp.object()), insertToken(token.object()), roleExists ? undefined : insertRole(role.object())])
-    
+    await Promise.all([
+      insertOtp(otp.object()),
+      insertToken(token.object()),
+      roleExists ? undefined : insertRole(role.object()),
+    ]);
 
     return ok<usecaseTypes.IPasswordlessVerifyResult>({
       payload: {
