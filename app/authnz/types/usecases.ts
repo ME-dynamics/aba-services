@@ -6,7 +6,6 @@ import {
   tFindOtpByTokenFunc,
   tSignJwtFunc,
   tCreateUserFunc,
-  tFindTokenFunc,
   tTokenGenFunc,
   tInsertTokenFunc,
   tFindTokenByUserIdFunc,
@@ -39,7 +38,7 @@ export interface IBuildPasswordlessVerify {
   findOtpByToken: tFindOtpByTokenFunc;
   signJwt: tSignJwtFunc;
   verifyHash: typeof verify;
-  findToken: tFindTokenFunc;
+  findTokenByUserId: tFindTokenByUserIdFunc;
   findRole: tFindRoleFunc;
   tokenGen: tTokenGenFunc;
   createUser: tCreateUserFunc;

@@ -13,7 +13,6 @@ import {
   insertToken,
   signJwt,
   tokenGen,
-  findToken,
   findRole,
   insertRole,
   findSecretKeys,
@@ -41,7 +40,7 @@ export const passwordlessVerify = buildPasswordlessVerify({
   signJwt,
   tokenGen,
   verifyHash: verify,
-  findToken,
+  findTokenByUserId,
   insertOtp,
 });
 
