@@ -123,7 +123,12 @@ export function buildInitDb(args: adaptersTypes.IBuildInit) {
       partition: ["otp_id"],
     },
   });
-
+  const adminIndex = createIndexQuery({
+    name: "admin",
+    version: "v1",
+    table: "role",
+    indexKey: "admin",
+  });
   return async function initDb() {
     await init({ query: createOtpTable.query, errorPath });
     await init({ query: otpTokenIndex, errorPath });
@@ -131,6 +136,6 @@ export function buildInitDb(args: adaptersTypes.IBuildInit) {
     await init({ query: createSecretKeysTable.query, errorPath });
     await init({ query: createTokenTable.query, errorPath });
     await init({ query: createRoleTable.query, errorPath });
-
+    await init({ query: adminIndex, errorPath });
   };
 }
