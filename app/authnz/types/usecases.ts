@@ -12,6 +12,8 @@ import {
   tInsertRoleFunc,
   tFindRoleFunc,
   tFindSecretKeysFunc,
+  tDeleteAdminFunc,
+  tFindAdminsFunc,
 } from "./adapters";
 import { otpGen } from "../adapters";
 import { tRole } from "./entities";
@@ -114,4 +116,14 @@ export interface ICreateProvider {
 export interface ICreateProviderResult {
   otpId: string;
   phoneNumber: string;
+}
+
+// initialize admin
+
+export interface IBuildInitAdmin {
+  findOtpByPhone: tFindOtpByPhoneFunc;
+  insertOtp: tInsertOtpFunc;
+  insertRole: tInsertRoleFunc;
+  deleteAdmin: tDeleteAdminFunc;
+  findAdmins: tFindAdminsFunc;
 }
