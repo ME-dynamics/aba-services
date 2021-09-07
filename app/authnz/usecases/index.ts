@@ -16,6 +16,8 @@ import {
   findRole,
   insertRole,
   findSecretKeys,
+  findAdmins,
+  deleteAdmin,
 } from "../adapters";
 
 import { buildPasswordlessStart } from "./passwordlessStart";
@@ -23,6 +25,7 @@ import { buildPasswordlessVerify } from "./passwordlessVerify";
 import { buildRefresh } from "./refresh";
 import { buildRetrievePublicKey } from "./retrievePublicKey";
 import { buildCreateProvider } from "./createProvider";
+import { buildInitAdmins } from "./initAdmins";
 
 export const passwordlessStart = buildPasswordlessStart({
   findOtpByPhone,
@@ -58,6 +61,14 @@ export const retrievePublicKey = buildRetrievePublicKey({ findSecretKeys });
 export const createProvider = buildCreateProvider({
   findOtpByPhone,
   findRole,
+  insertOtp,
+  insertRole,
+});
+
+export const initAdmin = buildInitAdmins({
+  deleteAdmin,
+  findAdmins,
+  findOtpByPhone,
   insertOtp,
   insertRole,
 });
