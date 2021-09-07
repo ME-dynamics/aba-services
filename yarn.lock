@@ -878,10 +878,10 @@
   resolved "https://registry.yarnpkg.com/@zxing/text-encoding/-/text-encoding-0.9.0.tgz#fb50ffabc6c7c66a0c96b4c03e3d9be74864b70b"
   integrity sha512-U/4aVJ2mxI0aDNI8Uq0wEhMgY+u4CNtEb0om3+y3+niDAsoTCOB33UF0sxpzqzdqXLqmvc+vZyAt4O8pPdfkwA==
 
-aba-node@0.2.8:
-  version "0.2.8"
-  resolved "https://registry.yarnpkg.com/aba-node/-/aba-node-0.2.8.tgz#9e67c80b00d5fb175bbf60747d6e2843514a91f4"
-  integrity sha512-OMo9GzYczL1L2LfblyGo2h1xg4QrihrmJivU/xlhIBjRBvfY35j7APDz2yHcgm5PzgoUukMmNf3cEc4BkGm4nA==
+aba-node@0.3.0:
+  version "0.3.0"
+  resolved "https://registry.yarnpkg.com/aba-node/-/aba-node-0.3.0.tgz#22bea14ac864cfcf2f581ceaefa533be4ab61c5e"
+  integrity sha512-M1wvu9ND5lntDVjiLTk7buFQ6oKOy5pusx0UIaFfZS1pqI5HSTL7qqkk/JqNxb0V0QYMZE87hAq7bIU/a7WgKg==
   dependencies:
     aba-utils "0.5.4"
     cassandra-driver "^4.6.3"
