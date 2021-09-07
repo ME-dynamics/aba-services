@@ -1,5 +1,5 @@
-export * from "./entities";
-export * from "./usecases";
-export * from "./controllers";
+export * as entityTypes from "./entities";
+export * as usecaseTypes from "./usecases";
+export * as controllerTypes from "./controllers";
 // export * from "./interfaces";
-export * from "./adapters"
+export * as adaptersTypes from "./adapters"
