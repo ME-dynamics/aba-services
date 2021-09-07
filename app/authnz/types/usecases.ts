@@ -15,6 +15,7 @@ import {
   tFindSecretKeysFunc,
 } from "./adapters";
 import { otpGen } from "../adapters";
+import { tRole } from "./entities";
 
 // passwordless start
 export interface IBuildPasswordlessStart {
@@ -56,7 +57,8 @@ export interface IPasswordlessVerifyResult {
   refreshToken: string;
   jwtToken: string;
   refreshTokenExpiresAt: number;
-  jwtTokenExpiresAt: number
+  jwtTokenExpiresAt: number;
+  role: tRole;
 }
 
 // refresh
@@ -95,4 +97,22 @@ interface IKeyStruct {
 }
 export interface IPublicKey {
   keys: IKeyStruct[];
+}
+
+// create provider
+
+export interface IBuildCreateProvider {
+  findOtpByPhone: tFindOtpByPhoneFunc;
+  findRole: tFindRoleFunc;
+  insertOtp: tInsertOtpFunc;
+  insertRole: tInsertRoleFunc;
+}
+
+export interface ICreateProvider {
+  providerPhoneNumber: string;
+}
+
+export interface ICreateProviderResult {
+  otpId: string;
+  phoneNumber: string;
 }
