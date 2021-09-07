@@ -1,0 +1,105 @@
+// import { queryGen } from "aba-node";
+// import { applicationVersion } from "../../config";
+// import { adapterTypes } from "../../types";
+// export function buildInitDb(args: adapterTypes.IBuildInit) {
+//   const { init } = args;
+//   const errorPath = "form, adapters, init db";
+//   return async function initDb() {
+//     const { createTableQuery, createTypeQuery, createIndexQuery } = queryGen;
+//     const choiceUDT = createTypeQuery({
+//       name: "choice",
+//       version: applicationVersion,
+//       columns: [
+//         { name: "label", type: "TEXT" },
+//         { name: "value", type: "TINYINT" },
+//       ],
+//     });
+//     const aggregateUDT = createTypeQuery({
+//       name: "aggregate",
+//       version: applicationVersion,
+//       columns: [
+//         { name: "label", type: "TEXT" },
+//         { name: "action", type: "TEXT" },
+//         { name: "filter_by", type: "TEXT" }, // aggregate , group, sub group
+//         { name: "filter_value", type: "TEXT" },
+//       ],
+//     });
+//     const createFormStructureTable = createTableQuery({
+//       name: "form_structure",
+//       version: applicationVersion,
+//       columns: [
+//         { name: "id", type: "UUID" },
+//         { name: "title", type: "TEXT" },
+//         { name: "description", type: "TEXT" },
+//         { name: "field_id", type: "SMALLINT" },
+//         { name: "type", type: "TEXT" },
+//         // { name: "group", type: "TEXT" },
+//         // { name: "sub_group", type: "TEXT" },
+//         { name: "group_label", type: "TEXT" },
+//         { name: "sub_group_label", type: "TEXT" },
+//         { name: "field_label", type: "TEXT" },
+//         { name: "field_description", type: "TEXT" },
+//         { name: "placeholder", type: "TEXT" },
+//         { name: "required", type: "BOOLEAN" },
+//         {
+//           name: "choice",
+//           type: "SET",
+//           setType: "UDT",
+//           udtName: choiceUDT.entityName,
+//         },
+//         {
+//           name: "multi_choice",
+//           type: "SET",
+//           setType: "UDT",
+//           udtName: choiceUDT.entityName,
+//         },
+//         { name: "aggregate", type: "UDT", udtName: "sd" },
+//         { name: "created_at", type: "TIMESTAMP" },
+//         { name: "modified_at", type: "TIMESTAMP" },
+//         { name: "soft_deleted", type: "BOOLEAN" },
+//       ],
+//       primaryKey: {
+//         partition: ["id"],
+//         cluster: ["field_id"],
+//       },
+//     });
+//     const createFormDataTable = createTableQuery({
+//       name: "form_data",
+//       version: applicationVersion,
+//       columns: [
+//         { name: "id", type: "UUID" },
+//         { name: "userId", type: "UUID" },
+//         { name: "structure_id", type: "UUID" },
+//         { name: "field_id", type: "UUID" },
+//         { name: "field_label", type: "TEXT" },
+//         { name: "text_value", type: "TEXT" },
+//         { name: "choice_label", type: "TEXT" },
+//         { name: "choice_value", type: "TINYINT" },
+//         {
+//           name: "multi_choice_values",
+//           type: "SET",
+//           setType: "UDT",
+//           udtName: choiceUDT.entityName,
+//         },
+//         { name: "created_at", type: "TIMESTAMP" },
+//         { name: "modified_at", type: "TIMESTAMP" },
+//         { name: "soft_deleted", type: "BOOLEAN" },
+//       ],
+//       primaryKey: {
+//         partition: ["userId"],
+//         cluster: ["created_at", "structure_id", "field_id"],
+//       },
+//       orderBy: [{ key: "created_at", type: "DESC" }],
+//     });
+//     const formDataIdIndex = createIndexQuery({
+//       table: "form_data",
+//       version: applicationVersion,
+//       indexKey: "id",
+//       name: "id",
+//     });
+//     await init({ query: choiceUDT.query, errorPath });
+//     await init({ query: createFormStructureTable.query, errorPath });
+//     await init({ query: createFormDataTable.query, errorPath });
+//     await init({ query: formDataIdIndex, errorPath });
+//   };
+// }
