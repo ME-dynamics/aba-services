@@ -17,6 +17,8 @@ import {
   buildInsertToken,
   buildFindRole,
   buildInsertRole,
+  buildDeleteAdmin,
+  buildFindAdmins,
 } from "./db";
 import {
   buildSignJwt,
@@ -82,6 +84,12 @@ export const insertSecretKeys = buildInsertSecretKeys({
 });
 export const insertToken = buildInsertToken({ insert: dbClient.insert });
 
+export const findAdmins = buildFindAdmins({
+  select: dbClient.select,
+  rowToRole,
+});
+export const deleteAdmin = buildDeleteAdmin({ remove: dbClient.delete });
+
 // utils
 export const signJwt = buildSignJwt({
   Signer: SignJwt,
@@ -103,7 +111,7 @@ export const tokenGen = buildTokenGen({
   daysFromNow: time.daysFromNow,
 });
 
-export { validatePhoneNumber } from "./utils"
+export { validatePhoneNumber } from "./utils";
 // init secret
 
 export const initSecret = buildInitSecret({
@@ -117,6 +125,3 @@ export const initSecret = buildInitSecret({
 
 export const createUser = buildCreateUser();
 export const sendOtpBySms = buildSendOtpBySms();
-
-
-
