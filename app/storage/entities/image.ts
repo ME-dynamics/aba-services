@@ -2,18 +2,18 @@ import { ErrorFactory } from "aba-node";
 import { entityTypes } from "../types";
 
 export function buildMakeImage(args: entityTypes.IBuildMakeImage) {
-  const { uuid } = args;
+  const { uuid, serverUrl } = args;
   const errorPath = "storage, entities, make image";
   return function makeImage(image: entityTypes.IMakeImage) {
     const {
       userId,
       id = uuid(),
       access,
-      url,
+
       createdAt = new Date(),
       modifiedAt = new Date(),
     } = image;
-    let { softDeleted } = image;
+    let { url, softDeleted } = image;
     if (access === "private" && url) {
       throw new ErrorFactory({
         name: "url_must_not_be_defined",
@@ -22,6 +22,9 @@ export function buildMakeImage(args: entityTypes.IBuildMakeImage) {
         path: errorPath,
         nativeError: undefined,
       });
+    }
+    if (access === "public") {
+      url = `${serverUrl}/public/${id}`;
     }
     // * Setters
     function remove() {
