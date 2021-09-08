@@ -1,9 +1,5 @@
-import { makeFileSession, makeImage } from "../entities";
-import {
-  httpResultClientError,
-  httpResultSuccess,
-  httpResultServerError,
-} from "aba-node"; // import http_result_* modules that you need here
+import { makeImage } from "../entities";
+import { httpResultClientError, httpResultSuccess } from "aba-node";
 import { entityTypes, usecaseTypes } from "../types";
 import { stream } from "file-type";
 export function buildUploadImage(args: usecaseTypes.IBuildUploadImage) {
@@ -33,9 +29,13 @@ export function buildUploadImage(args: usecaseTypes.IBuildUploadImage) {
     };
   }
   return async function uploadImage(info: usecaseTypes.IUploadImage) {
-    const { file, session } = info;
+    const { file, session, userId } = info;
     const fileSessionObject = await findFileSession(session);
     if (!fileSessionObject || fileSessionObject.softDeleted) {
+      return forbidden({ error: "action not allowed" });
+    }
+    // AUTHORIZE
+    if (fileSessionObject.userId !== userId) {
       return forbidden({ error: "action not allowed" });
     }
     const { access } = fileSessionObject;
@@ -51,7 +51,6 @@ export function buildUploadImage(args: usecaseTypes.IBuildUploadImage) {
         await minio.makeBucket(image.get.userId(), "est-ir");
       }
     }
-
     const typeStream = await stream(file);
     if (!typeStream.fileType) {
       return forbidden({ error: "allowed file types : jpg, png" });
