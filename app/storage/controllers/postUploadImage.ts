@@ -38,14 +38,14 @@ export function buildPostUploadImage() {
   ) {
     const { success, error, payload } = auth(httpRequest, roles);
     if (!success) {
-      return error ? error : unauthorized({ error: "unauthorized" });
+      return error;
     }
     const fileData = await httpRequest.file();
     const session = validate(fileData);
     if (session) {
       const result = await uploadImage({
         file: fileData.file,
-        userId: payload?.userId || "",
+        userId: payload.userId,
         session,
       });
       return result;
