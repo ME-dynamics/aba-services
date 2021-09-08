@@ -1,6 +1,6 @@
 export { buildInitDb } from "./initDb";
 
-export { buildFindImageByUserId } from "./findImageByUserId";
+export { buildFindImageById } from "./findImageById";
 export { buildFindFileSession } from "./findFileSession";
 
 export { buildInsertImage } from "./insertImage";

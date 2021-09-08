@@ -30,8 +30,8 @@ export function buildInitDb(args: adapterTypes.IBuildInit) {
       name: "images",
       version: "v1",
       columns: [
-        { name: "user_id", type: "UUID" },
         { name: "id", type: "UUID" },
+        { name: "user_id", type: "UUID" },
         { name: "access", type: "TEXT" },
         { name: "url", type: "TEXT" },
         { name: "created_at", type: "TIMESTAMP" },
