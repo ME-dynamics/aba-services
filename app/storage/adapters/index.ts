@@ -7,7 +7,7 @@ import { scyllaClient } from "aba-node";
 import { scyllaContactPoint } from "../config";
 import {
   buildFindFileSession,
-  buildFindImageByUserId,
+  buildFindImageById,
   buildInitDb,
   buildInsertFileSession,
   buildInsertImage,
@@ -41,7 +41,7 @@ export const findFileSession = buildFindFileSession({
   select: dbClient.select,
   rowToFileSession,
 });
-export const findImageByUserId = buildFindImageByUserId({
+export const findImageById = buildFindImageById({
   select: dbClient.select,
   rowToImage,
 });
