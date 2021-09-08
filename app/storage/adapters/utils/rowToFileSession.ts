@@ -7,8 +7,8 @@ export function rowToFileSession(
   return {
     session: row.get("session"),
     secret: row.get("secret"),
-    userId: row.get("user_id"),
-    businessId: row.get("business_id"),
+    userId: row.get("user_id").toString(),
+    businessId: row.get("business_id").toString(),
     access: row.get("access"),
     countLimit: row.get("count_limit"),
     sizeLimit: row.get("size_limit"),
