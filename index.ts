@@ -10,6 +10,7 @@ import {
   initPublicBucket,
   startStorageServer,
 } from "./app/storage";
+import { initDb as initBusinessDb, startBusinessServer } from "./app/business";
 const app = httpClient({ dev: true });
 
 export async function startService() {
@@ -19,8 +20,10 @@ export async function startService() {
     await initAdmin();
     await initStorageDb();
     await initPublicBucket();
+    await initBusinessDb();
     startAuthnzServer(app);
     startStorageServer(app);
+    startBusinessServer(app);
     await app.listen(3000, "0.0.0.0");
   } catch (error) {
     console.log(error);
