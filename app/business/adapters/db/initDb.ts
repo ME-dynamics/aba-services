@@ -56,6 +56,7 @@ export function buildInitDb(args: adaptersTypes.IBuildInit) {
         { name: "staff_id", type: "UUID" },
         { name: "customer_id", type: "UUID" },
         { name: "name", type: "TEXT" },
+        { name: "image_url", type: "TEXT" },
         { name: "confirmed", type: "BOOLEAN" },
         { name: "created_at", type: "TIMESTAMP" },
         { name: "modified_at", type: "TIMESTAMP" },
