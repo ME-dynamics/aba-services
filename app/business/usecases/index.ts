@@ -15,6 +15,7 @@ import { buildRemoveRequest } from "./removeRequest";
 import { buildRetrieveRequests } from "./retrieveRequests";
 import { buildRetrieveCustomers } from "./retrieveCustomers";
 import { buildRemoveCustomer } from "./removeCustomer";
+import { buildUpdateCustomerInfo } from "./updateCustomerInfo";
 import { v4 } from "uuid";
 
 const findUserById = async (id: string) => {
@@ -60,5 +61,12 @@ export const retrieveCustomers = buildRetrieveCustomers({
 
 export const removeCustomer = buildRemoveCustomer({
   findCustomer,
+  insertStaffCustomer,
+});
+
+export const updateCustomerInfo = buildUpdateCustomerInfo({
+  findCustomer,
+  findRequestByCustomerId,
+  insertRequest,
   insertStaffCustomer,
 });
