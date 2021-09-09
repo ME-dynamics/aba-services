@@ -1,4 +1,4 @@
-import { queryGen } from "aba-node";
+import { queryGen, undefinedToNull } from "aba-node";
 import { adaptersTypes, entityTypes } from "../../types";
 
 function insertQueryGen(): string {
@@ -42,9 +42,9 @@ export function buildInsertStaffCustomer(args: adaptersTypes.IBuildInsert) {
       params: {
         staff_id: staffId,
         customer_id: customerId,
-        name,
-        image_url: imageUrl,
-        description,
+        name: undefinedToNull(name),
+        image_url: undefinedToNull(imageUrl),
+        description: undefinedToNull(description),
         created_at: createdAt,
         modified_at: modifiedAt,
         soft_deleted: softDeleted,
