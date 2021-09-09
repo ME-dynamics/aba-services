@@ -1,5 +1,6 @@
 if (process.env.NODE_ENV !== "production") {
   try {
+    // eslint-disable-next-line @typescript-eslint/no-var-requires
     const { config } = require("dotenv");
     config();
   } catch (error) {
@@ -11,7 +12,10 @@ if (process.env.NODE_ENV !== "production") {
   }
 }
 export const port = process.env.PORT ? parseInt(process.env.PORT) : 3000;
-export const scyllaContactPoint = process.env.SCYLLA_CONTACT_POINT ? process.env.SCYLLA_CONTACT_POINT : "127.0.1.1";
+export const scyllaContactPoint = process.env.SCYLLA_CONTACT_POINT
+  ? process.env.SCYLLA_CONTACT_POINT
+  : "127.0.1.1";
 
-
-
+export const serverUrl = process.env.SERVER_URL
+  ? process.env.SERVER_URL
+  : "https://127.0.0.1:13000";

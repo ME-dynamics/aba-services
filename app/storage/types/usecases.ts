@@ -7,6 +7,7 @@ import {
   tInsertImage,
   tFindFileSession,
   tInsertFileSession,
+  tFindImageById,
 } from "./adapters";
 
 // file session
@@ -46,4 +47,20 @@ export interface IUploadImage {
 export interface IUploadImageResult {
   id: string;
   url: string | undefined;
+}
+
+// retrieve private image
+
+export interface IBuildRetrievePrivateImage {
+  minio: Client;
+  findImageById: tFindImageById;
+
+}
+
+export interface IRetrievePrivateImage {
+  userId: string;
+  imageId: string
+}
+export interface IRetrievePrivateImageResult {
+  url: string;
 }

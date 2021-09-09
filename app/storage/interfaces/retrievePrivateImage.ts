@@ -1,13 +1,13 @@
 import { types } from "aba-node";
-import { postFileSession } from "../controllers";
+import { getPrivateImage } from "../controllers";
 import { controllerTypes } from "../types";
 
-export async function uploadSession(
-  request: controllerTypes.tPostFileSession,
+export async function retrievePrivateImage(
+  request: controllerTypes.tGetPrivateImage,
   reply: types.tReply
 ) {
   try {
-    const response = await postFileSession(request);
+    const response = await getPrivateImage(request);
     reply.status(response.code);
     reply.send(response);
   } catch (error) {

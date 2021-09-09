@@ -878,10 +878,10 @@
   resolved "https://registry.yarnpkg.com/@zxing/text-encoding/-/text-encoding-0.9.0.tgz#fb50ffabc6c7c66a0c96b4c03e3d9be74864b70b"
   integrity sha512-U/4aVJ2mxI0aDNI8Uq0wEhMgY+u4CNtEb0om3+y3+niDAsoTCOB33UF0sxpzqzdqXLqmvc+vZyAt4O8pPdfkwA==
 
-aba-node@0.3.2:
-  version "0.3.2"
-  resolved "https://registry.yarnpkg.com/aba-node/-/aba-node-0.3.2.tgz#1905b66a214188be9149dd0616d871ba273f3689"
-  integrity sha512-7WF4aTKbkJX9m6JnwKKNYexYURMIKxTqQ654k3cJFsm2swVGhNPREU9ipxmNCIjvDOWKtY4sq21Uhg9hFME9rw==
+aba-node@0.3.4:
+  version "0.3.4"
+  resolved "https://registry.yarnpkg.com/aba-node/-/aba-node-0.3.4.tgz#2376c4652429cb86aa95389975fc7ef411c665da"
+  integrity sha512-jAMyV/c0zKCrtQEBD/iqaUJQcLqOehXICZnPOowCRX2aKbUoSP/7+VKGALnO3nvSEMpyhx1yRNZ3nldZ0Xt9qg==
   dependencies:
     aba-utils "0.5.5"
     cassandra-driver "^4.6.3"
@@ -3366,10 +3366,10 @@ jest@27.1.0:
     import-local "^3.0.2"
     jest-cli "^27.1.0"
 
-jose@^3.16.0:
-  version "3.16.0"
-  resolved "https://registry.yarnpkg.com/jose/-/jose-3.16.0.tgz#bbe31afa220811850fbfdb3eaac916bccb6879b1"
-  integrity sha512-IhW7qNLs/TFGzws4HPLyInCKfRCujNBwjuxARP6z9K3ntuxgRZkI1k0mnOak8cWp12bLBs6HfXpBpqwnHIotug==
+jose@^3.16.1:
+  version "3.16.1"
+  resolved "https://registry.yarnpkg.com/jose/-/jose-3.16.1.tgz#13808b18aad618099d6d56c9c7486ec0d00e1a6b"
+  integrity sha512-Dn/iku+Np0ggqWHmWQ127t6Uf7LFCLhCINN28lni1wX0NHDtSE3980baHz2tK1qn1ZFUL8t2m2yEScYyf3rgOw==
 
 js-tokens@^4.0.0:
   version "4.0.0"

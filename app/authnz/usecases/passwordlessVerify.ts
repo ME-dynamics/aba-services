@@ -85,12 +85,12 @@ export function buildPasswordlessVerify(
     }
     const { jwt, jwtExp, jwtKey } = await signJwt({
       userId: otp.get.id(),
-      admin: roleExists ? roleExists.admin : false,
-      provider: roleExists ? roleExists.provider : false,
-      assistant: roleExists ? roleExists.assistant : false,
-      customer: roleExists ? roleExists.customer : false,
-      accountant: roleExists ? roleExists.accountant : false,
-      support: roleExists ? roleExists.support : false,
+      admin: role.get.admin(),
+      provider: role.get.provider(),
+      assistant: role.get.assistant(),
+      customer: role.get.customer(),
+      accountant: role.get.accountant(),
+      support: role.get.support(),
     });
     const { hashedJwt, hashedRefreshToken, refreshExpiresAt, refreshToken } =
       await tokenGen(jwt);

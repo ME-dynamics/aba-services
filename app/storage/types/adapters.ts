@@ -2,12 +2,7 @@ import { types } from "aba-node";
 import { Client } from "minio";
 import sharp, { Sharp } from "sharp";
 import { PassThrough } from "stream";
-import {
-  IMadeFileSession,
-  IMadeFileSessionObject,
-  IMadeImageObject,
-  IMakeImage,
-} from "./entities";
+import { IMadeFileSessionObject, IMadeImageObject } from "./entities";
 
 //  minio
 export interface IBuildUploadToMinio {
@@ -23,6 +18,9 @@ export interface IUploadToMinio {
   objectName: string;
 }
 
+export interface IBuildSetPolicy {
+  minio: Client;
+}
 // utils
 export interface IBuildImageTransformer {
   sharp: typeof sharp;
@@ -39,9 +37,9 @@ export interface IBuildInit {
   init: types.tDbInitFunc;
 }
 
-export type tFindImageByUserId = (
-  userId: string
-) => Promise<IMadeImageObject[] | undefined>;
+export type tFindImageById = (
+  id: string
+) => Promise<IMadeImageObject | undefined>;
 export type tInsertImage = (info: IMadeImageObject) => Promise<void>;
 
 export interface IBuildFindBy {

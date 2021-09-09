@@ -45,6 +45,7 @@ export interface IMadeFileSession {
 
 export interface IBuildMakeImage {
   uuid: () => string;
+  serverUrl: string;
 }
 
 export interface IMakeImage {

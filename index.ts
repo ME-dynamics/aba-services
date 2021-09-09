@@ -5,6 +5,11 @@ import {
   initSecret as initAuthnzSecret,
   initAdmin,
 } from "./app/authnz";
+import {
+  initDb as initStorageDb,
+  initPublicBucket,
+  startStorageServer,
+} from "./app/storage";
 const app = httpClient({ dev: true });
 
 export async function startService() {
@@ -12,7 +17,10 @@ export async function startService() {
     await initAuthnzDb();
     await initAuthnzSecret();
     await initAdmin();
+    await initStorageDb();
+    await initPublicBucket();
     startAuthnzServer(app);
+    startStorageServer(app);
     await app.listen(3000, "0.0.0.0");
   } catch (error) {
     console.log(error);

@@ -1,13 +1,21 @@
-import { httpResultClientError } from "aba-node";
-import { v4 } from "uuid";
+import { httpResultClientError, auth, types } from "aba-node";
 import { controllerTypes } from "../types";
 import { uploadImage } from "../usecases";
 export function buildPostUploadImage() {
-  const { badRequest } = httpResultClientError;
+  const roles: types.IRoles = {
+    admin: true,
+    provider: true,
+    customer: true,
+    accountant: true,
+    assistant: true,
+    support: true,
+  };
+  const { badRequest, unauthorized } = httpResultClientError;
   function validate(fileData: controllerTypes.tMultiPartFile) {
     if (!fileData.fields.session) {
       return false;
     }
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
     // @ts-ignore
     const { fieldname, value } = fileData.fields.session;
     const keys = Object.keys(fileData.fields);
@@ -23,18 +31,21 @@ export function buildPostUploadImage() {
     if (!value || typeof value !== "string") {
       return false;
     }
-
     return value;
   }
   return async function postUploadImage(
     httpRequest: controllerTypes.tPostUploadImage
   ) {
+    const { success, error, payload } = auth(httpRequest, roles);
+    if (!success) {
+      return error;
+    }
     const fileData = await httpRequest.file();
     const session = validate(fileData);
     if (session) {
       const result = await uploadImage({
         file: fileData.file,
-        userId: v4(),
+        userId: payload.userId,
         session,
       });
       return result;

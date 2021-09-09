@@ -23,7 +23,7 @@ const response = {
   [statusCodes.BAD_REQUEST]: errorSchema,
 };
 
-export const fileSessionSchema = {
+export const sFileSessionSchema = {
   body,
   response,
 };

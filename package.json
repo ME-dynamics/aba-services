@@ -39,11 +39,11 @@
     "typescript": "4.4.2"
   },
   "dependencies": {
-    "aba-node": "0.3.2",
+    "aba-node": "0.3.4",
     "argon2": "^0.28.2",
     "fastify-multipart": "4.0.7",
     "file-type": "16.5.3",
-    "jose": "^3.16.0",
+    "jose": "^3.16.1",
     "libphonenumber-js": "^1.9.26",
     "make-promises-safe": "5.1.0",
     "minio": "7.0.19",
