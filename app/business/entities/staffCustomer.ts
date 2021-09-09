@@ -11,15 +11,15 @@ export function buildMakeStaffCustomer() {
     let { name, imageUrl, description, softDeleted } = staffCustomer;
 
     // * Setters
-    function setName(newName: string) {
+    function setName(newName: string | undefined) {
       name = newName;
       modifiedAt.setTime(Date.now());
     }
-    function setImageUrl(newUrl: string) {
+    function setImageUrl(newUrl: string | undefined) {
       imageUrl = newUrl;
       modifiedAt.setTime(Date.now());
     }
-    function setDescription(newDescription: string) {
+    function setDescription(newDescription: string | undefined) {
       description = newDescription;
       modifiedAt.setTime(Date.now());
     }
