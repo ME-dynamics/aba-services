@@ -1,4 +1,4 @@
-import { queryGen } from "aba-node";
+import { queryGen, undefinedToNull } from "aba-node";
 import { adaptersTypes, entityTypes } from "../../types";
 
 function insertQueryGen(): string {
@@ -10,6 +10,7 @@ function insertQueryGen(): string {
       { column: "staff_id", self: true },
       { column: "customer_id", self: true },
       { column: "name", self: true },
+      { column: "image_url", self: true },
       { column: "confirmed", self: true },
       { column: "created_at", self: true },
       { column: "modified_at", self: true },
@@ -31,6 +32,7 @@ export function buildInsertRequest(args: adaptersTypes.IBuildInsert) {
       customerId,
       confirmed,
       name,
+      imageUrl,
       createdAt,
       modifiedAt,
       softDeleted,
@@ -41,7 +43,8 @@ export function buildInsertRequest(args: adaptersTypes.IBuildInsert) {
         staff_id: staffId,
         customer_id: customerId,
         confirmed,
-        name,
+        name: undefinedToNull(name),
+        image_url: undefinedToNull(imageUrl),
         created_at: createdAt,
         modified_at: modifiedAt,
         soft_deleted: softDeleted,
