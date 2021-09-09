@@ -1,4 +1,3 @@
-
 export interface IStaffCustomer {
   staffId: string;
   customerId: string;
@@ -27,9 +26,9 @@ export interface IMadeStaffCustomer {
     softDeleted: () => boolean;
   };
   set: {
-    name: (newName: string) => void;
-    imageUrl: (newUrl: string) => void;
-    description: (newDescription: string) => void;
+    name: (newName: string | undefined) => void;
+    imageUrl: (newUrl: string | undefined) => void;
+    description: (newDescription: string | undefined) => void;
     remove: () => void;
     restore: () => void;
   };
@@ -38,11 +37,11 @@ export interface IMadeStaffCustomer {
 
 // request
 
-
 export interface ICustomerStaffRequest {
   staffId: string;
   customerId: string;
-  name: string;
+  name: string | undefined;
+  imageUrl: string | undefined;
   confirmed: boolean;
   createdAt: Date | undefined;
   modifiedAt: Date | undefined;
@@ -58,13 +57,16 @@ export interface IMadeCustomerStaffRequest {
   get: {
     staffId: () => string;
     customerId: () => string;
-    name: () => string;
+    name: () => string | undefined;
+    imageUrl: () => string | undefined;
     confirmed: () => boolean;
     createdAt: () => Date;
     modifiedAt: () => Date;
     softDeleted: () => boolean;
   };
   set: {
+    name: (newName: string | undefined) => void;
+    imageUrl: (newUrl: string | undefined) => void;
     confirm: () => void;
     reject: () => void;
     restore: () => void;
