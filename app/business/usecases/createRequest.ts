@@ -54,6 +54,7 @@ export function buildCreateRequest(args: usecaseTypes.IBuildCreateRequest) {
       staffId,
       customerId,
       name: customer.name,
+      imageUrl: customer.imageUrl,
       confirmed: false,
       createdAt: undefined,
       modifiedAt: undefined,
