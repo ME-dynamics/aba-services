@@ -1,6 +1,6 @@
 import { httpResultClientError, httpResultSuccess } from "aba-node";
 import { makeCustomerStaffRequest } from "../entities";
-import { entityTypes, usecaseTypes } from "../types";
+import { usecaseTypes } from "../types";
 
 export function buildRemoveRequest(args: usecaseTypes.IBuildRemoveRequest) {
   const { findRequestByCustomerId, insertRequest } = args;

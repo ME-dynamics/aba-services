@@ -39,7 +39,7 @@ export interface IBuildConfirmRequest {
 }
 export interface IConfirmRequest {
   staffId: string;
-  customerId: string
+  customerId: string;
 }
 // reject request
 export interface IBuildRejectRequest {
@@ -52,9 +52,9 @@ export interface IRejectRequest {
   customerId: string;
 }
 
-// retrieve requests 
+// retrieve requests
 export interface IBuildRetrieveRequests {
-  findRequestsByStaffId: tFindRequestsByStaffIdFunc
+  findRequestsByStaffId: tFindRequestsByStaffIdFunc;
 }
 
 // retrieve customers by staff id
@@ -63,8 +63,7 @@ export interface IBuildRetrieveCustomers {
   findCustomersByStaffId: tFindCustomersByStaffIdFunc;
 }
 
-
-// remove customer by id 
+// remove customer by id
 export interface IBuildRemoveCustomer {
   findCustomer: tFindCustomerFunc;
   insertStaffCustomer: tInsertStaffCustomerFunc;
@@ -73,4 +72,20 @@ export interface IBuildRemoveCustomer {
 export interface IRemoveCustomer {
   staffId: string;
   customerId: string;
+}
+
+// update customer info -- internal
+
+export interface IBuildUpdateCustomerInfo {
+  findRequestByCustomerId: tFindRequestByCustomerId;
+  findCustomer: tFindCustomerFunc;
+  insertRequest: tInsertRequestFunc;
+  insertStaffCustomer: tInsertStaffCustomerFunc;
+}
+
+export interface IUpdateCustomerInfo {
+  id: string;
+  name: string | undefined;
+  description: string | undefined;
+  imageUrl: string | undefined;
 }
