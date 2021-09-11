@@ -9,6 +9,28 @@ export function buildInitDb(args: adapterTypes.IBuildInitDb) {
 
   return async function initDb() {
     const { createTableQuery, createIndexQuery, createTypeQuery } = queryGen;
+    const createUserTableQuery = createTableQuery({
+      name: "users",
+      version: "v1",
+      columns: [
+        { name: "id", type: "UUID" },
+        { name: "username", type: "TEXT" },
+        { name: "phone_number", type: "TEXT" },
+        { name: "first_name", type: "TEXT" },
+        { name: "last_name", type: "TEXT" },
+        { name: "profile_picture_url", type: "TEXT" },
+        { name: "gender", type: "TEXT" },
+        { name: "address", type: "TEXT" },
+        { name: "telephone", type: "TEXT" },
+        { name: "deactivation_reason", type: "TEXT" },
+        { name: "created_at", type: "TIMESTAMP" },
+        { name: "modified_at", type: "TIMESTAMP" },
+        { name: "soft_deleted", type: "BOOLEAN" },
+      ],
+      primaryKey: {
+        partition: ["id"],
+      },
+    });
     const siblingsUDT = createTypeQuery({
       name: "siblings",
       version: applicationVersion,
@@ -20,20 +42,18 @@ export function buildInitDb(args: adapterTypes.IBuildInitDb) {
         { name: "mind_diseases", type: "TEXT" },
       ],
     });
-    const createUserTableQuery = createTableQuery({
-      name: "users",
+    const phoneNumberIndex = createIndexQuery({
+      name: "user_by_phone_number",
+      indexKey: "phone_number",
+      table: "users",
+      version: "v1",
+    });
+    const createPatientTable = createTableQuery({
+      name: "patients",
       version: "v1",
       columns: [
-        { name: "id", type: "UUID" },
-        { name: "username", type: "TEXT" },
-        { name: "phone_number", type: "TEXT" },
-        { name: "first_name", type: "TEXT" },
-        { name: "last_name", type: "TEXT" },
-        { name: "profile_picture_url", type: "TEXT" },
-        { name: "address", type: "TEXT" },
-        { name: "telephone", type: "TEXT" },
+        { name: "user_id", type: "UUID" },
         { name: "problem_description", type: "TEXT" },
-        { name: "gender", type: "TEXT" },
         { name: "birthday", type: "TIMESTAMP" },
         { name: "marital_status", type: "TEXT" },
         { name: "marital_state", type: "TEXT" },
@@ -55,23 +75,17 @@ export function buildInitDb(args: adapterTypes.IBuildInitDb) {
           setType: "UDT",
           udtName: siblingsUDT.entityName,
         },
-        { name: "deactivation_reason", type: "TEXT" },
         { name: "created_at", type: "TIMESTAMP" },
         { name: "modified_at", type: "TIMESTAMP" },
         { name: "soft_deleted", type: "BOOLEAN" },
       ],
       primaryKey: {
-        partition: ["phone_number"],
+        partition: ["user_id"],
       },
-    });
-    const userIdIndex = createIndexQuery({
-      name: "user_by_id",
-      indexKey: "id",
-      table: "users",
-      version: "v1",
     });
     await init({ query: siblingsUDT.query, errorPath });
     await init({ query: createUserTableQuery.query, errorPath });
-    await init({ query: userIdIndex, errorPath });
+    await init({ query: createPatientTable.query, errorPath });
+    await init({ query: phoneNumberIndex, errorPath });
   };
 }
