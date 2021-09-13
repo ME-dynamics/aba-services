@@ -8,70 +8,54 @@ export function buildMakeUser(args: entityTypes.IBuildMakeUser) {
   ): Readonly<entityTypes.IMadeUser> {
     const {
       id = uuid(),
+      phoneNumber,
       createdAt = new Date(),
       modifiedAt = new Date(),
     } = user;
     let {
-      username = nanoid(8),
-      academicField,
-      address,
-      birthday,
-      bodyDiseases,
-      cousinMarriage,
-      drugUse,
-      addiction,
-      education,
-      gender,
-      isFatherAlive,
-      isMotherAlive,
-      job,
-      maritalStatus,
-      maritalState,
-      mindDiseases,
-      problemDescription,
-      religion,
-      siblings,
-      siblingsPosition,
-      telephone,
-      phoneNumber,
+      username,
       firstName,
       lastName,
       profilePictureUrl,
+      address,
+      gender,
+      telephone,
       deactivationReason,
       softDeleted,
     } = user;
-
-    function setUsername(newUsername: string) {
+    if(!username) {
+      username = nanoid(8);
+    }
+    function setUsername(newUsername: string | undefined) {
       username = newUsername;
       modifiedAt.setTime(Date.now());
     }
 
-    function setFirstName(newFirstName: string) {
+    function setFirstName(newFirstName: string | undefined) {
       firstName = newFirstName;
       modifiedAt.setTime(Date.now());
     }
-    function setLastName(newLastName: string) {
+    function setLastName(newLastName: string | undefined) {
       lastName = newLastName;
       modifiedAt.setTime(Date.now());
     }
 
-    function setProfilePictureUrl(newProfilePictureUrl: string) {
+    function setProfilePictureUrl(newProfilePictureUrl: string | undefined) {
       profilePictureUrl = newProfilePictureUrl;
       modifiedAt.setTime(Date.now());
     }
-    // function setFavorite(newFav: string) {
-    //   if (!favorites) {
-    //     favorites = [newFav];
-    //     modifiedAt.setTime(Date.now());
-    //     return true;
-    //   }
-    //   if (favorites.includes(newFav)) {
-    //     return false;
-    //   }
-    //   favorites.push(newFav);
-    //   modifiedAt.setTime(Date.now());
-    //   return true;
-    // }
+    function setAddress(newAddress: string | undefined) {
+      address = newAddress;
+      modifiedAt.setTime(Date.now());
+    }
+    function setGender(newGender: "male" | "female" | undefined) {
+      gender = newGender;
+      modifiedAt.setTime(Date.now());
+    }
+    function setTelephone(newTel: string | undefined) {
+      telephone = newTel;
+      modifiedAt.setTime(Date.now());
+    }
     function setDeactivationReason(newDeactivationReason: string) {
       deactivationReason = newDeactivationReason;
       modifiedAt.setTime(Date.now());
@@ -102,7 +86,9 @@ export function buildMakeUser(args: entityTypes.IBuildMakeUser) {
         firstName: setFirstName,
         lastName: setLastName,
         profilePictureUrl: setProfilePictureUrl,
-        // favorite: setFavorite,
+        gender: setGender,
+        address: setAddress,
+        telephone: setTelephone,
         deactivationReason: setDeactivationReason,
         remove,
         restore,
@@ -110,25 +96,8 @@ export function buildMakeUser(args: entityTypes.IBuildMakeUser) {
       object: () => {
         return {
           id,
-          academicField,
           address,
-          birthday,
-          bodyDiseases,
-          cousinMarriage,
-          drugUse,
-          addiction,
-          education,
           gender,
-          isFatherAlive,
-          isMotherAlive,
-          job,
-          maritalState,
-          maritalStatus,
-          mindDiseases,
-          problemDescription,
-          religion,
-          siblings,
-          siblingsPosition,
           telephone,
           username,
           phoneNumber,

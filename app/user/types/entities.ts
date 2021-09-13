@@ -1,6 +1,64 @@
 /**
  * base structure for user object
  */
+
+export interface IBuildMakeUser {
+  uuid: () => string;
+  nanoid: (size: number) => string;
+}
+
+export type tGender = "male" | "female";
+export interface IUser {
+  id: string;
+  username: string | undefined;
+  phoneNumber: string;
+  firstName: string | undefined;
+  lastName: string | undefined;
+  gender: tGender | undefined;
+  profilePictureUrl: string | undefined;
+  address: string | undefined;
+  telephone: string | undefined;
+  deactivationReason: string | undefined;
+  createdAt: Date | undefined;
+  modifiedAt: Date | undefined;
+  softDeleted: boolean;
+}
+export interface IMadeUserObject extends IUser {
+  id: string;
+  createdAt: Date;
+  modifiedAt: Date;
+}
+/**
+ * getter and setters for making the user
+ */
+export interface IMadeUser {
+  get: {
+    id: () => string;
+    username: () => string | undefined;
+    phoneNumber: () => string;
+    firstName: () => string | undefined;
+    lastName: () => string | undefined;
+    profilePictureUrl: () => string | undefined;
+    deactivationReason: () => string | undefined;
+    createdAt: () => Date;
+    modifiedAt: () => Date;
+    softDeleted: () => boolean;
+  };
+  set: {
+    username: (username: string | undefined) => void;
+    firstName: (firstName: string | undefined) => void;
+    lastName: (lastName: string | undefined) => void;
+    profilePictureUrl: (url: string | undefined) => void;
+    gender: (gender: "male" | "female" | undefined) => void;
+    address: (address: string | undefined) => void;
+    telephone: (telephone: string | undefined) => void;
+    deactivationReason: (newDeactivationReason: string) => void;
+    remove: () => void;
+    restore: () => void;
+  };
+  object: () => IMadeUserObject;
+}
+
 export type tEducation =
   | "uneducated"
   | "underAged"
@@ -22,10 +80,6 @@ export type tEducation =
   | "diploma"
   | "student"
   | "clergyman";
-export interface IBuildMakeUser {
-  uuid: () => string;
-  nanoid: (size: number) => string;
-}
 
 export interface ISiblings {
   role: "sister" | "brother" | "mother" | "father";
@@ -34,8 +88,6 @@ export interface ISiblings {
   emotionalRelation: string;
   mindDiseases: string | undefined;
 }
-
-export type tGender = "male" | "female";
 export type tMaritalStatus = "engaged" | "single";
 export type tMaritalState =
   | "namzad"
@@ -54,17 +106,10 @@ export type tReligion =
   | "mandaeans"
   | "christianity"
   | "judaism";
-export interface IUser {
-  id: string;
-  username: string | undefined;
-  phoneNumber: string;
-  firstName: string | undefined;
-  lastName: string | undefined;
-  profilePictureUrl: string | undefined;
-  address: string | undefined;
-  telephone: string | undefined;
+
+export interface IPatient {
+  userId: string;
   problemDescription: string | undefined;
-  gender: tGender | undefined;
   birthday: Date | undefined;
   maritalStatus: tMaritalStatus | undefined;
   maritalState: tMaritalState | undefined;
@@ -81,41 +126,60 @@ export interface IUser {
   cousinMarriage: boolean | undefined;
   siblingsPosition: number | undefined;
   siblings: ISiblings[] | undefined;
-  deactivationReason: string | undefined;
   createdAt: Date | undefined;
   modifiedAt: Date | undefined;
   softDeleted: boolean;
 }
-export interface IMadeUserObject extends IUser {
-  id: string;
-  username: string;
+
+export interface IMadePatientObject extends IPatient {
   createdAt: Date;
   modifiedAt: Date;
 }
-/**
- * getter and setters for making the user
- */
-export interface IMadeUser {
+
+export interface IMadePatient {
   get: {
-    id: () => string;
-    username: () => string;
-    phoneNumber: () => string;
-    firstName: () => string | undefined;
-    lastName: () => string | undefined;
-    profilePictureUrl: () => string | undefined;
-    deactivationReason: () => string | undefined;
+    userId: () => string;
+    problemDescription: () => string | undefined;
+    birthday: () => Date | undefined;
+    maritalStatus: () => tMaritalStatus | undefined;
+    maritalState: () => tMaritalState | undefined;
+    education: () => tEducation | undefined;
+    academicField: () => string | undefined;
+    religion: () => tReligion | undefined;
+    job: () => string | undefined;
+    bodyDiseases: () => string | undefined;
+    mindDiseases: () => string | undefined;
+    drugUse: () => string | undefined;
+    addiction: () => string | undefined;
+    isFatherAlive: () => boolean | undefined;
+    isMotherAlive: () => boolean | undefined;
+    cousinMarriage: () => boolean | undefined;
+    siblingsPosition: () => number | undefined;
+    siblings: () => ISiblings[] | undefined;
     createdAt: () => Date;
     modifiedAt: () => Date;
     softDeleted: () => boolean;
   };
   set: {
-    username: (username: string) => void;
-    firstName: (firstName: string) => void;
-    lastName: (lastName: string) => void;
-    profilePictureUrl: (url: string) => void;
-    deactivationReason: (newDeactivationReason: string) => void;
+    problemDescription: (newDesc: string | undefined) => void;
+    birthday: (Date: Date | undefined) => void;
+    maritalStatus: (newStatus: tMaritalStatus | undefined) => void;
+    maritalState: (newState: tMaritalState | undefined) => void;
+    education: (newEducation: tEducation | undefined) => void;
+    academicField: (newAcademicField: string | undefined) => void;
+    religion: (newReligion: tReligion | undefined) => void;
+    job: (newJob: string | undefined) => void;
+    bodyDiseases: (newDiseases: string | undefined) => void;
+    mindDiseases: (newMindDiseases: string | undefined) => void;
+    drugUse: (newDrugUse: string | undefined) => void;
+    addiction: (newAddiction: string | undefined) => void;
+    isFatherAlive: (isFatherAlive: boolean | undefined) => void;
+    isMotherAlive: (isMotherAlive: boolean | undefined) => void;
+    cousinMarriage: (cousinMarriage: boolean | undefined) => void;
+    siblingsPosition: (newPosition: number | undefined) => void;
+    siblings: (newSiblings: ISiblings[] | undefined) => void;
     remove: () => void;
     restore: () => void;
   };
-  object: () => IMadeUserObject;
+  object: () => IMadePatientObject;
 }

@@ -1,4 +1,9 @@
-import { IUser, IMadeUser, IMadeUserObject } from "./entities";
+import {
+  IUser,
+  IMadeUser,
+  IMadeUserObject,
+  IMadePatientObject,
+} from "./entities";
 import { types } from "aba-node";
 
 // user to object function
@@ -21,7 +26,6 @@ export interface IBuildInitDb {
 
 // ------
 
-
 // find by interfaces
 export interface IBuildFindUserBy {
   select: types.tDbSelectFunc;
@@ -30,8 +34,9 @@ export interface IBuildFindUserBy {
 
 // find user by id
 
-export type tFindUserByIdFunc = (id:string) => Promise<IMadeUserObject | undefined> 
-
+export type tFindUserByIdFunc = (
+  id: string
+) => Promise<IMadeUserObject | undefined>;
 
 // find user by phone number interfaces
 
@@ -39,9 +44,14 @@ export type tFindUserByPhoneNumberFunc = (
   phoneNumber: string
 ) => Promise<IMadeUserObject | undefined>;
 
+// find patient
 
-// ------
+export type tRowToPatientFunc = (row: types.tRow) => IMadePatientObject;
 
+export interface IBuildFindPatientByUserId {
+  select: types.tDbSelectFunc;
+  rowToPatient: tRowToPatientFunc;
+}
 
 // insert user to db interfaces
 
@@ -49,13 +59,10 @@ export interface IBuildInsert {
   insert: types.tDbUpsertFunc;
 }
 
-
-
 // ------
 export interface ICreateInsert {
   insert: types.tDbUpsertFunc;
 }
-
 
 export interface findUserById {
   select: types.tDbSelectFunc;
@@ -66,3 +73,11 @@ export type tUpdateUserFunc = (info: IUser) => Promise<boolean>;
 export interface ICreateUpdate {
   insert: types.tDbUpsertFunc;
 }
+
+// patient
+
+export type tInsertPatientFunc = (patient: IMadePatientObject) => Promise<void>;
+
+export type tFindPatientByUserIdFunc = (
+  userId: string
+) => Promise<IMadePatientObject | undefined>;
