@@ -25,7 +25,6 @@ export interface IUser {
 }
 export interface IMadeUserObject extends IUser {
   id: string;
-  username: string;
   createdAt: Date;
   modifiedAt: Date;
 }
@@ -35,7 +34,7 @@ export interface IMadeUserObject extends IUser {
 export interface IMadeUser {
   get: {
     id: () => string;
-    username: () => string;
+    username: () => string | undefined;
     phoneNumber: () => string;
     firstName: () => string | undefined;
     lastName: () => string | undefined;
@@ -46,10 +45,13 @@ export interface IMadeUser {
     softDeleted: () => boolean;
   };
   set: {
-    username: (username: string) => void;
-    firstName: (firstName: string) => void;
-    lastName: (lastName: string) => void;
-    profilePictureUrl: (url: string) => void;
+    username: (username: string | undefined) => void;
+    firstName: (firstName: string | undefined) => void;
+    lastName: (lastName: string | undefined) => void;
+    profilePictureUrl: (url: string | undefined) => void;
+    gender: (gender: "male" | "female" | undefined) => void;
+    address: (address: string | undefined) => void;
+    telephone: (telephone: string | undefined) => void;
     deactivationReason: (newDeactivationReason: string) => void;
     remove: () => void;
     restore: () => void;
