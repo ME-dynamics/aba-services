@@ -73,3 +73,11 @@ export type tUpdateUserFunc = (info: IUser) => Promise<boolean>;
 export interface ICreateUpdate {
   insert: types.tDbUpsertFunc;
 }
+
+// patient
+
+export type tInsertPatientFunc = (patient: IMadePatientObject) => Promise<void>;
+
+export type tFindPatientByUserIdFunc = (
+  userId: string
+) => Promise<IMadePatientObject | undefined>;

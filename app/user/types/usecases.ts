@@ -1,10 +1,11 @@
 import {
+  tFindPatientByUserIdFunc,
   tFindUserByIdFunc,
   tFindUserByPhoneNumberFunc,
+  tInsertPatientFunc,
   tInsertUserFunc,
-  tUpdateUserFunc,
-  tUserToObject,
 } from "./adapters";
+import { IPatient } from "./entities";
 
 export interface IBuildRetrieveUser {
   findUserById: tFindUserByIdFunc;
@@ -22,10 +23,41 @@ export interface ICreateUser {
   phoneNumber: string;
 }
 
-
 // activate and deactivate user
 
 export interface IBuildDeOrActivateUser {
   findUserById: tFindUserByIdFunc;
   insertUser: tInsertUserFunc;
+}
+
+// create patient
+
+export interface IBuildCreatePatient {
+  findUserById: tFindUserByIdFunc;
+  insertPatient: tInsertPatientFunc;
+}
+
+export type tCreatePatient = Omit<IPatient, "softDeleted">;
+
+// retrieve patient
+
+export interface IBuildRetrievePatient {
+  findPatientByUserId: tFindPatientByUserIdFunc;
+}
+
+// update user
+
+export interface IBuildUpdateUser {
+  findUserById: tFindUserByIdFunc;
+  insertUser: tInsertUserFunc;
+}
+
+export interface IUpdateUser {
+  username: string | undefined;
+  firstName: string | undefined;
+  lastName: string | undefined;
+  profilePictureUrl: string | undefined;
+  address: string | undefined;
+  telephone: string | undefined;
+  gender: "male" | "female" | undefined;
 }
