@@ -878,10 +878,10 @@
   resolved "https://registry.yarnpkg.com/@zxing/text-encoding/-/text-encoding-0.9.0.tgz#fb50ffabc6c7c66a0c96b4c03e3d9be74864b70b"
   integrity sha512-U/4aVJ2mxI0aDNI8Uq0wEhMgY+u4CNtEb0om3+y3+niDAsoTCOB33UF0sxpzqzdqXLqmvc+vZyAt4O8pPdfkwA==
 
-aba-node@0.3.4:
-  version "0.3.4"
-  resolved "https://registry.yarnpkg.com/aba-node/-/aba-node-0.3.4.tgz#2376c4652429cb86aa95389975fc7ef411c665da"
-  integrity sha512-jAMyV/c0zKCrtQEBD/iqaUJQcLqOehXICZnPOowCRX2aKbUoSP/7+VKGALnO3nvSEMpyhx1yRNZ3nldZ0Xt9qg==
+aba-node@0.3.5:
+  version "0.3.5"
+  resolved "https://registry.yarnpkg.com/aba-node/-/aba-node-0.3.5.tgz#4f12f9925f37ec2338bee3f4aa0787a7ceda4e26"
+  integrity sha512-TexgrnSpnCjhoJa0nrQ6qUMHIJWuw/01ewL4yLfP74kTpwV6d3+OW+RJJKsLG6OhTTZ1X+lZzGaC0sli/s7d/w==
   dependencies:
     aba-utils "0.5.5"
     cassandra-driver "^4.6.3"
@@ -2147,10 +2147,10 @@ fastify-error@^0.3.0:
   resolved "https://registry.yarnpkg.com/fastify-error/-/fastify-error-0.3.1.tgz#8eb993e15e3cf57f0357fc452af9290f1c1278d2"
   integrity sha512-oCfpcsDndgnDVgiI7bwFKAun2dO+4h84vBlkWsWnz/OUK9Reff5UFoFl241xTiLeHWX/vU9zkDVXqYUxjOwHcQ==
 
-fastify-multipart@4.0.7:
-  version "4.0.7"
-  resolved "https://registry.yarnpkg.com/fastify-multipart/-/fastify-multipart-4.0.7.tgz#80e69f8034e95811b35d205cd9f4970d0199ff8f"
-  integrity sha512-bV6QB3mmDYdrYwIrUrkGplutQLUUSzXFXtkCL2HRw5eLXyv9+DD5Gb5GJNDtKYCiCtyaGLbJmt2rLsF6A3WCUw==
+fastify-multipart@5.0.0:
+  version "5.0.0"
+  resolved "https://registry.yarnpkg.com/fastify-multipart/-/fastify-multipart-5.0.0.tgz#3e0de27bec7c84e916ff0e9dd06dc0d8f3ed3c96"
+  integrity sha512-T0+lmisyJEKGGLWY0nOAu0hyIK2wZa5Eki+U2K6f2HE6les31CS4IxaZSG4zcBqTG6BnUXgPnhUcQ4xKsthrdA==
   dependencies:
     busboy "^0.3.1"
     deepmerge "^4.2.2"
@@ -3366,10 +3366,10 @@ jest@27.1.0:
     import-local "^3.0.2"
     jest-cli "^27.1.0"
 
-jose@^3.16.1:
-  version "3.16.1"
-  resolved "https://registry.yarnpkg.com/jose/-/jose-3.16.1.tgz#13808b18aad618099d6d56c9c7486ec0d00e1a6b"
-  integrity sha512-Dn/iku+Np0ggqWHmWQ127t6Uf7LFCLhCINN28lni1wX0NHDtSE3980baHz2tK1qn1ZFUL8t2m2yEScYyf3rgOw==
+jose@^3.17.0:
+  version "3.17.0"
+  resolved "https://registry.yarnpkg.com/jose/-/jose-3.17.0.tgz#19a561edec33d0f663fff201c3cce4bba7b28d93"
+  integrity sha512-rLpCb/TOsk4/yjjIALNecWbBivA17a5nQk/d2BJAiBbjP0db57rgrh3W3s6BzGcc9jxOo6txFBWGbDHwYAFgdQ==
 
 js-tokens@^4.0.0:
   version "4.0.0"
@@ -3475,10 +3475,10 @@ levn@~0.3.0:
     prelude-ls "~1.1.2"
     type-check "~0.3.2"
 
-libphonenumber-js@^1.9.26:
-  version "1.9.26"
-  resolved "https://registry.yarnpkg.com/libphonenumber-js/-/libphonenumber-js-1.9.26.tgz#888aca88a4019d0b108e45db8e0509d55785ae45"
-  integrity sha512-j0brmDsZLSKJCrcli1HjzHYP29VOf5P/Yz+xxe7WmKTe+0XVnKa0J+UEAaT96D21w1mfLPhlm0ZXBQ13EVF+XQ==
+libphonenumber-js@^1.9.34:
+  version "1.9.34"
+  resolved "https://registry.yarnpkg.com/libphonenumber-js/-/libphonenumber-js-1.9.34.tgz#ddddc778a9b2f53c70500fcf10c9483596e3574f"
+  integrity sha512-gHTNU9xTtVgSp30IDX/57W4pETMXDIYXFfwEOJVXiYosiY7Hc7ogJwlBjOqlCcU04X0aA8DT57hdwUC1sJBJnA==
 
 light-my-request@^4.2.0:
   version "4.4.1"
