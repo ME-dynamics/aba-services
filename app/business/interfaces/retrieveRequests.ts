@@ -8,7 +8,7 @@ export async function retrieveRequests(request: any, reply: types.tReply) {
     reply.status(response.code);
     reply.send(response);
   } catch (error) {
-    reply.status(error.code);
+    reply.status(500);
     reply.send(error);
   }
 }

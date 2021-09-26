@@ -10,7 +10,7 @@ export async function createRequest(
     reply.status(response.code);
     reply.send(response);
   } catch (error) {
-    reply.status(error.code || 500);
+    reply.status(500);
     console.dir(error, { depth: null, colors: true });
   }
 }

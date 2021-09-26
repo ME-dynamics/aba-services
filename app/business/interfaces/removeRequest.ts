@@ -11,7 +11,7 @@ export async function removeRequest(
     reply.status(response.code);
     reply.send(response);
   } catch (error) {
-    reply.status(error.code);
+    reply.status(500);
     reply.send(error);
   }
 }

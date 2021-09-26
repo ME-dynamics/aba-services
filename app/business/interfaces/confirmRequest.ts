@@ -7,7 +7,7 @@ export async function confirmRequest(request: controllerTypes.tPostConfirmReques
     reply.status(response.code);
     reply.send(response);
   } catch (error) {
-    reply.status(error.code || 500);
+    reply.status(500);
     reply.send(error);
   }
 }
