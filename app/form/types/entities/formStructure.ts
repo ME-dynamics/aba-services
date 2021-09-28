@@ -12,13 +12,16 @@ export interface IQuestion {
 }
 export type tQuestionFields = Record<string, IQuestion>;
 export interface IFormStructure {
-  id: string | undefined;
-  title: string;
-  description: string | undefined;
+  id: string;
+  title: {
+    fa: string;
+    en: string;
+  };
+  description: string;
   fields: tQuestionFields;
-  createdAt: Date | undefined;
-  modifiedAt: Date | undefined;
-  softDeleted: boolean;
+  // createdAt: Date | undefined;
+  // modifiedAt: Date | undefined;
+  // softDeleted: boolean;
 }
 
 export interface IMadeFormStructureObject extends IFormStructure {
