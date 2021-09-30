@@ -1,3 +1,3 @@
-import { buildPostSubmitFormStruct } from "./postSubmitFormStruct";
+import { buildGetNEOPIR } from "./getNEOPIR"
 
-export const postSubmitFormStruct = buildPostSubmitFormStruct();
+export const getNEOPIR = buildGetNEOPIR();

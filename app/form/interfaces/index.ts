@@ -1,14 +1,11 @@
-import { httpClient } from "aba-node";
-import { sSubmitFormStruct } from "../schemas";
-import { submitFormStruct } from "./submitFormStruct";
+import { types } from "aba-node";
+import { sNEOPIRStructure } from "../schemas";
 
-const app = httpClient({ dev: true });
+import { retrieveNEOPIR } from "./retrieveNEOPIR";
 
-app.post("/v1/form/structure", { schema: sSubmitFormStruct }, submitFormStruct);
-
-export async function startServer() {
+export async function startFormServer(app: types.tHttpInstance) {
   try {
-    await app.listen(3000, "0.0.0.0");
+    app.get("/v1/form/neopir", { schema: sNEOPIRStructure }, retrieveNEOPIR);
   } catch (error) {
     console.log(error);
     process.exit(1);
