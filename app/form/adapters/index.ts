@@ -1,7 +1,6 @@
 import { scyllaClient } from "aba-node";
 import {
   buildInitDb,
-  buildInsertFormStructure,
   buildInsertFormData,
 } from "./db";
 import { applicationVersion } from "../config";
@@ -17,7 +16,7 @@ const dbClient = scyllaClient({
 });
 
 export const initDb = buildInitDb({ init: dbClient.init });
-export const insertFormStructure = buildInsertFormStructure({
-  insert: dbClient.insert,
-});
+// export const insertFormStructure = buildInsertFormStructure({
+//   insert: dbClient.insert,
+// });
 export const insertFormData = buildInsertFormData({ insert: dbClient.insert });
