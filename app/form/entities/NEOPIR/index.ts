@@ -22,3 +22,6 @@ export function buildMakeNEOPIR(args: entityTypes.IBuildNEOPIR) {
     };
   };
 }
+
+
+export { formStructure as NEOPIRStructure } from "./formStructure"

@@ -16,3 +16,4 @@ export const makeNEOPIR = buildMakeNEOPIR({
   oFormula,
   rules,
 });
+export { NEOPIRStructure } from "./NEOPIR";
