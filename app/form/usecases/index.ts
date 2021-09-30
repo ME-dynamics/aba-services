@@ -1,4 +1,4 @@
-import { insertFormStructure } from "../adapters";
-import { buildSubmitFormStruct } from "./submitFormStruct";
+import { buildRetrieveNEOPIR } from "./retrieveNEOPIR";
 
-export const submitFormStruct = buildSubmitFormStruct({ insertFormStructure });
+export const retrieveNEOPIR = buildRetrieveNEOPIR();
+
