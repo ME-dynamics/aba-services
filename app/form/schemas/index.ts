@@ -1,1 +1,1 @@
-export { sSubmitFormStruct } from "./sSubmitFormStruct";
+export { sNEOPIRStructure } from "./sGetNEOPIR";
