@@ -6,7 +6,7 @@ export async function retrieveRequests(request: any, reply: types.tReply) {
   try {
     const response = await getRetrieveRequests();
     reply.status(response.code);
-    reply.send(response);
+    return response;
   } catch (error) {
     reply.status(500);
     reply.send(error);

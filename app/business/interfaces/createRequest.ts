@@ -8,7 +8,7 @@ export async function createRequest(
   try {
     const response = await postCreateRequest(request);
     reply.status(response.code);
-    reply.send(response);
+    return response;
   } catch (error) {
     reply.status(500);
     console.dir(error, { depth: null, colors: true });

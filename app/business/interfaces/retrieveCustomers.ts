@@ -9,7 +9,7 @@ export async function retrieveCustomers(
   try {
     const response = await getRetrieveCustomers();
     reply.status(response.code);
-    reply.send(response);
+    return response;
   } catch (error) {
     reply.status(500);
     reply.send(error);

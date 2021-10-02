@@ -9,7 +9,7 @@ export async function removeCustomer(
   try {
     const response = await deleteRemoveCustomer(request);
     reply.status(response.code);
-    reply.send(response);
+    return response;
   } catch (error) {
     reply.status(500);
     reply.send(error);
