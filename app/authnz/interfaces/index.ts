@@ -1,5 +1,5 @@
 // start your http, grpc, kafka , etc interface here
-import { types } from "aba-node";
+import { types, routeGen } from "aba-node";
 import { applicationVersion } from "../config";
 import {
   sPasswordlessStart,
@@ -14,38 +14,52 @@ import { createProvider } from "./createProvider";
 import { retrievePublicKey } from "./retrievePublicKey";
 
 import { refresh } from "./refresh";
-import { nanoid } from "nanoid";
-const customerEndpoint = `/${applicationVersion}/customer`;
-const providerEndpoint = `/${applicationVersion}/provider`;
-const adminEndpoint = `/${applicationVersion}/admin`;
 
 export function startAuthnzServer(app: types.tHttpInstance) {
   app.post(
-    `${customerEndpoint}/passwordless/start`,
+    routeGen({
+      version: applicationVersion,
+      role: "shared",
+      routes: ["passwordless", "start"],
+    }),
     { schema: sPasswordlessStart },
     passwordlessStart
   );
   app.post(
-    `${customerEndpoint}/passwordless/verify`,
+    routeGen({
+      version: applicationVersion,
+      role: "shared",
+      routes: ["passwordless", "verify"],
+    }),
     { schema: sPasswordlessVerify },
     passwordlessVerify
   );
   app.post(
-    `${adminEndpoint}/provider`,
+    routeGen({
+      version: applicationVersion,
+      role: "admin",
+      routes: ["provider"],
+    }),
     { schema: sCreateProvider },
     createProvider
   );
-  app.post(`${customerEndpoint}/refresh`, { schema: sRefresh }, refresh);
+  app.post(
+    routeGen({
+      version: applicationVersion,
+      role: "shared",
+      routes: ["refresh"],
+    }),
+    { schema: sRefresh },
+    refresh
+  );
 
   app.get(
-    "/v1/internal/public/key",
+    routeGen({
+      version: "v1",
+      role: "internal",
+      routes: ["jwt", "key", "public"],
+    }),
     { schema: sRetrievePublicKey },
     retrievePublicKey
   );
-
-  app.get("/v1", (req, res) => {
-    // console.dir(req.hostname, { depth: null, colors: true });
-    // console.dir(req.ip, { depth: null, colors: true });
-    res.send({ hello: nanoid(1024) });
-  });
 }
