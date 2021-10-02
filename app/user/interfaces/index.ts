@@ -1,29 +1,29 @@
-import {  types } from "aba-node";
+import { types, routeGen } from "aba-node";
 import { sCreateUser, sRetrieveUser } from "../schemas";
-import { applicationVersion, port } from "../config";
+import { applicationVersion } from "../config";
 
 import { retrieveUser } from "./retrieveUser";
 import { createUser } from "./createUser";
 
-const customerEndpoint = `/${applicationVersion}/customer`;
-const providerEndpoint = `/${applicationVersion}/provider`;
-const adminEndpoint = `/${applicationVersion}/admin`;
-const internalEndpoint = `/${applicationVersion}/internal`;
 
-export async function startServer(app: types.tHttpInstance) {
+export function startServer(app: types.tHttpInstance) {
+  app.get(
+    routeGen({
+      version: applicationVersion,
+      role: "customer",
+      routes: ["users"],
+    }),
+    { schema: sRetrieveUser },
+    retrieveUser
+  );
 
-  try {
-    app.get(
-      `${customerEndpoint}/users/`,
-      { schema: sRetrieveUser },
-      retrieveUser
-    );
-
-    app.post(`${internalEndpoint}/users`, { schema: sCreateUser }, createUser);
-
-    await app.listen(port);
-  } catch (error) {
-    app.log.error(error);
-    process.exit(1);
-  }
+  app.post(
+    routeGen({
+      version: applicationVersion,
+      role: "internal",
+      routes: ["users"],
+    }),
+    { schema: sCreateUser },
+    createUser
+  );
 }
