@@ -203,8 +203,8 @@ const nData: Record<string, {a: number, b: number}> = {
     },
  }
 function snFormula(fields: Record<string, "a"| "b">) {
-    let s: number = 0;
-    let n: number = 0;
+    let s = 0;
+    let n = 0;
     for (let index = 26; index <= 50; index++) {
         const field = fields[`${index}`];
         s = s + sData[`${index}`][field]
@@ -212,32 +212,32 @@ function snFormula(fields: Record<string, "a"| "b">) {
     }
     return { s, n , max: Math.max(s, n)}
 }
-console.log(snFormula(
-    {
-        "26":"b",
-        "27":"b",
-        "28":"b",
-        "29":"b",
-        "30":"b",
-        "31":"a",
-        "32":"b",
-        "33":"a",
-        "34":"b",
-        "35":"b",
-        "36":"b",
-        "37":"b",
-        "38":"a",
-        "39":"a",
-        "40":"b",
-        "41":"b",
-        "42":"b",
-        "43":"b",
-        "44":"b",
-        "45":"a",
-        "46":"b",
-        "47":"b",
-        "48":"b",
-        "49":"b",
-        "50":"b"
-    }
-    ));
+// console.log(snFormula(
+//     {
+//         "26":"b",
+//         "27":"b",
+//         "28":"b",
+//         "29":"b",
+//         "30":"b",
+//         "31":"a",
+//         "32":"b",
+//         "33":"a",
+//         "34":"b",
+//         "35":"b",
+//         "36":"b",
+//         "37":"b",
+//         "38":"a",
+//         "39":"a",
+//         "40":"b",
+//         "41":"b",
+//         "42":"b",
+//         "43":"b",
+//         "44":"b",
+//         "45":"a",
+//         "46":"b",
+//         "47":"b",
+//         "48":"b",
+//         "49":"b",
+//         "50":"b"
+//     }
+//     ));

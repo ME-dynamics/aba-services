@@ -1,7 +1,7 @@
 import { entityTypes } from "../../types"
 
 
-const formStructure: entityTypes.IFormStructure = {
+export const formStructure: entityTypes.IFormStructure = {
     id: "mbti-87",
     title: {
         fa: "",
