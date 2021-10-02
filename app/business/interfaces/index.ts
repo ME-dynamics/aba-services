@@ -1,4 +1,4 @@
-import { types } from "aba-node";
+import { types, routeGen } from "aba-node";
 
 import { confirmRequest } from "./confirmRequest";
 import { createRequest } from "./createRequest";
@@ -16,45 +16,71 @@ import {
   sRetrieveCustomers,
   sRetrieveRequests,
 } from "../schemas";
-
-const customerEndpoint = `/v1/customer`;
-const providerEndpoint = "/v1/provider";
+import { applicationVersion } from "../config";
 
 export function startBusinessServer(app: types.tHttpInstance) {
   app.post(
-    `${providerEndpoint}/requests/confirm`,
+    routeGen({
+      version: applicationVersion,
+      role: "provider",
+      routes: ["requests", "confirm"],
+    }),
     { schema: sConfirmSchema },
     confirmRequest
   );
   app.post(
-    `${customerEndpoint}/requests`,
+    routeGen({
+      version: applicationVersion,
+      role: "customer",
+      routes: ["requests"],
+    }),
     { schema: sCreateRequest },
     createRequest
   );
 
   app.delete(
-    `${providerEndpoint}/requests/reject/:customerId`,
+    routeGen({
+      version: applicationVersion,
+      role: "provider",
+      routes: ["requests", "reject", ":customerId"],
+    }),
     { schema: sRejectRequest },
     rejectRequest
   );
   app.delete(
-    `${providerEndpoint}/customers/:customerId`,
+    routeGen({
+      version: applicationVersion,
+      role: "provider",
+      routes: ["customers", ":customerId"],
+    }),
     { schema: sRemoveCustomer },
     removeCustomer
   );
   app.delete(
-    `${customerEndpoint}/requests`,
+    routeGen({
+      version: applicationVersion,
+      role: "customer",
+      routes: ["requests"],
+    }),
     { schema: sRemoveRequest },
     removeRequest
   );
 
   app.get(
-    `${providerEndpoint}/customers`,
+    routeGen({
+      version: applicationVersion,
+      role: "provider",
+      routes: ["customers"],
+    }),
     { schema: sRetrieveCustomers },
     retrieveCustomers
   );
   app.get(
-    `${providerEndpoint}/requests`,
+    routeGen({
+      version: applicationVersion,
+      role: "provider",
+      routes: ["requests"],
+    }),
     { schema: sRetrieveRequests },
     retrieveRequests
   );
