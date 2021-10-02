@@ -7,7 +7,7 @@ export async function retrievePublicKey(
   try {
     const response = await getRetrievePublicKey();
     reply.code(200);
-    reply.send(response);
+    return response;
   } catch (error) {
     reply.code(500);
     // console.dir(error, {depth: null, colors: true})

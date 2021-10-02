@@ -8,7 +8,7 @@ export async function passwordlessVerify(
   try {
     const response = await postPasswordlessVerify(request);
     reply.code(response.code);
-    reply.send(response);
+    return response;
   } catch (error) {
     reply.code(500);
     // console.dir(error, {depth: null, colors: true})
