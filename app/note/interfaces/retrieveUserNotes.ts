@@ -9,7 +9,7 @@ export async function retrieveUserNotes(
   try {
     const response = await getRetrieveUserNotes(request);
     reply.code(response.code);
-    reply.send(response);
+    return response;
   } catch (error) {
     reply.code(500);
     reply.send(error);

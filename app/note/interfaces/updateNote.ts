@@ -10,7 +10,7 @@ export async function updateNote(
     try {
       const response = await putUpdateNote(request);
       reply.code(response.code);
-      reply.send(response);
+      return response;
     } catch (error) {
       reply.code(500);
       reply.send(error);
