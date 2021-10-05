@@ -6,7 +6,7 @@ export function buildPostCreateProvider(
   args: controllerTypes.IBuildPostCreateProvider
 ) {
   const { validatePhoneNumber } = args;
-  const { badRequest, unauthorized } = httpResultClientError;
+  const { badRequest } = httpResultClientError;
   const role: types.IRoles = {
     admin: true,
     accountant: false,
@@ -20,9 +20,8 @@ export function buildPostCreateProvider(
   ) {
     const { success, error } = auth(httpRequest, role);
     if (!success) {
-      return error ? error : unauthorized({ error: "unauthorized" });
+      return error;
     }
-
     const { providerPhoneNumber } = httpRequest.body;
     if (!validatePhoneNumber(providerPhoneNumber)) {
       return badRequest({ error: "phone number is not valid" });
