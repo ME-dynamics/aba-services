@@ -1,0 +1,1 @@
+export { fetchImageInfo } from "./fetchImageInfo"
