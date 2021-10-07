@@ -60,6 +60,7 @@ export interface IPasswordlessVerifyResult {
   refreshTokenExpiresAt: number;
   jwtTokenExpiresAt: number;
   role: tRole;
+  userId: string;
 }
 
 // refresh
