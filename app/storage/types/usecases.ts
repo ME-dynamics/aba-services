@@ -43,6 +43,7 @@ export interface IUploadImage {
   file: internal.Readable;
   userId: string;
   access: "private" | "public";
+  transform: "profile" | "note";
 }
 export interface IUploadImageResult {
   id: string;
@@ -63,7 +64,6 @@ export interface IRetrievePrivateImage {
 export interface IRetrievePrivateImageResult {
   url: string;
 }
-
 
 // retrieve image info
 

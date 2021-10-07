@@ -12,9 +12,7 @@ export function buildUploadImage(args: usecaseTypes.IBuildUploadImage) {
   } = args;
   const { forbidden } = httpResultClientError;
   const { ok } = httpResultSuccess;
-  function imageInput(
-    info: usecaseTypes.IUploadImage,
-  ): entityTypes.IMakeImage {
+  function imageInput(info: usecaseTypes.IUploadImage): entityTypes.IMakeImage {
     const { userId, access } = info;
     return {
       userId,
@@ -26,10 +24,16 @@ export function buildUploadImage(args: usecaseTypes.IBuildUploadImage) {
       softDeleted: false,
     };
   }
+  function transformSize(transform: "profile" | "note") {
+    if (transform === "profile") {
+      return { width: 360, height: 360 };
+    }
+    return { width: 1280, height: 800 };
+  }
   return async function uploadImage(info: usecaseTypes.IUploadImage) {
-    const { file, access } = info;
+    const { file, access, transform } = info;
     const image = makeImage(imageInput(info));
-    const imageTransform = imageTransformer({ width: 1280, height: 800 });
+    const imageTransform = imageTransformer(transformSize(transform));
     const uploadStream = uploadToMinio({
       bucketName: access === "private" ? image.get.userId() : access,
       objectName: image.get.id(),
