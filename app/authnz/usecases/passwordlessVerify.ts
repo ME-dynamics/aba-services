@@ -73,11 +73,7 @@ export function buildPasswordlessVerify(
       ? makeRole(roleExists)
       : makeRole(roleInput(otp.get.id()));
 
-    const userCreated = await createUser(otp.get.id());
-    // const userId = otp.get.userId() || "none";
-    // if (userId === "none") {
-    //   return internalServerError({ error: "internal error" });
-    // }
+    const username = await createUser(otp.get.id(), otp.get.phoneNumber());
 
     const tokenFound = await findTokenByUserId(otp.get.id());
     if (tokenFound?.permanentBlock) {
@@ -124,6 +120,7 @@ export function buildPasswordlessVerify(
         jwtTokenExpiresAt: jwtExp,
         refreshTokenExpiresAt: refreshExpiresAt,
         role: role.get.role(),
+        userId: otp.get.id(),
       },
     });
   };
