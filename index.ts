@@ -11,19 +11,29 @@ import {
   startStorageServer,
 } from "./app/storage";
 import { initDb as initBusinessDb, startBusinessServer } from "./app/business";
-const app = httpClient({ dev: true });
+import { initDb as initFormDb, startFormServer } from "./app/form";
+import { initDb as initNoteDb, startNoteServer } from "./app/note";
+import { initDb as initUserDb } from "./app/user";
+const app = httpClient({ logger: true });
 
 export async function startService() {
   try {
-    await initAuthnzDb();
-    await initAuthnzSecret();
-    await initAdmin();
-    await initStorageDb();
-    await initPublicBucket();
-    await initBusinessDb();
+    await Promise.all([
+      await initAuthnzDb(),
+      await initAuthnzSecret(),
+      await initAdmin(),
+      await initStorageDb(),
+      await initPublicBucket(),
+      await initBusinessDb(),
+      await initFormDb(),
+      await initNoteDb(),
+      await initUserDb(),
+    ]);
     startAuthnzServer(app);
     startStorageServer(app);
     startBusinessServer(app);
+    startFormServer(app);
+    startNoteServer(app);
     await app.listen(3000, "0.0.0.0");
   } catch (error) {
     console.log(error);
