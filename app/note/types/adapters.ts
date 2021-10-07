@@ -39,3 +39,30 @@ export type tInsertNoteFunc = (note: IMadeNoteObject) => Promise<void>;
 // utils
 
 export type tRowToNoteFunc = (row: types.tRow) => IMadeNoteObject;
+
+export type tImageIdsValidationFunc = (
+  imageIds: string[],
+  ownerId: string
+) => Promise<boolean>;
+
+// network
+
+export interface IMakeImage {
+  userId: string;
+  id: string | undefined;
+  access: "public" | "private";
+  url: string | undefined;
+  createdAt: Date | undefined;
+  modifiedAt: Date | undefined;
+  softDeleted: boolean;
+}
+
+export interface IMadeImageObject extends IMakeImage {
+  id: string;
+  createdAt: Date;
+  modifiedAt: Date;
+}
+
+export type tFetchImageInfoFunc = (
+  imageId: string
+) => Promise<types.IErrorResult | types.IPayloadResult<IMadeImageObject>>;
