@@ -13,8 +13,7 @@ export function buildUploadToMinio(args: adapterTypes.IBuildUploadToMinio) {
       objectName,
       uploadStream,
       1,
-      { 'Content-type': 'image/jpeg',}
-      ,
+      { "Content-type": "image/jpeg" },
       function minioPutObjectCb(err, result) {
         if (err) {
           uploadStream.destroy();
