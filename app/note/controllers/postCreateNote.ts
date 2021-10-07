@@ -6,13 +6,13 @@ export function buildPostCreateNote() {
   return async function postCreateNote(
     request: controllerTypes.tPostCreateNote
   ) {
-      const { ownerId, title, content, imageToken } = request.body;
+      const { ownerId, title, content, imageIds } = request.body;
       
       return await createNote({
           ownerId,
           title,
           content,
-          imageToken,
+          imageIds,
           userId: v4()
       })
   };
