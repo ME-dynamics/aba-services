@@ -29,7 +29,6 @@ import {
   buildOtpGen,
   buildTokenGen,
 } from "./utils";
-import { buildCreateUser, buildSendOtpBySms } from "./network";
 import { buildInitSecret } from "./initSecret";
 import {
   scyllaContactPoint,
@@ -123,5 +122,4 @@ export const initSecret = buildInitSecret({
 
 // network
 
-export const createUser = buildCreateUser();
-export const sendOtpBySms = buildSendOtpBySms();
+export { fetchCreateUser, fetchSendOtpBySms } from "./network";
