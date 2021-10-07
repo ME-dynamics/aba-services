@@ -9,7 +9,7 @@ export async function uploadImage(
   try {
     const response = await postUploadImage(request);
     reply.status(response.code);
-    reply.send(response);
+    return response;
   } catch (error) {
     reply.status(500);
     reply.send(error);
