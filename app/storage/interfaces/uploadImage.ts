@@ -7,11 +7,11 @@ export async function uploadImage(
   reply: types.tReply
 ) {
   try {
-    const response = await postUploadImage(request);
+    const response = await postUploadImage(request, reply);
     reply.status(response.code);
     return response;
   } catch (error) {
     reply.status(500);
-    reply.send(error);
+    return error;
   }
 }
