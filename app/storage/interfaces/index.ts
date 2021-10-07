@@ -16,8 +16,8 @@ export async function startStorageServer(app: types.tHttpInstance) {
     limits: {
       fieldNameSize: 2000,
       fieldSize: 2000,
-      fields: 1,
-      fileSize: 1e6, // 12 megabyte for file limit 5e6
+      fields: 2,
+      fileSize: 8e6, // 12 megabyte for file limit 5e6
       files: 1,
       headerPairs: 2000,
     },
