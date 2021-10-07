@@ -3,12 +3,14 @@ import {
   tFindUserNotesFunc,
   IFindUserNotes,
   tFindNoteByIdFunc,
+  tImageIdsValidationFunc,
 } from "./adapters";
 
 // create note
 
 export interface IBuildCreateNote {
   insertNote: tInsertNoteFunc;
+  imageIdsValidation: tImageIdsValidationFunc;
 }
 
 export interface ICreateNote {
@@ -16,7 +18,7 @@ export interface ICreateNote {
   userId: string;
   title: string;
   content: string;
-  imageToken: string | undefined;
+  imageIds: string[] | undefined;
 }
 
 // retrieve note
@@ -25,10 +27,13 @@ export interface IBuildRetrieveNote {
   findUserNotes: tFindUserNotesFunc;
 }
 export interface IRemoveNote {
-  userId: string;
+  ownerId: string;
   id: string;
 }
-export type tRetrieveNote = IFindUserNotes;
+export interface IRetrieveNote {
+  ownerId: string;
+  userId: string;
+}
 
 // remove note
 
@@ -42,13 +47,13 @@ export interface IBuildRemoveNote {
 export interface IBuildUpdateNote {
   findNoteById: tFindNoteByIdFunc;
   insertNote: tInsertNoteFunc;
+  imageIdsValidation: tImageIdsValidationFunc;
 }
 
 export interface IUpdateNote {
-  userId: string;
+  ownerId: string;
   id: string;
   title: string;
   content: string;
   imageIds: string[] | undefined;
-  imageToken: string | undefined;
 }
