@@ -1,17 +1,15 @@
 // start your http, grpc, kafka , etc interface here
-import { types } from "aba-node";
+import { types, routeGen } from "aba-node";
 import multipart from "fastify-multipart";
 import { uploadImage } from "./uploadImage";
-import { uploadSession } from "./fileSession";
+// import { uploadSession } from "./fileSession";
 import { retrievePrivateImage } from "./retrievePrivateImage";
 import {
-  sFileSessionSchema,
+  // sFileSessionSchema,
   sUploadImage,
   sRetrievePrivateImage,
 } from "../schemas";
-const version = "v1";
-const customerEndpoint = `/${version}/customer`;
-const internal = `/${version}/internal`;
+import { applicationVersion } from "../config";
 
 export async function startStorageServer(app: types.tHttpInstance) {
   app.register(multipart, {
@@ -19,24 +17,32 @@ export async function startStorageServer(app: types.tHttpInstance) {
       fieldNameSize: 2000,
       fieldSize: 2000,
       fields: 1,
-      fileSize: 5e6, // 5 megabyte for file limit 5e6
+      fileSize: 1e6, // 12 megabyte for file limit 5e6
       files: 1,
       headerPairs: 2000,
     },
   });
   app.get(
-    `${customerEndpoint}/image/private/:imageId`,
+    routeGen({
+      version: applicationVersion,
+      role: "shared",
+      routes: ["images", "private", ":imageId"],
+    }),
     { schema: sRetrievePrivateImage },
     retrievePrivateImage
   );
   app.post(
-    `${customerEndpoint}/image/upload`,
+    routeGen({
+      version: applicationVersion,
+      role: "shared",
+      routes: ["images", "upload"],
+    }),
     { schema: sUploadImage },
     uploadImage
   );
-  app.post(
-    `${internal}/file/session`,
-    { schema: sFileSessionSchema },
-    uploadSession
-  );
+  // app.post(
+  //   `${internal}/file/session`,
+  //   { schema: sFileSessionSchema },
+  //   uploadSession
+  // );
 }
