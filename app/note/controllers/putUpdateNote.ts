@@ -1,17 +1,16 @@
 import { updateNote } from "../usecases";
 import { controllerTypes } from "../types";
-import { v4 } from "uuid";
 
 export function buildPutUpdateNote() {
   return async function putUpdateNote(request: controllerTypes.tPutUpdateNote) {
-    const { id, title, content, imageIds, imageToken } = request.body;
+    const { id, title, content, imageIds } = request.body;
     return await updateNote({
-      userId: v4(),
+      ownerId: "",
       id,
       title,
       content,
       imageIds,
-      imageToken,
+      
     });
   };
 }
