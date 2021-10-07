@@ -1,4 +1,5 @@
 import { httpResultClientError, httpResultSuccess } from "aba-node";
+import { serverUrl } from "../config"
 import { usecaseTypes } from "../types";
 
 export function buildRetrievePrivateImage(
@@ -7,9 +8,8 @@ export function buildRetrievePrivateImage(
   const { findImageById, minio } = args;
   const { notFound, forbidden } = httpResultClientError;
   const { ok } = httpResultSuccess;
-  const expiry = 1 * 60 * 60; // one hour in seconds
+  const expiry = 17 * 60; // 17 minutes in seconds
   const minioUrl = "http://127.0.0.1:9000";
-  const serverUrl = "https://127.0.0.1:13000";
   return async function retrievePrivateImage(
     info: usecaseTypes.IRetrievePrivateImage
   ) {
@@ -22,13 +22,15 @@ export function buildRetrievePrivateImage(
     if (imageFound.userId !== userId) {
       return forbidden({ error: "access is not allowed" });
     }
-
-    const url = await minio.presignedUrl("GET", userId, imageId, expiry);
-
-    return ok<usecaseTypes.IRetrievePrivateImageResult>({
-      payload: {
-        url: url.replace(minioUrl, serverUrl),
-      },
-    });
+    try {
+      const url = await minio.presignedUrl("GET", userId, imageId, expiry);
+      return ok<usecaseTypes.IRetrievePrivateImageResult>({
+        payload: {
+          url: url.replace(minioUrl, serverUrl),
+        },
+      });
+    } catch (error) {
+      return notFound({ error: "image not found" });
+    }
   };
 }
