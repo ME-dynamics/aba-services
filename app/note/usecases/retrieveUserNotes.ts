@@ -5,7 +5,7 @@ export function buildRetrieveUserNotes(args: usecaseTypes.IBuildRetrieveNote) {
   const { findUserNotes } = args;
   const { ok } = httpResultSuccess;
   const { notFound } = httpResultClientError;
-  return async function retrieveUserNotes(info: usecaseTypes.tRetrieveNote) {
+  return async function retrieveUserNotes(info: usecaseTypes.IRetrieveNote) {
     const notes = await findUserNotes(info);
     if (!notes) {
       return notFound({ error: "notes not found" });
