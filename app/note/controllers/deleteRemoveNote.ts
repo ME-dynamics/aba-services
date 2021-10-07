@@ -7,6 +7,6 @@ export function buildDeleteRemoveNote() {
     request: controllerTypes.tDeleteRemoveNote
   ) {
     const { id } = request.params;
-    return await removeNote({ userId: v4(), id });
+    return await removeNote({ ownerId: v4(), id });
   };
 }
