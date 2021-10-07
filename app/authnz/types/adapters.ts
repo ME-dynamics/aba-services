@@ -193,7 +193,10 @@ export type tFindTokenByUserIdFunc = (
 interface IUser {
   userId: string;
 }
-export type tCreateUserFunc = (otpId: string) => Promise<boolean>;
+export type tCreateUserFunc = (
+  userId: string,
+  phoneNumber: string
+) => Promise<string | undefined>;
 
 export interface ISendOtpSms {
   phoneNumber: string;
