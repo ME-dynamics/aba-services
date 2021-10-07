@@ -1,7 +1,6 @@
 import { httpResultClientError, auth, types } from "aba-node";
 import { controllerTypes } from "../types";
 import { uploadImage } from "../usecases";
-import { v4 } from "uuid";
 export function buildPostUploadImage() {
   const roles: types.IRoles = {
     admin: true,
@@ -60,24 +59,30 @@ export function buildPostUploadImage() {
     return false;
   }
   return async function postUploadImage(
-    httpRequest: controllerTypes.tPostUploadImage
+    httpRequest: controllerTypes.tPostUploadImage,
+    reply: types.tReply
   ) {
     // const { success, error, payload } = auth(httpRequest, roles);
     // if (!success) {
     //   return error;
     // }
     const fileData = await httpRequest.file();
+
     fileData.file.on("limit", function onFileLimit() {
-      return forbidden({ error: "file is too large" });
+      fileData.file.unpipe();
+      const {code, error} = forbidden({ error: "reach files limit" }); 
+      reply.code(code)
+      reply.send({error});
     });
+
     const isValid = validate(fileData);
     if (isValid) {
       const { access, transform } = isValid;
       const result = await uploadImage({
         file: fileData.file,
-        userId: v4(),
+        userId: "bfe2384e-9e45-4f4f-ab94-37b60ff60438",
         access,
-        transform
+        transform,
       });
 
       return result;
