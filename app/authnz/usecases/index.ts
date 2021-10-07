@@ -6,8 +6,8 @@ import {
   findOtpByPhone,
   insertOtp,
   otpGen,
-  sendOtpBySms,
-  createUser,
+  fetchCreateUser,
+  fetchSendOtpBySms,
   findOtpByToken,
   findTokenByUserId,
   insertToken,
@@ -31,13 +31,13 @@ export const passwordlessStart = buildPasswordlessStart({
   findOtpByPhone,
   insertOtp,
   otpGen,
-  sendOtpBySms,
+  sendOtpBySms: fetchSendOtpBySms,
 });
 
 export const passwordlessVerify = buildPasswordlessVerify({
   findRole,
   insertRole,
-  createUser,
+  createUser: fetchCreateUser,
   findOtpByToken,
   insertToken,
   signJwt,
