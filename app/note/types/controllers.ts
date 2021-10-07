@@ -16,7 +16,7 @@ interface IGetRetrieveUserNotes {
 export type tGetRetrieveUserNotes = types.tRequest<IGetRetrieveUserNotes>;
 
 interface IPutUpdateNote {
-  Body: Omit<IUpdateNote, "userId">;
+  Body: Omit<IUpdateNote, "ownerId">;
 }
 
 export type tPutUpdateNote = types.tRequest<IPutUpdateNote>;
