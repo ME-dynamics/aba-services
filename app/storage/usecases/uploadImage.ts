@@ -32,18 +32,7 @@ export function buildUploadImage(args: usecaseTypes.IBuildUploadImage) {
   }
   return async function uploadImage(info: usecaseTypes.IUploadImage) {
     const { file, access, transform } = info;
-    const image = makeImage(imageInput(info));
-    const imageTransform = imageTransformer(transformSize(transform));
-    const uploadStream = uploadToMinio({
-      bucketName: access === "private" ? image.get.userId() : access,
-      objectName: image.get.id(),
-    });
-    if (access === "private") {
-      const bucketExists = await minio.bucketExists(image.get.userId());
-      if (!bucketExists) {
-        await minio.makeBucket(image.get.userId(), "est-ir");
-      }
-    }
+    
     const typeStream = await fileType(file);
     if (!typeStream.fileType) {
       return forbidden({ error: "allowed file types : jpg, png" });
@@ -53,7 +42,18 @@ export function buildUploadImage(args: usecaseTypes.IBuildUploadImage) {
     ) {
       return forbidden({ error: "allowed file types : jpg, png" });
     }
-
+    const image = makeImage(imageInput(info));
+    const imageTransform = imageTransformer(transformSize(transform));
+    if (access === "private") {
+      const bucketExists = await minio.bucketExists(image.get.userId());
+      if (!bucketExists) {
+        await minio.makeBucket(image.get.userId(), "est-ir");
+      }
+    } 
+    const uploadStream = uploadToMinio({
+      bucketName: access === "private" ? image.get.userId() : access,
+      objectName: image.get.id(),
+    });
     await pump(typeStream, imageTransform, uploadStream);
 
     await insertImage(image.object());
