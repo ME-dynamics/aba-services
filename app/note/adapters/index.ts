@@ -14,7 +14,7 @@ const dbClient = scyllaClient({
   contactPoints: ["127.0.1.1"],
   errorPath: "notes, adapters, db client",
   id: undefined,
-  keyspace: "notes",
+  keyspace: "note",
   localDataCenter: "datacenter1",
 });
 
