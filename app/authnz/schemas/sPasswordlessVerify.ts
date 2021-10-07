@@ -20,6 +20,7 @@ const response = {
         .prop("refreshTokenExpiresAt", fluentSchema.number().required())
         .prop("jwtTokenExpiresAt", fluentSchema.number().required())
         .prop("role", fluentSchema.string().required())
+        .prop("userId", fluentSchema.string().format("uuid").required())
     ),
   [statusCodes.BAD_REQUEST]: errorSchema,
   [statusCodes.INTERNAL_SERVER_ERROR]: errorSchema,
