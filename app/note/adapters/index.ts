@@ -30,3 +30,10 @@ export const findUserNotes = buildFindUserNotes({
 });
 
 export const insertNote = buildInsertNote({ insert: dbClient.insert });
+
+// network
+
+export { fetchImageInfo } from "./network";
+
+// utils
+export { imageIdsValidation } from "./utils";
