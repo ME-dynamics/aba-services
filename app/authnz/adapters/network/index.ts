@@ -1,2 +1,2 @@
-export { buildCreateUser } from "./createUser";
-export { buildSendOtpBySms } from "./sendOtpBySms"
+export { fetchCreateUser } from "./createUser";
+export { fetchSendOtpBySms } from "./sendOtpBySms"
