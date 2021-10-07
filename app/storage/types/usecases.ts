@@ -1,11 +1,11 @@
 import { types } from "aba-node";
 import { Client } from "minio";
 import internal from "node:stream";
+import { stream } from "file-type";
 import {
   tImageTransformerFunc,
   tUploadToMinioFunc,
   tInsertImage,
-  tFindFileSession,
   tInsertFileSession,
   tFindImageById,
 } from "./adapters";
@@ -35,14 +35,14 @@ export interface IBuildUploadImage {
   uploadToMinio: tUploadToMinioFunc;
   imageTransformer: tImageTransformerFunc;
   insertImage: tInsertImage;
-  findFileSession: tFindFileSession;
+  fileType: typeof stream;
   minio: Client;
 }
 
 export interface IUploadImage {
   file: internal.Readable;
-  session: string;
   userId: string;
+  access: "private" | "public";
 }
 export interface IUploadImageResult {
   id: string;
@@ -54,13 +54,19 @@ export interface IUploadImageResult {
 export interface IBuildRetrievePrivateImage {
   minio: Client;
   findImageById: tFindImageById;
-
 }
 
 export interface IRetrievePrivateImage {
   userId: string;
-  imageId: string
+  imageId: string;
 }
 export interface IRetrievePrivateImageResult {
   url: string;
+}
+
+
+// retrieve image info
+
+export interface IBuildRetrieveImageInfo {
+  findImageById: tFindImageById;
 }
