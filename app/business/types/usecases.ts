@@ -62,6 +62,11 @@ export interface IBuildRetrieveRequests {
 export interface IBuildRetrieveCustomers {
   findCustomersByStaffId: tFindCustomersByStaffIdFunc;
 }
+// retrieve customer staff by customer id
+
+export interface IBuildRetrieveCustomerStaff {
+  findStaffByCustomerId: tFindStaffByCustomerId;
+}
 
 // remove customer by id
 export interface IBuildRemoveCustomer {
