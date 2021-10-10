@@ -28,3 +28,9 @@ export type tInsertTaskFunc = (task: IMadeTaskObject) => Promise<void>;
 // utils
 
 export type tRowTask = (row: types.tRow) => IMadeTaskObject;
+
+// network
+
+export type tFindUserProviderFunc = (
+  customerId: string
+) => Promise<string | undefined>;
