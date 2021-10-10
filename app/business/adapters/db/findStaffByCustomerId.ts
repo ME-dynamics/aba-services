@@ -25,11 +25,10 @@ export function buildFindStaffByCustomerId(
   return async function findStaffByCustomerId(
     customerId: string
   ): Promise<entityTypes.IMadeStaffCustomerObject | undefined> {
-    console.log(customerId);
     const result = await select({
       query,
       params: { customer_id: customerId },
-      unique: false,
+      unique: true,
       queryOptions: undefined,
       errorPath,
     });
