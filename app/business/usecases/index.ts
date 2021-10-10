@@ -16,6 +16,7 @@ import { buildRetrieveRequests } from "./retrieveRequests";
 import { buildRetrieveCustomers } from "./retrieveCustomers";
 import { buildRemoveCustomer } from "./removeCustomer";
 import { buildUpdateCustomerInfo } from "./updateCustomerInfo";
+import { buildRetrieveCustomerStaff } from "./retrieveCustomerStaff";
 import { v4 } from "uuid";
 
 const findUserById = async (id: string) => {
@@ -69,4 +70,8 @@ export const updateCustomerInfo = buildUpdateCustomerInfo({
   findRequestByCustomerId,
   insertRequest,
   insertStaffCustomer,
+});
+
+export const retrieveCustomerStaff = buildRetrieveCustomerStaff({
+  findStaffByCustomerId,
 });
