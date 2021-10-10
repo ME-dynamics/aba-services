@@ -11,36 +11,47 @@ export interface ICreateTask {
   content: string;
 }
 
-
 // retrieve tasks by user id
 
-
 export interface IBuildRetrieveTasksByUserId {
-    findTasksByUserId: tFindTasksByUserId
+  findTasksByUserId: tFindTasksByUserId;
 }
 
 // retrieve task by id
 
 export interface IBuildRetrieveTaskById {
-  findTaskById: tFindTaskById
+  findTaskById: tFindTaskById;
 }
 
 // task done
 
 export interface IBuildTaskDone {
-  findTaskById: tFindTaskById
+  findTaskById: tFindTaskById;
   insertTask: tInsertTaskFunc;
 }
 
 // task undone
 export interface IBuildTaskUndone {
-  findTaskById: tFindTaskById
+  findTaskById: tFindTaskById;
   insertTask: tInsertTaskFunc;
+}
+export interface ITaskUndone {
+  taskId: string;
+  userId: string;
+}
+export interface ITaskDone {
+  taskId: string;
+  userId: string;
 }
 
 // remove task
 
 export interface IBuildRemoveTask {
-  findTaskById: tFindTaskById
+  findTaskById: tFindTaskById;
   insertTask: tInsertTaskFunc;
+}
+
+export interface IRemoveTask {
+  taskId: string;
+  userId: string;
 }
