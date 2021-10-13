@@ -1,10 +1,10 @@
 export { buildInitDb } from "./initDb";
 
 export { buildFindCustomer } from "./findCustomer"
-export { buildFindCustomersByStaffId } from "./findCustomersByStaffId";
+export { buildFindCustomersByProviderId } from "./findCustomersByProviderId";
 export { buildFindRequestByCustomerId } from "./findRequestByCustomerId";
-export { buildFindRequestsByStaffId } from "./findRequestsByStaffId";
-export { buildFindStaffByCustomerId } from "./findStaffByCustomerId";
+export { buildFindRequestsByProviderId } from "./findRequestsByProviderId";
+export { buildFindProviderByCustomerId } from "./findProviderByCustomerId";
 
-export { buildInsertStaffCustomer } from "./insertStaffCustomer";
+export { buildInsertProviderCustomer } from "./insertProviderCustomer";
 export { buildInsertRequest } from "./insertRequest";

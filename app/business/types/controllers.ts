@@ -10,7 +10,7 @@ export type tPostConfirmRequest = types.tRequest<IPostConfirmRequest>;
 
 interface IPostCreateRequest {
   Body: {
-    staffId: string;
+    providerId: string;
   };
 }
 

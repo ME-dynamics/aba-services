@@ -1,5 +1,5 @@
 import { httpResultClientError, httpResultSuccess } from "aba-node";
-import { makeCustomerStaffRequest } from "../entities";
+import { makeCustomerProviderRequest } from "../entities";
 import { usecaseTypes } from "../types";
 
 export function buildRemoveRequest(args: usecaseTypes.IBuildRemoveRequest) {
@@ -11,7 +11,7 @@ export function buildRemoveRequest(args: usecaseTypes.IBuildRemoveRequest) {
     if (!requestFound || requestFound.softDeleted) {
       return notFound({ error: "request not found" });
     }
-    const request = makeCustomerStaffRequest(requestFound);
+    const request = makeCustomerProviderRequest(requestFound);
     request.set.remove();
     await insertRequest(request.object());
     return ok<string>({

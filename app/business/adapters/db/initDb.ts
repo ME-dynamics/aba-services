@@ -9,11 +9,11 @@ export function buildInitDb(args: adaptersTypes.IBuildInit) {
     const { createTableQuery, createMaterialView, selectQuery, operators } =
       queryGen;
     const { notNull } = operators;
-    const createStaffCustomerTable = createTableQuery({
-      name: "staff_customer",
+    const createProviderCustomerTable = createTableQuery({
+      name: "provider_customer",
       version: "v1",
       columns: [
-        { name: "staff_id", type: "UUID" },
+        { name: "provider_id", type: "UUID" },
         { name: "customer_id", type: "UUID" },
         { name: "name", type: "TEXT" },
         { name: "image_url", type: "TEXT" },
@@ -23,37 +23,37 @@ export function buildInitDb(args: adaptersTypes.IBuildInit) {
         { name: "soft_deleted", type: "BOOLEAN" },
       ],
       primaryKey: {
-        partition: ["staff_id"],
+        partition: ["provider_id"],
         cluster: ["created_at", "customer_id"],
       },
       orderBy: [{ key: "created_at", type: "DESC" }],
     });
-    const customerStaffMVSelect = selectQuery({
-      table: "staff_customer",
+    const customerProviderMVSelect = selectQuery({
+      table: "provider_customer",
       version: "v1",
       columns: ["*"],
       where: [
-        notNull("staff_id"),
+        notNull("provider_id"),
         notNull("created_at"),
         notNull("customer_id"),
         notNull("soft_deleted"),
       ],
     });
-    const createCustomerStaffMV = createMaterialView({
-      name: "staff_customer_by_customer_id",
+    const createCustomerProviderMV = createMaterialView({
+      name: "provider_customer_by_customer_id",
       version: "v1",
-      selectQuery: customerStaffMVSelect,
+      selectQuery: customerProviderMVSelect,
       primaryKey: {
         partition: ["customer_id"],
-        cluster: ["soft_deleted", "created_at", "staff_id"],
+        cluster: ["soft_deleted", "created_at", "provider_id"],
       },
     });
 
-    const createCustomerStaffRequestTable = createTableQuery({
-      name: "customer_staff_request",
+    const createCustomerProviderRequestTable = createTableQuery({
+      name: "customer_provider_request",
       version: "v1",
       columns: [
-        { name: "staff_id", type: "UUID" },
+        { name: "provider_id", type: "UUID" },
         { name: "customer_id", type: "UUID" },
         { name: "name", type: "TEXT" },
         { name: "image_url", type: "TEXT" },
@@ -63,35 +63,36 @@ export function buildInitDb(args: adaptersTypes.IBuildInit) {
         { name: "soft_deleted", type: "BOOLEAN" },
       ],
       primaryKey: {
-        partition: ["staff_id"],
+        partition: ["provider_id"],
         cluster: ["created_at", "customer_id"],
       },
       orderBy: [{ key: "created_at", type: "DESC" }],
     });
     const createCustomerRequestMVQuery = selectQuery({
-      table: "customer_staff_request",
+      table: "customer_provider_request",
       version: "v1",
       columns: ["*"],
       where: [
-        notNull("staff_id"),
+        notNull("provider_id"),
         notNull("created_at"),
         notNull("customer_id"),
         notNull("soft_deleted"),
       ],
     });
     const createCustomerRequestMV = createMaterialView({
-      name: "customer_staff_request_by_customer_id",
+      name: "customer_provider_request_by_customer_id",
       version: "v1",
       selectQuery: createCustomerRequestMVQuery,
       primaryKey: {
         partition: ["customer_id"],
-        cluster: ["soft_deleted", "created_at", "staff_id"],
+        cluster: ["soft_deleted", "created_at", "provider_id"],
       },
     });
-
-    await init({ query: createStaffCustomerTable.query, errorPath });
-    await init({ query: createCustomerStaffMV.query, errorPath });
-    await init({ query: createCustomerStaffRequestTable.query, errorPath });
-    await init({ query: createCustomerRequestMV.query, errorPath });
+    await Promise.all([
+      init({ query: createProviderCustomerTable.query, errorPath }),
+      init({ query: createCustomerProviderMV.query, errorPath }),
+      init({ query: createCustomerProviderRequestTable.query, errorPath }),
+      init({ query: createCustomerRequestMV.query, errorPath }),
+    ]);
   };
 }

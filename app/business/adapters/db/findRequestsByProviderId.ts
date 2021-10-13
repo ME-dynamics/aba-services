@@ -5,26 +5,26 @@ function selectQueryGen(): string {
   const { selectQuery, operators } = queryGen;
   const { equal } = operators;
   const query = selectQuery({
-    table: "customer_staff_request",
+    table: "customer_provider_request",
     version: "v1",
     columns: ["*"],
-    where: [equal({ argument: "staff_id", self: true })],
+    where: [equal({ argument: "provider_id", self: true })],
   });
   return query;
 }
 
-export function buildFindRequestsByStaffId(
+export function buildFindRequestsByProviderId(
   args: adaptersTypes.IBuildFindRequests
 ) {
-  const { select, rowToCustomerStaffRequest } = args;
-  const errorPath = "business, adapters, find requests by staff id";
+  const { select, rowToCustomerProviderRequest } = args;
+  const errorPath = "business, adapters, find requests by provider id";
   const query = selectQueryGen();
-  return async function findRequestsByStaffId(
-    staffId: string
-  ): Promise<entityTypes.IMadeCustomerStaffRequestObject[] | undefined> {
+  return async function findRequestsByProviderId(
+    providerId: string
+  ): Promise<entityTypes.IMadeCustomerProviderRequestObject[] | undefined> {
     const result = await select({
       query,
-      params: { staff_id: staffId },
+      params: { provider_id: providerId },
       unique: false,
       queryOptions: undefined,
       errorPath,
@@ -33,13 +33,13 @@ export function buildFindRequestsByStaffId(
     if (length === 0) {
       return undefined;
     }
-    const requests: entityTypes.IMadeCustomerStaffRequestObject[] = [];
+    const requests: entityTypes.IMadeCustomerProviderRequestObject[] = [];
     for (let index = 0; index < length; index++) {
       const row = result.rows[index];
       if (row.get("soft_deleted")) {
         continue;
       }
-      requests.push(rowToCustomerStaffRequest(row));
+      requests.push(rowToCustomerProviderRequest(row));
     }
     if (requests.length === 0) {
       return undefined;

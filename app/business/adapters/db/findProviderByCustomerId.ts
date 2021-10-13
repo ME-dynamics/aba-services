@@ -5,7 +5,7 @@ function selectQueryGen(): string {
   const { selectQuery, operators } = queryGen;
   const { equal } = operators;
   const query = selectQuery({
-    table: "staff_customer_by_customer_id",
+    table: "provider_customer_by_customer_id",
     version: "v1",
     columns: ["*"],
     where: [
@@ -16,15 +16,15 @@ function selectQueryGen(): string {
   return query;
 }
 
-export function buildFindStaffByCustomerId(
+export function buildFindProviderByCustomerId(
   args: adaptersTypes.IBuildFindCustomer
 ) {
-  const { select, rowToStaffCustomer } = args;
-  const errorPath = "business, adapters, find staff by customer id";
+  const { select, rowToProviderCustomer } = args;
+  const errorPath = "business, adapters, find provider by customer id";
   const query = selectQueryGen();
-  return async function findStaffByCustomerId(
+  return async function findProviderByCustomerId(
     customerId: string
-  ): Promise<entityTypes.IMadeStaffCustomerObject | undefined> {
+  ): Promise<entityTypes.IMadeProviderCustomerObject | undefined> {
     const result = await select({
       query,
       params: { customer_id: customerId },
@@ -36,6 +36,6 @@ export function buildFindStaffByCustomerId(
     if (result.rowLength === 0) {
       return undefined;
     }
-    return rowToStaffCustomer(result.first());
+    return rowToProviderCustomer(result.first());
   };
 }

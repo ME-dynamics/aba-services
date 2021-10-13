@@ -8,7 +8,7 @@ export function buildPostConfirmRequest() {
     const { customerId } = httpRequest.body;
     return await confirmRequest({
       customerId,
-      staffId: "b44b2952-800f-48d7-9ea3-7b8b52fdab9f",
+      providerId: "b44b2952-800f-48d7-9ea3-7b8b52fdab9f",
     });
   };
 }

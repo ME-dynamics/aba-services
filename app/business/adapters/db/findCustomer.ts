@@ -17,12 +17,12 @@ function selectQueryGen(): string {
 }
 
 export function buildFindCustomer(args: adaptersTypes.IBuildFindCustomer) {
-  const { rowToStaffCustomer, select } = args;
+  const { rowToProviderCustomer, select } = args;
   const errorPath = "business, adapters, find customer";
   const query = selectQueryGen();
   return async function findCustomer(
     customerId: string
-  ): Promise<entityTypes.IMadeStaffCustomerObject | undefined> {
+  ): Promise<entityTypes.IMadeProviderCustomerObject | undefined> {
     const result = await select({
       query,
       params: { customer_id: customerId },
@@ -33,6 +33,6 @@ export function buildFindCustomer(args: adaptersTypes.IBuildFindCustomer) {
     if (result.rowLength === 0) {
       return undefined;
     }
-    return rowToStaffCustomer(result.first());
+    return rowToProviderCustomer(result.first());
   };
 }

@@ -2,7 +2,7 @@ import { statusCodes, fluentSchema, errorSchema } from "aba-node";
 
 const body = fluentSchema
   .object()
-  .prop("staffId", fluentSchema.string().format("uuid").required())
+  .prop("providerId", fluentSchema.string().format("uuid").required())
   .prop("customerId", fluentSchema.string().format("uuid").required());
 
 const requestSchema = fluentSchema
@@ -11,7 +11,7 @@ const requestSchema = fluentSchema
     "payload",
     fluentSchema
       .object()
-      .prop("staffId", fluentSchema.string().format("uuid").required())
+      .prop("providerId", fluentSchema.string().format("uuid").required())
       .prop("customerId", fluentSchema.string().format("uuid").required())
       .prop("name", fluentSchema.string().default(null))
       .prop("imageUrl", fluentSchema.string().default(null))

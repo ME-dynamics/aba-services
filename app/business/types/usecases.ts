@@ -1,12 +1,12 @@
 import {
   tFindCustomerFunc,
-  tFindCustomersByStaffIdFunc,
+  tFindCustomersByProviderIdFunc,
   tFindRequestByCustomerId,
-  tFindRequestsByStaffIdFunc,
-  tFindStaffByCustomerId,
+  tFindRequestsByProviderIdFunc,
+  tFindProviderByCustomerId,
   tFindUserByIdFunc,
   tInsertRequestFunc,
-  tInsertStaffCustomerFunc,
+  tInsertProviderCustomerFunc,
 } from "./adapters";
 
 // create request;
@@ -17,7 +17,7 @@ export interface IBuildCreateRequest {
 }
 
 export interface ICreateRequest {
-  staffId: string;
+  providerId: string;
   customerId: string;
 }
 
@@ -34,11 +34,11 @@ export interface IBuildConfirmRequest {
   findUserById: tFindUserByIdFunc;
   findRequestByCustomerId: tFindRequestByCustomerId;
   insertRequest: tInsertRequestFunc;
-  insertStaffCustomer: tInsertStaffCustomerFunc;
-  findStaffByCustomerId: tFindStaffByCustomerId;
+  insertProviderCustomer: tInsertProviderCustomerFunc;
+  findProviderByCustomerId: tFindProviderByCustomerId;
 }
 export interface IConfirmRequest {
-  staffId: string;
+  providerId: string;
   customerId: string;
 }
 // reject request
@@ -48,34 +48,34 @@ export interface IBuildRejectRequest {
 }
 
 export interface IRejectRequest {
-  staffId: string;
+  providerId: string;
   customerId: string;
 }
 
 // retrieve requests
 export interface IBuildRetrieveRequests {
-  findRequestsByStaffId: tFindRequestsByStaffIdFunc;
+  findRequestsByProviderId: tFindRequestsByProviderIdFunc;
 }
 
-// retrieve customers by staff id
+// retrieve customers by provider id
 
 export interface IBuildRetrieveCustomers {
-  findCustomersByStaffId: tFindCustomersByStaffIdFunc;
+  findCustomersByProviderId: tFindCustomersByProviderIdFunc;
 }
-// retrieve customer staff by customer id
+// retrieve customer Provider by customer id
 
-export interface IBuildRetrieveCustomerStaff {
-  findStaffByCustomerId: tFindStaffByCustomerId;
+export interface IBuildRetrieveCustomerProvider {
+  findProviderByCustomerId: tFindProviderByCustomerId;
 }
 
 // remove customer by id
 export interface IBuildRemoveCustomer {
   findCustomer: tFindCustomerFunc;
-  insertStaffCustomer: tInsertStaffCustomerFunc;
+  insertProviderCustomer: tInsertProviderCustomerFunc;
 }
 
 export interface IRemoveCustomer {
-  staffId: string;
+  providerId: string;
   customerId: string;
 }
 
@@ -85,7 +85,7 @@ export interface IBuildUpdateCustomerInfo {
   findRequestByCustomerId: tFindRequestByCustomerId;
   findCustomer: tFindCustomerFunc;
   insertRequest: tInsertRequestFunc;
-  insertStaffCustomer: tInsertStaffCustomerFunc;
+  insertProviderCustomer: tInsertProviderCustomerFunc;
 }
 
 export interface IUpdateCustomerInfo {

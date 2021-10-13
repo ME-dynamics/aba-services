@@ -4,9 +4,9 @@ export function buildPostCreateRequest() {
   return async function postCreateRequest(
     httpRequest: controllerTypes.tPostCreateRequest
   ) {
-    const { staffId } = httpRequest.body;
+    const {  providerId} = httpRequest.body;
     return await createRequest({
-      staffId,
+      providerId,
       customerId: "399389b4-cd37-4856-b09e-1940d8814dd8",
     });
   };

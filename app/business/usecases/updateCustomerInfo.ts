@@ -1,4 +1,4 @@
-import { makeCustomerStaffRequest, makeStaffCustomer } from "../entities";
+import { makeCustomerProviderRequest, makeProviderCustomer } from "../entities";
 import { usecaseTypes } from "../types";
 
 export function buildUpdateCustomerInfo(
@@ -8,7 +8,7 @@ export function buildUpdateCustomerInfo(
     findCustomer,
     findRequestByCustomerId,
     insertRequest,
-    insertStaffCustomer,
+    insertProviderCustomer,
   } = args;
   return async function updateCustomerInfo(
     info: usecaseTypes.IUpdateCustomerInfo
@@ -19,7 +19,7 @@ export function buildUpdateCustomerInfo(
       findRequestByCustomerId(id),
     ]);
     const customer = customerFound
-      ? makeStaffCustomer(customerFound)
+      ? makeProviderCustomer(customerFound)
       : undefined;
     if (customer) {
       customer.set.name(name);
@@ -27,14 +27,14 @@ export function buildUpdateCustomerInfo(
       customer.set.description(description);
     }
     const request = requestFound
-      ? makeCustomerStaffRequest(requestFound)
+      ? makeCustomerProviderRequest(requestFound)
       : undefined;
     if (request) {
       request.set.name(name);
       request.set.imageUrl(imageUrl);
     }
     await Promise.all([
-      customer ? insertStaffCustomer(customer.object()) : undefined,
+      customer ? insertProviderCustomer(customer.object()) : undefined,
       request ? insertRequest(request.object()) : undefined,
     ]);
   };

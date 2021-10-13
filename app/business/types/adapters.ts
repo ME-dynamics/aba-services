@@ -1,7 +1,7 @@
 import { types } from "aba-node";
 import {
-  IMadeCustomerStaffRequestObject,
-  IMadeStaffCustomerObject,
+  IMadeCustomerProviderRequestObject,
+  IMadeProviderCustomerObject,
 } from "./entities";
 
 // init db
@@ -13,68 +13,59 @@ export interface IBuildInsert {
   insert: types.tDbUpsertFunc;
 }
 
-
 // find customer builder
 export interface IBuildFindCustomer {
   select: types.tDbSelectFunc;
-  rowToStaffCustomer: rowToStaffCustomerFunc;
+  rowToProviderCustomer: rowToProviderCustomerFunc;
 }
 
-// find customer 
+// find customer
 
-export type tFindCustomerFunc = (customerId:string) => Promise<IMadeStaffCustomerObject | undefined>;
-
-// find customers by staff id func
-
-export type tFindCustomersByStaffIdFunc = (
-  staffId: string
-) => Promise<IMadeStaffCustomerObject[] | undefined>;
-
-
-// find staff by customer id func
-
-export type tFindStaffByCustomerId = (
+export type tFindCustomerFunc = (
   customerId: string
-) => Promise<IMadeStaffCustomerObject | undefined>;
+) => Promise<IMadeProviderCustomerObject | undefined>;
 
+// find customers by provider id func
 
-// insert staff customer
+export type tFindCustomersByProviderIdFunc = (
+  providerId: string
+) => Promise<IMadeProviderCustomerObject[] | undefined>;
 
-export type tInsertStaffCustomerFunc = (
-  info: IMadeStaffCustomerObject
+// find provider by customer id func
+
+export type tFindProviderByCustomerId = (
+  customerId: string
+) => Promise<IMadeProviderCustomerObject | undefined>;
+
+// insert provider customer
+
+export type tInsertProviderCustomerFunc = (
+  info: IMadeProviderCustomerObject
 ) => Promise<void>;
-
-
-
-
-
-
 
 // find requests builder
 export interface IBuildFindRequests {
   select: types.tDbSelectFunc;
-  rowToCustomerStaffRequest: tRowToCustomerStaffRequestFunc;
+  rowToCustomerProviderRequest: tRowToCustomerProviderRequestFunc;
 }
 
 // find request by customer id func
 
 export type tFindRequestByCustomerId = (
   customerId: string
-) => Promise<IMadeCustomerStaffRequestObject | undefined>;
+) => Promise<IMadeCustomerProviderRequestObject | undefined>;
 
-// find request by staff id func
+// find request by provider id func
 
-export type tFindRequestsByStaffIdFunc = (
-  staffId: string
-) => Promise<IMadeCustomerStaffRequestObject[] | undefined>;
-
+export type tFindRequestsByProviderIdFunc = (
+  ProviderId: string
+) => Promise<IMadeCustomerProviderRequestObject[] | undefined>;
 
 // insert request
 
 export type tInsertRequestFunc = (
-  request: IMadeCustomerStaffRequestObject
+  request: IMadeCustomerProviderRequestObject
 ) => Promise<void>;
-
 
 // network
 
@@ -90,14 +81,12 @@ export interface IUser {
 
 export type tFindUserByIdFunc = (id: string) => Promise<IUser | undefined>;
 
-
 // utils
 
-export type rowToStaffCustomerFunc = (
+export type rowToProviderCustomerFunc = (
   row: types.tRow
-) => IMadeStaffCustomerObject;
+) => IMadeProviderCustomerObject;
 
-
-export type tRowToCustomerStaffRequestFunc = (
+export type tRowToCustomerProviderRequestFunc = (
   row: types.tRow
-) => IMadeCustomerStaffRequestObject;
+) => IMadeCustomerProviderRequestObject;

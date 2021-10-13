@@ -1,5 +1,5 @@
 import { httpResultClientError, httpResultSuccess } from "aba-node";
-import { makeCustomerStaffRequest } from "../entities";
+import { makeCustomerProviderRequest } from "../entities";
 import { entityTypes, usecaseTypes } from "../types";
 
 export function buildCreateRequest(args: usecaseTypes.IBuildCreateRequest) {
@@ -7,12 +7,12 @@ export function buildCreateRequest(args: usecaseTypes.IBuildCreateRequest) {
   const { forbidden, badRequest } = httpResultClientError;
   const { created, ok } = httpResultSuccess;
   return async function createRequest(info: usecaseTypes.ICreateRequest) {
-    // staff id in request body
+    // provider id in request body
     // customer id is extracted from the token
-    const { staffId, customerId } = info;
-    // find staff and customer
-    const [staff, customer] = await Promise.all([
-      findUserById(staffId),
+    const { providerId, customerId } = info;
+    // find provider and customer
+    const [provider, customer] = await Promise.all([
+      findUserById(providerId),
       findUserById(customerId),
     ]);
     // validate customer, customer should exists
@@ -25,33 +25,33 @@ export function buildCreateRequest(args: usecaseTypes.IBuildCreateRequest) {
         error: "you should define your name before making a request",
       });
     }
-    // staff should exits and staff role must be provider to make the request
-    if (!staff || staff.role !== "provider") {
+    // provider should exits and provider role must be provider to make the request
+    if (!provider || provider.role !== "provider") {
       return forbidden({ error: "request can be made to providers only" });
     }
-    // check if request is already made to a staff, not specifically staff of this request
+    // check if request is already made to a provider, not specifically provider of this request
     const requestFound = await findRequestByCustomerId(customerId);
 
     if (requestFound && !requestFound.softDeleted) {
       if (requestFound.confirmed) {
         return badRequest({ error: "request already confirmed" });
       }
-      // if found request staff is the same, just return the data
+      // if found request provider is the same, just return the data
       // this can happen when user send the same request more than once
-      if (requestFound.staffId === staffId) {
-        return ok<entityTypes.IMadeCustomerStaffRequestObject>({
+      if (requestFound.providerId === providerId) {
+        return ok<entityTypes.IMadeCustomerProviderRequestObject>({
           payload: requestFound,
         });
       }
       // only one request can be made for a customer
       // if request found, delete the request
-      const request = makeCustomerStaffRequest(requestFound);
+      const request = makeCustomerProviderRequest(requestFound);
       request.set.remove();
       await insertRequest(request.object());
     }
     // create the new request
-    const request = makeCustomerStaffRequest({
-      staffId,
+    const request = makeCustomerProviderRequest({
+      providerId,
       customerId,
       name: customer.name,
       imageUrl: customer.imageUrl,
@@ -61,7 +61,7 @@ export function buildCreateRequest(args: usecaseTypes.IBuildCreateRequest) {
       softDeleted: false,
     });
     await insertRequest(request.object());
-    return created<entityTypes.IMadeCustomerStaffRequestObject>({
+    return created<entityTypes.IMadeCustomerProviderRequestObject>({
       payload: request.object(),
     });
   };

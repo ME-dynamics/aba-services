@@ -4,10 +4,10 @@ import { adaptersTypes, entityTypes } from "../../types";
 function insertQueryGen(): string {
   const { insertQuery } = queryGen;
   const query = insertQuery({
-    table: "customer_staff_request",
+    table: "customer_provider_request",
     version: "v1",
     values: [
-      { column: "staff_id", self: true },
+      { column: "provider_id", self: true },
       { column: "customer_id", self: true },
       { column: "name", self: true },
       { column: "image_url", self: true },
@@ -25,10 +25,10 @@ export function buildInsertRequest(args: adaptersTypes.IBuildInsert) {
   const errorPath = "business, adapters, insert request";
   const query = insertQueryGen();
   return async function insertRequest(
-    request: entityTypes.IMadeCustomerStaffRequestObject
+    request: entityTypes.IMadeCustomerProviderRequestObject
   ): Promise<void> {
     const {
-      staffId,
+      providerId,
       customerId,
       confirmed,
       name,
@@ -40,7 +40,7 @@ export function buildInsertRequest(args: adaptersTypes.IBuildInsert) {
     await insert({
       query,
       params: {
-        staff_id: staffId,
+        provider_id: providerId,
         customer_id: customerId,
         confirmed,
         name: undefinedToNull(name),

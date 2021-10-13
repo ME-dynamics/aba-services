@@ -1,14 +1,16 @@
 import { entityTypes } from "../types";
 
-export function buildMakeStaffCustomer() {
-  return function makeStaffCustomer(staffCustomer: entityTypes.IStaffCustomer) {
+export function buildMakeProviderCustomer() {
+  return function makeProviderCustomer(
+    providerCustomer: entityTypes.IProviderCustomer
+  ) {
     const {
-      staffId,
+      providerId,
       customerId,
       createdAt = new Date(),
       modifiedAt = new Date(),
-    } = staffCustomer;
-    let { name, imageUrl, description, softDeleted } = staffCustomer;
+    } = providerCustomer;
+    let { name, imageUrl, description, softDeleted } = providerCustomer;
 
     // * Setters
     function setName(newName: string | undefined) {
@@ -31,9 +33,9 @@ export function buildMakeStaffCustomer() {
       softDeleted = false;
       modifiedAt.setTime(Date.now());
     }
-    const madeStaffCustomer: entityTypes.IMadeStaffCustomer = {
+    const madeProviderCustomer: entityTypes.IMadeProviderCustomer = {
       get: {
-        staffId: () => staffId,
+        providerId: () => providerId,
         customerId: () => customerId,
         name: () => name,
         imageUrl: () => imageUrl,
@@ -51,7 +53,7 @@ export function buildMakeStaffCustomer() {
       },
       object: () => {
         return {
-          staffId,
+          providerId,
           customerId,
           name,
           imageUrl,
@@ -62,6 +64,6 @@ export function buildMakeStaffCustomer() {
         };
       },
     };
-    return madeStaffCustomer;
+    return madeProviderCustomer;
   };
 }

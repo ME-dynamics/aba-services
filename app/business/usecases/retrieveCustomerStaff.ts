@@ -1,14 +1,14 @@
 import { usecaseTypes } from "../types";
 
 export function buildRetrieveCustomerStaff(
-  args: usecaseTypes.IBuildRetrieveCustomerStaff
+  args: usecaseTypes.IBuildRetrieveCustomerProvider
 ) {
-  const { findStaffByCustomerId } = args;
-  return async function retrieveCustomerStaff(customerId: string) {
-    const customerFound = await findStaffByCustomerId(customerId);
+  const { findProviderByCustomerId } = args;
+  return async function retrieveCustomerProvider(customerId: string) {
+    const customerFound = await findProviderByCustomerId(customerId);
     if (!customerFound) {
       return undefined;
     }
-    return customerFound.staffId;
+    return customerFound.providerId;
   };
 }

@@ -19,12 +19,12 @@ function selectQueryGen(): string {
 export function buildFindRequestByCustomerId(
   args: adaptersTypes.IBuildFindRequests
 ) {
-  const { select, rowToCustomerStaffRequest } = args;
+  const { select, rowToCustomerProviderRequest } = args;
   const errorPath = "business, adapters, find request by customer id";
   const query = selectQueryGen();
   return async function findRequestByCustomerId(
     customerId: string
-  ): Promise<entityTypes.IMadeCustomerStaffRequestObject | undefined> {
+  ): Promise<entityTypes.IMadeCustomerProviderRequestObject | undefined> {
     const result = await select({
       query,
       params: { customer_id: customerId },
@@ -35,6 +35,6 @@ export function buildFindRequestByCustomerId(
     if (result.rowLength === 0) {
       return undefined;
     }
-    return rowToCustomerStaffRequest(result.first());
+    return rowToCustomerProviderRequest(result.first());
   };
 }

@@ -1,5 +1,5 @@
-export interface IStaffCustomer {
-  staffId: string;
+export interface IProviderCustomer {
+  providerId: string;
   customerId: string;
   name: string | undefined;
   imageUrl: string | undefined;
@@ -9,14 +9,14 @@ export interface IStaffCustomer {
   softDeleted: boolean;
 }
 
-export interface IMadeStaffCustomerObject extends IStaffCustomer {
+export interface IMadeProviderCustomerObject extends IProviderCustomer {
   createdAt: Date;
   modifiedAt: Date;
 }
 
-export interface IMadeStaffCustomer {
+export interface IMadeProviderCustomer {
   get: {
-    staffId: () => string;
+    providerId: () => string;
     customerId: () => string;
     name: () => string | undefined;
     imageUrl: () => string | undefined;
@@ -32,13 +32,13 @@ export interface IMadeStaffCustomer {
     remove: () => void;
     restore: () => void;
   };
-  object: () => IMadeStaffCustomerObject;
+  object: () => IMadeProviderCustomerObject;
 }
 
 // request
 
-export interface ICustomerStaffRequest {
-  staffId: string;
+export interface ICustomerProviderRequest {
+  providerId: string;
   customerId: string;
   name: string | undefined;
   imageUrl: string | undefined;
@@ -48,14 +48,15 @@ export interface ICustomerStaffRequest {
   softDeleted: boolean;
 }
 
-export interface IMadeCustomerStaffRequestObject extends ICustomerStaffRequest {
+export interface IMadeCustomerProviderRequestObject
+  extends ICustomerProviderRequest {
   createdAt: Date;
   modifiedAt: Date;
 }
 
-export interface IMadeCustomerStaffRequest {
+export interface IMadeCustomerProviderRequest {
   get: {
-    staffId: () => string;
+    providerId: () => string;
     customerId: () => string;
     name: () => string | undefined;
     imageUrl: () => string | undefined;
@@ -72,5 +73,5 @@ export interface IMadeCustomerStaffRequest {
     restore: () => void;
     remove: () => void;
   };
-  object: () => IMadeCustomerStaffRequestObject;
+  object: () => IMadeCustomerProviderRequestObject;
 }

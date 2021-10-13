@@ -5,26 +5,26 @@ function selectQueryGen(): string {
   const { selectQuery, operators } = queryGen;
   const { equal } = operators;
   const query = selectQuery({
-    table: "staff_customer",
+    table: "provider_customer",
     version: "v1",
     columns: ["*"],
-    where: [equal({ argument: "staff_id", self: true })],
+    where: [equal({ argument: "provider_id", self: true })],
   });
   return query;
 }
 
-export function buildFindCustomersByStaffId(
+export function buildFindCustomersByProviderId(
   args: adaptersTypes.IBuildFindCustomer
 ) {
-  const { select, rowToStaffCustomer } = args;
-  const errorPath = "business, adapters, find customer by staff id";
+  const { select, rowToProviderCustomer } = args;
+  const errorPath = "business, adapters, find customer by provider id";
   const query = selectQueryGen();
-  return async function findCustomersByStaffId(
-    staffId: string
-  ): Promise<entityTypes.IMadeStaffCustomerObject[] | undefined> {
+  return async function findCustomersByProviderId(
+    providerId: string
+  ): Promise<entityTypes.IMadeProviderCustomerObject[] | undefined> {
     const result = await select({
       query,
-      params: { staff_id: staffId },
+      params: { provider_id: providerId },
       unique: false,
       queryOptions: undefined,
       errorPath,
@@ -33,17 +33,17 @@ export function buildFindCustomersByStaffId(
     if (length === 0) {
       return undefined;
     }
-    const staffCustomers: entityTypes.IMadeStaffCustomerObject[] = [];
+    const providerCustomers: entityTypes.IMadeProviderCustomerObject[] = [];
     for (let index = 0; index < length; index++) {
       const row = result.rows[index];
-      if(row.get("soft_deleted")) {
+      if (row.get("soft_deleted")) {
         continue;
       }
-      staffCustomers.push(rowToStaffCustomer(row));
+      providerCustomers.push(rowToProviderCustomer(row));
     }
-    if(staffCustomers.length === 0) {
+    if (providerCustomers.length === 0) {
       return undefined;
     }
-    return staffCustomers;
+    return providerCustomers;
   };
 }
