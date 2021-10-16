@@ -34,6 +34,7 @@ export interface IBuildDeOrActivateUser {
 
 export interface IBuildCreatePatient {
   findUserById: tFindUserByIdFunc;
+  findPatientByUserId: tFindPatientByUserIdFunc;
   insertPatient: tInsertPatientFunc;
 }
 

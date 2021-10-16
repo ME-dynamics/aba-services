@@ -1,13 +1,23 @@
 import { types } from "aba-node";
-import { ICreateUser } from "./usecases";
+import { ICreateUser, IUpdateUser, tCreatePatient } from "./usecases";
 
-interface IGetRetrieveUser {
+import {
+  tFetchCustomerProviderFunc,
+  tParseStoragePublicUrlFunc,
+  tFetchImageInfoFunc,
+} from "./adapters";
+
+export interface IBuildGetUser {
+  fetchCustomerProvider: tFetchCustomerProviderFunc;
+}
+
+interface IGetUser {
   Params: {
-    id: string;
+    id: string | undefined;
   };
 }
 
-export type tGetRetrieveUser = types.tRequest<IGetRetrieveUser>;
+export type tGetUser = types.tRequest<IGetUser>;
 
 interface IPostCreateUser {
   Body: ICreateUser;
@@ -15,10 +25,28 @@ interface IPostCreateUser {
 
 export type tPostCreateUser = types.tRequest<IPostCreateUser>;
 
-interface IPatchDeOrActivateUser {
+export interface IBuildPostCreatePatient {
+  fetchCustomerProvider: tFetchCustomerProviderFunc;
+}
+
+interface IPostCreatePatient {
+  Body: Omit<tCreatePatient, "userId">;
   Params: {
-    id: string;
+    id: string | undefined;
   };
 }
 
-export type tPatchDeOrActivateUser = types.tRequest<IPatchDeOrActivateUser>;
+export type tPostCreatePatient = types.tRequest<IPostCreatePatient>;
+
+export interface IBuildPutUpdateUser {
+  parseStoragePublicUrl: tParseStoragePublicUrlFunc;
+  fetchImageInfo: tFetchImageInfoFunc;
+}
+interface IPutUpdateUser {
+  Body: IUpdateUser;
+  Params: {
+    id: string | undefined;
+  };
+}
+
+export type tPutUpdateUser = types.tRequest<IPutUpdateUser>;

@@ -81,3 +81,19 @@ export type tInsertPatientFunc = (patient: IMadePatientObject) => Promise<void>;
 export type tFindPatientByUserIdFunc = (
   userId: string
 ) => Promise<IMadePatientObject | undefined>;
+
+// network
+
+export type tFetchCustomerProviderFunc = (
+  customerId: string
+) => Promise<string | undefined>;
+export type tFetchImageInfoFunc = (
+  imageId: string
+) => Promise<string | undefined>;
+// utils
+
+export interface IParsedStorageUrl {
+  id: string;
+  valid: boolean;
+}
+export type tParseStoragePublicUrlFunc = (url: string) => IParsedStorageUrl;
