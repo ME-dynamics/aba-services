@@ -1,6 +1,6 @@
 import { usecaseTypes } from "../types";
 
-export function buildRetrieveCustomerStaff(
+export function buildRetrieveCustomerProvider(
   args: usecaseTypes.IBuildRetrieveCustomerProvider
 ) {
   const { findProviderByCustomerId } = args;
