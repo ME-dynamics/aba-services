@@ -1,2 +1,2 @@
-export { rowToStaffCustomer } from "./rowToStaffCustomer";
-export { rowToCustomerStaffRequest } from "./rowToCustomerStaffRequest";
+export { rowToProviderCustomer } from "./rowToProviderCustomer";
+export { rowToCustomerProviderRequest } from "./rowToCustomerProviderRequest";

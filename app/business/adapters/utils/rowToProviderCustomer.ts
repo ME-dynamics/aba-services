@@ -1,14 +1,14 @@
 import { nullToUndefined, types } from "aba-node";
 import { entityTypes } from "../../types";
 
-export function rowToStaffCustomer(
+export function rowToProviderCustomer(
   row: types.tRow
-): entityTypes.IMadeStaffCustomerObject {
+): entityTypes.IMadeProviderCustomerObject {
   return {
-    staffId: row.get("staff_id").toString(),
+    providerId: row.get("provider_id").toString(),
     customerId: row.get("customer_id").toString(),
     name: nullToUndefined<string>(row.get("name")),
-    imageUrl: nullToUndefined<string>(row.get("image_url")),
+    profilePictureUrl: nullToUndefined<string>(row.get("profile_picture_url")),
     description: nullToUndefined<string>(row.get("description")),
     createdAt: row.get("created_at"),
     modifiedAt: row.get("modified_at"),

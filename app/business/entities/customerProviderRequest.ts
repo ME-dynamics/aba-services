@@ -10,7 +10,7 @@ export function buildMakeCustomerProviderRequest() {
       createdAt = new Date(),
       modifiedAt = new Date(),
     } = request;
-    let { confirmed, name, imageUrl, softDeleted } = request;
+    let { confirmed, name, profilePictureUrl, softDeleted } = request;
 
     // Setters
 
@@ -18,8 +18,8 @@ export function buildMakeCustomerProviderRequest() {
       name = newName;
       modifiedAt.setTime(Date.now());
     }
-    function setImageUrl(newImageUrl: string | undefined) {
-      imageUrl = newImageUrl;
+    function setProfilePictureUrl(newProfilePictureUrl: string | undefined) {
+      profilePictureUrl = newProfilePictureUrl;
       modifiedAt.setTime(Date.now());
     }
     function confirm() {
@@ -46,7 +46,7 @@ export function buildMakeCustomerProviderRequest() {
           providerId: () => providerId,
           customerId: () => customerId,
           name: () => name,
-          imageUrl: () => imageUrl,
+          profilePictureUrl: () => profilePictureUrl,
           confirmed: () => confirmed,
           createdAt: () => createdAt,
           modifiedAt: () => modifiedAt,
@@ -54,7 +54,7 @@ export function buildMakeCustomerProviderRequest() {
         },
         set: {
           name: setName,
-          imageUrl: setImageUrl,
+          profilePictureUrl: setProfilePictureUrl,
           confirm,
           reject,
           remove,
@@ -65,7 +65,7 @@ export function buildMakeCustomerProviderRequest() {
             providerId,
             customerId,
             name,
-            imageUrl,
+            profilePictureUrl,
             confirmed,
             createdAt,
             modifiedAt,

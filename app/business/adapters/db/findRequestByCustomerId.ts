@@ -5,7 +5,7 @@ function selectQueryGen(): string {
   const { selectQuery, operators } = queryGen;
   const { equal } = operators;
   const query = selectQuery({
-    table: "customer_staff_request_by_customer_id",
+    table: "customer_provider_request_by_customer_id",
     version: "v1",
     columns: ["*"],
     where: [
