@@ -1,2 +1,2 @@
 export { initDb } from "./adapters";
-export { createUser } from "./usecases";
+export { createUser, retrieveUser } from "./usecases";
