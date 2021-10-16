@@ -5,7 +5,7 @@ import { entityTypes, usecaseTypes } from "../types";
 export function buildConfirmRequest(args: usecaseTypes.IBuildConfirmRequest) {
   const {
     findRequestByCustomerId,
-    findUserById,
+    fetchUserById,
     insertRequest,
     insertProviderCustomer,
     findProviderByCustomerId,
@@ -28,7 +28,7 @@ export function buildConfirmRequest(args: usecaseTypes.IBuildConfirmRequest) {
       return forbidden({ error: "action not allowed" });
     }
     // check if customer exists
-    const user = await findUserById(requestFound.customerId);
+    const user = await fetchUserById(requestFound.customerId);
     // if user does not exits , remove the request
     if (!user) {
       const request = makeCustomerProviderRequest(requestFound);
@@ -48,7 +48,7 @@ export function buildConfirmRequest(args: usecaseTypes.IBuildConfirmRequest) {
           providerId: requestFound.providerId,
           customerId: requestFound.customerId,
           name: user.name,
-          imageUrl: user.imageUrl,
+          profilePictureUrl: user.profilePictureUrl,
           description: user.description,
           createdAt: undefined,
           modifiedAt: undefined,
@@ -71,7 +71,7 @@ export function buildConfirmRequest(args: usecaseTypes.IBuildConfirmRequest) {
       providerId: request.get.providerId(),
       customerId: request.get.customerId(),
       name: user.name,
-      imageUrl: user.imageUrl,
+      profilePictureUrl: user.profilePictureUrl,
       description: user.description,
       createdAt: undefined,
       modifiedAt: undefined,
