@@ -23,6 +23,7 @@ export function buildUpdateUser(args: usecaseTypes.IBuildUpdateUser) {
       address,
       telephone,
     } = info;
+    
     const user = makeUser(userFound);
     user.set.firstName(firstName);
     user.set.lastName(lastName);
