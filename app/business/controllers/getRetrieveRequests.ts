@@ -1,7 +1,21 @@
+import { auth, types } from "aba-node";
 import { retrieveRequests } from "../usecases";
-
+import { controllerTypes } from "../types"
 export function buildGetRetrieveRequests() {
-  return async function getRetrieveRequests() {
-    return await retrieveRequests("b44b2952-800f-48d7-9ea3-7b8b52fdab9f");
+  const roles: types.IRoles = {
+    customer: false,
+    provider: true,
+    admin: false,
+    accountant: false,
+    assistant: false,
+    support: false,
+  };
+  return async function getRetrieveRequests(httpRequest: controllerTypes.tGetRequests) {
+    const { success, error, payload } = auth(httpRequest, roles);
+    if(!success) {
+      return error;
+    }
+    const { userId } = payload;
+    return await retrieveRequests(userId);
   };
 }

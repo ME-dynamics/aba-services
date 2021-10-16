@@ -1,7 +1,40 @@
-import { removeRequest } from "../usecases";
+import { types, auth, httpResultClientError } from "aba-node";
+import { removeRequest, retrieveCustomerProvider } from "../usecases";
+import { controllerTypes } from "../types";
 
 export function buildDeleteRemoveRequest() {
-  return async function deleteRemoveRequest() {
-    return await removeRequest("399389b4-cd37-4856-b09e-1940d8814dd8");
+  const roles: types.IRoles = {
+    customer: true,
+    provider: true,
+    admin: false,
+    accountant: false,
+    assistant: false,
+    support: false,
+  };
+  const { badRequest, forbidden } = httpResultClientError;
+  return async function deleteRemoveRequest(
+    httpRequest: controllerTypes.tDeleteRequest
+  ) {
+    const { success, error, payload } = auth(httpRequest, roles);
+    if (!success) {
+      return error;
+    }
+    const { role, userId } = payload;
+    const { customerId } = httpRequest.params;
+    if (role === "provider") {
+      if (!customerId) {
+        return badRequest({ error: "customer id must be defined" });
+      }
+      const providerId = await retrieveCustomerProvider(customerId);
+      if (!providerId) {
+        return forbidden({ error: "action not allowed" });
+      }
+      if (userId !== providerId) {
+        return forbidden({ error: "action not allowed" });
+      }
+      return await removeRequest(customerId);
+    }
+
+    return await removeRequest(userId);
   };
 }

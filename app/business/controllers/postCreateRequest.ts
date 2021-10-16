@@ -1,13 +1,27 @@
+import { auth, types } from "aba-node";
 import { createRequest } from "../usecases";
 import { controllerTypes } from "../types";
 export function buildPostCreateRequest() {
+  const roles: types.IRoles = {
+    customer: true,
+    provider: false,
+    accountant: false,
+    admin: false,
+    assistant: false,
+    support: false,
+  };
   return async function postCreateRequest(
     httpRequest: controllerTypes.tPostCreateRequest
   ) {
-    const {  providerId} = httpRequest.body;
+    const { success, error, payload } = auth(httpRequest, roles);
+    if (!success) {
+      return error;
+    }
+    const { userId } = payload;
+    const { providerId } = httpRequest.body;
     return await createRequest({
       providerId,
-      customerId: "399389b4-cd37-4856-b09e-1940d8814dd8",
+      customerId: userId,
     });
   };
 }
