@@ -19,7 +19,6 @@ import { buildRetrieveCustomers } from "./retrieveCustomers";
 import { buildRemoveCustomer } from "./removeCustomer";
 import { buildUpdateCustomerInfo } from "./updateCustomerInfo";
 import { buildRetrieveCustomerProvider } from "./retrieveCustomerProvider";
-import { v4 } from "uuid";
 
 
 
