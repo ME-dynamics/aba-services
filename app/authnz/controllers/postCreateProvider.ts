@@ -7,7 +7,7 @@ export function buildPostCreateProvider(
 ) {
   const { validatePhoneNumber } = args;
   const { badRequest } = httpResultClientError;
-  const role: types.IRoles = {
+  const roles: types.IRoles = {
     admin: true,
     accountant: false,
     assistant: false,
@@ -18,7 +18,7 @@ export function buildPostCreateProvider(
   return async function postCreateProvider(
     httpRequest: controllerTypes.tPostCreateProvider
   ) {
-    const { success, error } = auth(httpRequest, role);
+    const { success, error } = auth(httpRequest, roles);
     if (!success) {
       return error;
     }
