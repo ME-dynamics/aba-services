@@ -2,7 +2,7 @@ export interface IProviderCustomer {
   providerId: string;
   customerId: string;
   name: string | undefined;
-  imageUrl: string | undefined;
+  profilePictureUrl: string | undefined;
   description: string | undefined;
   createdAt: Date | undefined;
   modifiedAt: Date | undefined;
@@ -19,7 +19,7 @@ export interface IMadeProviderCustomer {
     providerId: () => string;
     customerId: () => string;
     name: () => string | undefined;
-    imageUrl: () => string | undefined;
+    profilePictureUrl: () => string | undefined;
     description: () => string | undefined;
     createdAt: () => Date;
     modifiedAt: () => Date;
@@ -27,7 +27,7 @@ export interface IMadeProviderCustomer {
   };
   set: {
     name: (newName: string | undefined) => void;
-    imageUrl: (newUrl: string | undefined) => void;
+    profilePictureUrl: (newUrl: string | undefined) => void;
     description: (newDescription: string | undefined) => void;
     remove: () => void;
     restore: () => void;
@@ -41,7 +41,7 @@ export interface ICustomerProviderRequest {
   providerId: string;
   customerId: string;
   name: string | undefined;
-  imageUrl: string | undefined;
+  profilePictureUrl: string | undefined;
   confirmed: boolean;
   createdAt: Date | undefined;
   modifiedAt: Date | undefined;
@@ -59,7 +59,7 @@ export interface IMadeCustomerProviderRequest {
     providerId: () => string;
     customerId: () => string;
     name: () => string | undefined;
-    imageUrl: () => string | undefined;
+    profilePictureUrl: () => string | undefined;
     confirmed: () => boolean;
     createdAt: () => Date;
     modifiedAt: () => Date;
@@ -67,7 +67,7 @@ export interface IMadeCustomerProviderRequest {
   };
   set: {
     name: (newName: string | undefined) => void;
-    imageUrl: (newUrl: string | undefined) => void;
+    profilePictureUrl: (newUrl: string | undefined) => void;
     confirm: () => void;
     reject: () => void;
     restore: () => void;
