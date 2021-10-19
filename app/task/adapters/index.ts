@@ -29,4 +29,4 @@ export const findTaskById = buildFindTaskById({
 export const insertTask = buildInsertTask({ insert: dbClient.insert });
 
 // network
-export { findUserProvider } from "./network";
+export { fetchCustomerProvider } from "./network";
