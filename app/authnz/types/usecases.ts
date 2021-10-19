@@ -128,3 +128,7 @@ export interface IBuildInitAdmin {
   deleteAdmin: tDeleteAdminFunc;
   findAdmins: tFindAdminsFunc;
 }
+
+export interface IBuildRetrieveRoleByOtpId {
+  findRole: tFindRoleFunc;
+}
