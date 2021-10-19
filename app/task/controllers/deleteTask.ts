@@ -2,7 +2,7 @@ import { auth, types, httpResultClientError } from "aba-node";
 import { removeTask } from "../usecases";
 import { controllerTypes } from "../types";
 export function buildDeleteTask(args: controllerTypes.IBuildRemoveTask) {
-  const { findUserProvider } = args;
+  const { fetchCustomerProvider } = args;
   const roles: types.IRoles = {
     customer: true,
     provider: true,
@@ -30,7 +30,7 @@ export function buildDeleteTask(args: controllerTypes.IBuildRemoveTask) {
       if (!userId) {
         return badRequest({ error: "user id must be defined" });
       }
-      const userProviderId = await findUserProvider(userId);
+      const userProviderId = await fetchCustomerProvider(userId);
       if (!userProviderId || userProviderId !== providerId) {
         return forbidden({ error: "action not allowed" });
       }

@@ -2,7 +2,7 @@ import { auth, types, httpResultClientError } from "aba-node";
 import { taskDone } from "../usecases";
 import { controllerTypes } from "../types";
 export function buildPostTaskDone(args: controllerTypes.IBuildPostTaskDone) {
-  const { findUserProvider } = args;
+  const { fetchCustomerProvider } = args;
   const roles: types.IRoles = {
     customer: true,
     provider: true,
@@ -32,7 +32,7 @@ export function buildPostTaskDone(args: controllerTypes.IBuildPostTaskDone) {
       if (!userId) {
         return badRequest({ error: "user id must be defined" });
       }
-      const userProviderId = await findUserProvider(userId);
+      const userProviderId = await fetchCustomerProvider(userId);
       if (!userProviderId || userProviderId !== providerId) {
         return forbidden({ error: "action not allowed" });
       }

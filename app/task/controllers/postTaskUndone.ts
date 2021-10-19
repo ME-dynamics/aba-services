@@ -4,7 +4,7 @@ import { controllerTypes } from "../types";
 export function buildPostTaskUndone(
   args: controllerTypes.IBuildPostTaskUndone
 ) {
-  const { findUserProvider } = args;
+  const { fetchCustomerProvider } = args;
   const roles: types.IRoles = {
     customer: true,
     provider: true,
@@ -34,7 +34,7 @@ export function buildPostTaskUndone(
       if (!userId) {
         return badRequest({ error: "user id must be defined" });
       }
-      const userProviderId = await findUserProvider(userId);
+      const userProviderId = await fetchCustomerProvider(userId);
       if (!userProviderId || userProviderId !== providerId) {
         return forbidden({ error: "action not allowed" });
       }
