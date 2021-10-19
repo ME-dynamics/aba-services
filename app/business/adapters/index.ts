@@ -2,16 +2,16 @@ import { scyllaClient } from "aba-node";
 
 import {
   buildInitDb,
-  buildFindCustomersByStaffId,
+  buildFindCustomersByProviderId,
   buildFindRequestByCustomerId,
-  buildFindRequestsByStaffId,
-  buildFindStaffByCustomerId,
-  buildInsertStaffCustomer,
+  buildFindRequestsByProviderId,
+  buildFindProviderByCustomerId,
+  buildInsertProviderCustomer,
   buildInsertRequest,
   buildFindCustomer
 } from "./db";
 
-import { rowToCustomerStaffRequest, rowToStaffCustomer } from "./utils";
+import { rowToCustomerProviderRequest, rowToProviderCustomer } from "./utils";
 
 const dbClient = scyllaClient({
   contactPoints: ["127.0.1.1"],
@@ -26,26 +26,29 @@ const dbClient = scyllaClient({
 export const initDb = buildInitDb({ init: dbClient.init });
 
 
-export const findCustomer = buildFindCustomer({select: dbClient.select, rowToStaffCustomer})
+export const findCustomer = buildFindCustomer({select: dbClient.select, rowToProviderCustomer})
 
-export const findCustomersByStaffId = buildFindCustomersByStaffId({
+export const findCustomersByProviderId = buildFindCustomersByProviderId({
   select: dbClient.select,
-  rowToStaffCustomer,
+  rowToProviderCustomer,
 });
 export const findRequestByCustomerId = buildFindRequestByCustomerId({
   select: dbClient.select,
-  rowToCustomerStaffRequest,
+  rowToCustomerProviderRequest,
 });
-export const findRequestsByStaffId = buildFindRequestsByStaffId({
+export const findRequestsByProviderId = buildFindRequestsByProviderId({
   select: dbClient.select,
-  rowToCustomerStaffRequest,
+  rowToCustomerProviderRequest,
 });
-export const findStaffByCustomerId = buildFindStaffByCustomerId({
+export const findProviderByCustomerId = buildFindProviderByCustomerId({
   select: dbClient.select,
-  rowToStaffCustomer,
+  rowToProviderCustomer,
 });
 
-export const insertStaffCustomer = buildInsertStaffCustomer({
+export const insertProviderCustomer = buildInsertProviderCustomer({
   insert: dbClient.insert,
 });
 export const insertRequest = buildInsertRequest({ insert: dbClient.insert });
+
+
+export { fetchUserById, fetchUserRole } from "./network"
