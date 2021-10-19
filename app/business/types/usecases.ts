@@ -4,14 +4,16 @@ import {
   tFindRequestByCustomerId,
   tFindRequestsByProviderIdFunc,
   tFindProviderByCustomerId,
-  tFindUserByIdFunc,
+  tFetchUserByIdFunc,
   tInsertRequestFunc,
   tInsertProviderCustomerFunc,
+  tFetchRoleByUserIdFunc,
 } from "./adapters";
 
 // create request;
 export interface IBuildCreateRequest {
-  findUserById: tFindUserByIdFunc;
+  fetchUserById: tFetchUserByIdFunc;
+  fetchRoleByUserId: tFetchRoleByUserIdFunc;
   findRequestByCustomerId: tFindRequestByCustomerId;
   insertRequest: tInsertRequestFunc;
 }
@@ -31,7 +33,7 @@ export interface IBuildRemoveRequest {
 // confirm request
 
 export interface IBuildConfirmRequest {
-  findUserById: tFindUserByIdFunc;
+  fetchUserById: tFetchUserByIdFunc;
   findRequestByCustomerId: tFindRequestByCustomerId;
   insertRequest: tInsertRequestFunc;
   insertProviderCustomer: tInsertProviderCustomerFunc;
@@ -92,5 +94,5 @@ export interface IUpdateCustomerInfo {
   id: string;
   name: string | undefined;
   description: string | undefined;
-  imageUrl: string | undefined;
+  profilePictureUrl: string | undefined;
 }

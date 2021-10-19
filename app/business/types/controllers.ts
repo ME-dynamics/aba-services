@@ -31,3 +31,15 @@ interface IDeleteRemoveCustomer {
 }
 
 export type tDeleteRemoveCustomer = types.tRequest<IDeleteRemoveCustomer>;
+
+interface IDeleteRequest {
+  Params: {
+    customerId: string | undefined;
+  };
+}
+
+export type tDeleteRequest = types.tRequest<IDeleteRequest>;
+
+export type tGetCustomers = types.tRequest<unknown>;
+
+export type tGetRequests = types.tRequest<unknown>;
