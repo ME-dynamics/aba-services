@@ -1,11 +1,13 @@
 import {
-  findCustomersByStaffId,
+  findCustomersByProviderId,
   findRequestByCustomerId,
-  findRequestsByStaffId,
-  findStaffByCustomerId,
+  findRequestsByProviderId,
+  findProviderByCustomerId,
   findCustomer,
+  fetchUserById,
+  fetchUserRole,
   insertRequest,
-  insertStaffCustomer,
+  insertProviderCustomer,
 } from "../adapters";
 
 import { buildConfirmRequest } from "./confirmRequest";
@@ -16,30 +18,23 @@ import { buildRetrieveRequests } from "./retrieveRequests";
 import { buildRetrieveCustomers } from "./retrieveCustomers";
 import { buildRemoveCustomer } from "./removeCustomer";
 import { buildUpdateCustomerInfo } from "./updateCustomerInfo";
-import { buildRetrieveCustomerStaff } from "./retrieveCustomerStaff";
+import { buildRetrieveCustomerProvider } from "./retrieveCustomerProvider";
 import { v4 } from "uuid";
 
-const findUserById = async (id: string) => {
-  return {
-    id: v4(),
-    description: "some stuff",
-    imageUrl: "imageUrl",
-    name: "erf",
-    role: "provider",
-  };
-};
+
 
 export const confirmRequest = buildConfirmRequest({
   findRequestByCustomerId,
-  findStaffByCustomerId,
-  findUserById,
+  findProviderByCustomerId,
+  fetchUserById,
   insertRequest,
-  insertStaffCustomer,
+  insertProviderCustomer,
 });
 
 export const createRequest = buildCreateRequest({
   findRequestByCustomerId,
-  findUserById,
+  fetchUserById,
+  fetchRoleByUserId: fetchUserRole,
   insertRequest,
 });
 
@@ -53,25 +48,25 @@ export const removeRequest = buildRemoveRequest({
 });
 
 export const retrieveRequests = buildRetrieveRequests({
-  findRequestsByStaffId,
+  findRequestsByProviderId,
 });
 
 export const retrieveCustomers = buildRetrieveCustomers({
-  findCustomersByStaffId,
+  findCustomersByProviderId,
 });
 
 export const removeCustomer = buildRemoveCustomer({
   findCustomer,
-  insertStaffCustomer,
+  insertProviderCustomer,
 });
 
 export const updateCustomerInfo = buildUpdateCustomerInfo({
   findCustomer,
   findRequestByCustomerId,
   insertRequest,
-  insertStaffCustomer,
+  insertProviderCustomer,
 });
 
-export const retrieveCustomerStaff = buildRetrieveCustomerStaff({
-  findStaffByCustomerId,
+export const retrieveCustomerProvider = buildRetrieveCustomerProvider({
+  findProviderByCustomerId,
 });
