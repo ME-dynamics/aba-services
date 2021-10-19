@@ -1,8 +1,8 @@
 import { types } from "aba-node";
-import { tFindUserProviderFunc } from "./adapters";
+import { tFetchCustomerProviderFunc } from "./adapters";
 
 export interface IBuildPostCreateTask {
-  findUserProvider: tFindUserProviderFunc;
+  fetchCustomerProvider: tFetchCustomerProviderFunc;
 }
 interface IPostCreateTask {
   Body: {
@@ -14,7 +14,7 @@ interface IPostCreateTask {
 export type tPostCreateTask = types.tRequest<IPostCreateTask>;
 
 export interface IBuildGetUserTasks {
-  findUserProvider: tFindUserProviderFunc;
+  fetchCustomerProvider: tFetchCustomerProviderFunc;
 }
 interface IGetUserTasks {
   Params: {
@@ -25,7 +25,7 @@ interface IGetUserTasks {
 export type tGetUserTasks = types.tRequest<IGetUserTasks>;
 
 export interface IBuildPostTaskDone {
-  findUserProvider: tFindUserProviderFunc;
+  fetchCustomerProvider: tFetchCustomerProviderFunc;
 }
 interface IPostTaskDone {
   Body: {
@@ -37,7 +37,7 @@ interface IPostTaskDone {
 export type tPostTaskDone = types.tRequest<IPostTaskDone>;
 
 export interface IBuildPostTaskUndone {
-  findUserProvider: tFindUserProviderFunc;
+  fetchCustomerProvider: tFetchCustomerProviderFunc;
 }
 interface IPostTaskUndone {
   Body: {
@@ -48,7 +48,7 @@ interface IPostTaskUndone {
 export type tPostTaskUndone = types.tRequest<IPostTaskUndone>;
 
 export interface IBuildRemoveTask {
-  findUserProvider: tFindUserProviderFunc;
+  fetchCustomerProvider: tFetchCustomerProviderFunc;
 }
 interface IRemoveTask {
   Params: {

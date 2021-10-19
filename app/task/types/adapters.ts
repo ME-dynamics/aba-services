@@ -31,6 +31,6 @@ export type tRowTask = (row: types.tRow) => IMadeTaskObject;
 
 // network
 
-export type tFindUserProviderFunc = (
+export type tFetchCustomerProviderFunc = (
   customerId: string
 ) => Promise<string | undefined>;
