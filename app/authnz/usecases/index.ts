@@ -26,6 +26,7 @@ import { buildRefresh } from "./refresh";
 import { buildRetrievePublicKey } from "./retrievePublicKey";
 import { buildCreateProvider } from "./createProvider";
 import { buildInitAdmins } from "./initAdmins";
+import { buildRetrieveRoleByOtpId } from "./retrieveRoleByOtpId";
 
 export const passwordlessStart = buildPasswordlessStart({
   findOtpByPhone,
@@ -72,3 +73,5 @@ export const initAdmin = buildInitAdmins({
   insertOtp,
   insertRole,
 });
+
+export const retrieveRoleByOtpId = buildRetrieveRoleByOtpId({ findRole });
