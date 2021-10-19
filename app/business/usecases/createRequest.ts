@@ -3,7 +3,7 @@ import { makeCustomerProviderRequest } from "../entities";
 import { entityTypes, usecaseTypes } from "../types";
 
 export function buildCreateRequest(args: usecaseTypes.IBuildCreateRequest) {
-  const { findUserById, insertRequest, findRequestByCustomerId } = args;
+  const { fetchUserById, insertRequest, findRequestByCustomerId, fetchRoleByUserId } = args;
   const { forbidden, badRequest } = httpResultClientError;
   const { created, ok } = httpResultSuccess;
   return async function createRequest(info: usecaseTypes.ICreateRequest) {
@@ -12,8 +12,8 @@ export function buildCreateRequest(args: usecaseTypes.IBuildCreateRequest) {
     const { providerId, customerId } = info;
     // find provider and customer
     const [provider, customer] = await Promise.all([
-      findUserById(providerId),
-      findUserById(customerId),
+      fetchRoleByUserId(providerId),
+      fetchUserById(customerId),
     ]);
     // validate customer, customer should exists
     if (!customer) {
@@ -54,7 +54,7 @@ export function buildCreateRequest(args: usecaseTypes.IBuildCreateRequest) {
       providerId,
       customerId,
       name: customer.name,
-      imageUrl: customer.imageUrl,
+      profilePictureUrl: customer.profilePictureUrl,
       confirmed: false,
       createdAt: undefined,
       modifiedAt: undefined,
