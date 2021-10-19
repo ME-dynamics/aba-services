@@ -1,1 +1,1 @@
-export { findUserProvider } from "./findUserProvider";
+export { fetchCustomerProvider } from "./fetchCustomerProvider";
