@@ -8,7 +8,7 @@ import { buildPostTaskUndone } from "./postTaskUndone";
 
 export const postCreateTask = buildPostCreateTask({ fetchCustomerProvider });
 export const postTaskDone = buildPostTaskDone({ fetchCustomerProvider });
-export const postTasKUndone = buildPostTaskUndone({ fetchCustomerProvider });
+export const postTaskUndone = buildPostTaskUndone({ fetchCustomerProvider });
 
 export const getUserTasks = buildGetUserTasks({ fetchCustomerProvider });
 
