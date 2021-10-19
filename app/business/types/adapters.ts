@@ -68,18 +68,20 @@ export type tInsertRequestFunc = (
 ) => Promise<void>;
 
 // network
-
-// find user by id
-
 export interface IUser {
   id: string;
+  name: string;
+  profilePictureUrl : string;
+  description: string;
+}
+export type tFetchUserByIdFunc = (userId: string) => Promise<IUser | undefined>
+
+
+export interface IRole {
   role: string;
-  name: string | undefined;
-  imageUrl: string | undefined;
-  description: string | undefined;
 }
 
-export type tFindUserByIdFunc = (id: string) => Promise<IUser | undefined>;
+export type tFetchRoleByUserIdFunc = (userId: string) => Promise<IRole | undefined>
 
 // utils
 
@@ -90,3 +92,5 @@ export type rowToProviderCustomerFunc = (
 export type tRowToCustomerProviderRequestFunc = (
   row: types.tRow
 ) => IMadeCustomerProviderRequestObject;
+
+
