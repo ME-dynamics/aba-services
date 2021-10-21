@@ -17,13 +17,13 @@ export function startServer(app: types.tHttpInstance) {
     retrieveUser
   );
 
-  app.post(
-    routeGen({
-      version: applicationVersion,
-      role: "internal",
-      routes: ["users"],
-    }),
-    { schema: sCreateUser },
-    createUser
-  );
+  // app.post(
+  //   routeGen({
+  //     version: applicationVersion,
+  //     role: "internal",
+  //     routes: ["users"],
+  //   }),
+  //   { schema: sCreateUser },
+  //   createUser
+  // );
 }
