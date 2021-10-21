@@ -4,7 +4,7 @@ import { adaptersTypes } from "../types";
 
 
 export function buildInitSecret(args: adaptersTypes.IBuildInitSecret) {
-  const { findSecretKeys, fromKeyLike, generateKey, insertSecretKeys } = args;
+  const { findSecretKeys, exportJWK, generateKey, insertSecretKeys } = args;
   const errorPath = "authnz, adapters, init secret";
 
   return async function initSecret() {
@@ -18,8 +18,8 @@ export function buildInitSecret(args: adaptersTypes.IBuildInitSecret) {
     });
 
     // parse keys to insert into data base
-    const parsedPrivateKey = await fromKeyLike(privateKey);
-    const parsedPublicKey = await fromKeyLike(publicKey);
+    const parsedPrivateKey = await exportJWK(privateKey);
+    const parsedPublicKey = await exportJWK(publicKey);
     // check key is defined
     if(!parsedPrivateKey.kty || !parsedPrivateKey.crv || !parsedPrivateKey.x) {
       throw new ErrorFactory({

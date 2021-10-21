@@ -1,10 +1,7 @@
 import { scyllaClient, secureRandomNumber, time } from "aba-node";
 import { hash } from "argon2";
 import { nanoid } from "nanoid";
-import SignJwt from "jose/jwt/sign";
-import generateKeyPair from "jose/util/generate_key_pair";
-import fromKeyLike from "jose/jwk/from_key_like";
-import parseKey from "jose/jwk/parse";
+import {SignJWT, generateKeyPair, importJWK, exportJWK} from "jose";
 import {
   buildFindOtpByPhone,
   buildFindOtpByToken,
@@ -60,7 +57,7 @@ export const findOtpByToken = buildFindOtpByToken({
 export const findPrivateKey = buildFindPrivateKey({
   select: dbClient.select,
   rowToKey,
-  parseKey,
+  importJWK,
 });
 export const findSecretKeys = buildFindSecretKeys({
   select: dbClient.select,
@@ -91,7 +88,7 @@ export const deleteAdmin = buildDeleteAdmin({ remove: dbClient.delete });
 
 // utils
 export const signJwt = buildSignJwt({
-  Signer: SignJwt,
+  Signer: SignJWT,
   findPrivateKey,
   minutesFromNow: time.minutesFromNow,
   nanoid,
@@ -115,7 +112,7 @@ export { validatePhoneNumber } from "./utils";
 
 export const initSecret = buildInitSecret({
   findSecretKeys,
-  fromKeyLike,
+  exportJWK,
   generateKey: generateKeyPair,
   insertSecretKeys,
 });

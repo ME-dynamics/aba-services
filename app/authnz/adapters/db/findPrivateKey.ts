@@ -20,7 +20,7 @@ function selectQueryGen():string {
 
 
 export function buildFindPrivateKey(args: adaptersTypes.IBuildFindPrivateKey) {
-  const { select, rowToKey, parseKey } = args;
+  const { select, rowToKey, importJWK } = args;
   const errorPath = "authnz, adapters, find secret keys";
   const query = selectQueryGen();
   return async function findPrivateKey(
@@ -43,13 +43,13 @@ export function buildFindPrivateKey(args: adaptersTypes.IBuildFindPrivateKey) {
       });
     }
     const { crv, d, kty, x } = rowToKey(privateRow.first());
-    const parsedPrivateKey = await parseKey({
+    const parsedPrivateKey = await importJWK({
       alg: "EdDSA",
       kty,
       crv,
       d,
       x,
-    });
+    }, "EdDSA", true);
     return {
       privateKey: parsedPrivateKey,
     };

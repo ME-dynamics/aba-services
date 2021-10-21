@@ -1,10 +1,6 @@
 import { secureRandomNumber, time, types } from "aba-node";
 import { hash } from "argon2";
-import SignJwt from "jose/jwt/sign";
-import generateKeyPair from "jose/util/generate_key_pair";
-import fromKeyLike from "jose/jwk/from_key_like";
-import parseKey from "jose/jwk/parse";
-import { KeyLike } from "jose/types";
+import {SignJWT, generateKeyPair, importJWK, KeyLike, exportJWK} from "jose";
 import { IMadeOtpObject, IMadeRoleObject, IMadeTokenObject } from "./entities";
 
 // initialize database
@@ -80,10 +76,10 @@ export type tRowToKeyFunc = (row: types.tRow) => IKey;
 export interface IBuildFindPrivateKey {
   select: types.tDbSelectFunc;
   rowToKey: tRowToKeyFunc;
-  parseKey: typeof parseKey;
+  importJWK: typeof importJWK;
 }
 export interface IFindPrivateKeyResult {
-  privateKey: KeyLike;
+  privateKey: KeyLike | Uint8Array;
 }
 
 // find secret keys
@@ -138,7 +134,7 @@ export interface IJwtPayload {
 export type tFindPrivateKeyFunc = () => Promise<IFindPrivateKeyResult>;
 
 export interface IBuildSignJwt {
-  Signer: typeof SignJwt;
+  Signer: typeof SignJWT;
   findPrivateKey: tFindPrivateKeyFunc;
   nanoid: (size: number) => string;
   minutesFromNow: typeof time.minutesFromNow;
@@ -155,7 +151,7 @@ export type tSignJwtFunc = (payload: IJwtPayload) => Promise<ISignJwtResult>;
 
 export interface IBuildInitSecret {
   generateKey: typeof generateKeyPair;
-  fromKeyLike: typeof fromKeyLike;
+  exportJWK: typeof exportJWK;
   findSecretKeys: tFindSecretKeysFunc;
   insertSecretKeys: tInsertSecretKeysFunc;
 }
