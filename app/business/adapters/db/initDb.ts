@@ -88,11 +88,10 @@ export function buildInitDb(args: adaptersTypes.IBuildInit) {
         cluster: ["soft_deleted", "created_at", "provider_id"],
       },
     });
-    await Promise.all([
-      init({ query: createProviderCustomerTable.query, errorPath }),
-      init({ query: createCustomerProviderMV.query, errorPath }),
-      init({ query: createCustomerProviderRequestTable.query, errorPath }),
-      init({ query: createCustomerRequestMV.query, errorPath }),
-    ]);
+
+    await init({ query: createProviderCustomerTable.query, errorPath });
+    await init({ query: createCustomerProviderMV.query, errorPath });
+    await init({ query: createCustomerProviderRequestTable.query, errorPath });
+    await init({ query: createCustomerRequestMV.query, errorPath });
   };
 }
