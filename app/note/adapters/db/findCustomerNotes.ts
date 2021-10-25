@@ -10,26 +10,26 @@ function selectQueryGen(): string {
     version: applicationVersion,
     columns: ["*"],
     where: [
-      equal({ argument: "owner_id", self: true }),
-      equal({ argument: "user_id", self: true }),
+      equal({ argument: "provider_id", self: true }),
+      equal({ argument: "customer_id", self: true }),
     ],
   });
   return query;
 }
 
-export function buildFindUserNotes(args: adapterTypes.IBuildFindUserNotes) {
+export function buildFindCustomerNotes(args: adapterTypes.IBuildFindCustomerNotes) {
   const { select, rowToNote } = args;
-  const errorPath = "notes, adapters, find user notes";
+  const errorPath = "notes, adapters, find customer notes";
   const query = selectQueryGen();
-  return async function findUserNotes(
-    info: adapterTypes.IFindUserNotes
+  return async function findCustomerNotes(
+    info: adapterTypes.IFindCustomerNotes
   ): Promise<entityTypes.IMadeNoteObject[] | undefined> {
-    const { ownerId, userId } = info;
+    const { providerId, customerId } = info;
     const result = await select({
       query,
       params: {
-        owner_id: ownerId,
-        user_id: userId,
+        provider_id: providerId,
+        customer_id: customerId,
       },
       errorPath,
       unique: false,

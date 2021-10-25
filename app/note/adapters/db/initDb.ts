@@ -11,8 +11,8 @@ export function buildInitDb(args: adapterTypes.IBuildInitDb) {
       name: "notes",
       version: applicationVersion,
       columns: [
-        { name: "owner_id", type: "UUID" },
-        { name: "user_id", type: "UUID" },
+        { name: "provider_id", type: "UUID" },
+        { name: "customer_id", type: "UUID" },
         { name: "id", type: "UUID" },
         { name: "title", type: "TEXT" },
         { name: "content", type: "TEXT" },
@@ -22,7 +22,7 @@ export function buildInitDb(args: adapterTypes.IBuildInitDb) {
         { name: "soft_deleted", type: "BOOLEAN" },
       ],
       primaryKey: {
-        partition: ["owner_id", "user_id"],
+        partition: ["provider_id", "customer_id"],
         cluster: ["created_at"],
       },
       orderBy: [{ key: "created_at", type: "DESC" }],

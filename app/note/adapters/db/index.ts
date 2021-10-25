@@ -1,6 +1,6 @@
 export { buildInitDb } from "./initDb";
 
 export { buildFindNoteById } from "./findNoteById";
-export { buildFindUserNotes } from "./findUserNotes";
+export { buildFindCustomerNotes } from "./findCustomerNotes";
 
 export { buildInsertNote } from "./insertNote";

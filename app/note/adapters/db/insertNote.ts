@@ -8,8 +8,8 @@ function insertQueryGen() {
     table: "notes",
     version: applicationVersion,
     values: [
-      { column: "owner_id", self: true },
-      { column: "user_id", self: true },
+      { column: "provider_id", self: true },
+      { column: "customer_id", self: true },
       { column: "id", self: true },
       { column: "title", self: true },
       { column: "content", self: true },
@@ -28,8 +28,8 @@ export function buildInsertNote(args: adapterTypes.IBuildInsertNote) {
   const query = insertQueryGen();
   return async function insertNote(note: entityTypes.IMadeNoteObject) {
     const {
-      ownerId,
-      userId,
+      providerId,
+      customerId,
       id,
       title,
       content,
@@ -41,8 +41,8 @@ export function buildInsertNote(args: adapterTypes.IBuildInsertNote) {
     await insert({
       query,
       params: {
-        owner_id: ownerId,
-        user_id: userId,
+        provider_id: providerId,
+        customer_id: customerId,
         id,
         title,
         content,
