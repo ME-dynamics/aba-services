@@ -7,17 +7,17 @@ export function buildUpdateNote(args: usecaseTypes.IBuildUpdateNote) {
   const { notFound, forbidden } = httpResultClientError;
   const { ok } = httpResultSuccess;
   return async function updateNote(info: usecaseTypes.IUpdateNote) {
-    const { id, ownerId, title, content, imageIds } = info;
+    const { id, providerId, title, content, imageIds } = info;
     const noteFound = await findNoteById(id);
     if (!noteFound || noteFound?.softDeleted) {
       return notFound({ error: "note not found" });
     }
     // AUTHORIZE
-    if (noteFound.ownerId !== ownerId) {
+    if (noteFound.providerId !== providerId) {
       return forbidden({ error: "you don't have access to note" });
     }
     if (imageIds) {
-      const imageValid = await imageIdsValidation(imageIds, ownerId);
+      const imageValid = await imageIdsValidation(imageIds, providerId);
       if(!imageValid) {
         return forbidden({ error: "image is not valid" });
       } 

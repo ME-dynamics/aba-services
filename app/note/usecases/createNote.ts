@@ -7,10 +7,10 @@ export function buildCreateNote(args: usecaseTypes.IBuildCreateNote) {
   const { created } = httpResultSuccess;
   const { forbidden } = httpResultClientError;
   function noteInput(info: usecaseTypes.ICreateNote): entityTypes.IMakeNote {
-    const { ownerId, userId, title, content, imageIds } = info;
+    const { providerId, customerId, title, content, imageIds } = info;
     return {
-      ownerId,
-      userId,
+      providerId,
+      customerId,
       id: undefined,
       title,
       content,
@@ -21,9 +21,9 @@ export function buildCreateNote(args: usecaseTypes.IBuildCreateNote) {
     };
   }
   return async function createNote(info: usecaseTypes.ICreateNote) {
-    const { imageIds, ownerId } = info;
+    const { imageIds, providerId } = info;
     if (imageIds) {
-      const imagesValid = await imageIdsValidation(imageIds, ownerId);
+      const imagesValid = await imageIdsValidation(imageIds, providerId);
       if (!imagesValid) {
         return forbidden({ error: "image is not valid" });
       }
