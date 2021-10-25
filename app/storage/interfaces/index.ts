@@ -14,10 +14,10 @@ import { applicationVersion } from "../config";
 export async function startStorageServer(app: types.tHttpInstance) {
   app.register(multipart, {
     limits: {
-      fieldNameSize: 2000,
-      fieldSize: 2000,
+      fieldNameSize: 8000,
+      fieldSize: 8000,
       fields: 2,
-      fileSize: 8e6, // 12 megabyte for file limit 5e6
+      fileSize: 12e6, // 8 megabyte for file limit 8e6
       files: 1,
       headerPairs: 2000,
     },
