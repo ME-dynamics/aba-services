@@ -1,1 +1,2 @@
-export { fetchImageInfo } from "./fetchImageInfo"
+export { fetchImageInfo } from "./fetchImageInfo";
+export { fetchCustomerProvider } from "./fetchCustomerProvider";
