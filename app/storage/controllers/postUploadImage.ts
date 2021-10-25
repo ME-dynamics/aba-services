@@ -30,14 +30,6 @@ export function buildPostUploadImage() {
     if (keys.length !== 3) {
       return false;
     }
-    if (
-      keys[0] !== "access" ||
-      keys[1] !== "transform" ||
-      keys[2] !== "imageFile"
-    ) {
-      return false;
-    }
-
     if (!accessValue || typeof accessValue !== "string") {
       return false;
     }
@@ -62,25 +54,25 @@ export function buildPostUploadImage() {
     httpRequest: controllerTypes.tPostUploadImage,
     reply: types.tReply
   ) {
-    // const { success, error, payload } = auth(httpRequest, roles);
-    // if (!success) {
-    //   return error;
-    // }
+    const { success, error, payload } = auth(httpRequest, roles);
+    if (!success) {
+      return error;
+    }
     const fileData = await httpRequest.file();
-
     fileData.file.on("limit", function onFileLimit() {
       fileData.file.unpipe();
-      const {code, error} = forbidden({ error: "reach files limit" }); 
-      reply.code(code)
-      reply.send({error});
+      const { code, error } = forbidden({ error: "reach files limit" });
+      reply.code(code);
+      reply.send({ error });
     });
 
     const isValid = validate(fileData);
     if (isValid) {
       const { access, transform } = isValid;
+      const { userId } = payload;
       const result = await uploadImage({
         file: fileData.file,
-        userId: "bfe2384e-9e45-4f4f-ab94-37b60ff60438",
+        userId,
         access,
         transform,
       });
