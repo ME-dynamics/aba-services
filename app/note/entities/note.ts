@@ -4,8 +4,8 @@ export function buildMakeNote(args: entityTypes.IBuildMakeNote) {
   const { uuid } = args;
   return function makeNote(note: entityTypes.IMakeNote) {
     const {
-      ownerId,
-      userId,
+      providerId,
+      customerId,
       id = uuid(),
       createdAt = new Date(),
       modifiedAt = new Date(),
@@ -35,8 +35,8 @@ export function buildMakeNote(args: entityTypes.IBuildMakeNote) {
     }
     const madeNote: entityTypes.IMadeNote = {
       get: {
-        ownerId: () => ownerId,
-        userId: () => userId,
+        providerId: () => providerId,
+        customerId: () => customerId,
         id: () => id,
         title: () => title,
         content: () => content,
@@ -54,8 +54,8 @@ export function buildMakeNote(args: entityTypes.IBuildMakeNote) {
       },
       object: () => {
         return {
-          ownerId,
-          userId,
+          providerId,
+          customerId,
           id,
           title,
           content,
