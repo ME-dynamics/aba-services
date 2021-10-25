@@ -1,14 +1,14 @@
 import { types } from "aba-node";
-import { deleteRemoveNote } from "../controllers";
+import { deleteNote } from "../controllers";
 import { controllerTypes } from "../types";
 
 
 export async function removeNote(
-    request: controllerTypes.tDeleteRemoveNote,
+    request: controllerTypes.tDeleteNote,
     reply: types.tReply
   ) {
     try {
-      const response = await deleteRemoveNote(request);
+      const response = await deleteNote(request);
       reply.code(response.code);
       return response;
     } catch (error) {

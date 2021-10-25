@@ -1,6 +1,12 @@
 import { types, routeGen } from "aba-node";
 
-import { retrieveUserNotes } from "./retrieveUserNotes";
+import {
+  sCreateNote,
+  sRemoveNote,
+  sRetrieveCustomerNotes,
+  sUpdateNote,
+} from "../schemas";
+import { retrieveCustomerNotes } from "./retrieveCustomerNotes";
 import { createNote } from "./createNote";
 import { updateNote } from "./updateNote";
 import { removeNote } from "./removeNote";
@@ -11,9 +17,10 @@ export function startNoteServer(app: types.tHttpInstance) {
     routeGen({
       version: applicationVersion,
       role: "provider",
-      routes: ["notes", ":userId"],
+      routes: ["notes", ":customerId"],
     }),
-    retrieveUserNotes
+    { schema: sRetrieveCustomerNotes },
+    retrieveCustomerNotes
   );
 
   app.post(
@@ -22,6 +29,7 @@ export function startNoteServer(app: types.tHttpInstance) {
       role: "provider",
       routes: ["notes"],
     }),
+    { schema: sCreateNote },
     createNote
   );
   app.put(
@@ -30,6 +38,7 @@ export function startNoteServer(app: types.tHttpInstance) {
       role: "provider",
       routes: ["notes"],
     }),
+    { schema: sUpdateNote },
     updateNote
   );
   app.delete(
@@ -38,6 +47,7 @@ export function startNoteServer(app: types.tHttpInstance) {
       role: "provider",
       routes: ["notes", ":noteId"],
     }),
+    { schema: sRemoveNote },
     removeNote
   );
 }

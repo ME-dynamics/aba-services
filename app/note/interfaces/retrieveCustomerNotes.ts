@@ -1,13 +1,13 @@
 import { types } from "aba-node";
-import { getRetrieveUserNotes } from "../controllers";
+import { getCustomerNotes } from "../controllers";
 import { controllerTypes } from "../types";
 
-export async function retrieveUserNotes(
-  request: controllerTypes.tGetRetrieveUserNotes,
+export async function retrieveCustomerNotes(
+  request: controllerTypes.tGetCustomerNotes,
   reply: types.tReply
 ) {
   try {
-    const response = await getRetrieveUserNotes(request);
+    const response = await getCustomerNotes(request);
     reply.code(response.code);
     return response;
   } catch (error) {
