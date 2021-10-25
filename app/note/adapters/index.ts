@@ -2,7 +2,7 @@ import { scyllaClient } from "aba-node";
 import { applicationVersion } from "../config";
 import {
   buildFindNoteById,
-  buildFindUserNotes,
+  buildFindCustomerNotes,
   buildInitDb,
   buildInsertNote,
 } from "./db";
@@ -24,7 +24,7 @@ export const findNoteById = buildFindNoteById({
   select: dbClient.select,
   rowToNote,
 });
-export const findUserNotes = buildFindUserNotes({
+export const findCustomerNotes = buildFindCustomerNotes({
   select: dbClient.select,
   rowToNote,
 });
@@ -33,7 +33,7 @@ export const insertNote = buildInsertNote({ insert: dbClient.insert });
 
 // network
 
-export { fetchImageInfo } from "./network";
+export { fetchImageInfo, fetchCustomerProvider } from "./network";
 
 // utils
 export { imageIdsValidation } from "./utils";

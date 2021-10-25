@@ -3,8 +3,8 @@ import { entityTypes } from "../../types";
 
 export function rowToNote(row: types.tRow): entityTypes.IMadeNoteObject {
   return {
-    ownerId: row.get("owner_id"),
-    userId: row.get("user_id"),
+    providerId: row.get("provider_id"),
+    customerId: row.get("customer_id"),
     id: row.get("id"),
     title: row.get("title"),
     content: row.get("content"),
