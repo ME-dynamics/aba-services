@@ -1,9 +1,10 @@
+import { fetchCustomerProvider } from "../adapters";
 import { buildPostCreateNote } from "./postCreateNote";
 import { buildPutUpdateNote } from "./putUpdateNote";
-import { buildGetRetrieveUserNotes } from "./getRetrieveUserNotes";
-import { buildDeleteRemoveNote } from "./deleteRemoveNote";
+import { buildGetCustomerNotes } from "./getCustomerNotes";
+import { buildDeleteNote } from "./deleteNote";
 
-export const postCreateNote = buildPostCreateNote();
+export const postCreateNote = buildPostCreateNote({ fetchCustomerProvider });
 export const putUpdateNote = buildPutUpdateNote();
-export const getRetrieveUserNotes = buildGetRetrieveUserNotes();
-export const deleteRemoveNote = buildDeleteRemoveNote();
+export const getCustomerNotes = buildGetCustomerNotes({ fetchCustomerProvider });
+export const deleteNote = buildDeleteNote({ fetchCustomerProvider });

@@ -1,19 +1,39 @@
-import { createNote } from "../usecases"
+import { types, auth, httpResultClientError } from "aba-node";
+import { createNote } from "../usecases";
 import { controllerTypes } from "../types";
-import { v4 } from "uuid";
 
-export function buildPostCreateNote() {
+export function buildPostCreateNote(
+  args: controllerTypes.IBuildPostCreateNote
+) {
+  const { fetchCustomerProvider } = args;
+  const roles: types.IRoles = {
+    customer: false,
+    provider: true,
+    admin: false,
+    accountant: false,
+    assistant: false,
+    support: false,
+  };
+  const { forbidden } = httpResultClientError;
   return async function postCreateNote(
-    request: controllerTypes.tPostCreateNote
+    httpRequest: controllerTypes.tPostCreateNote
   ) {
-      const { ownerId, title, content, imageIds } = request.body;
-      
-      return await createNote({
-          ownerId,
-          title,
-          content,
-          imageIds,
-          userId: v4()
-      })
+    const { success, error, payload } = auth(httpRequest, roles);
+    if (!success) {
+      return error;
+    }
+    const { title, content, imageIds, customerId } = httpRequest.body;
+    const { userId } = payload;
+    const providerId = await fetchCustomerProvider(customerId);
+    if (!providerId || providerId !== userId) {
+      return forbidden({ error: "action not allowed" });
+    }
+    return await createNote({
+      providerId: userId,
+      customerId,
+      title,
+      content,
+      imageIds,
+    });
   };
 }
