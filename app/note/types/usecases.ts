@@ -1,7 +1,6 @@
 import {
   tInsertNoteFunc,
-  tFindUserNotesFunc,
-  IFindUserNotes,
+  tFindCustomerNotesFunc,
   tFindNoteByIdFunc,
   tImageIdsValidationFunc,
 } from "./adapters";
@@ -14,8 +13,8 @@ export interface IBuildCreateNote {
 }
 
 export interface ICreateNote {
-  ownerId: string;
-  userId: string;
+  providerId: string;
+  customerId: string;
   title: string;
   content: string;
   imageIds: string[] | undefined;
@@ -24,15 +23,15 @@ export interface ICreateNote {
 // retrieve note
 
 export interface IBuildRetrieveNote {
-  findUserNotes: tFindUserNotesFunc;
+  findCustomerNotes: tFindCustomerNotesFunc;
 }
 export interface IRemoveNote {
-  ownerId: string;
+  providerId: string;
   id: string;
 }
 export interface IRetrieveNote {
-  ownerId: string;
-  userId: string;
+  providerId: string;
+  customerId: string;
 }
 
 // remove note
@@ -51,7 +50,7 @@ export interface IBuildUpdateNote {
 }
 
 export interface IUpdateNote {
-  ownerId: string;
+  providerId: string;
   id: string;
   title: string;
   content: string;

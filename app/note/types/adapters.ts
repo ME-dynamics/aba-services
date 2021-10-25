@@ -7,18 +7,18 @@ export interface IBuildInitDb {
   init: types.tDbInitFunc;
 }
 
-export interface IBuildFindUserNotes {
+export interface IBuildFindCustomerNotes {
   select: types.tDbSelectFunc;
   rowToNote: tRowToNoteFunc;
 }
 
-export interface IFindUserNotes {
-  ownerId: string;
-  userId: string;
+export interface IFindCustomerNotes {
+  providerId: string;
+  customerId: string;
 }
 
-export type tFindUserNotesFunc = (
-  info: IFindUserNotes
+export type tFindCustomerNotesFunc = (
+  info: IFindCustomerNotes
 ) => Promise<entityTypes.IMadeNoteObject[] | undefined>;
 
 export interface IBuildFindNoteById {
@@ -66,3 +66,7 @@ export interface IMadeImageObject extends IMakeImage {
 export type tFetchImageInfoFunc = (
   imageId: string
 ) => Promise<types.IErrorResult | types.IPayloadResult<IMadeImageObject>>;
+
+export type tFetchCustomerProviderFunc = (
+  customerId: string
+) => Promise<string | undefined>;

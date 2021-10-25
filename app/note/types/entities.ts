@@ -5,8 +5,8 @@ export interface IBuildMakeNote {
 }
 
 export interface IMakeNote {
-  ownerId: string;
-  userId: string;
+  providerId: string;
+  customerId: string;
   id: string | undefined;
   title: string;
   content: string;
@@ -24,8 +24,8 @@ export interface IMadeNoteObject extends IMakeNote {
 
 export interface IMadeNote {
   get: {
-    ownerId: () => string;
-    userId: () => string;
+    providerId: () => string;
+    customerId: () => string;
     id: () => string;
     title: () => string;
     content: () => string;
