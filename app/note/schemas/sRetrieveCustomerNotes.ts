@@ -2,7 +2,7 @@ import { fluentSchema, errorSchema, statusCodes } from "aba-node";
 
 const params = fluentSchema
   .object()
-  .prop("userId", fluentSchema.string().format("uuid").required());
+  .prop("customerId", fluentSchema.string().format("uuid").required());
 
 const response = {
   [statusCodes.OK]: fluentSchema
@@ -15,8 +15,8 @@ const response = {
         .items(
           fluentSchema
             .object()
-            .prop("ownerId", fluentSchema.string().format("uuid").required())
-            .prop("userId", fluentSchema.string().format("uuid").required())
+            .prop("providerId", fluentSchema.string().format("uuid").required())
+            .prop("customerId", fluentSchema.string().format("uuid").required())
             .prop("id", fluentSchema.string().format("uuid").required())
             .prop("title", fluentSchema.string().required().maxLength(271))
             .prop("content", fluentSchema.string().required().maxLength(9973))
@@ -36,7 +36,7 @@ const response = {
   [statusCodes.INTERNAL_SERVER_ERROR]: errorSchema,
 };
 
-export const sRetrieveUserNotes = {
+export const sRetrieveCustomerNotes = {
   params,
   response,
 };

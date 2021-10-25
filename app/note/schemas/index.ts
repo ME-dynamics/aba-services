@@ -1,4 +1,4 @@
 export { sCreateNote } from "./sCreateNote";
 export { sUpdateNote } from "./sUpdateNote";
-export { sRetrieveUserNotes } from "./sRetrieveUserNotes";
+export { sRetrieveCustomerNotes } from "./sRetrieveCustomerNotes";
 export { sRemoveNote } from "./sRemoveNote";
