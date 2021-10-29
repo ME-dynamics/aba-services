@@ -9,7 +9,7 @@ const body = fluentSchema
     "imageIds",
     fluentSchema
       .array()
-      .items(fluentSchema.string().format("uuid").required())
+      .items(fluentSchema.string().format("uuid"))
       .default(undefined)
   );
 
@@ -27,12 +27,12 @@ const response = {
         "imageIds",
         fluentSchema
           .array()
-          .items(fluentSchema.string().format("uuid").required())
+          .items(fluentSchema.string().format("uuid"))
           .default(null)
       )
       .prop("createdAt", fluentSchema.string().format("date").required())
       .prop("modifiedAt", fluentSchema.string().format("date").required())
-  ).required(),
+  ),
   [statusCodes.INTERNAL_SERVER_ERROR]: errorSchema,
   [statusCodes.FORBIDDEN]: errorSchema,
 };
