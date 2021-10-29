@@ -13,9 +13,10 @@ export async function fetchUserById(
   }
   const { id, lastName, firstName, profilePictureUrl, gender, telephone } =
     payload;
+  const name = firstName ? `${firstName}${lastName ? " " + lastName : ""}` : "";
   return {
     id,
-    name: `${firstName} ${lastName}`,
+    name,
     description: `${gender} ${telephone}`,
     profilePictureUrl: profilePictureUrl ? profilePictureUrl : "",
   };
