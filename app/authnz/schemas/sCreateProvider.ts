@@ -20,6 +20,7 @@ const createProviderResult = fluentSchema
 const response = {
   [statusCodes.CREATED]: createProviderResult,
   [statusCodes.OK]: createProviderResult,
+  [statusCodes.UNAUTHORIZED]: errorSchema,
   [statusCodes.INTERNAL_SERVER_ERROR]: errorSchema,
 };
 
