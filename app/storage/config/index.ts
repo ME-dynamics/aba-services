@@ -17,4 +17,4 @@ export const port = process.env.PORT ? parseInt(process.env.PORT) : 3000;
 export const scyllaContactPoint = process.env.SCYLLA_CONTACT_POINT
   ? process.env.SCYLLA_CONTACT_POINT
   : "127.0.1.1";
-export const serverUrl = "https://cdn.taskyn.ir";
+export const serverUrl = "https://storage.taskyn.ir";
