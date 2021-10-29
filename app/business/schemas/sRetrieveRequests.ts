@@ -6,18 +6,22 @@ const requestSchema = fluentSchema
   .prop(
     "payload",
     fluentSchema
-      .object()
-      .prop("providerId", fluentSchema.string().format("uuid").required())
-      .prop("customerId", fluentSchema.string().format("uuid").required())
-      .prop("name", fluentSchema.string().default(null))
-      .prop("profilePictureUrl", fluentSchema.string().default(null))
-      .prop("confirmed", fluentSchema.boolean().required())
-      .prop("createdAt", fluentSchema.string().format("date").required())
-      .prop("modifiedAt", fluentSchema.string().format("date").required())
+      .array()
+      .items(
+        fluentSchema
+          .object()
+          .prop("providerId", fluentSchema.string().format("uuid").required())
+          .prop("customerId", fluentSchema.string().format("uuid").required())
+          .prop("name", fluentSchema.string().default(null))
+          .prop("profilePictureUrl", fluentSchema.string().default(null))
+          .prop("confirmed", fluentSchema.boolean().required())
+          .prop("createdAt", fluentSchema.string().format("date").required())
+          .prop("modifiedAt", fluentSchema.string().format("date").required())
+      )
   );
 
 const response = {
-  [statusCodes.OK]: fluentSchema.array().items(requestSchema),
+  [statusCodes.OK]: requestSchema,
   [statusCodes.NOT_FOUND]: errorSchema,
 };
 
