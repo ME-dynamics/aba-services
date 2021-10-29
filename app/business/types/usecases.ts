@@ -73,6 +73,8 @@ export interface IBuildRetrieveCustomerProvider {
 // remove customer by id
 export interface IBuildRemoveCustomer {
   findCustomer: tFindCustomerFunc;
+  findRequestByCustomerId: tFindRequestByCustomerId;
+  insertRequest: tInsertRequestFunc;
   insertProviderCustomer: tInsertProviderCustomerFunc;
 }
 
