@@ -17,7 +17,7 @@ export function startNoteServer(app: types.tHttpInstance) {
     routeGen({
       version: applicationVersion,
       role: "provider",
-      routes: ["notes", ":customerId"],
+      routes: ["notes", ":id"],
     }),
     { schema: sRetrieveCustomerNotes },
     retrieveCustomerNotes
