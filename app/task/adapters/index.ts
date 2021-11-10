@@ -9,11 +9,11 @@ import { rowToTask } from "./utils";
 
 const dbClient = scyllaClient({
   id: undefined,
-  applicationName: "tasks",
+  applicationName: "task",
   applicationVersion: "v1",
   contactPoints: ["127.0.1.1"],
-  errorPath: "tasks, adapters, db client",
-  keyspace: "tasks",
+  errorPath: "task, adapters, db client",
+  keyspace: "task",
   localDataCenter: "datacenter1",
 });
 
