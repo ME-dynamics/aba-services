@@ -73,7 +73,11 @@ export function buildPasswordlessVerify(
       ? makeRole(roleExists)
       : makeRole(roleInput(otp.get.id()));
 
-    const username = await createUser(otp.get.id(), otp.get.phoneNumber());
+    const username = await createUser({
+      userId: otp.get.id(),
+      role: role.get.role(),
+      phoneNumber: otp.get.phoneNumber(),
+    });
 
     const tokenFound = await findTokenByUserId(otp.get.id());
     if (tokenFound?.permanentBlock) {
