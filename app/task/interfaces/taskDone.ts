@@ -1,13 +1,13 @@
 import { types } from "aba-node";
-import { postTaskDone } from "../controllers";
+import { patchTaskDone } from "../controllers";
 import { controllerTypes } from "../types";
 
 export async function taskDone(
-  request: controllerTypes.tPostTaskDone,
+  request: controllerTypes.tPatchTaskDone,
   reply: types.tReply
 ) {
   try {
-    const response = await postTaskDone(request);
+    const response = await patchTaskDone(request);
     reply.code(response.code);
     return response;
   } catch (error) {
