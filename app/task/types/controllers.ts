@@ -24,29 +24,42 @@ interface IGetUserTasks {
 
 export type tGetUserTasks = types.tRequest<IGetUserTasks>;
 
-export interface IBuildPostTaskDone {
+export interface IBuildPatchTaskDone {
   fetchCustomerProvider: tFetchCustomerProviderFunc;
 }
-interface IPostTaskDone {
+interface IPatchTaskDone {
   Body: {
     taskId: string;
     userId: string | undefined;
   };
 }
 
-export type tPostTaskDone = types.tRequest<IPostTaskDone>;
+export type tPatchTaskDone = types.tRequest<IPatchTaskDone>;
 
-export interface IBuildPostTaskUndone {
+export interface IBuildPatchTaskUndone {
   fetchCustomerProvider: tFetchCustomerProviderFunc;
 }
-interface IPostTaskUndone {
+interface IPatchTaskUndone {
   Body: {
     taskId: string;
-    userId: string;
+    userId: string | undefined;
   };
 }
-export type tPostTaskUndone = types.tRequest<IPostTaskUndone>;
+export type tPatchTaskUndone = types.tRequest<IPatchTaskUndone>;
 
+export interface IBuildPatchUpdateTask {
+  fetchCustomerProvider: tFetchCustomerProviderFunc;
+}
+
+interface IPatchUpdateTask {
+  Body: {
+    taskId: string;
+    content: string;
+    userId: string | undefined;
+  };
+}
+
+export type tPatchUpdateTask = types.tRequest<IPatchUpdateTask>;
 export interface IBuildRemoveTask {
   fetchCustomerProvider: tFetchCustomerProviderFunc;
 }

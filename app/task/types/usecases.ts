@@ -11,6 +11,19 @@ export interface ICreateTask {
   content: string;
 }
 
+// update task
+
+export interface IBuildUpdateTask {
+  findTaskById: tFindTaskById;
+  insertTask: tInsertTaskFunc;
+}
+
+export interface IUpdateTask {
+  userId: string
+  taskId: string;
+  content: string;
+}
+
 // retrieve tasks by user id
 
 export interface IBuildRetrieveTasksByUserId {
