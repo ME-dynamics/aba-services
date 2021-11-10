@@ -3,13 +3,13 @@ import { fetchCustomerProvider } from "../adapters";
 import { buildPostCreateTask } from "./postCreateTask";
 import { buildGetUserTasks } from "./getUserTasks";
 import { buildDeleteTask } from "./deleteTask";
-import { buildPostTaskDone } from "./postTaskDone";
-import { buildPostTaskUndone } from "./postTaskUndone";
-
+import { buildPatchTaskDone } from "./patchTaskDone";
+import { buildPatchTaskUndone } from "./patchTaskUndone";
+import { buildPatchUpdateTask } from "./patchUpdateTask";
 export const postCreateTask = buildPostCreateTask({ fetchCustomerProvider });
-export const postTaskDone = buildPostTaskDone({ fetchCustomerProvider });
-export const postTaskUndone = buildPostTaskUndone({ fetchCustomerProvider });
-
+export const patchTaskDone = buildPatchTaskDone({ fetchCustomerProvider });
+export const patchTaskUndone = buildPatchTaskUndone({ fetchCustomerProvider });
+export const patchUpdateTask = buildPatchUpdateTask({ fetchCustomerProvider });
 export const getUserTasks = buildGetUserTasks({ fetchCustomerProvider });
 
 export const deleteTask = buildDeleteTask({ fetchCustomerProvider });

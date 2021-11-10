@@ -1,8 +1,8 @@
 import { auth, types, httpResultClientError } from "aba-node";
 import { taskUndone } from "../usecases";
 import { controllerTypes } from "../types";
-export function buildPostTaskUndone(
-  args: controllerTypes.IBuildPostTaskUndone
+export function buildPatchTaskUndone(
+  args: controllerTypes.IBuildPatchTaskUndone
 ) {
   const { fetchCustomerProvider } = args;
   const roles: types.IRoles = {
@@ -14,8 +14,8 @@ export function buildPostTaskUndone(
     support: false,
   };
   const { badRequest, forbidden } = httpResultClientError;
-  return async function postTaskUndone(
-    httpRequest: controllerTypes.tPostTaskUndone
+  return async function patchTaskUndone(
+    httpRequest: controllerTypes.tPatchTaskUndone
   ) {
     const { success, error, payload } = auth(httpRequest, roles);
     if (!success) {
