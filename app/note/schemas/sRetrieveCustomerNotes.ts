@@ -25,8 +25,8 @@ const response = {
               .items(fluentSchema.string().format("uuid"))
               .default(null)
           )
-          .prop("createdAt", fluentSchema.string().format("date").required())
-          .prop("modifiedAt", fluentSchema.string().format("date").required())
+          .prop("createdAt", fluentSchema.string().format("date-time").required())
+          .prop("modifiedAt", fluentSchema.string().format("date-time").required())
       )
   ),
   [statusCodes.NOT_FOUND]: errorSchema,
