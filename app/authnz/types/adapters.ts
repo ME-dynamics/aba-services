@@ -1,6 +1,6 @@
 import { secureRandomNumber, time, types } from "aba-node";
 import { hash } from "argon2";
-import {SignJWT, generateKeyPair, importJWK, KeyLike, exportJWK} from "jose";
+import { SignJWT, generateKeyPair, importJWK, KeyLike, exportJWK } from "jose";
 import { IMadeOtpObject, IMadeRoleObject, IMadeTokenObject } from "./entities";
 
 // initialize database
@@ -186,12 +186,13 @@ export type tFindTokenByUserIdFunc = (
 ) => Promise<IMadeTokenObject | undefined>;
 
 // network
-interface IUser {
+export interface ICreateUser {
   userId: string;
+  phoneNumber: string;
+  role: string;
 }
 export type tCreateUserFunc = (
-  userId: string,
-  phoneNumber: string
+  args: ICreateUser
 ) => Promise<string | undefined>;
 
 export interface ISendOtpSms {
