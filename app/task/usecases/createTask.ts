@@ -4,7 +4,7 @@ import { entityTypes, usecaseTypes } from "../types";
 
 export function buildCreateTask(args: usecaseTypes.IBuildCreateTask) {
   const { insertTask } = args;
-  const { ok } = httpResultSuccess;
+  const { created } = httpResultSuccess;
   function taskInput(info: usecaseTypes.ICreateTask): entityTypes.IMakeTask {
     const { userId, content } = info;
     return {
@@ -20,7 +20,7 @@ export function buildCreateTask(args: usecaseTypes.IBuildCreateTask) {
   return async function createTask(info: usecaseTypes.ICreateTask) {
     const task = makeTask(taskInput(info));
     await insertTask(task.object());
-    return ok<entityTypes.IMadeTaskObject>({
+    return created<entityTypes.IMadeTaskObject>({
       payload: task.object(),
     });
   };
