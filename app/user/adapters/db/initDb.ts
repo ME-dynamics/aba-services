@@ -8,12 +8,21 @@ export function buildInitDb(args: adapterTypes.IBuildInitDb) {
   const errorPath = "user service, adapters , init db";
 
   return async function initDb() {
-    const { createTableQuery, createIndexQuery, createTypeQuery } = queryGen;
+    const {
+      createTableQuery,
+      createIndexQuery,
+      createTypeQuery,
+      createMaterialView,
+      selectQuery,
+      operators,
+    } = queryGen;
+    const { equal, notNull } = operators;
     const createUserTableQuery = createTableQuery({
       name: "users",
       version: "v1",
       columns: [
         { name: "id", type: "UUID" },
+        { name: "role", type: "TEXT" },
         { name: "username", type: "TEXT" },
         { name: "phone_number", type: "TEXT" },
         { name: "first_name", type: "TEXT" },
@@ -29,7 +38,27 @@ export function buildInitDb(args: adapterTypes.IBuildInitDb) {
       ],
       primaryKey: {
         partition: ["id"],
+        cluster: ["created_at"],
       },
+    });
+    const providerSelect = selectQuery({
+      table: "users",
+      version: "v1",
+      columns: ["*"],
+      where: [
+        equal({ argument: "role", equals: "'provider'" }),
+        notNull("created_at"),
+      ],
+    });
+    const providersMV = createMaterialView({
+      name: "providers",
+      version: "v1",
+      selectQuery: providerSelect,
+      primaryKey: {
+        partition: ["role"],
+        cluster: ["created_at", "id"],
+      },
+      orderBy: [{ key: "created_at", type: "DESC" }],
     });
     const siblingsUDT = createTypeQuery({
       name: "siblings",
@@ -87,5 +116,6 @@ export function buildInitDb(args: adapterTypes.IBuildInitDb) {
     await init({ query: createUserTableQuery.query, errorPath });
     await init({ query: createPatientTable.query, errorPath });
     await init({ query: phoneNumberIndex, errorPath });
+    await init({ query: providersMV.query, errorPath });
   };
 }
