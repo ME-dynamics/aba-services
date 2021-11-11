@@ -12,6 +12,7 @@ import {
   buildInsertUser,
   buildFindPatientByUserId,
   buildInsertPatient,
+  buildFindProviders,
 } from "./db";
 import { rowToUser, rowToPatient } from "./utils";
 
@@ -38,6 +39,10 @@ export const findUserByPhoneNumber = buildFindUserByPhoneNumber({
 export const findPatientByUserId = buildFindPatientByUserId({
   select: dbClient.select,
   rowToPatient,
+});
+export const findProviders = buildFindProviders({
+  select: dbClient.select,
+  rowToUser,
 });
 export const insertUser = buildInsertUser({ insert: dbClient.insert });
 export const insertPatient = buildInsertPatient({ insert: dbClient.insert });
