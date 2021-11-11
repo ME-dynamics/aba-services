@@ -3,7 +3,7 @@ import { entityTypes } from "../../types";
 
 export function rowToPatient(row: types.tRow): entityTypes.IMadePatientObject {
   return {
-    userId: row.get("user_id"),
+    userId: row.get("user_id")?.toString(),
     problemDescription: nullToUndefined<string>(row.get("problem_description")),
     birthday: nullToUndefined<Date>(row.get("birthday")),
     maritalStatus: nullToUndefined<entityTypes.tMaritalStatus>(
