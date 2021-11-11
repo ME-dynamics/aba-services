@@ -1,5 +1,6 @@
 import {
   tFindPatientByUserIdFunc,
+  tFindProvidersFunc,
   tFindUserByIdFunc,
   tFindUserByPhoneNumberFunc,
   tInsertPatientFunc,
@@ -20,6 +21,7 @@ export interface IBuildCreateUser {
 
 export interface ICreateUser {
   id: string;
+  role: string;
   phoneNumber: string;
 }
 
@@ -44,6 +46,10 @@ export type tCreatePatient = Omit<IPatient, "softDeleted">;
 
 export interface IBuildRetrievePatient {
   findPatientByUserId: tFindPatientByUserIdFunc;
+}
+
+export interface IBuildRetrieveProviders {
+  findProviders: tFindProvidersFunc;
 }
 
 // update user

@@ -38,6 +38,19 @@ interface IPostCreatePatient {
 
 export type tPostCreatePatient = types.tRequest<IPostCreatePatient>;
 
+export interface IBuildGetPatient {
+  fetchCustomerProvider: tFetchCustomerProviderFunc;
+}
+
+interface IGetPatient {
+  Params: {
+    id: string | undefined;
+  };
+}
+
+export type tGetPatient = types.tRequest<IGetPatient>;
+
+export type tGetProviders = types.tRequest<unknown>;
 export interface IBuildPutUpdateUser {
   parseStoragePublicUrl: tParseStoragePublicUrlFunc;
   fetchImageInfo: tFetchImageInfoFunc;

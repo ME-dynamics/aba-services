@@ -26,6 +26,14 @@ export interface IBuildInitDb {
 
 // ------
 
+// find providers
+
+export interface IBuildFindProviders {
+  select: types.tDbSelectFunc;
+  rowToUser: tRowToUserFunc;
+}
+
+export type tFindProvidersFunc = () => Promise<IMadeUserObject[] | undefined>;
 // find by interfaces
 export interface IBuildFindUserBy {
   select: types.tDbSelectFunc;

@@ -10,6 +10,7 @@ export interface IBuildMakeUser {
 export type tGender = "male" | "female";
 export interface IUser {
   id: string;
+  role: string;
   username: string | undefined;
   phoneNumber: string;
   firstName: string | undefined;
@@ -34,6 +35,7 @@ export interface IMadeUserObject extends IUser {
 export interface IMadeUser {
   get: {
     id: () => string;
+    role: () => string;
     username: () => string | undefined;
     phoneNumber: () => string;
     firstName: () => string | undefined;
