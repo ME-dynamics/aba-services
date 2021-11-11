@@ -8,6 +8,7 @@ function insertQueryGen(): string {
     version: "v1",
     values: [
       { column: "id", self: true },
+      { column: "role", self: true },
       { column: "username", self: true },
       { column: "phone_number", self: true },
       { column: "first_name", self: true },
@@ -32,6 +33,7 @@ export function buildInsertUser(args: adapterTypes.IBuildInsert) {
   return async function insertUser(info: entityTypes.IMadeUserObject) {
     const {
       id,
+      role,
       username,
       phoneNumber,
       firstName,
@@ -50,6 +52,7 @@ export function buildInsertUser(args: adapterTypes.IBuildInsert) {
       errorPath,
       params: {
         id,
+        role,
         username,
         phone_number: phoneNumber,
         first_name: firstName,
