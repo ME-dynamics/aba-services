@@ -8,9 +8,10 @@ export function buildCreateUser(args: usecaseTypes.IBuildCreateUser) {
   const { created, ok } = httpResultSuccess;
 
   function userInput(info: usecaseTypes.ICreateUser): entityTypes.IUser {
-    const { id, phoneNumber } = info;
+    const { id, role, phoneNumber } = info;
     return {
       id,
+      role,
       phoneNumber,
       username: undefined,
       firstName: undefined,
