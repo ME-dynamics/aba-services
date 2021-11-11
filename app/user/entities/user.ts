@@ -7,7 +7,8 @@ export function buildMakeUser(args: entityTypes.IBuildMakeUser) {
     user: entityTypes.IUser
   ): Readonly<entityTypes.IMadeUser> {
     const {
-      id = uuid(),
+      id,
+      role,
       phoneNumber,
       createdAt = new Date(),
       modifiedAt = new Date(),
@@ -23,7 +24,7 @@ export function buildMakeUser(args: entityTypes.IBuildMakeUser) {
       deactivationReason,
       softDeleted,
     } = user;
-    if(!username) {
+    if (!username) {
       username = nanoid(8);
     }
     function setUsername(newUsername: string | undefined) {
@@ -71,6 +72,7 @@ export function buildMakeUser(args: entityTypes.IBuildMakeUser) {
     const madeUser: entityTypes.IMadeUser = {
       get: {
         id: () => id,
+        role: () => role,
         username: () => username,
         phoneNumber: () => phoneNumber,
         firstName: () => firstName,
@@ -96,6 +98,7 @@ export function buildMakeUser(args: entityTypes.IBuildMakeUser) {
       object: () => {
         return {
           id,
+          role,
           address,
           gender,
           telephone,
