@@ -1,13 +1,13 @@
 import { statusCodes, fluentSchema, errorSchema } from "aba-node";
 
-import { user } from "./sCreateUser"
+import { userSchema } from "./userSchema";
 
 const params = fluentSchema
   .object()
-  .prop("id", fluentSchema.string().required().format("uuid"))
+  .prop("id", fluentSchema.string().required().format("uuid"));
 
 const response = {
-  [statusCodes.OK]: user,
+  [statusCodes.OK]: userSchema,
   [statusCodes.NOT_FOUND]: errorSchema,
   [statusCodes.INTERNAL_SERVER_ERROR]: errorSchema,
 };
