@@ -1,12 +1,12 @@
 import { types } from "aba-node";
-import { getRetrieveUser } from "../controllers";
+import { getUser } from "../controllers";
 import { controllerTypes } from "../types";
 export async function retrieveUser(
-  request: controllerTypes.tGetRetrieveUser,
+  request: controllerTypes.tGetUser,
   reply: types.tReply
 ) {
   try {
-    const response = await getRetrieveUser(request);
+    const response = await getUser(request);
     reply.status(response.code);
     return response;
   } catch (error) {
