@@ -17,6 +17,7 @@ export function buildMakeUser(args: entityTypes.IBuildMakeUser) {
       username,
       firstName,
       lastName,
+      description,
       profilePictureUrl,
       address,
       gender,
@@ -40,7 +41,10 @@ export function buildMakeUser(args: entityTypes.IBuildMakeUser) {
       lastName = newLastName;
       modifiedAt.setTime(Date.now());
     }
-
+    function setDescription(newDesc: string | undefined) {
+      description = newDesc;
+      modifiedAt.setTime(Date.now());
+    }
     function setProfilePictureUrl(newProfilePictureUrl: string | undefined) {
       profilePictureUrl = newProfilePictureUrl;
       modifiedAt.setTime(Date.now());
@@ -77,6 +81,7 @@ export function buildMakeUser(args: entityTypes.IBuildMakeUser) {
         phoneNumber: () => phoneNumber,
         firstName: () => firstName,
         lastName: () => lastName,
+        description: () => description,
         profilePictureUrl: () => profilePictureUrl,
         createdAt: () => createdAt,
         modifiedAt: () => modifiedAt,
@@ -87,6 +92,7 @@ export function buildMakeUser(args: entityTypes.IBuildMakeUser) {
         username: setUsername,
         firstName: setFirstName,
         lastName: setLastName,
+        description: setDescription,
         profilePictureUrl: setProfilePictureUrl,
         gender: setGender,
         address: setAddress,
@@ -106,6 +112,7 @@ export function buildMakeUser(args: entityTypes.IBuildMakeUser) {
           phoneNumber,
           firstName,
           lastName,
+          description,
           profilePictureUrl,
           deactivationReason,
           createdAt,

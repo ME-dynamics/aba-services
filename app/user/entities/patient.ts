@@ -18,13 +18,15 @@ export function buildMakePatient() {
       addiction,
       isFatherAlive,
       isMotherAlive,
+      fatherDeathReason,
+      motherDeathReason,
       cousinMarriage,
       siblingsPosition,
       siblings,
       softDeleted,
     } = patient;
     // Setters
-    function setProblemDescription(newDesc: string | undefined) {
+    function setProblemDescription(newDesc: string) {
       problemDescription = newDesc;
       modifiedAt.setTime(Date.now());
     }
@@ -82,6 +84,14 @@ export function buildMakePatient() {
       isMotherAlive = alive;
       modifiedAt.setTime(Date.now());
     }
+    function setFatherDeathReason(reason: string) {
+      fatherDeathReason = reason;
+      modifiedAt.setTime(Date.now());
+    }
+    function setMotherDeathReason(reason: string) {
+      motherDeathReason = reason;
+      modifiedAt.setTime(Date.now());
+    }
     function setCousinMarriage(status: boolean | undefined) {
       cousinMarriage = status;
       modifiedAt.setTime(Date.now());
@@ -90,7 +100,7 @@ export function buildMakePatient() {
       siblingsPosition = newPosition;
       modifiedAt.setTime(Date.now());
     }
-    function setSiblings(newSiblings: entityTypes.ISiblings[] | undefined) {
+    function setSiblings(newSiblings: string | undefined) {
       siblings = newSiblings;
       modifiedAt.setTime(Date.now());
     }
@@ -119,6 +129,8 @@ export function buildMakePatient() {
         addiction: () => addiction,
         isFatherAlive: () => isFatherAlive,
         isMotherAlive: () => isMotherAlive,
+        fatherDeathReason: () => fatherDeathReason,
+        motherDeathReason: () => motherDeathReason,
         cousinMarriage: () => cousinMarriage,
         siblingsPosition: () => siblingsPosition,
         siblings: () => siblings,
@@ -141,6 +153,8 @@ export function buildMakePatient() {
         addiction: setAddiction,
         isFatherAlive: setIsFatherAlive,
         isMotherAlive: setIsMotherAlive,
+        fatherDeathReason: setFatherDeathReason,
+        motherDeathReason: setMotherDeathReason,
         cousinMarriage: setCousinMarriage,
         siblingsPosition: setSiblingsPosition,
         siblings: setSiblings,
@@ -164,6 +178,8 @@ export function buildMakePatient() {
           addiction,
           isFatherAlive,
           isMotherAlive,
+          fatherDeathReason,
+          motherDeathReason,
           cousinMarriage,
           siblingsPosition,
           siblings,
