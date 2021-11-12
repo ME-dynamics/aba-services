@@ -1,4 +1,4 @@
-import { queryGen } from "aba-node";
+import { queryGen, undefinedToNull } from "aba-node";
 import { adapterTypes, entityTypes } from "../../types";
 
 function insertQueryGen(): string {
@@ -13,8 +13,10 @@ function insertQueryGen(): string {
       { column: "phone_number", self: true },
       { column: "first_name", self: true },
       { column: "last_name", self: true },
+      { column: "description", self: true },
       { column: "profile_picture_url", self: true },
       { column: "gender", self: true },
+      { column: "age", self: true },
       { column: "address", self: true },
       { column: "telephone", self: true },
       { column: "deactivation_reason", self: true },
@@ -38,8 +40,10 @@ export function buildInsertUser(args: adapterTypes.IBuildInsert) {
       phoneNumber,
       firstName,
       lastName,
+      description,
       profilePictureUrl,
       gender,
+      age,
       address,
       telephone,
       deactivationReason,
@@ -57,8 +61,10 @@ export function buildInsertUser(args: adapterTypes.IBuildInsert) {
         phone_number: phoneNumber,
         first_name: firstName,
         last_name: lastName,
+        description: undefinedToNull<string>(description || ""),
         profile_picture_url: profilePictureUrl,
         gender,
+        age,
         address,
         telephone,
         deactivation_reason: deactivationReason,
