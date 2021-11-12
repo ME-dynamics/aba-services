@@ -4,7 +4,7 @@ import { entityTypes } from "../../types";
 export function rowToPatient(row: types.tRow): entityTypes.IMadePatientObject {
   return {
     userId: row.get("user_id")?.toString(),
-    problemDescription: nullToUndefined<string>(row.get("problem_description")),
+    problemDescription: row.get("problem_description"),
     birthday: nullToUndefined<Date>(row.get("birthday")),
     maritalStatus: nullToUndefined<entityTypes.tMaritalStatus>(
       row.get("marital_status")
@@ -22,9 +22,11 @@ export function rowToPatient(row: types.tRow): entityTypes.IMadePatientObject {
     addiction: nullToUndefined<string>(row.get("addiction")),
     isFatherAlive: nullToUndefined<boolean>(row.get("is_father_alive")),
     isMotherAlive: nullToUndefined<boolean>(row.get("is_mother_alive")),
+    fatherDeathReason: nullToUndefined<string>(row.get("father_death_reason")),
+    motherDeathReason: nullToUndefined<string>(row.get("mother_death_reason")),
     cousinMarriage: nullToUndefined<boolean>(row.get("cousin_marriage")),
     siblingsPosition: nullToUndefined<number>(row.get("siblings_position")),
-    siblings: nullToUndefined<entityTypes.ISiblings[]>(row.get("siblings")),
+    siblings: nullToUndefined<string>(row.get("siblings")),
     createdAt: row.get("created_at"),
     modifiedAt: row.get("modified_at"),
     softDeleted: row.get("soft_deleted"),
