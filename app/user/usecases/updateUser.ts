@@ -18,16 +18,18 @@ export function buildUpdateUser(args: usecaseTypes.IBuildUpdateUser) {
       firstName,
       lastName,
       username,
+      description,
       profilePictureUrl,
       gender,
       address,
       telephone,
     } = info;
-    
+
     const user = makeUser(userFound);
     user.set.firstName(firstName);
     user.set.lastName(lastName);
     user.set.username(username);
+    user.set.description(description);
     user.set.profilePictureUrl(profilePictureUrl);
     user.set.gender(gender);
     user.set.address(address);
