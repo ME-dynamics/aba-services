@@ -5,6 +5,7 @@ const body = fluentSchema
   .prop("username", fluentSchema.string().default(undefined))
   .prop("firstName", fluentSchema.string().default(undefined))
   .prop("lastName", fluentSchema.string().default(undefined))
+  .prop("description", fluentSchema.string().default(undefined))
   .prop("profilePictureUrl", fluentSchema.string().default(undefined))
   .prop("address", fluentSchema.string().default(undefined))
   .prop("telephone", fluentSchema.string().default(undefined))
