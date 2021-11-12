@@ -63,6 +63,7 @@ export interface IUpdateUser {
   username: string | undefined;
   firstName: string | undefined;
   lastName: string | undefined;
+  description: string | undefined;
   profilePictureUrl: string | undefined;
   address: string | undefined;
   telephone: string | undefined;

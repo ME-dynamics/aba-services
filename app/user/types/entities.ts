@@ -15,7 +15,9 @@ export interface IUser {
   phoneNumber: string;
   firstName: string | undefined;
   lastName: string | undefined;
+  description: string | undefined;
   gender: tGender | undefined;
+  age: number | undefined;
   profilePictureUrl: string | undefined;
   address: string | undefined;
   telephone: string | undefined;
@@ -40,7 +42,12 @@ export interface IMadeUser {
     phoneNumber: () => string;
     firstName: () => string | undefined;
     lastName: () => string | undefined;
+    description: () => string | undefined;
+    gender: () => tGender | undefined;
+    age: () => number | undefined;
     profilePictureUrl: () => string | undefined;
+    address: () => string | undefined;
+    telephone: () => string | undefined;
     deactivationReason: () => string | undefined;
     createdAt: () => Date;
     modifiedAt: () => Date;
@@ -50,8 +57,10 @@ export interface IMadeUser {
     username: (username: string | undefined) => void;
     firstName: (firstName: string | undefined) => void;
     lastName: (lastName: string | undefined) => void;
+    description: (newDesc: string | undefined) => void;
     profilePictureUrl: (url: string | undefined) => void;
-    gender: (gender: "male" | "female" | undefined) => void;
+    gender: (gender: tGender | undefined) => void;
+    age: (newAge: number | undefined) => void;
     address: (address: string | undefined) => void;
     telephone: (telephone: string | undefined) => void;
     deactivationReason: (newDeactivationReason: string) => void;
@@ -65,31 +74,24 @@ export type tEducation =
   | "uneducated"
   | "underAged"
   | "preSchool"
-  | "school-1"
-  | "school-2"
-  | "school-3"
-  | "school-4"
-  | "school-5"
-  | "school-6"
-  | "highschool-1"
-  | "highschool-2"
-  | "highschool-3"
-  | "highschool-4"
-  | "highschool-5"
-  | "highschool-6"
-  | "dropout"
+  | "school"
+  | "preHighSchool"
+  | "highSchool"
+  | "dropoutPreSchool"
+  | "dropoutSchool"
+  | "dropoutSchool"
+  | "student"
   | "graduate"
   | "diploma"
-  | "student"
   | "clergyman";
 
-export interface ISiblings {
-  role: "sister" | "brother" | "mother" | "father";
-  education: tEducation;
-  academicFields: string | undefined;
-  emotionalRelation: string;
-  mindDiseases: string | undefined;
-}
+// export interface ISiblings {
+//   role: "sister" | "brother" | "mother" | "father";
+//   education: tEducation;
+//   academicField: string | undefined;
+//   emotionalRelation: string;
+//   mindDiseases: string | undefined;
+// }
 export type tMaritalStatus = "engaged" | "single";
 export type tMaritalState =
   | "namzad"
@@ -104,14 +106,12 @@ export type tMaritalState =
 export type tReligion =
   | "islamShia"
   | "islamSunny"
-  | "mazdayasna"
-  | "mandaeans"
+  | "zoroastrianism" // zartoshti
   | "christianity"
-  | "judaism";
-
+  | "other";
 export interface IPatient {
   userId: string;
-  problemDescription: string | undefined;
+  problemDescription: string;
   birthday: Date | undefined;
   maritalStatus: tMaritalStatus | undefined;
   maritalState: tMaritalState | undefined;
@@ -125,9 +125,11 @@ export interface IPatient {
   addiction: string | undefined;
   isFatherAlive: boolean | undefined;
   isMotherAlive: boolean | undefined;
+  fatherDeathReason: string | undefined;
+  motherDeathReason: string | undefined;
   cousinMarriage: boolean | undefined;
   siblingsPosition: number | undefined;
-  siblings: ISiblings[] | undefined;
+  siblings: string | undefined;
   createdAt: Date | undefined;
   modifiedAt: Date | undefined;
   softDeleted: boolean;
@@ -155,15 +157,17 @@ export interface IMadePatient {
     addiction: () => string | undefined;
     isFatherAlive: () => boolean | undefined;
     isMotherAlive: () => boolean | undefined;
+    fatherDeathReason: () => string | undefined;
+    motherDeathReason: () => string | undefined;
     cousinMarriage: () => boolean | undefined;
     siblingsPosition: () => number | undefined;
-    siblings: () => ISiblings[] | undefined;
+    siblings: () => string | undefined;
     createdAt: () => Date;
     modifiedAt: () => Date;
     softDeleted: () => boolean;
   };
   set: {
-    problemDescription: (newDesc: string | undefined) => void;
+    problemDescription: (newDesc: string) => void;
     birthday: (Date: Date | undefined) => void;
     maritalStatus: (newStatus: tMaritalStatus | undefined) => void;
     maritalState: (newState: tMaritalState | undefined) => void;
@@ -177,9 +181,11 @@ export interface IMadePatient {
     addiction: (newAddiction: string | undefined) => void;
     isFatherAlive: (isFatherAlive: boolean | undefined) => void;
     isMotherAlive: (isMotherAlive: boolean | undefined) => void;
+    fatherDeathReason: (reason: string) => void;
+    motherDeathReason: (reason: string) => void;
     cousinMarriage: (cousinMarriage: boolean | undefined) => void;
     siblingsPosition: (newPosition: number | undefined) => void;
-    siblings: (newSiblings: ISiblings[] | undefined) => void;
+    siblings: (desc: string | undefined) => void;
     remove: () => void;
     restore: () => void;
   };
