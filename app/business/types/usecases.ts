@@ -66,8 +66,20 @@ export interface IBuildRetrieveCustomers {
 }
 // retrieve customer Provider by customer id
 
-export interface IBuildRetrieveCustomerProvider {
+// TODO: combine these two functions;
+export interface IBuildRetrieveCustomerProviderId {
   findProviderByCustomerId: tFindProviderByCustomerId;
+}
+
+export type tRetrieveCustomerProviderIdFunc = (
+  customerId: string
+) => Promise<string | undefined>;
+
+// find customer provider info
+
+export interface IBuildRetrieveCustomerProviderInfo {
+  retrieveCustomerProviderId: tRetrieveCustomerProviderIdFunc;
+  fetchUserById: tFetchUserByIdFunc;
 }
 
 // remove customer by id

@@ -43,3 +43,5 @@ export type tDeleteRequest = types.tRequest<IDeleteRequest>;
 export type tGetCustomers = types.tRequest<unknown>;
 
 export type tGetRequests = types.tRequest<unknown>;
+
+export type tGetCustomerProviderInfo = types.tRequest<unknown>;
