@@ -5,3 +5,4 @@ export { sRemoveCustomer } from "./sRemoveCustomer";
 export { sRemoveRequest } from "./sRemoveRequest";
 export { sRetrieveCustomers } from "./sRetrieveCustomers";
 export { sRetrieveRequests } from "./sRetrieveRequests";
+export { sRetrieveCustomerProviderInfo } from "./sRetrieveCustomerProviderInfo";
