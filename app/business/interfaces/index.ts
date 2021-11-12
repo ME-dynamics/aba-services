@@ -7,6 +7,7 @@ import { removeRequest } from "./removeRequest";
 import { removeCustomer } from "./removeCustomer";
 import { retrieveCustomers } from "./retrieveCustomers";
 import { retrieveRequests } from "./retrieveRequests";
+import { retrieveCustomerProviderInfo } from "./retrieveCustomerProviderInfo";
 import {
   sConfirmSchema,
   sCreateRequest,
@@ -15,10 +16,12 @@ import {
   sRemoveRequest,
   sRetrieveCustomers,
   sRetrieveRequests,
+  sRetrieveCustomerProviderInfo,
 } from "../schemas";
 import { applicationVersion } from "../config";
 
 export function startBusinessServer(app: types.tHttpInstance) {
+ 
   app.post(
     routeGen({
       version: applicationVersion,
@@ -83,5 +86,14 @@ export function startBusinessServer(app: types.tHttpInstance) {
     }),
     { schema: sRetrieveRequests },
     retrieveRequests
+  );
+  app.get(
+    routeGen({
+      version: applicationVersion,
+      role: "customer",
+      routes: ["providers"],
+    }),
+    { schema: sRetrieveCustomerProviderInfo },
+    retrieveCustomerProviderInfo
   );
 }
