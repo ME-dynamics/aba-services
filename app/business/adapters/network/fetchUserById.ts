@@ -11,13 +11,12 @@ export async function fetchUserById(
   if (!payload) {
     return undefined;
   }
-  const { id, lastName, firstName, profilePictureUrl, gender, telephone } =
-    payload;
+  const { id, lastName, firstName, profilePictureUrl, description } = payload;
   const name = firstName ? `${firstName}${lastName ? " " + lastName : ""}` : "";
   return {
     id,
     name,
-    description: `${gender} ${telephone}`,
+    description: description || "",
     profilePictureUrl: profilePictureUrl ? profilePictureUrl : "",
   };
 }
