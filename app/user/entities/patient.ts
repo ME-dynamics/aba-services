@@ -5,7 +5,6 @@ export function buildMakePatient() {
     const { userId, createdAt = new Date(), modifiedAt = new Date() } = patient;
     let {
       problemDescription,
-      birthday,
       maritalStatus,
       maritalState,
       education,
@@ -28,10 +27,6 @@ export function buildMakePatient() {
     // Setters
     function setProblemDescription(newDesc: string) {
       problemDescription = newDesc;
-      modifiedAt.setTime(Date.now());
-    }
-    function setBirthday(newBirthday: Date | undefined) {
-      birthday = newBirthday;
       modifiedAt.setTime(Date.now());
     }
     function setMaritalStatus(
@@ -116,7 +111,6 @@ export function buildMakePatient() {
       get: {
         userId: () => userId,
         problemDescription: () => problemDescription,
-        birthday: () => birthday,
         maritalStatus: () => maritalStatus,
         maritalState: () => maritalState,
         education: () => education,
@@ -140,7 +134,6 @@ export function buildMakePatient() {
       },
       set: {
         problemDescription: setProblemDescription,
-        birthday: setBirthday,
         maritalStatus: setMaritalStatus,
         maritalState: setMaritalState,
         education: setEducation,
@@ -165,7 +158,6 @@ export function buildMakePatient() {
         return {
           userId,
           problemDescription,
-          birthday,
           maritalStatus,
           maritalState,
           education,

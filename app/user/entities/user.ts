@@ -21,6 +21,7 @@ export function buildMakeUser(args: entityTypes.IBuildMakeUser) {
       profilePictureUrl,
       address,
       gender,
+      birthday,
       telephone,
       deactivationReason,
       softDeleted,
@@ -57,6 +58,10 @@ export function buildMakeUser(args: entityTypes.IBuildMakeUser) {
       gender = newGender;
       modifiedAt.setTime(Date.now());
     }
+    function setBirthday(date: Date | undefined) {
+      birthday = date;
+      modifiedAt.setTime(Date.now());
+    }
     function setTelephone(newTel: string | undefined) {
       telephone = newTel;
       modifiedAt.setTime(Date.now());
@@ -82,7 +87,11 @@ export function buildMakeUser(args: entityTypes.IBuildMakeUser) {
         firstName: () => firstName,
         lastName: () => lastName,
         description: () => description,
+        gender: () => gender,
+        birthday: () => birthday,
         profilePictureUrl: () => profilePictureUrl,
+        address: () => address,
+        telephone: () => telephone,
         createdAt: () => createdAt,
         modifiedAt: () => modifiedAt,
         deactivationReason: () => deactivationReason,
@@ -93,6 +102,7 @@ export function buildMakeUser(args: entityTypes.IBuildMakeUser) {
         firstName: setFirstName,
         lastName: setLastName,
         description: setDescription,
+        birthday: setBirthday,
         profilePictureUrl: setProfilePictureUrl,
         gender: setGender,
         address: setAddress,
@@ -107,6 +117,7 @@ export function buildMakeUser(args: entityTypes.IBuildMakeUser) {
           role,
           address,
           gender,
+          birthday,
           telephone,
           username,
           phoneNumber,
