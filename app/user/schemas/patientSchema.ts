@@ -23,7 +23,6 @@ export const patient = fluentSchema
     "problemDescription",
     fluentSchema.string().required().minLength(5).maxLength(5717)
   )
-  .prop("birthday", fluentSchema.string().format("date-time").required())
   .prop("maritalStatus", fluentSchema.enum(["engaged", "single"]))
   .prop(
     "maritalState",

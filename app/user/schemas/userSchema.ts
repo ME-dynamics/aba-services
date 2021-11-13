@@ -9,7 +9,7 @@ export const user = fluentSchema
   .prop("lastName", fluentSchema.string().default(""))
   .prop("description", fluentSchema.string().default(""))
   .prop("gender", fluentSchema.enum(["male", "female"]).default(""))
-  .prop("age", fluentSchema.number().required().minimum(1).maximum(100))
+  .prop("birthday", fluentSchema.string().required().format("date-time"))
   .prop("profilePictureUrl", fluentSchema.string().default(""))
   .prop("address", fluentSchema.string().default(""))
   .prop("telephone", fluentSchema.string().default(""))

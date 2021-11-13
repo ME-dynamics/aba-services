@@ -9,7 +9,8 @@ const body = fluentSchema
   .prop("profilePictureUrl", fluentSchema.string().default(undefined))
   .prop("address", fluentSchema.string().default(undefined))
   .prop("telephone", fluentSchema.string().default(undefined))
-  .prop("gender", fluentSchema.enum(["male", "female"]).default(undefined));
+  .prop("gender", fluentSchema.enum(["male", "female"]).default(undefined))
+  .prop("birthday", fluentSchema.string().format("date-time").required());
 
 const response = {
   [statusCodes.OK]: userSchema,
