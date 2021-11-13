@@ -9,7 +9,6 @@ function insertQueryGen(): string {
     values: [
       { column: "user_id", self: true },
       { column: "problem_description", self: true },
-      { column: "birthday", self: true },
       { column: "marital_status", self: true },
       { column: "marital_state", self: true },
       { column: "education", self: true },
@@ -43,7 +42,6 @@ export function buildInsertPatient(args: adapterTypes.IBuildInsert) {
     const {
       userId,
       problemDescription,
-      birthday,
       maritalStatus,
       maritalState,
       education,
@@ -70,7 +68,6 @@ export function buildInsertPatient(args: adapterTypes.IBuildInsert) {
       params: {
         user_id: userId,
         problem_description: problemDescription,
-        birthday,
         marital_status: maritalStatus,
         marital_state: maritalState,
         education,

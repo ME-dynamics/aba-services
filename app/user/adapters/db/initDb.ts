@@ -29,7 +29,7 @@ export function buildInitDb(args: adapterTypes.IBuildInitDb) {
         { name: "last_name", type: "TEXT" },
         { name: "description", type: "TEXT" },
         { name: "gender", type: "TEXT" },
-        { name: "age", type: "SMALLINT" },
+        { name: "birthday", type: "TIMESTAMP" },
         { name: "profile_picture_url", type: "TEXT" },
         { name: "address", type: "TEXT" },
         { name: "telephone", type: "TEXT" },
@@ -85,7 +85,6 @@ export function buildInitDb(args: adapterTypes.IBuildInitDb) {
       columns: [
         { name: "user_id", type: "UUID" },
         { name: "problem_description", type: "TEXT" },
-        { name: "birthday", type: "TIMESTAMP" },
         { name: "marital_status", type: "TEXT" },
         { name: "marital_state", type: "TEXT" },
         { name: "education", type: "TEXT" },

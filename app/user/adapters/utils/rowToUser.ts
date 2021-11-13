@@ -14,7 +14,7 @@ export function rowToUser(row: types.tRow): entityTypes.IMadeUserObject {
     address: nullToUndefined<string>(row.get("address")),
     telephone: nullToUndefined<string>(row.get("telephone")),
     gender: nullToUndefined<entityTypes.tGender>(row.get("gender")),
-    age: nullToUndefined<number>(row.get("age")),
+    birthday: nullToUndefined<Date>(row.get("birthday")),
     deactivationReason: nullToUndefined<string>(row.get("deactivation_reason")),
     createdAt: row.get("created_at"),
     modifiedAt: row.get("modified_at"),
