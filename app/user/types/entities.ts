@@ -17,7 +17,7 @@ export interface IUser {
   lastName: string | undefined;
   description: string | undefined;
   gender: tGender | undefined;
-  age: number | undefined;
+  birthday: Date | undefined;
   profilePictureUrl: string | undefined;
   address: string | undefined;
   telephone: string | undefined;
@@ -42,9 +42,9 @@ export interface IMadeUser {
     phoneNumber: () => string;
     firstName: () => string | undefined;
     lastName: () => string | undefined;
+    birthday: () => Date | undefined;
     description: () => string | undefined;
     gender: () => tGender | undefined;
-    age: () => number | undefined;
     profilePictureUrl: () => string | undefined;
     address: () => string | undefined;
     telephone: () => string | undefined;
@@ -58,9 +58,9 @@ export interface IMadeUser {
     firstName: (firstName: string | undefined) => void;
     lastName: (lastName: string | undefined) => void;
     description: (newDesc: string | undefined) => void;
+    birthday: (Date: Date | undefined) => void;
     profilePictureUrl: (url: string | undefined) => void;
     gender: (gender: tGender | undefined) => void;
-    age: (newAge: number | undefined) => void;
     address: (address: string | undefined) => void;
     telephone: (telephone: string | undefined) => void;
     deactivationReason: (newDeactivationReason: string) => void;
@@ -112,7 +112,6 @@ export type tReligion =
 export interface IPatient {
   userId: string;
   problemDescription: string;
-  birthday: Date | undefined;
   maritalStatus: tMaritalStatus | undefined;
   maritalState: tMaritalState | undefined;
   education: tEducation | undefined;
@@ -144,7 +143,6 @@ export interface IMadePatient {
   get: {
     userId: () => string;
     problemDescription: () => string | undefined;
-    birthday: () => Date | undefined;
     maritalStatus: () => tMaritalStatus | undefined;
     maritalState: () => tMaritalState | undefined;
     education: () => tEducation | undefined;
@@ -168,7 +166,6 @@ export interface IMadePatient {
   };
   set: {
     problemDescription: (newDesc: string) => void;
-    birthday: (Date: Date | undefined) => void;
     maritalStatus: (newStatus: tMaritalStatus | undefined) => void;
     maritalState: (newState: tMaritalState | undefined) => void;
     education: (newEducation: tEducation | undefined) => void;

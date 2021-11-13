@@ -68,4 +68,5 @@ export interface IUpdateUser {
   address: string | undefined;
   telephone: string | undefined;
   gender: "male" | "female" | undefined;
+  birthday: Date | undefined;
 }
