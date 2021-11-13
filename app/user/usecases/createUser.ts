@@ -21,7 +21,7 @@ export function buildCreateUser(args: usecaseTypes.IBuildCreateUser) {
       address: undefined,
       telephone: undefined,
       gender: undefined,
-      age: undefined,
+      birthday: undefined,
       deactivationReason: undefined,
       createdAt: undefined,
       modifiedAt: undefined,

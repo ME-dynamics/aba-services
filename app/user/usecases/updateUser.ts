@@ -21,6 +21,7 @@ export function buildUpdateUser(args: usecaseTypes.IBuildUpdateUser) {
       description,
       profilePictureUrl,
       gender,
+      birthday,
       address,
       telephone,
     } = info;
@@ -32,6 +33,7 @@ export function buildUpdateUser(args: usecaseTypes.IBuildUpdateUser) {
     user.set.description(description);
     user.set.profilePictureUrl(profilePictureUrl);
     user.set.gender(gender);
+    user.set.birthday(birthday);
     user.set.address(address);
     user.set.telephone(telephone);
     await insertUser(user.object());
