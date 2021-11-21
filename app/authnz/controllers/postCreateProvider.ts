@@ -1,5 +1,6 @@
 import { httpResultClientError, auth, types } from "aba-node";
 import { createProvider } from "../usecases";
+import { strings } from "../config";
 import { controllerTypes } from "../types";
 
 export function buildPostCreateProvider(
@@ -24,7 +25,7 @@ export function buildPostCreateProvider(
     }
     const { providerPhoneNumber } = httpRequest.body;
     if (!validatePhoneNumber(providerPhoneNumber)) {
-      return badRequest({ error: "phone number is not valid" });
+      return badRequest({ error: strings.phoneNotValid.fa });
     }
     return await createProvider({ providerPhoneNumber });
   };
