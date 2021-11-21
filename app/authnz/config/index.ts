@@ -12,6 +12,8 @@ if (process.env.NODE_ENV !== "production") {
   }
 }
 
+export { strings } from "./strings";
+
 export const applicationName = "authnz";
 export const applicationVersion = "v1";
 
