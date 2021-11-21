@@ -4,6 +4,7 @@ import {
   httpResultClientError,
   httpResultServerError,
 } from "aba-node";
+import { strings } from "../config";
 import {
   usecaseTypes,
   entityTypes
@@ -44,13 +45,13 @@ export function buildPasswordlessStart(args: usecaseTypes.IBuildPasswordlessStar
     // TODO: these to checks only needed when otp found
     if (otp.get.permanentBlock()) {
       return forbidden({
-        error: "your number is permanently blocked",
+        error: strings.numberPermanentlyBlocked.fa,
       });
     }
     const tempBlockTime = otp.get.otpTempBlockDate();
     if (tempBlockTime && tempBlockTime.getTime() > Date.now()) {
       return tooManyRequests({
-        error: "you need to wait at least one minute",
+        error: strings.tooManyAttempts.fa,
       });
     }
     // generate new token and otp code;
@@ -67,7 +68,7 @@ export function buildPasswordlessStart(args: usecaseTypes.IBuildPasswordlessStar
     // check if permanent block is applied after setting new otp
     // TODO: only when otp found
     if (otp.get.permanentBlock()) {
-      return forbidden({ error: "your number in permanently blocked" });
+      return forbidden({ error: strings.numberPermanentlyBlocked.fa });
     }
     // insert new codes to db;
     await insertOtp(otp.object());
@@ -76,7 +77,7 @@ export function buildPasswordlessStart(args: usecaseTypes.IBuildPasswordlessStar
     const smsSent = await sendOtpBySms({ otpCode, phoneNumber });
     if (!smsSent) {
       return internalServerError({
-        error: "SMS not sent",
+        error: strings.smsNotSent.fa,
       });
     }
 

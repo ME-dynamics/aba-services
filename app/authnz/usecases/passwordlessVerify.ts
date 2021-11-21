@@ -1,5 +1,6 @@
 import { makeOtp, makeToken, makeRole } from "../entities";
 import { httpResultSuccess, httpResultClientError } from "aba-node";
+import { strings } from "../config"
 import { usecaseTypes, entityTypes } from "../types";
 
 export function buildPasswordlessVerify(
@@ -45,11 +46,11 @@ export function buildPasswordlessVerify(
     const { otpCode, otpToken } = info;
     const otpFound = await findOtpByToken(otpToken);
     if (!otpFound) {
-      return badRequest({ error: "otp token or code are not valid" });
+      return badRequest({ error: strings.codeOrOtpTokenNotValid.fa });
     }
     if (otpFound.permanentBlock) {
       return forbidden({
-        error: "your number is permanently blocked",
+        error: strings.numberPermanentlyBlocked.fa,
       });
     }
     const otp = makeOtp(otpFound);
@@ -59,13 +60,13 @@ export function buildPasswordlessVerify(
     const otpCodeHash = otp.get.otpCode();
     if (!otpCodeHash) {
       return badRequest({
-        error: "you should start verification process first",
+        error: strings.startVerificationFirst.fa,
       });
     }
     // check if code matches
     const otpVerification = await verifyHash(otpCodeHash, `${otpCode}`);
     if (!otpVerification) {
-      return badRequest({ error: "otp token or code are not valid" });
+      return badRequest({ error: strings.codeOrOtpTokenNotValid.fa });
     }
     otp.set.phoneConfirmed();
     const roleExists = await findRole(otp.get.id());
@@ -81,7 +82,7 @@ export function buildPasswordlessVerify(
 
     const tokenFound = await findTokenByUserId(otp.get.id());
     if (tokenFound?.permanentBlock) {
-      return forbidden({ error: "your number is permanently blocked" });
+      return forbidden({ error: strings.numberPermanentlyBlocked.fa });
     }
     const { jwt, jwtExp, jwtKey } = await signJwt({
       userId: otp.get.id(),
