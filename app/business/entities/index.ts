@@ -1,10 +1,8 @@
 // import { v4 } from "uuid";
 // import { nanoid } from "nanoid";
-import { buildMakeProviderCustomer } from "./ProviderCustomer";
-import { buildMakeCustomerProviderRequest } from "./customerProviderRequest";
+import { buildMakeCustomers } from "./customers";
 // function slugify(value: string): string {
 //   return value;
 // }
 
-export const makeProviderCustomer = buildMakeProviderCustomer();
-export const makeCustomerProviderRequest = buildMakeCustomerProviderRequest();
+export const makeCustomers = buildMakeCustomers();
