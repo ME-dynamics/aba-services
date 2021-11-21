@@ -1,14 +1,15 @@
 import { queryGen } from "aba-node";
+import { applicationVersion } from "../../config" 
 import { adaptersTypes, entityTypes } from "../../types";
 
 function selectQueryGen(): string {
   const { selectQuery, operators } = queryGen;
   const { equal } = operators;
   const query = selectQuery({
-    table: "customer_provider_request",
-    version: "v1",
+    table: "customers_by_provider_id",
+    version: applicationVersion,
     columns: ["*"],
-    where: [equal({ argument: "provider_id", self: true })],
+    where: [equal({ argument: "provider_id", self: true }), equal({argument: "request_confirmed", equals: false})],
   });
   return query;
 }
@@ -16,12 +17,12 @@ function selectQueryGen(): string {
 export function buildFindRequestsByProviderId(
   args: adaptersTypes.IBuildFindRequests
 ) {
-  const { select, rowToCustomerProviderRequest } = args;
+  const { select, rowToCustomers } = args;
   const errorPath = "business, adapters, find requests by provider id";
   const query = selectQueryGen();
   return async function findRequestsByProviderId(
     providerId: string
-  ): Promise<entityTypes.IMadeCustomerProviderRequestObject[] | undefined> {
+  ): Promise<entityTypes.IMadeCustomersObject[] | undefined> {
     const result = await select({
       query,
       params: { provider_id: providerId },
@@ -33,13 +34,13 @@ export function buildFindRequestsByProviderId(
     if (length === 0) {
       return undefined;
     }
-    const requests: entityTypes.IMadeCustomerProviderRequestObject[] = [];
+    const requests: entityTypes.IMadeCustomersObject[] = [];
     for (let index = 0; index < length; index++) {
       const row = result.rows[index];
       if (row.get("soft_deleted")) {
         continue;
       }
-      requests.push(rowToCustomerProviderRequest(row));
+      requests.push(rowToCustomers(row));
     }
     if (requests.length === 0) {
       return undefined;

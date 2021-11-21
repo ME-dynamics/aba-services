@@ -1,17 +1,20 @@
 import { queryGen, undefinedToNull } from "aba-node";
+import { applicationVersion } from "../../config";
 import { adaptersTypes, entityTypes } from "../../types";
 
 function insertQueryGen(): string {
   const { insertQuery } = queryGen;
   const query = insertQuery({
-    table: "customer_provider_request",
-    version: "v1",
+    table: "customers",
+    version: applicationVersion,
     values: [
-      { column: "provider_id", self: true },
       { column: "customer_id", self: true },
+      { column: "provider_id", self: true },
+      { column: "business_id", self: true },
+      { column: "request_confirmed", self: true },
       { column: "name", self: true },
       { column: "profile_picture_url", self: true },
-      { column: "confirmed", self: true },
+      { column: "description", self: true },
       { column: "created_at", self: true },
       { column: "modified_at", self: true },
       { column: "soft_deleted", self: true },
@@ -20,31 +23,33 @@ function insertQueryGen(): string {
   return query;
 }
 
-export function buildInsertRequest(args: adaptersTypes.IBuildInsert) {
+export function buildInsertCustomer(args: adaptersTypes.IBuildInsert) {
   const { insert } = args;
-  const errorPath = "business, adapters, insert request";
+  const errorPath = "business service, adapters, insert customer";
   const query = insertQueryGen();
-  return async function insertRequest(
-    request: entityTypes.IMadeCustomerProviderRequestObject
-  ): Promise<void> {
+  return async function insertCustomer(info: entityTypes.IMadeCustomersObject) {
     const {
-      providerId,
       customerId,
-      confirmed,
+      providerId,
+      businessId,
+      requestConfirmed,
       name,
       profilePictureUrl,
+      description,
       createdAt,
       modifiedAt,
       softDeleted,
-    } = request;
+    } = info;
     await insert({
       query,
       params: {
-        provider_id: providerId,
         customer_id: customerId,
-        confirmed,
-        name: undefinedToNull(name),
+        provider_id: providerId,
+        business_id: businessId,
+        request_confirmed: requestConfirmed,
+        name: name,
         profile_picture_url: undefinedToNull(profilePictureUrl),
+        description: undefinedToNull(description),
         created_at: createdAt,
         modified_at: modifiedAt,
         soft_deleted: softDeleted,

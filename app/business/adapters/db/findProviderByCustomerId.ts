@@ -5,13 +5,10 @@ function selectQueryGen(): string {
   const { selectQuery, operators } = queryGen;
   const { equal } = operators;
   const query = selectQuery({
-    table: "provider_customer_by_customer_id",
+    table: "customers",
     version: "v1",
     columns: ["*"],
-    where: [
-      equal({ argument: "customer_id", self: true }),
-      equal({ argument: "soft_deleted", equals: false }),
-    ],
+    where: [equal({ argument: "customer_id", self: true })],
   });
   return query;
 }
@@ -19,16 +16,16 @@ function selectQueryGen(): string {
 export function buildFindProviderByCustomerId(
   args: adaptersTypes.IBuildFindCustomer
 ) {
-  const { select, rowToProviderCustomer } = args;
+  const { select, rowToCustomers } = args;
   const errorPath = "business, adapters, find provider by customer id";
   const query = selectQueryGen();
   return async function findProviderByCustomerId(
     customerId: string
-  ): Promise<entityTypes.IMadeProviderCustomerObject | undefined> {
+  ): Promise<entityTypes.IMadeCustomersObject | undefined> {
     const result = await select({
       query,
       params: { customer_id: customerId },
-      unique: true,
+      unique: false,
       queryOptions: undefined,
       errorPath,
     });
@@ -36,6 +33,15 @@ export function buildFindProviderByCustomerId(
     if (result.rowLength === 0) {
       return undefined;
     }
-    return rowToProviderCustomer(result.first());
+    if (result.rowLength === 1) {
+      const customer = rowToCustomers(result.first());
+      if (customer.softDeleted || !customer.requestConfirmed) {
+        return undefined;
+      }
+      return customer;
+    }
+    console.warn("customer can have only one provider");
+    console.log(JSON.stringify(result.rows, null, 2));
+    return undefined;
   };
 }

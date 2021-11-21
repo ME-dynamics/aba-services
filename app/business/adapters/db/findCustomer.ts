@@ -1,28 +1,26 @@
 import { queryGen } from "aba-node";
+import { applicationVersion } from "../../config";
 import { adaptersTypes, entityTypes } from "../../types";
 
 function selectQueryGen(): string {
   const { selectQuery, operators } = queryGen;
   const { equal } = operators;
   const query = selectQuery({
-    table: "provider_customer_by_customer_id",
-    version: "v1",
+    table: "customers",
+    version: applicationVersion,
     columns: ["*"],
-    where: [
-      equal({ argument: "customer_id", self: true }),
-      equal({ argument: "soft_deleted", equals: false }),
-    ],
+    where: [equal({ argument: "customer_id", self: true })],
   });
   return query;
 }
 
 export function buildFindCustomer(args: adaptersTypes.IBuildFindCustomer) {
-  const { rowToProviderCustomer, select } = args;
+  const { rowToCustomers, select } = args;
   const errorPath = "business, adapters, find customer";
   const query = selectQueryGen();
   return async function findCustomer(
     customerId: string
-  ): Promise<entityTypes.IMadeProviderCustomerObject | undefined> {
+  ): Promise<entityTypes.IMadeCustomersObject | undefined> {
     const result = await select({
       query,
       params: { customer_id: customerId },
@@ -33,6 +31,13 @@ export function buildFindCustomer(args: adaptersTypes.IBuildFindCustomer) {
     if (result.rowLength === 0) {
       return undefined;
     }
-    return rowToProviderCustomer(result.first());
+    if (result.rowLength === 1) {
+      return rowToCustomers(result.first());
+    }
+    if (result.rowLength > 1) {
+      console.warn("customer must have only one provider");
+      console.log(JSON.stringify(result.rows, null, 2));
+      return undefined;
+    }
   };
 }
