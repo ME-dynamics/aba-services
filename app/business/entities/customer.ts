@@ -1,7 +1,7 @@
 import { entityTypes } from "../types";
 
-export function buildMakeCustomers() {
-  return function makeCustomers(
+export function buildMakeCustomer() {
+  return function makeCustomer(
     customer: entityTypes.ICustomers
   ): entityTypes.IMadeCustomers {
     const {
