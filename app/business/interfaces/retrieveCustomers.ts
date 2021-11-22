@@ -1,4 +1,4 @@
-import { getRetrieveCustomers } from "../controllers";
+import { getCustomers } from "../controllers";
 import { types } from "aba-node";
 import { controllerTypes } from "../types";
 
@@ -7,7 +7,7 @@ export async function retrieveCustomers(
   reply: types.tReply
 ) {
   try {
-    const response = await getRetrieveCustomers(request);
+    const response = await getCustomers(request);
     reply.status(response.code);
     return response;
   } catch (error) {
