@@ -5,7 +5,7 @@ import { controllerTypes } from "../types"
 
 
 
-export function buildGetRetrieveCustomers(){
+export function buildGetCustomers(){
     const roles: types.IRoles = {
         customer: false,
         provider: true,
@@ -14,7 +14,7 @@ export function buildGetRetrieveCustomers(){
         assistant: false,
         support: false,
     }
-    return async function getRetrieveCustomers(httpRequest: controllerTypes.tGetCustomers){
+    return async function getCustomers(httpRequest: controllerTypes.tGetCustomers){
         const {success, error, payload} = auth(httpRequest, roles);
         if(!success) {
             return error;

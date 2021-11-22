@@ -1,17 +1,15 @@
 import { buildDeleteRejectRequest } from "./deleteRejectRequest";
-import { buildDeleteRemoveCustomer } from "./deleteRemoveCustomer";
-import { buildDeleteRemoveRequest } from "./deleteRemoveRequest";
-import { buildGetRetrieveCustomers } from "./getRetrieveCustomers";
-import { buildGetRetrieveRequests } from "./getRetrieveRequests";
+import { buildDeleteCustomer } from "./deleteCustomer";
+import { buildGetCustomers } from "./getCustomers";
+import { buildGetRequests } from "./getRequests";
 import { buildPostConfirmRequest } from "./postConfirmRequest";
 import { buildPostCreateRequest } from "./postCreateRequest";
 import { buildGetCustomerProviderInfo } from "./getCustomerProviderInfo";
 
 export const deleteRejectRequest = buildDeleteRejectRequest();
-export const deleteRemoveCustomer = buildDeleteRemoveCustomer();
-export const deleteRemoveRequest = buildDeleteRemoveRequest();
-export const getRetrieveCustomers = buildGetRetrieveCustomers();
-export const getRetrieveRequests = buildGetRetrieveRequests();
+export const deleteCustomer = buildDeleteCustomer();
+export const getCustomers = buildGetCustomers();
+export const getRequests = buildGetRequests();
 export const postConfirmRequest = buildPostConfirmRequest();
 export const postCreateRequest = buildPostCreateRequest();
 export const getCustomerProviderInfo = buildGetCustomerProviderInfo();

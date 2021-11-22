@@ -1,7 +1,7 @@
 import { auth, types } from "aba-node";
 import { retrieveRequests } from "../usecases";
 import { controllerTypes } from "../types"
-export function buildGetRetrieveRequests() {
+export function buildGetRequests() {
   const roles: types.IRoles = {
     customer: false,
     provider: true,
@@ -10,7 +10,7 @@ export function buildGetRetrieveRequests() {
     assistant: false,
     support: false,
   };
-  return async function getRetrieveRequests(httpRequest: controllerTypes.tGetRequests) {
+  return async function getRequests(httpRequest: controllerTypes.tGetRequests) {
     const { success, error, payload } = auth(httpRequest, roles);
     if(!success) {
       return error;

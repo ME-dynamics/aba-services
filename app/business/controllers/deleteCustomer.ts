@@ -2,7 +2,7 @@ import { types, auth } from "aba-node"
 import { controllerTypes } from "../types";
 import { removeCustomer } from "../usecases";
 
-export function buildDeleteRemoveCustomer() {
+export function buildDeleteCustomer() {
   const roles: types.IRoles = {
     customer: false,
     provider: true,
@@ -11,8 +11,8 @@ export function buildDeleteRemoveCustomer() {
     assistant: false,
     support: false,
   }
-  return async function deleteRemoveCustomer(
-    httpRequest: controllerTypes.tDeleteRemoveCustomer
+  return async function deleteCustomer(
+    httpRequest: controllerTypes.tDeleteCustomer
   ) {
     const {success, error, payload} = auth(httpRequest, roles);
     if(!success) {
