@@ -34,12 +34,6 @@ export type tFindProviderByCustomerId = (
   customerId: string
 ) => Promise<IMadeCustomersObject | undefined>;
 
-// insert provider customer
-
-export type tInsertProviderCustomerFunc = (
-  info: IMadeCustomersObject
-) => Promise<void>;
-
 // find requests builder
 export interface IBuildFindRequests {
   select: types.tDbSelectFunc;
@@ -58,10 +52,10 @@ export type tFindRequestsByProviderIdFunc = (
   ProviderId: string
 ) => Promise<IMadeCustomersObject[] | undefined>;
 
-// insert request
+// insert customer
 
-export type tInsertRequestFunc = (
-  request: IMadeCustomersObject
+export type tInsertCustomerFunc = (
+  customer: IMadeCustomersObject
 ) => Promise<void>;
 
 // network

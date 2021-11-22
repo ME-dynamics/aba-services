@@ -24,13 +24,13 @@ interface IDeleteRejectRequest {
 
 export type tDeleteRejectRequest = types.tRequest<IDeleteRejectRequest>;
 
-interface IDeleteRemoveCustomer {
+interface IDeleteCustomer {
   Params: {
     customerId: string;
   };
 }
 
-export type tDeleteRemoveCustomer = types.tRequest<IDeleteRemoveCustomer>;
+export type tDeleteCustomer = types.tRequest<IDeleteCustomer>;
 
 interface IDeleteRequest {
   Params: {

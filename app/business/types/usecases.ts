@@ -5,8 +5,7 @@ import {
   tFindRequestsByProviderIdFunc,
   tFindProviderByCustomerId,
   tFetchUserByIdFunc,
-  tInsertRequestFunc,
-  tInsertProviderCustomerFunc,
+  tInsertCustomerFunc,
   tFetchRoleByUserIdFunc,
 } from "./adapters";
 
@@ -15,7 +14,7 @@ export interface IBuildCreateRequest {
   fetchUserById: tFetchUserByIdFunc;
   fetchRoleByUserId: tFetchRoleByUserIdFunc;
   findRequestByCustomerId: tFindRequestByCustomerId;
-  insertRequest: tInsertRequestFunc;
+  insertCustomer: tInsertCustomerFunc;
 }
 
 export interface ICreateRequest {
@@ -27,7 +26,7 @@ export interface ICreateRequest {
 
 export interface IBuildRemoveRequest {
   findRequestByCustomerId: tFindRequestByCustomerId;
-  insertRequest: tInsertRequestFunc;
+  insertCustomer: tInsertCustomerFunc;
 }
 
 // confirm request
@@ -35,9 +34,7 @@ export interface IBuildRemoveRequest {
 export interface IBuildConfirmRequest {
   fetchUserById: tFetchUserByIdFunc;
   findRequestByCustomerId: tFindRequestByCustomerId;
-  insertRequest: tInsertRequestFunc;
-  insertProviderCustomer: tInsertProviderCustomerFunc;
-  findProviderByCustomerId: tFindProviderByCustomerId;
+  insertCustomer: tInsertCustomerFunc;
 }
 export interface IConfirmRequest {
   providerId: string;
@@ -46,7 +43,7 @@ export interface IConfirmRequest {
 // reject request
 export interface IBuildRejectRequest {
   findRequestByCustomerId: tFindRequestByCustomerId;
-  insertRequest: tInsertRequestFunc;
+  insertCustomer: tInsertCustomerFunc;
 }
 
 export interface IRejectRequest {
@@ -85,9 +82,7 @@ export interface IBuildRetrieveCustomerProviderInfo {
 // remove customer by id
 export interface IBuildRemoveCustomer {
   findCustomer: tFindCustomerFunc;
-  findRequestByCustomerId: tFindRequestByCustomerId;
-  insertRequest: tInsertRequestFunc;
-  insertProviderCustomer: tInsertProviderCustomerFunc;
+  insertCustomer: tInsertCustomerFunc;
 }
 
 export interface IRemoveCustomer {
@@ -100,8 +95,7 @@ export interface IRemoveCustomer {
 export interface IBuildUpdateCustomerInfo {
   findRequestByCustomerId: tFindRequestByCustomerId;
   findCustomer: tFindCustomerFunc;
-  insertRequest: tInsertRequestFunc;
-  insertProviderCustomer: tInsertProviderCustomerFunc;
+  insertCustomer: tInsertCustomerFunc;
 }
 
 export interface IUpdateCustomerInfo {
