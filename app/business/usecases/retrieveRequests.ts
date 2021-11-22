@@ -12,7 +12,7 @@ export function buildRetrieveRequests(
     if (!requestsFound) {
       return notFound({ error: "no requests found" });
     }
-    return ok<entityTypes.IMadeCustomerProviderRequestObject[]>({
+    return ok<entityTypes.IMadeCustomersObject[]>({
       payload: requestsFound,
     });
   };

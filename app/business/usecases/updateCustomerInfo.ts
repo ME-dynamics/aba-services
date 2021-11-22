@@ -1,41 +1,22 @@
-import { makeCustomerProviderRequest, makeProviderCustomer } from "../entities";
+import { makeCustomer } from "../entities";
 import { usecaseTypes } from "../types";
 
 export function buildUpdateCustomerInfo(
   args: usecaseTypes.IBuildUpdateCustomerInfo
 ) {
-  const {
-    findCustomer,
-    findRequestByCustomerId,
-    insertRequest,
-    insertProviderCustomer,
-  } = args;
+  const { findCustomer, insertCustomer } = args;
   return async function updateCustomerInfo(
     info: usecaseTypes.IUpdateCustomerInfo
   ) {
     const { id, name, profilePictureUrl, description } = info;
-    const [customerFound, requestFound] = await Promise.all([
-      findCustomer(id),
-      findRequestByCustomerId(id),
-    ]);
-    const customer = customerFound
-      ? makeProviderCustomer(customerFound)
-      : undefined;
+    const customerFound = await findCustomer(id);
+
+    const customer = customerFound ? makeCustomer(customerFound) : undefined;
     if (customer) {
-      customer.set.name(name);
-      customer.set.profilePictureUrl(profilePictureUrl);
-      customer.set.description(description);
+      customer.set.name(name || "");
+      customer.set.profilePictureUrl(profilePictureUrl || "");
+      customer.set.description(description || "");
+      await insertCustomer(customer.object());
     }
-    const request = requestFound
-      ? makeCustomerProviderRequest(requestFound)
-      : undefined;
-    if (request) {
-      request.set.name(name);
-      request.set.profilePictureUrl(profilePictureUrl);
-    }
-    await Promise.all([
-      customer ? insertProviderCustomer(customer.object()) : undefined,
-      request ? insertRequest(request.object()) : undefined,
-    ]);
   };
 }

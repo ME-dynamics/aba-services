@@ -1,9 +1,9 @@
 import { httpResultClientError, httpResultSuccess } from "aba-node";
-import { makeCustomerProviderRequest } from "../entities";
+import { makeCustomer } from "../entities";
 import { usecaseTypes } from "../types";
 
 export function buildRejectRequest(args: usecaseTypes.IBuildRejectRequest) {
-  const { findRequestByCustomerId, insertRequest } = args;
+  const { findRequestByCustomerId, insertCustomer } = args;
   const { notFound, forbidden } = httpResultClientError;
   const { ok } = httpResultSuccess;
   return async function rejectRequest(info: usecaseTypes.IRejectRequest) {
@@ -21,14 +21,13 @@ export function buildRejectRequest(args: usecaseTypes.IBuildRejectRequest) {
       return forbidden({ error: "action not allowed here" });
     }
     // cannot reject a request that is already confirmed
-    if (requestFound.confirmed) {
+    if (requestFound.requestConfirmed) {
       return forbidden({ error: "request already confirmed" });
     }
     // reject and remove request;
-    const request = makeCustomerProviderRequest(requestFound);
-    request.set.reject();
+    const request = makeCustomer(requestFound);
     request.set.remove();
-    await insertRequest(request.object());
+    await insertCustomer(request.object());
     return ok<string>({
       payload: "request rejected",
     });

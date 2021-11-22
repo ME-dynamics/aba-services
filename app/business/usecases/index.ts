@@ -6,14 +6,12 @@ import {
   findCustomer,
   fetchUserById,
   fetchUserRole,
-  insertRequest,
-  insertProviderCustomer,
+  insertCustomer
 } from "../adapters";
 
 import { buildConfirmRequest } from "./confirmRequest";
 import { buildCreateRequest } from "./createRequest";
 import { buildRejectRequest } from "./rejectRequest";
-import { buildRemoveRequest } from "./removeRequest";
 import { buildRetrieveRequests } from "./retrieveRequests";
 import { buildRetrieveCustomers } from "./retrieveCustomers";
 import { buildRemoveCustomer } from "./removeCustomer";
@@ -23,26 +21,20 @@ import { buildRetrieveCustomerProviderInfo } from "./retrieveCustomerProviderInf
 
 export const confirmRequest = buildConfirmRequest({
   findRequestByCustomerId,
-  findProviderByCustomerId,
   fetchUserById,
-  insertRequest,
-  insertProviderCustomer,
+  insertCustomer,
 });
 
 export const createRequest = buildCreateRequest({
   findRequestByCustomerId,
   fetchUserById,
   fetchRoleByUserId: fetchUserRole,
-  insertRequest,
+  insertCustomer,
 });
 
 export const rejectRequest = buildRejectRequest({
   findRequestByCustomerId,
-  insertRequest,
-});
-export const removeRequest = buildRemoveRequest({
-  findRequestByCustomerId,
-  insertRequest,
+  insertCustomer,
 });
 
 export const retrieveRequests = buildRetrieveRequests({
@@ -55,16 +47,13 @@ export const retrieveCustomers = buildRetrieveCustomers({
 
 export const removeCustomer = buildRemoveCustomer({
   findCustomer,
-  insertProviderCustomer,
-  findRequestByCustomerId,
-  insertRequest,
+  insertCustomer,
 });
 
 export const updateCustomerInfo = buildUpdateCustomerInfo({
   findCustomer,
   findRequestByCustomerId,
-  insertRequest,
-  insertProviderCustomer,
+  insertCustomer,
 });
 
 export const retrieveCustomerProvider = buildRetrieveCustomerProvider({

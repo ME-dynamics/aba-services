@@ -12,7 +12,7 @@ export function buildRetrieveCustomers(
     if (!customersFound) {
       return notFound({ error: "no customer found" });
     }
-    return ok<entityTypes.IMadeProviderCustomerObject[]>({
+    return ok<entityTypes.IMadeCustomersObject[]>({
       payload: customersFound,
     });
   };

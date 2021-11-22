@@ -1,9 +1,9 @@
 import { httpResultClientError, httpResultSuccess } from "aba-node";
-import { makeCustomerProviderRequest } from "../entities";
+import { makeCustomer } from "../entities";
 import { entityTypes, usecaseTypes } from "../types";
 
 export function buildCreateRequest(args: usecaseTypes.IBuildCreateRequest) {
-  const { fetchUserById, insertRequest, findRequestByCustomerId, fetchRoleByUserId } = args;
+  const { fetchUserById, insertCustomer, findRequestByCustomerId, fetchRoleByUserId } = args;
   const { forbidden, badRequest } = httpResultClientError;
   const { created, ok } = httpResultSuccess;
   return async function createRequest(info: usecaseTypes.ICreateRequest) {
@@ -33,35 +33,37 @@ export function buildCreateRequest(args: usecaseTypes.IBuildCreateRequest) {
     const requestFound = await findRequestByCustomerId(customerId);
 
     if (requestFound && !requestFound.softDeleted) {
-      if (requestFound.confirmed) {
+      if (requestFound.requestConfirmed) {
         return badRequest({ error: "request already confirmed" });
       }
       // if found request provider is the same, just return the data
       // this can happen when user send the same request more than once
       if (requestFound.providerId === providerId) {
-        return ok<entityTypes.IMadeCustomerProviderRequestObject>({
+        return ok<entityTypes.IMadeCustomersObject>({
           payload: requestFound,
         });
       }
       // only one request can be made for a customer
       // if request found, delete the request
-      const request = makeCustomerProviderRequest(requestFound);
-      request.set.remove();
-      await insertRequest(request.object());
+      const customer = makeCustomer(requestFound);
+      customer.set.remove();
+      await insertCustomer(customer.object());
     }
     // create the new request
-    const request = makeCustomerProviderRequest({
+    const request = makeCustomer({
       providerId,
       customerId,
+      businessId: "",
       name: customer.name,
       profilePictureUrl: customer.profilePictureUrl,
-      confirmed: false,
+      requestConfirmed: false,
+      description: customer.description,
       createdAt: undefined,
       modifiedAt: undefined,
       softDeleted: false,
     });
-    await insertRequest(request.object());
-    return created<entityTypes.IMadeCustomerProviderRequestObject>({
+    await insertCustomer(request.object());
+    return created<entityTypes.IMadeCustomersObject>({
       payload: request.object(),
     });
   };
