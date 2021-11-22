@@ -1,9 +1,11 @@
 import { scyllaClient } from "aba-node";
+import { applicationVersion } from "../config";
 import {
   buildInitDb,
   buildInsertFormData,
+  buildFindFormDataByUserId,
 } from "./db";
-import { applicationVersion } from "../config";
+import { rowToFormData } from "./utils";
 
 const dbClient = scyllaClient({
   applicationName: "",
@@ -20,3 +22,7 @@ export const initDb = buildInitDb({ init: dbClient.init });
 //   insert: dbClient.insert,
 // });
 export const insertFormData = buildInsertFormData({ insert: dbClient.insert });
+export const findFormDataByUserId = buildFindFormDataByUserId({
+  select: dbClient.select,
+  rowToFormData,
+});
