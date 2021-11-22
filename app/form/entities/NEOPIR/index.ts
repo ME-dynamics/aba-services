@@ -3,7 +3,7 @@ import { entityTypes } from "../../types";
 export function buildMakeNEOPIR(args: entityTypes.IBuildNEOPIR) {
   const { aFormula, cFormula, eFormula, nFormula, oFormula, rules } = args;
   return function makeNEOPIR(
-    fields: entityTypes.tFields
+    fields: entityTypes.tNEOFields
   ): entityTypes.INEOPIRResult {
     const aGroup = aFormula(fields);
     const cGroup = cFormula(fields);
@@ -23,5 +23,4 @@ export function buildMakeNEOPIR(args: entityTypes.IBuildNEOPIR) {
   };
 }
 
-
-export { formStructure as NEOPIRStructure } from "./formStructure"
+export { formStructure as NEOPIRStructure } from "./formStructure";

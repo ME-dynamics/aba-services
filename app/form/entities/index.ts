@@ -7,6 +7,12 @@ import { nFormula } from "./NEOPIR/nFormula";
 import { oFormula } from "./NEOPIR/oFormula";
 import { rules } from "./NEOPIR/rules";
 import { buildMakeNEOPIR } from "./NEOPIR";
+
+import { eiFormula } from "./MBTI/eiFormula";
+import { jpFormula } from "./MBTI/jpFormula";
+import { snFormula } from "./MBTI/snFormula";
+import { tfFormula } from "./MBTI/tfFormula";
+import { buildMakeMBTI } from "./MBTI";
 export const makeFormData = buildMakeFormData({ uuid: v4 });
 export const makeNEOPIR = buildMakeNEOPIR({
   aFormula,
@@ -16,4 +22,12 @@ export const makeNEOPIR = buildMakeNEOPIR({
   oFormula,
   rules,
 });
+
+export const makeMBTI = buildMakeMBTI({
+  eiFormula,
+  jpFormula,
+  snFormula,
+  tfFormula,
+});
 export { NEOPIRStructure } from "./NEOPIR";
+export { mbtiStructure } from "./MBTI";
