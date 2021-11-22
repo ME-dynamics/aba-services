@@ -203,7 +203,7 @@ const fData: Record<string, { a: number; b: number }> = {
   },
 };
 
-function tfFormula(fields: Record<string, "a" | "b">) {
+export function tfFormula(fields: Record<string, "a" | "b">) {
   let t = 0;
   let f = 0;
   for (let index = 51; index <= 75; index++) {
