@@ -59,7 +59,7 @@ export function buildInitDb(args: adapterTypes.IBuildInit) {
       columns: [
         { name: "id", type: "UUID" },
         { name: "user_id", type: "UUID" },
-        { name: "structure_id", type: "UUID" },
+        { name: "structure_id", type: "TEXT" },
         { name: "form_name", type: "TEXT" },
         {
           name: "fields",
@@ -107,15 +107,16 @@ export function buildInitDb(args: adapterTypes.IBuildInit) {
       ],
       primaryKey: {
         partition: ["user_id"],
-        cluster: ["id"],
+        cluster: ["created_at"],
       },
+      orderBy: [{ key: "created_at", type: "DESC" }],
     });
     const { notNull } = operators;
     const structureMVQuery = selectQuery({
       table: "form_data",
       version: applicationVersion,
       columns: ["*"],
-      where: [notNull("structure_id"), notNull("id")],
+      where: [notNull("structure_id"), notNull("created_at"), notNull("id")],
     });
     const createStructureIdMV = createMaterialView({
       name: "form_data_by_structure",
