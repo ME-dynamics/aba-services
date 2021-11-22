@@ -1,4 +1,4 @@
-export type tFields = Record<string, number>;
+export type tNEOFields = Record<string, number>;
 
 export interface IAGroup {
   a1: number;
@@ -51,12 +51,12 @@ interface IRules {
   validation: Record<string, string>;
 }
 export interface IBuildNEOPIR {
-  aFormula: (fields: tFields) => IAGroup;
-  cFormula: (fields: tFields) => ICGroup;
-  eFormula: (fields: tFields) => IEGroup;
-  nFormula: (fields: tFields) => INGroup;
-  oFormula: (fields: tFields) => IOGroup;
-  rules: (fields: tFields) => IRules;
+  aFormula: (fields: tNEOFields) => IAGroup;
+  cFormula: (fields: tNEOFields) => ICGroup;
+  eFormula: (fields: tNEOFields) => IEGroup;
+  nFormula: (fields: tNEOFields) => INGroup;
+  oFormula: (fields: tNEOFields) => IOGroup;
+  rules: (fields: tNEOFields) => IRules;
 }
 
 export interface INEOPIRResult {
@@ -67,5 +67,4 @@ export interface INEOPIRResult {
   oGroup: IOGroup;
   warnings: Record<string, string>;
   validation: Record<string, string>;
-
 }
