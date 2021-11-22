@@ -4,7 +4,7 @@ import { entityTypes, usecaseTypes } from "../types";
 export function buildSubmitNEOPIR(args: usecaseTypes.IBuildSubmitNEOPIR) {
   const { insertFormData } = args;
   const { created } = httpResultSuccess;
-  function formDataObj(
+  function formDataInput(
     info: usecaseTypes.ISubmitNEOPIR
   ): entityTypes.IFormData {
     const { fields, structureId, userId } = info;
@@ -71,7 +71,7 @@ export function buildSubmitNEOPIR(args: usecaseTypes.IBuildSubmitNEOPIR) {
   return async function submitNEOPIR(info: usecaseTypes.ISubmitNEOPIR) {
     //TODO: should check if structure exists
 
-    const formData = makeFormData(formDataObj(info));
+    const formData = makeFormData(formDataInput(info));
     await insertFormData(formData.object());
     return created<entityTypes.IMadeFormDataObject>({
       payload: formData.object(),
