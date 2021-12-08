@@ -65,7 +65,7 @@ export function buildInitDb(args: adapterTypes.IBuildInit) {
           name: "fields",
           type: "MAP",
           map: {
-            keyType: "SMALLINT",
+            keyType: "TEXT",
             valueType: "TINYINT",
           },
         },
