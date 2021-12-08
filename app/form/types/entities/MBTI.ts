@@ -31,3 +31,18 @@ export interface IBuildMakeMBTI {
   snFormula: (fields: tMbtiFields) => ISNGroup;
   tfFormula: (fields: tMbtiFields) => ITFGroup;
 }
+
+export interface IInterpret {
+  type: "image" | "title" | "paragraph" | "list" | "slogan";
+  data: string;
+}
+
+export interface IMbtiInterpret {
+  type: string;
+  interpret: IInterpret[];
+}
+
+export interface IMakeMbtiResult {
+  aggregates: IEIGroup & IJPGroup & ISNGroup & ITFGroup;
+  interpret: string;
+}
