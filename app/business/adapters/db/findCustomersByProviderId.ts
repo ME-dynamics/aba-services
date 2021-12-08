@@ -19,7 +19,7 @@ function selectQueryGen(): string {
 export function buildFindCustomersByProviderId(
   args: adaptersTypes.IBuildFindCustomer
 ) {
-  const { select, rowToCustomers } = args;
+  const { select, rowToCustomer } = args;
   const errorPath = "business, adapters, find customer by provider id";
   const query = selectQueryGen();
   return async function findCustomersByProviderId(
@@ -42,7 +42,7 @@ export function buildFindCustomersByProviderId(
       if (row.get("soft_deleted")) {
         continue;
       }
-      providerCustomers.push(rowToCustomers(row));
+      providerCustomers.push(rowToCustomer(row));
     }
     if (providerCustomers.length === 0) {
       return undefined;

@@ -15,7 +15,7 @@ function selectQueryGen(): string {
 }
 
 export function buildFindCustomer(args: adaptersTypes.IBuildFindCustomer) {
-  const { rowToCustomers, select } = args;
+  const { rowToCustomer, select } = args;
   const errorPath = "business, adapters, find customer";
   const query = selectQueryGen();
   return async function findCustomer(
@@ -32,7 +32,7 @@ export function buildFindCustomer(args: adaptersTypes.IBuildFindCustomer) {
       return undefined;
     }
     if (result.rowLength === 1) {
-      return rowToCustomers(result.first());
+      return rowToCustomer(result.first());
     }
     if (result.rowLength > 1) {
       console.warn("customer must have only one provider");

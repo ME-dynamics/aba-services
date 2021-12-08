@@ -51,7 +51,7 @@ export function buildFindRequestByCustomerId(
       return requests[0];
     }
     console.warn("customer can have only one provider");
-    console.log(JSON.stringify(result.rows, null, 2));
+    console.log(JSON.stringify(requests, null, 2));
     return undefined;
   };
 }

@@ -17,7 +17,7 @@ function selectQueryGen(): string {
 export function buildFindRequestsByProviderId(
   args: adaptersTypes.IBuildFindRequests
 ) {
-  const { select, rowToCustomers } = args;
+  const { select, rowToCustomer } = args;
   const errorPath = "business, adapters, find requests by provider id";
   const query = selectQueryGen();
   return async function findRequestsByProviderId(
@@ -40,7 +40,7 @@ export function buildFindRequestsByProviderId(
       if (row.get("soft_deleted")) {
         continue;
       }
-      requests.push(rowToCustomers(row));
+      requests.push(rowToCustomer(row));
     }
     if (requests.length === 0) {
       return undefined;

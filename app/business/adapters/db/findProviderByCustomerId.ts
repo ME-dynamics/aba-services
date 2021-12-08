@@ -16,7 +16,7 @@ function selectQueryGen(): string {
 export function buildFindProviderByCustomerId(
   args: adaptersTypes.IBuildFindCustomer
 ) {
-  const { select, rowToCustomers } = args;
+  const { select, rowToCustomer } = args;
   const errorPath = "business, adapters, find provider by customer id";
   const query = selectQueryGen();
   return async function findProviderByCustomerId(
@@ -29,19 +29,29 @@ export function buildFindProviderByCustomerId(
       queryOptions: undefined,
       errorPath,
     });
-
     if (result.rowLength === 0) {
       return undefined;
     }
     if (result.rowLength === 1) {
-      const customer = rowToCustomers(result.first());
+      const customer = rowToCustomer(result.first());
       if (customer.softDeleted || !customer.requestConfirmed) {
         return undefined;
       }
       return customer;
     }
+    const customers: entityTypes.IMadeCustomersObject[] = [];
+    for (let index = 0; index < result.rowLength; index++) {
+      const row = result.rows[index];
+      if (row.get("soft_deleted")) {
+        continue;
+      }
+      customers.push(rowToCustomer(row));
+    }
+    if (customers.length === 1) {
+      return customers[0];
+    }
     console.warn("customer can have only one provider");
-    console.log(JSON.stringify(result.rows, null, 2));
+    console.log(JSON.stringify(customers, null, 2));
     return undefined;
   };
 }
