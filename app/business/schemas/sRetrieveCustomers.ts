@@ -1,27 +1,12 @@
 import { statusCodes, fluentSchema, errorSchema } from "aba-node";
-
+import { customerSchema } from "./customerSchema";
 // TODO: add a shared schema file
-const customerSchema = fluentSchema
+const customer = fluentSchema
   .object()
-  .prop(
-    "payload",
-    fluentSchema
-      .array()
-      .items(
-        fluentSchema
-          .object()
-          .prop("providerId", fluentSchema.string().format("uuid").required())
-          .prop("customerId", fluentSchema.string().format("uuid").required())
-          .prop("name", fluentSchema.string().default(null))
-          .prop("profilePictureUrl", fluentSchema.string().default(null))
-          .prop("description", fluentSchema.string().default(null))
-          .prop("createdAt", fluentSchema.string().format("date").required())
-          .prop("modifiedAt", fluentSchema.string().format("date").required())
-      )
-  );
+  .prop("payload", fluentSchema.array().items(customerSchema));
 
 const response = {
-  [statusCodes.OK]: customerSchema,
+  [statusCodes.OK]: customer,
   [statusCodes.NOT_FOUND]: errorSchema,
 };
 

@@ -1,26 +1,13 @@
 import { statusCodes, fluentSchema, errorSchema } from "aba-node";
-
+import { customerSchema } from "./customerSchema";
 const body = fluentSchema
   .object()
   .prop("customerId", fluentSchema.string().format("uuid").required());
 
-const customerSchema = fluentSchema
-  .object()
-  .prop(
-    "payload",
-    fluentSchema
-      .object()
-      .prop("providerId", fluentSchema.string().format("uuid").required())
-      .prop("customerId", fluentSchema.string().format("uuid").required())
-      .prop("name", fluentSchema.string().default(null))
-      .prop("profilePictureUrl", fluentSchema.string().default(null))
-      .prop("description", fluentSchema.string().default(null))
-      .prop("createdAt", fluentSchema.string().format("date").required())
-      .prop("modifiedAt", fluentSchema.string().format("date").required())
-  );
+const customer = fluentSchema.object().prop("payload", customerSchema);
 
 const response = {
-  [statusCodes.OK]: customerSchema,
+  [statusCodes.OK]: customer,
   [statusCodes.NOT_FOUND]: errorSchema,
   [statusCodes.FORBIDDEN]: errorSchema,
 };
