@@ -3,7 +3,12 @@ import { makeCustomer } from "../entities";
 import { entityTypes, usecaseTypes } from "../types";
 
 export function buildCreateRequest(args: usecaseTypes.IBuildCreateRequest) {
-  const { fetchUserById, insertCustomer, findRequestByCustomerId, fetchRoleByUserId } = args;
+  const {
+    fetchUserById,
+    insertCustomer,
+    findRequestByCustomerId,
+    fetchRoleByUserId,
+  } = args;
   const { forbidden, badRequest } = httpResultClientError;
   const { created, ok } = httpResultSuccess;
   return async function createRequest(info: usecaseTypes.ICreateRequest) {
@@ -53,7 +58,7 @@ export function buildCreateRequest(args: usecaseTypes.IBuildCreateRequest) {
     const request = makeCustomer({
       providerId,
       customerId,
-      businessId: "",
+      businessId: "00000000-0000-0000-0000-000000000000",
       name: customer.name,
       profilePictureUrl: customer.profilePictureUrl,
       requestConfirmed: false,
