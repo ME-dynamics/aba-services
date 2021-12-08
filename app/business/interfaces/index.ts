@@ -4,6 +4,7 @@ import { confirmRequest } from "./confirmRequest";
 import { createRequest } from "./createRequest";
 import { rejectRequest } from "./rejectRequest";
 import { removeCustomer } from "./removeCustomer";
+import { removeRequest } from "./removeRequest";
 import { retrieveCustomers } from "./retrieveCustomers";
 import { retrieveRequests } from "./retrieveRequests";
 import { retrieveCustomerProviderInfo } from "./retrieveCustomerProviderInfo";
@@ -14,6 +15,7 @@ import {
   sRemoveCustomer,
   sRetrieveCustomers,
   sRetrieveRequests,
+  sRemoveRequest,
   sRetrieveCustomerProviderInfo,
 } from "../schemas";
 import { applicationVersion } from "../config";
@@ -56,7 +58,15 @@ export function startBusinessServer(app: types.tHttpInstance) {
     { schema: sRemoveCustomer },
     removeCustomer
   );
-
+  app.delete(
+    routeGen({
+      version: applicationVersion,
+      role: "customer",
+      routes: ["requests"],
+    }),
+    { schema: sRemoveRequest },
+    removeRequest
+  );
   app.get(
     routeGen({
       version: applicationVersion,
