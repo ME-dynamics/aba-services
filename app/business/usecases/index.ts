@@ -6,7 +6,7 @@ import {
   findCustomer,
   fetchUserById,
   fetchUserRole,
-  insertCustomer
+  insertCustomer,
 } from "../adapters";
 
 import { buildConfirmRequest } from "./confirmRequest";
@@ -15,6 +15,7 @@ import { buildRejectRequest } from "./rejectRequest";
 import { buildRetrieveRequests } from "./retrieveRequests";
 import { buildRetrieveCustomers } from "./retrieveCustomers";
 import { buildRemoveCustomer } from "./removeCustomer";
+import { buildRemoveRequest } from "./removeRequest";
 import { buildUpdateCustomerInfo } from "./updateCustomerInfo";
 import { buildRetrieveCustomerProvider } from "./retrieveCustomerProvider";
 import { buildRetrieveCustomerProviderInfo } from "./retrieveCustomerProviderInfo";
@@ -39,6 +40,11 @@ export const rejectRequest = buildRejectRequest({
 
 export const retrieveRequests = buildRetrieveRequests({
   findRequestsByProviderId,
+});
+
+export const removeRequest = buildRemoveRequest({
+  findRequestByCustomerId,
+  insertCustomer,
 });
 
 export const retrieveCustomers = buildRetrieveCustomers({
