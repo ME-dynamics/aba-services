@@ -18,6 +18,8 @@ const response = {
         .object()
         .prop("jwtToken", fluentSchema.string().required())
         .prop("refreshToken", fluentSchema.string().required())
+        .prop("refreshTokenExpiresAt", fluentSchema.number().required())
+        .prop("jwtTokenExpiresAt", fluentSchema.number().required())
     ),
   [statusCodes.NOT_FOUND]: errorSchema,
   [statusCodes.INTERNAL_SERVER_ERROR]: errorSchema,

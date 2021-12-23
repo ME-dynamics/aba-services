@@ -82,6 +82,8 @@ export interface IRefresh {
 export interface IRefreshResult {
   refreshToken: string;
   jwtToken: string;
+  refreshTokenExpiresAt: number;
+  jwtTokenExpiresAt: number;
 }
 
 // retrieve public key

@@ -74,6 +74,8 @@ export function buildRefresh(args: usecaseTypes.IBuildRefresh) {
       payload: {
         jwtToken: jwt,
         refreshToken,
+        jwtTokenExpiresAt: jwtExp,
+        refreshTokenExpiresAt: refreshExpiresAt,
       },
     });
   };
