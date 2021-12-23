@@ -1,10 +1,10 @@
-import { tInsertFormStructureFunc, tInsertFormDataFunc } from "./adapters";
-import { tFields, tQuestionFields } from "./entities";
+import {  tInsertFormDataFunc } from "./adapters";
+import { tNEOFields, tQuestionFields } from "./entities";
 
 // submit form structure
-export interface IBuildSubmitFormStructure {
-  insertFormStructure: tInsertFormStructureFunc;
-}
+// export interface IBuildSubmitFormStructure {
+//   insertFormStructure: tInsertFormStructureFunc;
+// }
 export interface ISubmitFormStructure {
   title: string;
   description: string | undefined;
@@ -20,5 +20,5 @@ export interface IBuildSubmitNEOPIR {
 export interface ISubmitNEOPIR {
   userId: string;
   structureId: string;
-  fields: tFields;
+  fields: tNEOFields;
 }
