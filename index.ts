@@ -21,7 +21,6 @@ export async function startService() {
   try {
     await Promise.all([
       initAuthnzDb(),
-      initAuthnzSecret(),
       initStorageDb(),
       initPublicBucket(),
       initBusinessDb(),
@@ -30,7 +29,7 @@ export async function startService() {
       initUserDb(),
       initTaskDb(),
     ]);
-    await initAdmin();
+    await Promise.all([initAdmin(), initAuthnzSecret()]);
     startAuthnzServer(app);
     startStorageServer(app);
     startBusinessServer(app);
@@ -49,3 +48,10 @@ startService().catch((err) => {
   console.log(err);
   process.exit(1);
 });
+
+async function closeGracefully(signal: NodeJS.Signals) {
+  console.log({ signal });
+  await app.close();
+  process.exit();
+}
+process.on("SIGINT", closeGracefully);
