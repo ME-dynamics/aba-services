@@ -1,22 +1,24 @@
-FROM node:14-alpine as builder
-RUN mkdir -p /home/node/app/packages
-WORKDIR /home/node/app
-COPY packages/ ./packages
+FROM node:14.18.2-alpine3.14 as builder
+RUN mkdir -p /home/node/app
+WORKDIR /home/node
+COPY app/ ./app
 COPY index.ts .
 COPY tsconfig.json .
-COPY package*.json ./
+COPY ["package.json", "package-lock.json", "./"]
 RUN npm install
 RUN npm run build
 RUN chown -R node:node ./build
 
 
 
-FROM node:14-alpine
+FROM node:14.18.2-alpine3.14
 RUN mkdir -p /home/node/app && chown -R node:node /home/node/app
 USER node
-WORKDIR /home/node/app
-COPY package*.json ./
+WORKDIR /home/node
+RUN apk add --no-cache tini
+COPY ["package.json", "package-lock.json", "./"]
 ENV NODE_ENV production
-RUN npm install --production
-COPY --from=builder /home/node/app/build ./build
-CMD ["node", "build/index.js"]
+RUN npm ci --production
+COPY --from=builder /home/node/build ./app
+ENTRYPOINT ["/sbin/tini", "--"]
+CMD ["node", "app/index.js", "--max-old-space-size=512"]
