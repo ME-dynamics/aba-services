@@ -11,6 +11,7 @@ export function buildMakeMBTI(args: entityTypes.IBuildMakeMBTI) {
     const { n, s } = snFormula(fields);
     const { f, t } = tfFormula(fields);
     return {
+      interpret: "all good here",
       aggregates: {
         e,
         f,
