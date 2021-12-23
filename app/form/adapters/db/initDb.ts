@@ -116,7 +116,11 @@ export function buildInitDb(args: adapterTypes.IBuildInit) {
       table: "form_data",
       version: applicationVersion,
       columns: ["*"],
-      where: [notNull("structure_id"), notNull("created_at"), notNull("id")],
+      where: [
+        notNull("structure_id"),
+        notNull("user_id"),
+        notNull("created_at"),
+      ],
     });
     const createStructureIdMV = createMaterialView({
       name: "form_data_by_structure",
@@ -124,7 +128,7 @@ export function buildInitDb(args: adapterTypes.IBuildInit) {
       selectQuery: structureMVQuery,
       primaryKey: {
         partition: ["user_id"],
-        cluster: ["structure_id", "id"],
+        cluster: ["structure_id", "created_at"],
       },
     });
     // await init({ query: choiceUDT.query, errorPath });
