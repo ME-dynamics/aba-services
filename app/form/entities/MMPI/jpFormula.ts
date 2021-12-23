@@ -16,7 +16,7 @@ export function LFormula(fields: Record<string, number>) {
   const L = shouldBeWrong(fields["16"]) + shouldBeWrong(fields["29"]) + shouldBeWrong(fields["41"]) + shouldBeWrong(fields["51"]) + shouldBeWrong(fields["77"]) + shouldBeWrong(fields["93"]) + shouldBeWrong(fields["102"]) + shouldBeWrong(fields["107"]) + shouldBeWrong(fields["123"]) + shouldBeWrong(fields["139"]) + shouldBeWrong(fields["153"]) + shouldBeWrong(fields["183"]) + shouldBeWrong(fields["203"]) + shouldBeWrong(fields["232"]) + shouldBeWrong(fields["260"]);
 }
 export function FFormula(fields: Record<string, number>) {
-  const F = 
+  // const F = 
 }
 
 
