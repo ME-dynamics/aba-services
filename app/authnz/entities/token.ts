@@ -24,13 +24,14 @@ export function buildMakeToken(args: entityTypes.IBuildMakeToken) {
     } = token;
 
     // increase token generation count per otp id
-    if(tokenTempBlock && tokenTempBlock.getTime() > Date.now()) {
+    // due to silent refresh technique on client side, 10 second time threshold is applied
+    if (tokenTempBlock && tokenTempBlock.getTime() - 1e4 > Date.now()) {
       ++tokenReCreateCount;
     }
-  
+
     // check if it's blocked
     permanentBlock = isPermanentlyBlocked(tokenReCreateCount);
-    
+
     // can create 6 token within two hours
     tokenTempBlock = new Date(hoursFromNow(2, errorPath));
 
