@@ -19,6 +19,7 @@ import { buildRemoveRequest } from "./removeRequest";
 import { buildUpdateCustomerInfo } from "./updateCustomerInfo";
 import { buildRetrieveCustomerProvider } from "./retrieveCustomerProvider";
 import { buildRetrieveCustomerProviderInfo } from "./retrieveCustomerProviderInfo";
+import { buildRetrieveRequestByCustomerId } from "./retrieveRequestByCustomerId";
 
 export const confirmRequest = buildConfirmRequest({
   findRequestByCustomerId,
@@ -49,6 +50,10 @@ export const removeRequest = buildRemoveRequest({
 
 export const retrieveCustomers = buildRetrieveCustomers({
   findCustomersByProviderId,
+});
+
+export const retrieveRequestByCustomerId = buildRetrieveRequestByCustomerId({
+  findRequestByCustomerId,
 });
 
 export const removeCustomer = buildRemoveCustomer({
