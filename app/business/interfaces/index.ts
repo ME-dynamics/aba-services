@@ -8,6 +8,7 @@ import { removeRequest } from "./removeRequest";
 import { retrieveCustomers } from "./retrieveCustomers";
 import { retrieveRequests } from "./retrieveRequests";
 import { retrieveCustomerProviderInfo } from "./retrieveCustomerProviderInfo";
+import { retrieveRequestByCustomerId } from "./retrieveRequestByCustomerId";
 import {
   sConfirmSchema,
   sCreateRequest,
@@ -17,6 +18,7 @@ import {
   sRetrieveRequests,
   sRemoveRequest,
   sRetrieveCustomerProviderInfo,
+  sRetrieveRequestByCustomerId,
 } from "../schemas";
 import { applicationVersion } from "../config";
 
@@ -93,5 +95,14 @@ export function startBusinessServer(app: types.tHttpInstance) {
     }),
     { schema: sRetrieveCustomerProviderInfo },
     retrieveCustomerProviderInfo
+  );
+  app.get(
+    routeGen({
+      version: applicationVersion,
+      role: "customer",
+      routes: ["requests"],
+    }),
+    { schema: sRetrieveRequestByCustomerId },
+    retrieveRequestByCustomerId
   );
 }
