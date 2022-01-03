@@ -6,6 +6,7 @@ export const customerSchema = fluentSchema
   .prop("providerId", fluentSchema.string().format("uuid").required())
   .prop("businessId", fluentSchema.string().format("uuid").required())
   .prop("requestConfirmed", fluentSchema.boolean().required())
+  .prop("name", fluentSchema.string().required())
   .prop("profilePictureUrl", fluentSchema.string().default(""))
   .prop("description", fluentSchema.string().default(""))
   .prop("createdAt", fluentSchema.string().format("date-time").required())

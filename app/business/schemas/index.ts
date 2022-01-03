@@ -6,3 +6,4 @@ export { sRemoveRequest } from "./sRemoveRequest";
 export { sRetrieveCustomers } from "./sRetrieveCustomers";
 export { sRetrieveRequests } from "./sRetrieveRequests";
 export { sRetrieveCustomerProviderInfo } from "./sRetrieveCustomerProviderInfo";
+export { sRetrieveRequestByCustomerId } from "./sRetrieveRequestByCustomerId";
