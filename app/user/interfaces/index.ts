@@ -13,7 +13,7 @@ export function startUserServer(app: types.tHttpInstance) {
     routeGen({
       version: applicationVersion,
       role: "shared",
-      routes: ["users"],
+      routes: ["users", ":id"],
     }),
     { schema: sRetrieveUser },
     retrieveUser
