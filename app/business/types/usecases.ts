@@ -56,6 +56,12 @@ export interface IBuildRetrieveRequests {
   findRequestsByProviderId: tFindRequestsByProviderIdFunc;
 }
 
+// retrieve request by customer id
+
+export interface IBuildRetrieveRequestByCustomerId {
+  findRequestByCustomerId: tFindRequestByCustomerId;
+}
+
 // retrieve customers by provider id
 
 export interface IBuildRetrieveCustomers {

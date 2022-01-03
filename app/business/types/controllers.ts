@@ -45,3 +45,11 @@ export type tGetCustomers = types.tRequest<unknown>;
 export type tGetRequests = types.tRequest<unknown>;
 
 export type tGetCustomerProviderInfo = types.tRequest<unknown>;
+
+interface IGetRequestByCustomerId {
+  Params: {
+    customerId: string;
+  };
+}
+
+export type tGetRequestByCustomerId = types.tRequest<IGetRequestByCustomerId>;
