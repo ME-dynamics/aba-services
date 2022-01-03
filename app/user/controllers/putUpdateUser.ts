@@ -8,7 +8,7 @@ export function buildPutUpdateUser(args: controllerTypes.IBuildPutUpdateUser) {
   const { parseStoragePublicUrl, fetchImageInfo } = args;
   const roles: types.IRoles = {
     customer: true,
-    provider: false,
+    provider: true,
     admin: true,
     accountant: false,
     assistant: false,
