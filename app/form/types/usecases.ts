@@ -1,5 +1,5 @@
-import {  tInsertFormDataFunc } from "./adapters";
-import { tNEOFields, tQuestionFields } from "./entities";
+import { tInsertFormDataFunc } from "./adapters";
+import { tNEOFields, tQuestionFields, tMbtiFields } from "./entities";
 
 // submit form structure
 // export interface IBuildSubmitFormStructure {
@@ -11,7 +11,6 @@ export interface ISubmitFormStructure {
   fields: tQuestionFields;
 }
 
-
 // submit NEOPIR
 
 export interface IBuildSubmitNEOPIR {
@@ -19,6 +18,13 @@ export interface IBuildSubmitNEOPIR {
 }
 export interface ISubmitNEOPIR {
   userId: string;
-  structureId: string;
   fields: tNEOFields;
+}
+
+export interface IBuildSubmitMBTI {
+  insertFormData: tInsertFormDataFunc;
+}
+export interface ISubmitMBTI {
+  userId: string;
+  fields: tMbtiFields;
 }

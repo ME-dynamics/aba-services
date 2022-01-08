@@ -1,5 +1,6 @@
-export type tMbtiFields = Record<string, "a" | "b">;
-
+import { IInterpret, IWarning, IError, IAggregate } from "./formData";
+export type tMbtiFields = Record<string, "1" | "2">;
+export type tMbtiStructureFields = Record<string, Record<"1" | "2", number>>;
 export interface IEIGroup {
   e: number;
   i: number;
@@ -19,10 +20,11 @@ export interface ITFGroup {
   t: number;
   f: number;
 }
-
+export type tMbtiInterpret = IEIGroup & IJPGroup & ISNGroup & ITFGroup;
+export type tInterpretCollection = Record<string, IInterpret[]>;
 export interface IRules {
-  warnings: Record<string, string>;
-  validation: Record<string, string>;
+  warnings: IWarning[];
+  errors: IError[];
 }
 
 export interface IBuildMakeMBTI {
@@ -32,17 +34,12 @@ export interface IBuildMakeMBTI {
   tfFormula: (fields: tMbtiFields) => ITFGroup;
 }
 
-export interface IInterpret {
-  type: "image" | "title" | "paragraph" | "list" | "slogan";
-  data: string;
-}
-
 export interface IMbtiInterpret {
   type: string;
   interpret: IInterpret[];
 }
 
 export interface IMakeMbtiResult {
-  aggregates: IEIGroup & IJPGroup & ISNGroup & ITFGroup;
-  interpret: string;
+  aggregates: IAggregate[];
+  interpret: IInterpret[];
 }
