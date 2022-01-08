@@ -4,6 +4,7 @@ import {
   sGetMbti,
   sGetBeckAnxiety,
   sGetBeckDepressionII,
+  sGetTests,
 } from "../schemas";
 // import { retrieveNEOPIR } from "./retrieveNEOPIR";
 import { retrieveTests } from "./retrieveTests";
@@ -29,7 +30,7 @@ export async function startFormServer(app: types.tHttpInstance) {
         role: "shared",
         routes: ["tests"],
       }),
-      // { schema: sNEOPIRStructure },
+      { schema: sGetTests },
       retrieveTests
     );
     app.get(
