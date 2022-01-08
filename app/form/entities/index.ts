@@ -13,6 +13,7 @@ import { jpFormula } from "./MBTI/jpFormula";
 import { snFormula } from "./MBTI/snFormula";
 import { tfFormula } from "./MBTI/tfFormula";
 import { buildMakeMBTI } from "./MBTI";
+
 export const makeFormData = buildMakeFormData({ uuid: v4 });
 export const makeNEOPIR = buildMakeNEOPIR({
   aFormula,
@@ -31,3 +32,5 @@ export const makeMBTI = buildMakeMBTI({
 });
 export { NEOPIRStructure } from "./NEOPIR";
 export { mbtiStructure } from "./MBTI";
+export { beckAnxietyStructure } from "./beckAnxiety";
+export { beckDepressionIIStructure } from "./beckDepressionII";
