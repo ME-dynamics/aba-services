@@ -1,4 +1,4 @@
-FROM node:14.18.2-alpine3.14 as builder
+FROM node:16.13.1-alpine3.14 as builder
 RUN mkdir -p /home/node/app
 WORKDIR /home/node
 COPY app/ ./app
@@ -11,7 +11,7 @@ RUN chown -R node:node ./build
 
 
 
-FROM node:14.18.2-alpine3.14
+FROM node:16.13.1-alpine3.14
 RUN mkdir -p /home/node/app && chown -R node:node /home/node/app
 USER node
 WORKDIR /home/node
