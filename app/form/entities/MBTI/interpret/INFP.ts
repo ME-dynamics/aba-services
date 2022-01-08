@@ -1,6 +1,6 @@
-import { entityTypes } from "../../types";
+import { entityTypes } from "../../../types";
 
-export const INTPInterpret: entityTypes.IInterpret[] = [
+export const INFPInterpret: entityTypes.IInterpret[] = [
   {
     type: "image",
     data: "https://storage.taskyn.ir/public/intp",

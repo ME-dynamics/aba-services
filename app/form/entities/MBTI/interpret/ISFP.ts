@@ -1,6 +1,6 @@
-import { entityTypes } from "../../types";
+import { entityTypes } from "../../../types";
 
-export const ISTJInterpret: entityTypes.IInterpret[] = [
+export const ISFPInterpret: entityTypes.IInterpret[] = [
   {
     type: "image",
     data: "https://storage.taskyn.ir/public/istj.png", //mistake

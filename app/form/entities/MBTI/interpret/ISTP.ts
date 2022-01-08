@@ -1,4 +1,4 @@
-import { entityTypes } from "../../types";
+import { entityTypes } from "../../../types";
 
 export const ISTPInterpret: entityTypes.IInterpret[] = [
   {

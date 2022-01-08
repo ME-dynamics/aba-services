@@ -1,105 +1,106 @@
-const jData: Record<string, { a: number; b: number }> = {
+import { entityTypes } from "../../types";
+const jData: entityTypes.tMbtiStructureFields = {
   "76": {
-    a: 1,
-    b: 0,
+    "1": 1,
+    "2": 0,
   },
   "77": {
-    a: 2,
-    b: 0,
+    "1": 2,
+    "2": 0,
   },
   "78": {
-    a: 0,
-    b: 1,
+    "1": 0,
+    "2": 1,
   },
   "79": {
-    a: 2,
-    b: 0,
+    "1": 2,
+    "2": 0,
   },
   "80": {
-    a: 1,
-    b: 0,
+    "1": 1,
+    "2": 0,
   },
   "81": {
-    a: 2,
-    b: 0,
+    "1": 2,
+    "2": 0,
   },
   "82": {
-    a: 2,
-    b: 0,
+    "1": 2,
+    "2": 0,
   },
   "83": {
-    a: 2,
-    b: 0,
+    "1": 2,
+    "2": 0,
   },
   "84": {
-    a: 2,
-    b: 0,
+    "1": 2,
+    "2": 0,
   },
   "85": {
-    a: 2,
-    b: 0,
+    "1": 2,
+    "2": 0,
   },
   "86": {
-    a: 1,
-    b: 0,
+    "1": 1,
+    "2": 0,
   },
   "87": {
-    a: 1,
-    b: 0,
+    "1": 1,
+    "2": 0,
   },
 };
-const pData: Record<string, { a: number; b: number }> = {
+const pData: entityTypes.tMbtiStructureFields = {
   "76": {
-    a: 0,
-    b: 2,
+    "1": 0,
+    "2": 2,
   },
   "77": {
-    a: 0,
-    b: 2,
+    "1": 0,
+    "2": 2,
   },
   "78": {
-    a: 1,
-    b: 0,
+    "1": 1,
+    "2": 0,
   },
   "79": {
-    a: 0,
-    b: 1,
+    "1": 0,
+    "2": 1,
   },
   "80": {
-    a: 0,
-    b: 2,
+    "1": 0,
+    "2": 2,
   },
   "81": {
-    a: 0,
-    b: 0,
+    "1": 0,
+    "2": 0,
   },
   "82": {
-    a: 0,
-    b: 1,
+    "1": 0,
+    "2": 1,
   },
   "83": {
-    a: 0,
-    b: 2,
+    "1": 0,
+    "2": 2,
   },
   "84": {
-    a: 0,
-    b: 2,
+    "1": 0,
+    "2": 2,
   },
   "85": {
-    a: 0,
-    b: 2,
+    "1": 0,
+    "2": 2,
   },
   "86": {
-    a: 0,
-    b: 1,
+    "1": 0,
+    "2": 1,
   },
   "87": {
-    a: 0,
-    b: 2,
+    "1": 0,
+    "2": 2,
   },
 };
 
-export function jpFormula(fields: Record<string, "a" | "b">) {
+export function jpFormula(fields: entityTypes.tMbtiFields) {
   let j = 0;
   let p = 0;
   for (let index = 76; index <= 87; index++) {
@@ -107,23 +108,5 @@ export function jpFormula(fields: Record<string, "a" | "b">) {
     j = j + jData[`${index}`][field];
     p = p + pData[`${index}`][field];
   }
-
-  return { j, p, max: Math.max(j, p) };
+  return { j, p };
 }
-// console.log(jpFormula(
-//     {
-//         "76":"a",
-//         "77":"b",
-//         "78":"a",
-//         "79":"a",
-//         "80":"a",
-//         "81":"b",
-//         "82":"a",
-//         "83":"a",
-//         "84":"a",
-//         "85":"a",
-//         "86":"b",
-//         "87":"a",
-//     }
-
-//     ))
