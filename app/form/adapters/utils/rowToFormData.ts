@@ -13,7 +13,7 @@ export function rowToFormData(
     aggregates: row.get("aggregates"),
     interpret: row.get("interpret"),
     warnings: row.get("warnings"),
-    validation: row.get("validation"),
+    errors: row.get("errors"),
     createdAt: row.get("created_at"),
     modifiedAt: row.get("modified_at"),
     softDeleted: row.get("soft_deleted"),
