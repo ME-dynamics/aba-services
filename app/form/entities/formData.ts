@@ -11,20 +11,20 @@ export function buildMakeFormData(args: entityTypes.IBuildFormData) {
       userId,
       formName,
       warnings,
-      validation,
+      errors,
     } = formData;
     let { fields, aggregates, interpret, softDeleted } = formData;
 
     // Setters
-    function setFields(newFields: Record<string, number>) {
+    function setFields(newFields: Record<string, string>) {
       fields = newFields;
       modifiedAt.setTime(Date.now());
     }
-    function setAggregates(newAgg: Record<string, number>) {
+    function setAggregates(newAgg: entityTypes.IAggregate[]) {
       aggregates = newAgg;
       modifiedAt.setTime(Date.now());
     }
-    function setInterpret(newInterpret: Record<string, string>) {
+    function setInterpret(newInterpret: entityTypes.IInterpret[]) {
       interpret = newInterpret;
       modifiedAt.setTime(Date.now());
     }
@@ -44,6 +44,8 @@ export function buildMakeFormData(args: entityTypes.IBuildFormData) {
         fields: () => fields,
         aggregates: () => aggregates,
         interpret: () => interpret,
+        warnings: () => warnings,
+        errors: () => errors,
         createdAt: () => createdAt,
         modifiedAt: () => modifiedAt,
         softDeleted: () => softDeleted,
@@ -65,7 +67,7 @@ export function buildMakeFormData(args: entityTypes.IBuildFormData) {
           aggregates,
           interpret,
           warnings,
-          validation,
+          errors,
           createdAt,
           modifiedAt,
           softDeleted,
