@@ -6,29 +6,46 @@ export function buildInitDb(args: adapterTypes.IBuildInit) {
   const { init } = args;
   const errorPath = "form, adapters, init db";
   return async function initDb() {
-    const { createTableQuery, createMaterialView, selectQuery, operators } =
-      queryGen;
-    // const choiceUDT = createTypeQuery({
-    //   name: "choice",
-    //   version: applicationVersion,
-    //   columns: [
-    //     { name: "label", type: "TEXT" },
-    //     { name: "value", type: "TINYINT" },
-    //   ],
-    // });
-    // const questionUDT = createTypeQuery({
-    //   name: "question",
-    //   version: applicationVersion,
-    //   columns: [
-    //     { name: "question", type: "TEXT" },
-    //     {
-    //       name: "choices",
-    //       type: "SET",
-    //       setType: "UDT",
-    //       udtName: choiceUDT.entityName,
-    //     },
-    //   ],
-    // });
+    const {
+      createTableQuery,
+      createMaterialView,
+      selectQuery,
+      createTypeQuery,
+      operators,
+    } = queryGen;
+    const createAggregateType = createTypeQuery({
+      name: "aggregate",
+      version: applicationVersion,
+      columns: [
+        { name: "title", type: "TEXT" },
+        { name: "aggregate", type: "INT" },
+      ],
+    });
+    const createInterpretType = createTypeQuery({
+      name: "interpret",
+      version: applicationVersion,
+      columns: [
+        { name: "type", type: "TEXT" },
+        { name: "data", type: "TEXT" },
+      ],
+    });
+    const createWarningsType = createTypeQuery({
+      name: "warnings",
+      version: applicationVersion,
+      columns: [
+        { name: "title", type: "TEXT" },
+        { name: "warning", type: "TEXT" },
+      ],
+    });
+    const createErrorsType = createTypeQuery({
+      name: "errors",
+      version: applicationVersion,
+      columns: [
+        { name: "title", type: "TEXT" },
+        { name: "error", type: "TEXT" },
+      ],
+    });
+
     // const createFromStructureTable = createTableQuery({
     //   name: "form_structure",
     //   version: applicationVersion,
@@ -66,40 +83,32 @@ export function buildInitDb(args: adapterTypes.IBuildInit) {
           type: "MAP",
           map: {
             keyType: "TEXT",
-            valueType: "TINYINT",
+            valueType: "TEXT",
           },
         },
         {
           name: "aggregates",
-          type: "MAP",
-          map: {
-            keyType: "TEXT",
-            valueType: "SMALLINT",
-          },
+          type: "SET",
+          setType: "UDT",
+          udtName: createAggregateType.entityName,
         },
         {
           name: "interpret",
-          type: "MAP",
-          map: {
-            keyType: "TEXT",
-            valueType: "TEXT",
-          },
+          type: "SET",
+          setType: "UDT",
+          udtName: createInterpretType.entityName,
         },
         {
           name: "warnings",
-          type: "MAP",
-          map: {
-            keyType: "TEXT",
-            valueType: "TEXT",
-          },
+          type: "SET",
+          setType: "UDT",
+          udtName: createWarningsType.entityName,
         },
         {
-          name: "validation",
-          type: "MAP",
-          map: {
-            keyType: "TEXT",
-            valueType: "TEXT",
-          },
+          name: "errors",
+          type: "SET",
+          setType: "UDT",
+          udtName: createErrorsType.entityName,
         },
         { name: "created_at", type: "TIMESTAMP" },
         { name: "modified_at", type: "TIMESTAMP" },
@@ -131,9 +140,12 @@ export function buildInitDb(args: adapterTypes.IBuildInit) {
         cluster: ["structure_id", "created_at"],
       },
     });
-    // await init({ query: choiceUDT.query, errorPath });
-    // await init({ query: questionUDT.query, errorPath });
-    // await init({ query: createFromStructureTable.query, errorPath });
+    await Promise.all([
+      init({ query: createAggregateType.query, errorPath }),
+      init({ query: createInterpretType.query, errorPath }),
+      init({ query: createWarningsType.query, errorPath }),
+      init({ query: createErrorsType.query, errorPath }),
+    ]);
     await init({ query: createFormDataTable.query, errorPath });
     await init({ query: createStructureIdMV.query, errorPath });
   };
