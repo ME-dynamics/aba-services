@@ -1,3 +1,0 @@
-echo "user: ubuntu";
-echo "pass: taskyn\$753159";
-ssh ubuntu@185.239.106.110
