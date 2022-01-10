@@ -5,12 +5,11 @@ import {
   httpResultServerError,
 } from "aba-node";
 import { strings } from "../config";
-import {
-  usecaseTypes,
-  entityTypes
-} from "../types";
+import { usecaseTypes, entityTypes } from "../types";
 
-export function buildPasswordlessStart(args: usecaseTypes.IBuildPasswordlessStart) {
+export function buildPasswordlessStart(
+  args: usecaseTypes.IBuildPasswordlessStart
+) {
   const { findOtpByPhone, insertOtp, sendOtpBySms, otpGen } = args;
   const { created } = httpResultSuccess;
   const { forbidden, tooManyRequests } = httpResultClientError;
@@ -33,7 +32,9 @@ export function buildPasswordlessStart(args: usecaseTypes.IBuildPasswordlessStar
       softDeleted: false,
     };
   }
-  return async function passwordlessStart(info: usecaseTypes.IPasswordlessStart) {
+  return async function passwordlessStart(
+    info: usecaseTypes.IPasswordlessStart
+  ) {
     const { phoneNumber } = info;
     // find otp in db
     const otpFound = await findOtpByPhone(phoneNumber);
@@ -41,19 +42,23 @@ export function buildPasswordlessStart(args: usecaseTypes.IBuildPasswordlessStar
     const otp: Readonly<entityTypes.IMadeOtp> = otpFound
       ? makeOtp(otpFound)
       : makeOtp(otpInput(phoneNumber)); // using function instead of spread makes it about 50 time faster !
-    // check if it's not permanently blocked
-    // TODO: these to checks only needed when otp found
-    if (otp.get.permanentBlock()) {
-      return forbidden({
-        error: strings.numberPermanentlyBlocked.fa,
-      });
+    // * TODO: these to checks only needed when otp found - DONE
+    if (otpFound) {
+          // check if it's not permanently blocked
+
+      if (otp.get.permanentBlock()) {
+        return forbidden({
+          error: strings.numberPermanentlyBlocked.fa,
+        });
+      }
+      const tempBlockTime = otp.get.otpTempBlockDate();
+      if (tempBlockTime && tempBlockTime.getTime() > Date.now()) {
+        return tooManyRequests({
+          error: strings.tooManyAttempts.fa,
+        });
+      }
     }
-    const tempBlockTime = otp.get.otpTempBlockDate();
-    if (tempBlockTime && tempBlockTime.getTime() > Date.now()) {
-      return tooManyRequests({
-        error: strings.tooManyAttempts.fa,
-      });
-    }
+
     // generate new token and otp code;
     const {
       otpCode,
@@ -72,7 +77,7 @@ export function buildPasswordlessStart(args: usecaseTypes.IBuildPasswordlessStar
     }
     // insert new codes to db;
     await insertOtp(otp.object());
-    
+
     // send otp code by sms
     const smsSent = await sendOtpBySms({ otpCode, phoneNumber });
     if (!smsSent) {
