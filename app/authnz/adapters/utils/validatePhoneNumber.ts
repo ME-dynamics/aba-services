@@ -1,13 +1,19 @@
 import { ErrorFactory } from "aba-node";
 import { parsePhoneNumberFromString } from "libphonenumber-js/max";
-
-export function validatePhoneNumber(phoneNumber: string): boolean {
+import { adaptersTypes } from "../../types";
+export function validatePhoneNumber(
+  phoneNumber: string
+): adaptersTypes.IValidatePhoneNumberResult {
   try {
     const parsedNum = parsePhoneNumberFromString(phoneNumber, "IR");
     if (!parsedNum) {
-      return false;
+      return {
+        isValid: false,
+        phoneNumber: "",
+      };
     }
-    return parsedNum?.isValid() && parsedNum.getType() === "MOBILE";
+    const isValid = parsedNum?.isValid() && parsedNum.getType() === "MOBILE";
+    return { isValid, phoneNumber: parsedNum.number.toString() };
   } catch (error) {
     throw new ErrorFactory({
       name: "validate_phone_number",
