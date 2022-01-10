@@ -23,10 +23,11 @@ export function buildPostCreateProvider(
     if (!success) {
       return error;
     }
-    const { providerPhoneNumber } = httpRequest.body;
-    if (!validatePhoneNumber(providerPhoneNumber)) {
+    const { providerPhoneNumber: providerNumber } = httpRequest.body;
+    const { isValid, phoneNumber } = validatePhoneNumber(providerNumber);
+    if (!isValid) {
       return badRequest({ error: strings.phoneNotValid.fa });
     }
-    return await createProvider({ providerPhoneNumber });
+    return await createProvider({ providerPhoneNumber: phoneNumber });
   };
 }
