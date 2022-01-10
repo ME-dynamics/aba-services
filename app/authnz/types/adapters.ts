@@ -155,6 +155,12 @@ export interface IBuildInitSecret {
   findSecretKeys: tFindSecretKeysFunc;
   insertSecretKeys: tInsertSecretKeysFunc;
 }
+// utils - validate phone number
+
+export interface IValidatePhoneNumberResult {
+  isValid: boolean;
+  phoneNumber: string;
+}
 
 // utils - otp gen
 
