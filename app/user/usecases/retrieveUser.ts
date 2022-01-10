@@ -8,7 +8,7 @@ export function buildRetrieveUser(args: usecaseTypes.IBuildRetrieveUser) {
   return async function retrieveUser(id: string) {
     const user = await findUserById(id);
 
-    if (!user || user.softDeleted || user.role === "admin") {
+    if (!user || user.softDeleted) {
       return notFound({ error: "user not found" });
     }
 

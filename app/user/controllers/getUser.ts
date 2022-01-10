@@ -43,7 +43,7 @@ export function buildGetUser(args: controllerTypes.IBuildGetUser) {
     }
     if (role === "customer" && id) {
       const user = await retrieveUser(id);
-      if (user.payload?.role === "customer") {
+      if (user.payload?.role === "customer" || user.payload?.role === "admin") {
         return forbidden({ error: "action not allowed" });
       }
       return user;
