@@ -12,6 +12,7 @@ import { retrieveBeckAnxiety } from "./retrieveBeckAnxiety";
 import { retrieveBeckDepressionII } from "./retrieveBeckDepressionII";
 import { retrieveMBTI } from "./retrieveMbti";
 import { createMbti } from "./createMbti";
+import { retrieveFormData } from "./retrieveFormData";
 import { applicationVersion } from "../config";
 export async function startFormServer(app: types.tHttpInstance) {
   try {
@@ -68,6 +69,14 @@ export async function startFormServer(app: types.tHttpInstance) {
       }),
       { schema: sSubmitMbti },
       createMbti
+    );
+    app.get(
+      routeGen({
+        version: applicationVersion,
+        routes: ["formData", ":id"],
+        role: "shared",
+      }),
+      retrieveFormData
     );
   } catch (error) {
     console.log(error);

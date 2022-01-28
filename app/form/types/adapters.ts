@@ -12,7 +12,7 @@ export interface IBuildFindFormDataByUserId {
   rowToFormData: tRowToFormDataFunc;
 }
 
-export type findFormDataByUserIdFunc = (
+export type tFindFormDataByUserIdFunc = (
   userId: string
 ) => Promise<IMadeFormDataObject[] | undefined>;
 

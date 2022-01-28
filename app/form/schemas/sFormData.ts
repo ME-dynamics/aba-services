@@ -26,12 +26,11 @@ const error = fluentSchema
 
 export const sFormData = fluentSchema
   .object()
-  .maxProperties(12)
   .prop("id", fluentSchema.string().required())
   .prop("userId", fluentSchema.string().required())
   .prop("structureId", fluentSchema.string().required())
   .prop("formName", fluentSchema.string().required())
-  .prop("fields", fluentSchema.object().minProperties(1).required())
+  .prop("fields", fluentSchema.object().additionalProperties(true))
   .prop("aggregates", fluentSchema.array().items(aggregate).default([]))
   .prop("interpret", fluentSchema.array().items(interpret).default([]))
   .prop("warnings", fluentSchema.array().items(warning).default([]))

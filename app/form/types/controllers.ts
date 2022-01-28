@@ -18,3 +18,13 @@ export type tGetMBTI = types.tRequest<unknown>;
 export type tGetTests = types.tRequest<unknown>;
 export type tGetBeckAnxiety = types.tRequest<unknown>;
 export type tGetBeckDepressionII = types.tRequest<unknown>;
+
+
+interface IGetFormData {
+  Params: {
+    id: string | undefined
+  }
+}
+
+
+export type tGetFormData = types.tRequest<IGetFormData>;

@@ -1,4 +1,4 @@
-import { tInsertFormDataFunc } from "./adapters";
+import { tInsertFormDataFunc, tFindFormDataByUserIdFunc } from "./adapters";
 import { tNEOFields, tQuestionFields, tMbtiFields } from "./entities";
 
 // submit form structure
@@ -27,4 +27,8 @@ export interface IBuildSubmitMBTI {
 export interface ISubmitMBTI {
   userId: string;
   fields: tMbtiFields;
+}
+
+export interface IBuildRetrieveFormData {
+  findFormDataByUserId: tFindFormDataByUserIdFunc;
 }
