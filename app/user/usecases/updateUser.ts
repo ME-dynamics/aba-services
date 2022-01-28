@@ -4,7 +4,7 @@ import { usecaseTypes } from "../types";
 
 export function buildUpdateUser(args: usecaseTypes.IBuildUpdateUser) {
   const { findUserById, insertUser } = args;
-  const { forbidden } = httpResultClientError;
+  const { notFound } = httpResultClientError;
   const { ok } = httpResultSuccess;
   return async function updateUser(
     userId: string,
@@ -12,7 +12,7 @@ export function buildUpdateUser(args: usecaseTypes.IBuildUpdateUser) {
   ) {
     const userFound = await findUserById(userId);
     if (!userFound || userFound.softDeleted) {
-      return forbidden({ error: "action is not allowed" });
+      return notFound({ error: "user not found" });
     }
     const {
       firstName,
@@ -27,15 +27,34 @@ export function buildUpdateUser(args: usecaseTypes.IBuildUpdateUser) {
     } = info;
 
     const user = makeUser(userFound);
-    user.set.firstName(firstName);
-    user.set.lastName(lastName);
-    user.set.username(username);
-    user.set.description(description);
-    user.set.profilePictureUrl(profilePictureUrl);
-    user.set.gender(gender);
-    user.set.birthday(birthday);
-    user.set.address(address);
-    user.set.telephone(telephone);
+    if (firstName) {
+      user.set.firstName(firstName);
+    }
+    if (lastName) {
+      user.set.lastName(lastName);
+    }
+    if (username) {
+      user.set.username(username);
+    }
+    if (description) {
+      user.set.description(description);
+    }
+    if (profilePictureUrl) {
+      user.set.profilePictureUrl(profilePictureUrl);
+    }
+    if (gender) {
+      user.set.gender(gender);
+    }
+    if (birthday) {
+      user.set.birthday(birthday);
+    }
+    if (address) {
+      user.set.address(address);
+    }
+    if (telephone) {
+      user.set.telephone(telephone);
+    }
+
     await insertUser(user.object());
     return ok({
       payload: user.object(),
