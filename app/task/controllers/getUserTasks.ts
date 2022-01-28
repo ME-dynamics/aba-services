@@ -1,4 +1,4 @@
-import { auth, types, httpResultClientError } from "aba-node";
+import { auth, types, httpResultClientError, nullToUndefined } from "aba-node";
 import { retrieveTasksByUserId } from "../usecases";
 import { controllerTypes } from "../types";
 export function buildGetUserTasks(args: controllerTypes.IBuildGetUserTasks) {
@@ -20,7 +20,8 @@ export function buildGetUserTasks(args: controllerTypes.IBuildGetUserTasks) {
       return error;
     }
 
-    const { userId } = httpRequest.params;
+    const userId = nullToUndefined(httpRequest.params.userId);
+
     const { role } = payload;
     if (role === "admin") {
       if (!userId) {
