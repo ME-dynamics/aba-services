@@ -20,16 +20,16 @@ export function buildGetUser(args: controllerTypes.IBuildGetUser) {
     }
     const { role, userId } = payload;
     const { id } = httpRequest.params;
-    if (role === "admin") {
+    if (role === "admin" ) {
       if (!id) {
         return badRequest({ error: "id must be defined" });
       }
       return await retrieveUser(id);
     }
-    if (role === "provider") {
-      if (!id) {
-        return badRequest({ error: "id must be defined" });
-      }
+    if (role === "provider" && id) {
+      // if (!id) {
+      //   return badRequest({ error: "id must be defined" });
+      // }
       // AUTHORIZE
       // USER MUST BE provider customer
       const providerId = await fetchCustomerProvider(id);
