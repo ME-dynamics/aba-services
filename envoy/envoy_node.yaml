@@ -5,7 +5,7 @@ overload_manager:
     typed_config:
       "@type": type.googleapis.com/envoy.extensions.resource_monitors.fixed_heap.v3.FixedHeapConfig
       # TODO: Tune for your system.
-      max_heap_size_bytes: 1073741824  # 1 GiB
+      max_heap_size_bytes: 134217728  # 128 MiB
   actions:
   - name: "envoy.overload_actions.shrink_heap"
     triggers:
@@ -31,28 +31,28 @@ static_resources:
       address:
         socket_address:
           address: 0.0.0.0
-          port_value: 443
+          port_value: 13000
       listener_filters:
       - name: "envoy.filters.listener.tls_inspector"
       per_connection_buffer_limit_bytes: 32768 # 32 KiB
       filter_chains:
       - filter_chain_match:
-        server_names: ["taskyn.ir", "www.taskyn.ir"]
-        transport_socket:
-            name: envoy.transport_sockets.tls
-            typed_config:
-              "@type": type.googleapis.com/envoy.extensions.transport_sockets.tls.v3.DownstreamTlsContext
-              common_tls_context:
-                tls_certificates:
-                - certificate_chain:
-                    filename: /taskyn-ir.crt
-                  private_key:
-                    filename: /taskyn-ir.key
-                  password:
-                    inline_string: "taskyn"
-                alpn_protocols: ["h2"]
-                tls_params:
-                  tls_minimum_protocol_version: "TLSv1_2"
+        # server_names: ["879c-81-19-222-69.ngrok.io"]
+        # transport_socket:
+        #     name: envoy.transport_sockets.tls
+        #     typed_config:
+        #       "@type": type.googleapis.com/envoy.extensions.transport_sockets.tls.v3.DownstreamTlsContext
+        #       common_tls_context:
+        #         tls_certificates:
+        #         - certificate_chain:
+        #             filename: /taskyn-ir.crt
+        #           private_key:
+        #             filename: /taskyn-ir.key
+        #           password:
+        #             inline_string: "taskyn"
+        #         alpn_protocols: ["h2"]
+        #         tls_params:
+        #           tls_minimum_protocol_version: "TLSv1_2"
         filters:
             - name: envoy.filters.network.http_connection_manager
               typed_config:
@@ -96,7 +96,9 @@ static_resources:
                               seconds: 1200
                           from_headers:
                           - name: Authorization
-                            value_prefix: "Bearer " 
+                            value_prefix: "Bearer "
+                          from_cookies:
+                          - authorization
                           forward: true
                           forward_payload_header: x-jwt-payload
                       rules:
@@ -117,8 +119,8 @@ static_resources:
                       "@type": type.googleapis.com/envoy.extensions.filters.http.local_ratelimit.v3.LocalRateLimit
                       stat_prefix: rate_limit
                       token_bucket:
-                        max_tokens: 10
-                        tokens_per_fill: 10
+                        max_tokens: 1000
+                        tokens_per_fill: 100
                         fill_interval: 60s
                       filter_enabled:
                         runtime_key: local_rate_limit
@@ -154,19 +156,21 @@ static_resources:
                   - name: envoy.filters.http.router
                 route_config:
                   name: local_route
+                  
                   virtual_hosts:
                     - name: node_service
-                      domains: ["taskyn.ir", "www.taskyn.ir"]
+                      # domains: ["taskyn.ir", "www.taskyn.ir"]
+                      domains: ["*"]
                       routes:
                         - match: 
-                            prefix: /v1/internal
+                            prefix: /api/v1/internal
                           direct_response: {status: 403, body: {inline_string: forbidden}}
                         - match:
-                            prefix: "/v1"
+                            prefix: "/api/v1"
                           route:
                             cluster: node_app
                     - name: minio_service
-                      domains: ["cdn.taskyn.ir"]
+                      domains: ["storage.taskyn.ir"]
                       routes:
                         - match:
                             prefix: "/"                         
