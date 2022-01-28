@@ -1,5 +1,5 @@
 import { httpResultSuccess } from "aba-node";
-import { makeMBTI, makeFormData } from "../entities";
+import { makeMBTI, makeFormData, mbtiStructure } from "../entities";
 
 import { entityTypes, usecaseTypes } from "../types";
 
@@ -14,8 +14,8 @@ export function buildSubmitMBTI(args: usecaseTypes.IBuildSubmitMBTI) {
     return {
       id: undefined,
       userId,
-      structureId: "MBTI",
-      formName: "MBTI",
+      structureId: mbtiStructure.id,
+      formName: mbtiStructure.title.fa,
       fields,
       aggregates,
       interpret,
