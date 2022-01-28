@@ -34,6 +34,7 @@ export function buildCreateRequest(args: usecaseTypes.IBuildCreateRequest) {
     if (!provider || provider.role !== "provider") {
       return forbidden({ error: "request can be made to providers only" });
     }
+    // TODO: check if user is already a customer of the provider
     // check if request is already made to a provider, not specifically provider of this request
     const requestFound = await findRequestByCustomerId(customerId);
 
