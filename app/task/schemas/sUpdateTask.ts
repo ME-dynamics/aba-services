@@ -2,7 +2,13 @@ import { fluentSchema, errorSchema, statusCodes } from "aba-node";
 
 const body = fluentSchema
   .object()
-  .prop("userId", fluentSchema.string().format("uuid").default(undefined))
+  .prop(
+    "userId",
+    fluentSchema.oneOf([
+      fluentSchema.string().format("uuid"),
+      fluentSchema.null(),
+    ])
+  )
   .prop("taskId", fluentSchema.string().format("uuid").required())
   .prop(
     "content",

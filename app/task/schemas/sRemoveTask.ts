@@ -6,7 +6,7 @@ const params = fluentSchema
   .prop(
     "userId",
     fluentSchema.oneOf([
-      fluentSchema.string().default(undefined),
+      fluentSchema.null(),
       fluentSchema.string().format("uuid"),
     ])
   );

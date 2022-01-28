@@ -4,8 +4,8 @@ const params = fluentSchema
   .object()
   .prop(
     "userId",
-    fluentSchema.oneOf([
-      fluentSchema.string().default(undefined),
+    fluentSchema.anyOf([
+      fluentSchema.null(),
       fluentSchema.string().format("uuid"),
     ])
   );
