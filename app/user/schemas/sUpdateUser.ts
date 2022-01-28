@@ -10,7 +10,10 @@ const body = fluentSchema
   .prop("address", fluentSchema.string().default(undefined))
   .prop("telephone", fluentSchema.string().default(undefined))
   .prop("gender", fluentSchema.enum(["male", "female"]).default(undefined))
-  .prop("birthday", fluentSchema.string().format("date-time").required());
+  .prop(
+    "birthday",
+    fluentSchema.string().format("date-time").default(undefined)
+  );
 
 const response = {
   [statusCodes.OK]: userSchema,

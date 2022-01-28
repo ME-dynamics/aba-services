@@ -4,7 +4,7 @@ import { userSchema } from "./userSchema";
 
 const params = fluentSchema
   .object()
-  .prop("id", fluentSchema.string().format("uuid").default(undefined));
+  .prop("id", fluentSchema.string().default(undefined));
 
 const response = {
   [statusCodes.OK]: userSchema,

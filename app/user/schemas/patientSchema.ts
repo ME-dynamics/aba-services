@@ -40,7 +40,7 @@ export const patient = fluentSchema
       .required()
   )
   .prop("education", education)
-  .prop("academicField", fluentSchema.string().required())
+  .prop("academicField", fluentSchema.string())
   .prop(
     "religion",
     fluentSchema
@@ -63,7 +63,7 @@ export const patient = fluentSchema
   .prop("fatherDeathReason", fluentSchema.string().default(undefined))
   .prop("motherDeathReason", fluentSchema.string().default(undefined))
   .prop("cousinMarriage", fluentSchema.boolean().default(undefined))
-  .prop("siblingsPosition", fluentSchema.number().required())
+  .prop("siblingsPosition", fluentSchema.number().minimum(1).maximum(41).required())
   .prop("siblings", fluentSchema.string().required());
 
 export const patientSchema = fluentSchema
