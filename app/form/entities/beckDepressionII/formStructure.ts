@@ -1,7 +1,7 @@
 import { entityTypes } from "../../types";
 
 export const formStructure: entityTypes.IFormStructure = {
-  id: "bdi-ii",
+  id: "beckDepressionII",
   title: {
     fa: "پرسشنامه افسردگی بک",
     en: "Beck Depression Inventory ( BDI )",
@@ -487,4 +487,3 @@ export const formStructure: entityTypes.IFormStructure = {
     },
   },
 };
-

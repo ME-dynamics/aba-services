@@ -1,7 +1,7 @@
 import { entityTypes } from "../../types";
 
 export const formStructure: entityTypes.IFormStructure = {
-  id: "mbti-87",
+  id: "mbti",
   title: {
     fa: "تیپ نمای مایرز-بریگز",
     en: "Myers-Briggs Type Indicator (MBTI)",

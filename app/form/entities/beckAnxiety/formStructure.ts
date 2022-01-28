@@ -20,7 +20,7 @@ const choices = [
 ];
 
 export const formStructure: entityTypes.IFormStructure = {
-  id: "bai",
+  id: "beckAnxiety",
   title: {
     fa: "پرسشنامه اضطراب بک",
     en: "Beck anxiety inventory (BAI)",
