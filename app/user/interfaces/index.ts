@@ -48,7 +48,7 @@ export function startUserServer(app: types.tHttpInstance) {
     routeGen({
       version: applicationVersion,
       role: "shared",
-      routes: ["patients"],
+      routes: ["patients", ":id"],
     }),
     retrievePatient
   );
