@@ -14,7 +14,6 @@ export function buildPostPasswordlessStart(
   ) {
     const { phoneNumber: number } = httpRequest.body;
     const { isValid, phoneNumber } = validatePhoneNumber(number);
-    console.log(phoneNumber);
     if (!isValid) {
       return badRequest({ error: strings.phoneNotValid.fa });
     }
