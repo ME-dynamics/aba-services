@@ -24,20 +24,26 @@ export function buildFindCustomer(args: adaptersTypes.IBuildFindCustomer) {
     const result = await select({
       query,
       params: { customer_id: customerId },
-      unique: true,
+      unique: false,
       queryOptions: undefined,
       errorPath,
     });
     if (result.rowLength === 0) {
       return undefined;
     }
-    if (result.rowLength === 1) {
-      return rowToCustomer(result.first());
+    const customers = [];
+    for (let index = 0; index < result.rowLength; index++) {
+      const customer = result.rows[index];
+      if (customer.get("soft_deleted")) {
+        continue;
+      }
+      customers.push(rowToCustomer(customer));
     }
-    if (result.rowLength > 1) {
-      console.warn("customer must have only one provider");
-      console.log(JSON.stringify(result.rows, null, 2));
+    if (customers.length > 1) {
+      console.error("More than one customer found");
+      console.log(JSON.stringify(customers, null, 2));
       return undefined;
     }
+    return customers[0];
   };
 }
