@@ -1,0 +1,1 @@
+export { fetchCustomerProvider } from "./fetchCustomerProvider"
