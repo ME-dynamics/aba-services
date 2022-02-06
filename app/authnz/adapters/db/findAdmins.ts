@@ -8,7 +8,7 @@ function selectQueryGen(): string {
     table: "role",
     version: "v1",
     columns: ["*"],
-    where: [equal({ argument: "admin", equals: true })],
+    where: [equal({ argument: "admin", dynamicValue: true })],
   });
   return query;
 }

@@ -13,7 +13,7 @@ function selectQueryGen(): string {
     table: "otp",
     version: "v1",
     columns: ["*"],
-    where: [equal({ argument: "otp_token", self: true })],
+    where: [equal({ argument: "otp_token", dynamicValue: true })],
   });
   return query;
 }

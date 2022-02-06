@@ -8,7 +8,7 @@ function selectQueryGen(): string {
     table: "customers",
     version: "v1",
     columns: ["*"],
-    where: [equal({ argument: "customer_id", self: true })],
+    where: [equal({ argument: "customer_id", dynamicValue: true })],
   });
   return query;
 }
@@ -29,29 +29,18 @@ export function buildFindProviderByCustomerId(
       queryOptions: undefined,
       errorPath,
     });
+    if (result.rowLength > 1) {
+      console.warn("customer can have only one provider");
+      console.log(JSON.stringify(result.rows, null, 2));
+      return undefined;
+    }
     if (result.rowLength === 0) {
       return undefined;
     }
-    if (result.rowLength === 1) {
-      const customer = rowToCustomer(result.first());
-      if (customer.softDeleted || !customer.requestConfirmed) {
-        return undefined;
-      }
-      return customer;
+    const customer = rowToCustomer(result.first());
+    if (!customer.requestConfirmed) {
+      return undefined;
     }
-    const customers: entityTypes.IMadeCustomersObject[] = [];
-    for (let index = 0; index < result.rowLength; index++) {
-      const row = result.rows[index];
-      if (row.get("soft_deleted")) {
-        continue;
-      }
-      customers.push(rowToCustomer(row));
-    }
-    if (customers.length === 1) {
-      return customers[0];
-    }
-    console.warn("customer can have only one provider");
-    console.log(JSON.stringify(customers, null, 2));
-    return undefined;
+    return customer;
   };
 }

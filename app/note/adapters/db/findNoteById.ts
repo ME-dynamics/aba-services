@@ -9,7 +9,7 @@ function selectQueryGen(): string {
     table: "notes",
     version: applicationVersion,
     columns: ["*"],
-    where: [equal({ argument: "id", self: true })],
+    where: [equal({ argument: "id", dynamicValue: true })],
   });
   return query;
 }

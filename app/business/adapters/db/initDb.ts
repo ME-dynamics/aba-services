@@ -13,16 +13,15 @@ export function buildInitDb(args: adaptersTypes.IBuildInit) {
       name: "customers",
       version: applicationVersion,
       columns: [
-        { name: "customer_id", type: "UUID" },
-        { name: "provider_id", type: "UUID" },
-        { name: "business_id", type: "UUID" },
-        { name: "request_confirmed", type: "BOOLEAN" },
-        { name: "name", type: "TEXT" },
-        { name: "profile_picture_url", type: "TEXT" },
-        { name: "description", type: "TEXT" },
-        { name: "created_at", type: "TIMESTAMP" },
-        { name: "modified_at", type: "TIMESTAMP" },
-        { name: "soft_deleted", type: "BOOLEAN" },
+        { columnName: "customer_id", columnType: "UUID" },
+        { columnName: "provider_id", columnType: "UUID" },
+        { columnName: "business_id", columnType: "UUID" },
+        { columnName: "request_confirmed", columnType: "BOOLEAN" },
+        { columnName: "name", columnType: "TEXT" },
+        { columnName: "profile_picture_url", columnType: "TEXT" },
+        { columnName: "description", columnType: "TEXT" },
+        { columnName: "created_at", columnType: "TIMESTAMP" },
+        { columnName: "modified_at", columnType: "TIMESTAMP" },
       ],
       primaryKey: {
         partition: ["customer_id"],
@@ -41,7 +40,7 @@ export function buildInitDb(args: adaptersTypes.IBuildInit) {
       ],
     });
     const createCustomersByProviderIdMV = createMaterialView({
-      name: "customers_by_provider_id",
+      materialViewName: "customers_by_provider_id",
       version: applicationVersion,
       selectQuery: customersSelect,
       primaryKey: {

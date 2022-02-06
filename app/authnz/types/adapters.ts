@@ -57,6 +57,7 @@ export type tFindAdminsFunc = () => Promise<IMadeRoleObject[] | undefined>;
 
 export interface IBuildDeleteAdmin {
   remove: types.tDbDeleteFunc;
+  insert: types.tDbUpsertFunc;
 }
 export type tDeleteAdminFunc = (otpId: string) => Promise<void>;
 // find private secret key

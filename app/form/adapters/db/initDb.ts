@@ -14,35 +14,35 @@ export function buildInitDb(args: adapterTypes.IBuildInit) {
       operators,
     } = queryGen;
     const createAggregateType = createTypeQuery({
-      name: "aggregate",
+      typeName: "aggregate",
       version: applicationVersion,
       columns: [
-        { name: "title", type: "TEXT" },
-        { name: "aggregate", type: "INT" },
+        { columnName: "title", columnType: "TEXT" },
+        { columnName: "aggregate", columnType: "INT" },
       ],
     });
     const createInterpretType = createTypeQuery({
-      name: "interpret",
+      typeName: "interpret",
       version: applicationVersion,
       columns: [
-        { name: "type", type: "TEXT" },
-        { name: "data", type: "TEXT" },
+        { columnName: "type", columnType: "TEXT" },
+        { columnName: "data", columnType: "TEXT" },
       ],
     });
     const createWarningsType = createTypeQuery({
-      name: "warnings",
+      typeName: "warnings",
       version: applicationVersion,
       columns: [
-        { name: "title", type: "TEXT" },
-        { name: "warning", type: "TEXT" },
+        { columnName: "title", columnType: "TEXT" },
+        { columnName: "warning", columnType: "TEXT" },
       ],
     });
     const createErrorsType = createTypeQuery({
-      name: "errors",
+      typeName: "errors",
       version: applicationVersion,
       columns: [
-        { name: "title", type: "TEXT" },
-        { name: "error", type: "TEXT" },
+        { columnName: "title", columnType: "TEXT" },
+        { columnName: "error", columnType: "TEXT" },
       ],
     });
 
@@ -74,45 +74,44 @@ export function buildInitDb(args: adapterTypes.IBuildInit) {
       name: "form_data",
       version: applicationVersion,
       columns: [
-        { name: "id", type: "UUID" },
-        { name: "user_id", type: "UUID" },
-        { name: "structure_id", type: "TEXT" },
-        { name: "form_name", type: "TEXT" },
+        { columnName: "id", columnType: "UUID" },
+        { columnName: "user_id", columnType: "UUID" },
+        { columnName: "structure_id", columnType: "TEXT" },
+        { columnName: "form_name", columnType: "TEXT" },
         {
-          name: "fields",
-          type: "MAP",
-          map: {
+          columnName: "fields",
+          columnType: "MAP",
+          mapType: {
             keyType: "TEXT",
             valueType: "TEXT",
           },
         },
         {
-          name: "aggregates",
-          type: "SET",
+          columnName: "aggregates",
+          columnType: "SET",
           setType: "UDT",
-          udtName: createAggregateType.entityName,
+          udtName: createAggregateType.name,
         },
         {
-          name: "interpret",
-          type: "SET",
+          columnName: "interpret",
+          columnType: "SET",
           setType: "UDT",
-          udtName: createInterpretType.entityName,
+          udtName: createInterpretType.name,
         },
         {
-          name: "warnings",
-          type: "SET",
+          columnName: "warnings",
+          columnType: "SET",
           setType: "UDT",
-          udtName: createWarningsType.entityName,
+          udtName: createWarningsType.name,
         },
         {
-          name: "errors",
-          type: "SET",
+          columnName: "errors",
+          columnType: "SET",
           setType: "UDT",
-          udtName: createErrorsType.entityName,
+          udtName: createErrorsType.name,
         },
-        { name: "created_at", type: "TIMESTAMP" },
-        { name: "modified_at", type: "TIMESTAMP" },
-        { name: "soft_deleted", type: "BOOLEAN" },
+        { columnName: "created_at", columnType: "TIMESTAMP" },
+        { columnName: "modified_at", columnType: "TIMESTAMP" },
       ],
       primaryKey: {
         partition: ["user_id"],
@@ -132,7 +131,7 @@ export function buildInitDb(args: adapterTypes.IBuildInit) {
       ],
     });
     const createStructureIdMV = createMaterialView({
-      name: "form_data_by_structure",
+      materialViewName: "form_data_by_structure",
       version: applicationVersion,
       selectQuery: structureMVQuery,
       primaryKey: {

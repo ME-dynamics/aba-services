@@ -8,8 +8,8 @@ function selectQueryGen(): string {
   const query = selectQuery({
     table: "form_data",
     version: applicationVersion,
-    columns: ["*"],
-    where: [equal({ argument: "user_id", self: true })],
+    columns: ["*"], // TODO: return only the columns that are needed
+    where: [equal({ argument: "user_id", dynamicValue: true })],
   });
   return query;
 }
@@ -36,11 +36,8 @@ export function buildFindFormDataByUserId(
     const formsData: entityTypes.IMadeFormDataObject[] = [];
     for (let index = 0; index < result.rows.length; index++) {
       const formData = result.rows[index];
-      if (formData.get("soft_deleted")) {
-        continue;
-      }
       formsData.push(rowToFormData(formData));
     }
-    return formsData.length > 0 ? formsData : undefined;
+    return formsData;
   };
 }

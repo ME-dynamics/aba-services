@@ -8,7 +8,7 @@ function selectQueryGen(): string {
     table: "patients",
     version: "v1",
     columns: ["*"],
-    where: [equal({ argument: "user_id", self: true })],
+    where: [equal({ argument: "user_id", dynamicValue: true })],
   });
   return query;
 }

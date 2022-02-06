@@ -1,5 +1,5 @@
 import { queryGen } from "aba-node";
-import { applicationVersion } from "../../config" 
+import { applicationVersion } from "../../config";
 import { adaptersTypes, entityTypes } from "../../types";
 
 function selectQueryGen(): string {
@@ -9,7 +9,10 @@ function selectQueryGen(): string {
     table: "customers_by_provider_id",
     version: applicationVersion,
     columns: ["*"],
-    where: [equal({ argument: "provider_id", self: true }), equal({argument: "request_confirmed", equals: false})],
+    where: [
+      equal({ argument: "provider_id", dynamicValue: true }),
+      equal({ argument: "request_confirmed", dynamicValue: false }),
+    ],
   });
   return query;
 }
@@ -37,13 +40,7 @@ export function buildFindRequestsByProviderId(
     const requests: entityTypes.IMadeCustomersObject[] = [];
     for (let index = 0; index < length; index++) {
       const row = result.rows[index];
-      if (row.get("soft_deleted")) {
-        continue;
-      }
       requests.push(rowToCustomer(row));
-    }
-    if (requests.length === 0) {
-      return undefined;
     }
     return requests;
   };

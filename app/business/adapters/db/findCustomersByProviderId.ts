@@ -9,8 +9,8 @@ function selectQueryGen(): string {
     version: "v1",
     columns: ["*"],
     where: [
-      equal({ argument: "provider_id", self: true }),
-      equal({ argument: "request_confirmed", equals: true }),
+      equal({ argument: "provider_id", dynamicValue: true }),
+      equal({ argument: "request_confirmed", dynamicValue: true }),
     ],
   });
   return query;
@@ -39,13 +39,7 @@ export function buildFindCustomersByProviderId(
     const providerCustomers: entityTypes.IMadeCustomersObject[] = [];
     for (let index = 0; index < length; index++) {
       const row = result.rows[index];
-      if (row.get("soft_deleted")) {
-        continue;
-      }
       providerCustomers.push(rowToCustomer(row));
-    }
-    if (providerCustomers.length === 0) {
-      return undefined;
     }
     return providerCustomers;
   };

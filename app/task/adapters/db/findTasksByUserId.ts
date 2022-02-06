@@ -8,7 +8,7 @@ function selectQueryGen(): string {
     table: "tasks",
     version: "v1",
     columns: ["*"],
-    where: [equal({ argument: "user_id", self: true })],
+    where: [equal({ argument: "user_id", dynamicValue: true })],
   });
   return query;
 }
@@ -36,9 +36,6 @@ export function buildFindTasksByUserId(
     const tasks: entityTypes.IMadeTaskObject[] = [];
     for (let index = 0; index < length; index++) {
       const task = rowToTask(result.rows[index]);
-      if (task.softDeleted) {
-        continue;
-      }
       tasks.push(task);
     }
     return tasks;

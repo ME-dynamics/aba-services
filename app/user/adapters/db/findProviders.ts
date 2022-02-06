@@ -8,7 +8,7 @@ function selectQueryGen(): string {
     table: "providers",
     version: "v1",
     columns: ["*"],
-    where: [equal({argument: "role", equals: "'provider'"})],
+    where: [equal({ argument: "role", staticValue: "'provider'" })],
   });
   return query;
 }
@@ -34,9 +34,6 @@ export function buildFindProviders(args: adapterTypes.IBuildFindProviders) {
     const providers: entityTypes.IMadeUserObject[] = [];
     for (let index = 0; index < length; index++) {
       const row = result.rows[index];
-      if (row.get("soft_deleted")) {
-        continue;
-      }
       providers.push(rowToUser(row));
     }
     return providers;
