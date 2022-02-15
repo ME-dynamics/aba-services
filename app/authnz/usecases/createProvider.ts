@@ -8,7 +8,7 @@ export function buildCreateProvider(args: usecaseTypes.IBuildCreateProvider) {
   function otpInput(phoneNumber: string): entityTypes.IOtp {
     return {
       id: undefined,
-      deviceId: undefined,
+      // deviceId: undefined, 
       phoneNumber,
       phoneConfirm: false,
       otpCode: undefined,
@@ -19,7 +19,6 @@ export function buildCreateProvider(args: usecaseTypes.IBuildCreateProvider) {
       permanentBlock: false,
       createdAt: undefined,
       modifiedAt: undefined,
-      softDeleted: false,
     };
   }
   function roleInput(otpId: string): entityTypes.IRole {
@@ -39,7 +38,7 @@ export function buildCreateProvider(args: usecaseTypes.IBuildCreateProvider) {
       accountantAL: 0,
       createdAt: undefined,
       modifiedAt: undefined,
-      softDeleted: false,
+      // softDeleted: false,
     };
   }
   return async function createProvider(info: usecaseTypes.ICreateProvider) {
