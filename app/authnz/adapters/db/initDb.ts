@@ -11,7 +11,6 @@ export function buildInitDb(args: adaptersTypes.IBuildInit) {
     version: "v1",
     columns: [
       { columnName: "id", columnType: "UUID" },
-      { columnName: "device_id", columnType: "TEXT" }, // TODO: move device id to token table
       { columnName: "phone_number", columnType: "TEXT" },
       { columnName: "phone_confirm", columnType: "BOOLEAN" },
       { columnName: "otp_code", columnType: "TEXT" },
@@ -80,6 +79,7 @@ export function buildInitDb(args: adaptersTypes.IBuildInit) {
     version: "v1",
     columns: [
       { columnName: "otp_id", columnType: "UUID" },
+      { columnName: "device_id", columnType: "TEXT" },
       { columnName: "refresh_token", columnType: "TEXT" },
       { columnName: "jwt", columnType: "TEXT" },
       { columnName: "jwt_key", columnType: "TEXT" },
@@ -93,6 +93,7 @@ export function buildInitDb(args: adaptersTypes.IBuildInit) {
     ],
     primaryKey: {
       partition: ["otp_id"],
+      cluster: ["device_id"],
     },
   });
 
