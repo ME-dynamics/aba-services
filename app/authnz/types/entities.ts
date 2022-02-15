@@ -8,12 +8,10 @@ export interface IGeneratedOtp {
 }
 export interface IBuildMakeOtp {
   uuid: () => string;
-  nanoid: (size: number) => string;
 }
 
 export interface IOtp {
   id: string | undefined;
-  deviceId: string | undefined;
   phoneNumber: string; // required
   phoneConfirm: boolean;
   otpCode: string | undefined; // hashed otp generated number
@@ -24,11 +22,9 @@ export interface IOtp {
   permanentBlock: boolean;
   createdAt: Date | undefined;
   modifiedAt: Date | undefined;
-  softDeleted: boolean;
 }
 export interface IMadeOtpObject extends IOtp {
   id: string;
-  deviceId: string;
   createdAt: Date;
   modifiedAt: Date;
 }
@@ -40,7 +36,7 @@ export interface IOtpGen {
 export interface IMadeOtp {
   get: {
     id: () => string;
-    deviceId: () => string;
+
     phoneNumber: () => string;
     phoneConfirm: () => boolean;
     otpCode: () => string | undefined;
@@ -51,7 +47,6 @@ export interface IMadeOtp {
     permanentBlock: () => boolean;
     createdAt: () => Date;
     modifiedAt: () => Date;
-    softDeleted: () => boolean;
   };
   set: {
     phoneConfirmed: () => void;
@@ -61,8 +56,6 @@ export interface IMadeOtp {
       newOtpTokenValidDate: number,
       newOtpTempBlockDate: number
     ) => void;
-    remove: () => void;
-    restore: () => void;
   };
   object: () => IMadeOtpObject;
 }
@@ -71,10 +64,12 @@ export interface IMadeOtp {
 
 export interface IBuildMakeToken {
   hoursFromNow: typeof time.hoursFromNow;
+  nanoid: (size: number) => string;
 }
 
 export interface IToken {
   otpId: string;
+  deviceId: string | undefined;
   refreshToken: string;
   jwt: string;
   jwtKey: string;
@@ -85,7 +80,6 @@ export interface IToken {
   permanentBlock: boolean;
   createdAt: Date | undefined;
   modifiedAt: Date | undefined;
-  softDeleted: boolean;
 }
 
 export interface IMadeTokenObject extends IToken {
@@ -96,6 +90,7 @@ export interface IMadeTokenObject extends IToken {
 export interface IMadeToken {
   get: {
     otpId: () => string;
+    deviceId: () => string;
     refreshToken: () => string;
     jwt: () => string;
     jwtKey: () => string;
@@ -105,11 +100,6 @@ export interface IMadeToken {
     permanentBlock: () => boolean;
     createdAt: () => Date;
     modifiedAt: () => Date;
-    softDeleted: () => boolean;
-  };
-  set: {
-    remove: () => void;
-    restore: () => void;
   };
   object: () => IMadeTokenObject;
 }
@@ -145,7 +135,6 @@ export interface IRole {
   accountantAL: number;
   createdAt: Date | undefined;
   modifiedAt: Date | undefined;
-  softDeleted: boolean;
 }
 export interface IMadeRoleObject extends IRole {
   createdAt: Date;
@@ -169,7 +158,6 @@ export interface IMadeRole {
     role: () => tRole;
     createdAt: () => Date;
     modifiedAt: () => Date;
-    softDeleted: () => boolean;
   };
   set: {
     admin: (isAdmin: boolean) => void;
@@ -184,8 +172,6 @@ export interface IMadeRole {
     customerAL: (newAccessLevel: number) => void;
     supportAL: (newAccessLevel: number) => void;
     accountantAL: (newAccessLevel: number) => void;
-    remove: () => void;
-    restore: () => void;
   };
   object: () => IMadeRoleObject;
 }
