@@ -10,12 +10,11 @@ export function buildMakeOtp(args: entityTypes.IBuildMakeOtp) {
   function isPermanentlyBlocked(otpCodeResendCount: number): boolean {
     return otpCodeResendCount > 9;
   }
-  const { nanoid, uuid } = args;
+  const { uuid } = args;
   return function makeOtp(otp: entityTypes.IOtp) {
     const {
       id = uuid(),
       phoneNumber,
-      deviceId = nanoid(16),
       createdAt = new Date(),
       modifiedAt = new Date(),
     } = otp;
@@ -27,7 +26,6 @@ export function buildMakeOtp(args: entityTypes.IBuildMakeOtp) {
       otpCodeResendCount = 0,
       otpTempBlockDate,
       permanentBlock,
-      softDeleted,
     } = otp;
 
     permanentBlock = isPermanentlyBlocked(otpCodeResendCount);
@@ -69,19 +67,9 @@ export function buildMakeOtp(args: entityTypes.IBuildMakeOtp) {
         : (otpTempBlockDate = new Date(newOtpTempBlockDate));
       modifiedAt.setTime(Date.now());
     }
-
-    function remove() {
-      softDeleted = true;
-      modifiedAt.setTime(Date.now());
-    }
-    function restore() {
-      softDeleted = false;
-      modifiedAt.setTime(Date.now());
-    }
     const madeOtp: Readonly<entityTypes.IMadeOtp> = {
       get: {
         id: () => id,
-        deviceId: () => deviceId,
         phoneNumber: () => phoneNumber,
         phoneConfirm: () => phoneConfirm,
         otpCode: () => otpCode,
@@ -92,18 +80,14 @@ export function buildMakeOtp(args: entityTypes.IBuildMakeOtp) {
         permanentBlock: () => permanentBlock,
         createdAt: () => createdAt,
         modifiedAt: () => modifiedAt,
-        softDeleted: () => softDeleted,
       },
       set: {
         phoneConfirmed,
         otp: setOtp,
-        remove,
-        restore,
       },
       object: () => {
         return {
           id,
-          deviceId,
           phoneNumber,
           phoneConfirm,
           otpCode,
@@ -114,7 +98,6 @@ export function buildMakeOtp(args: entityTypes.IBuildMakeOtp) {
           permanentBlock,
           createdAt,
           modifiedAt,
-          softDeleted,
         };
       },
     };
