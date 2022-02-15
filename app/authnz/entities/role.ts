@@ -1,7 +1,9 @@
 import { entityTypes } from "../types";
 
 export function buildMakeRole() {
-  return function makeRole(role: entityTypes.IRole): Readonly<entityTypes.IMadeRole> {
+  return function makeRole(
+    role: entityTypes.IRole
+  ): Readonly<entityTypes.IMadeRole> {
     const { otpId, createdAt = new Date(), modifiedAt = new Date() } = role;
     let {
       admin = false,
@@ -16,7 +18,6 @@ export function buildMakeRole() {
       customerAL = 0,
       supportAL = 0,
       accountantAL = 0,
-      softDeleted = false,
     } = role;
     // Getters
     function getRole(): entityTypes.tRole {
@@ -90,14 +91,7 @@ export function buildMakeRole() {
       accountantAL = newAccessLevel;
       modifiedAt.setTime(Date.now());
     }
-    function remove() {
-      softDeleted = true;
-      modifiedAt.setTime(Date.now());
-    }
-    function restore() {
-      softDeleted = false;
-      modifiedAt.setTime(Date.now());
-    }
+
     const madeRole: Readonly<entityTypes.IMadeRole> = {
       get: {
         otpId: () => otpId,
@@ -116,7 +110,6 @@ export function buildMakeRole() {
         role: getRole,
         createdAt: () => createdAt,
         modifiedAt: () => modifiedAt,
-        softDeleted: () => softDeleted,
       },
       set: {
         admin: setAdmin,
@@ -131,8 +124,6 @@ export function buildMakeRole() {
         customerAL: setCustomerAL,
         supportAL: setSupportAL,
         accountantAL: setAccountantAL,
-        remove,
-        restore,
       },
       object: () => {
         return {
@@ -151,7 +142,6 @@ export function buildMakeRole() {
           accountantAL,
           createdAt,
           modifiedAt,
-          softDeleted,
         };
       },
     };
