@@ -15,6 +15,5 @@ export function rowToOtp(row: types.tRow): entityTypes.IMadeOtpObject {
     permanentBlock: row.get("permanent_block"),
     createdAt: row.get("created_at"),
     modifiedAt: row.get("modified_at"),
-    softDeleted: row.get("soft_deleted"),
   };
 }
