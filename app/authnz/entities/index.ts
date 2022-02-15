@@ -7,12 +7,12 @@ import { buildMakeToken } from "./token";
 import { buildMakeRole } from "./role";
 
 export const makeOtp = buildMakeOtp({
-  nanoid,
   uuid: v4,
 });
 
 export const makeToken = buildMakeToken({
   hoursFromNow: time.hoursFromNow,
+  nanoid,
 });
 
 export const makeRole = buildMakeRole();
