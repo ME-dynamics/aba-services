@@ -22,7 +22,6 @@ function insertQueryGen() {
       { column: "accountant_al", dynamicValue: true },
       { column: "created_at", dynamicValue: true },
       { column: "modified_at", dynamicValue: true },
-      { column: "soft_deleted", dynamicValue: true },
     ],
   });
   return query;
@@ -51,7 +50,6 @@ export function buildInsertRole(args: adaptersTypes.IBuildInsert) {
       accountantAL,
       createdAt,
       modifiedAt,
-      softDeleted,
     } = roleObject;
     const params = {
       otp_id: otpId,
@@ -69,14 +67,9 @@ export function buildInsertRole(args: adaptersTypes.IBuildInsert) {
       accountant_al: accountantAL,
       created_at: createdAt,
       modified_at: modifiedAt,
-      soft_deleted: softDeleted,
     };
     await Promise.all([
-      insert({
-        query,
-        params,
-        errorPath,
-      }),
+      insert({ query, params, errorPath }),
       insert({ query: logQuery, params, errorPath }),
     ]);
   };
