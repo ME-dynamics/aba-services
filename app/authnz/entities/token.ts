@@ -1,6 +1,6 @@
 import { entityTypes } from "../types";
 export function buildMakeToken(args: entityTypes.IBuildMakeToken) {
-  const { hoursFromNow } = args;
+  const { hoursFromNow, nanoid } = args;
   const errorPath = "authnz, entities, token";
   function isPermanentlyBlocked(tokenReCreateCount: number) {
     return tokenReCreateCount > 6;
@@ -8,6 +8,7 @@ export function buildMakeToken(args: entityTypes.IBuildMakeToken) {
   return function makeToken(token: entityTypes.IToken) {
     const {
       otpId,
+      deviceId = nanoid(32),
       createdAt = new Date(),
       modifiedAt = new Date(),
       refreshToken,
@@ -20,7 +21,6 @@ export function buildMakeToken(args: entityTypes.IBuildMakeToken) {
       tokenReCreateCount = 0,
       tokenTempBlock,
       permanentBlock = false,
-      softDeleted,
     } = token;
 
     // increase token generation count per otp id
@@ -36,18 +36,11 @@ export function buildMakeToken(args: entityTypes.IBuildMakeToken) {
     tokenTempBlock = new Date(hoursFromNow(2, errorPath));
 
     // * Setters
-    function remove() {
-      softDeleted = true;
-      modifiedAt.setTime(Date.now());
-    }
-    function restore() {
-      softDeleted = false;
-      modifiedAt.setTime(Date.now());
-    }
 
     const madeToken: Readonly<entityTypes.IMadeToken> = {
       get: {
         otpId: () => otpId,
+        deviceId: () => deviceId,
         refreshToken: () => refreshToken,
         jwt: () => jwt,
         jwtKey: () => jwtKey,
@@ -57,15 +50,11 @@ export function buildMakeToken(args: entityTypes.IBuildMakeToken) {
         permanentBlock: () => permanentBlock,
         createdAt: () => createdAt,
         modifiedAt: () => modifiedAt,
-        softDeleted: () => softDeleted,
-      },
-      set: {
-        remove,
-        restore,
       },
       object: () => {
         return {
           otpId,
+          deviceId,
           refreshToken,
           jwt,
           jwtKey,
@@ -76,7 +65,6 @@ export function buildMakeToken(args: entityTypes.IBuildMakeToken) {
           tokenTempBlock,
           createdAt,
           modifiedAt,
-          softDeleted,
         };
       },
     };
