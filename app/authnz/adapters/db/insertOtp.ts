@@ -12,8 +12,7 @@ function insertQueryGen() {
     table: "otp",
     version: "v1",
     values: [
-      { column: "id", dynamicValue: true },
-      { column: "device_id", dynamicValue: true },
+      { column: "id", dynamicValue: true }, 
       { column: "phone_number", dynamicValue: true },
       { column: "phone_confirm", dynamicValue: true },
       { column: "otp_code", dynamicValue: true },
@@ -38,7 +37,6 @@ export function buildInsertOtp(args: adaptersTypes.IBuildInsert) {
   ): Promise<void> {
     const {
       id,
-      deviceId,
       phoneNumber,
       phoneConfirm,
       otpCode,
@@ -52,7 +50,6 @@ export function buildInsertOtp(args: adaptersTypes.IBuildInsert) {
     } = otpObject;
     const params = {
       id,
-      device_id: deviceId,
       phone_number: phoneNumber,
       phone_confirm: phoneConfirm,
       otp_code: undefinedToNull(otpCode),
