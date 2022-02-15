@@ -13,6 +13,8 @@ export function validatePhoneNumber(
       };
     }
     const isValid = parsedNum?.isValid() && parsedNum.getType() === "MOBILE";
+    // return parsed phone number to avoid duplicate phone numbers
+    // for example: using same phone number with persian and english digits
     return { isValid, phoneNumber: parsedNum.number.toString() };
   } catch (error) {
     throw new ErrorFactory({
