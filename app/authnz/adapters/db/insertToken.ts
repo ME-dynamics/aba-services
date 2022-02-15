@@ -9,6 +9,7 @@ function insertQueryGen() {
     version: "v1",
     values: [
       { column: "otp_id", dynamicValue: true },
+      { column: "device_id", dynamicValue: true },
       { column: "refresh_token", dynamicValue: true },
       { column: "jwt", dynamicValue: true },
       { column: "jwt_key", dynamicValue: true },
@@ -33,6 +34,7 @@ export function buildInsertToken(args: adaptersTypes.IBuildInsert) {
   ): Promise<void> {
     const {
       otpId,
+      deviceId,
       refreshToken,
       jwt,
       jwtKey,
@@ -46,6 +48,7 @@ export function buildInsertToken(args: adaptersTypes.IBuildInsert) {
     } = tokenObject;
     const params = {
       otp_id: otpId,
+      device_id: deviceId,
       refresh_token: refreshToken,
       jwt,
       jwt_key: jwtKey,
