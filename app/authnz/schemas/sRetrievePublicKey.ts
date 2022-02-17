@@ -1,4 +1,4 @@
-import { statusCodes, fluentSchema, errorSchema } from "aba-node";
+import { statusCodes, fluentSchema, errorSchemaObject } from "aba-node";
 
 const key = fluentSchema
   .object()
@@ -13,8 +13,7 @@ const response = {
   [statusCodes.OK]: fluentSchema
     .object()
     .prop("keys", fluentSchema.array().items(key)),
-  [statusCodes.NOT_FOUND]: errorSchema,
-  [statusCodes.INTERNAL_SERVER_ERROR]: errorSchema,
+  ...errorSchemaObject,
 };
 
 export const sRetrievePublicKey = {

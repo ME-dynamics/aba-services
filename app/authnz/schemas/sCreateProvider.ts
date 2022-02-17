@@ -1,10 +1,10 @@
-import { statusCodes, fluentSchema, errorSchema } from "aba-node";
+import { statusCodes, fluentSchema, errorSchemaObject } from "aba-node";
 
 const body = fluentSchema
   .object()
   .prop(
     "providerPhoneNumber",
-    fluentSchema.string().id("irPhone").required().minLength(10).maxLength(14)
+    fluentSchema.string().required().minLength(10).maxLength(14)
   );
 
 const createProviderResult = fluentSchema
@@ -20,8 +20,7 @@ const createProviderResult = fluentSchema
 const response = {
   [statusCodes.CREATED]: createProviderResult,
   [statusCodes.OK]: createProviderResult,
-  [statusCodes.UNAUTHORIZED]: errorSchema,
-  [statusCodes.INTERNAL_SERVER_ERROR]: errorSchema,
+  ...errorSchemaObject
 };
 
 export const sCreateProvider = {
