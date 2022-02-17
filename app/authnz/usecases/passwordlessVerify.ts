@@ -1,6 +1,6 @@
 import { makeOtp, makeToken, makeRole } from "../entities";
-import { httpResultSuccess, httpResultClientError } from "aba-node";
-import { strings } from "../config"
+import { httpResult } from "aba-node";
+import { strings } from "../config";
 import { usecaseTypes, entityTypes } from "../types";
 
 export function buildPasswordlessVerify(
@@ -8,6 +8,7 @@ export function buildPasswordlessVerify(
 ) {
   const {
     findOtpByToken,
+    findDeviceIdByPhone,
     signJwt,
     verifyHash,
     createUser,
@@ -18,8 +19,8 @@ export function buildPasswordlessVerify(
     findRole,
     insertRole,
   } = args;
-  const { ok } = httpResultSuccess;
-  const { badRequest, forbidden } = httpResultClientError;
+  const { ok } = httpResult.success;
+  const { badRequest, forbidden } = httpResult.clientError;
   function roleInput(otpId: string): entityTypes.IRole {
     return {
       otpId,
@@ -37,24 +38,30 @@ export function buildPasswordlessVerify(
       accountantAL: 0,
       createdAt: undefined,
       modifiedAt: undefined,
-      softDeleted: false,
     };
   }
   return async function passwordlessVerify(
     info: usecaseTypes.IPasswordlessVerify
   ) {
-    const { otpCode, otpToken } = info;
+    const { otpCode, otpToken, deviceId } = info;
     const otpFound = await findOtpByToken(otpToken);
     if (!otpFound) {
-      return badRequest({ error: strings.codeOrOtpTokenNotValid.fa });
+      return badRequest({ error: strings.tokenNotFoundOrValid.fa });
     }
+    const deviceIdFound = await findDeviceIdByPhone({
+      deviceId,
+      phoneNumber: otpFound.phoneNumber,
+    });
+    if (!deviceIdFound) {
+      return badRequest({ error: strings.tokenNotFoundOrValid.fa });
+    }
+    // check if it's not blocked
     if (otpFound.permanentBlock) {
       return forbidden({
         error: strings.numberPermanentlyBlocked.fa,
       });
     }
     const otp = makeOtp(otpFound);
-    // check if it's not blocked
 
     // check if otp code was generated
     const otpCodeHash = otp.get.otpCode();
@@ -80,7 +87,10 @@ export function buildPasswordlessVerify(
       phoneNumber: otp.get.phoneNumber(),
     });
 
-    const tokenFound = await findTokenByUserId(otp.get.id());
+    const tokenFound = await findTokenByUserId({
+      userId: otp.get.id(),
+      deviceId: deviceIdFound.deviceId,
+    });
     if (tokenFound?.permanentBlock) {
       return forbidden({ error: strings.numberPermanentlyBlocked.fa });
     }
@@ -97,6 +107,7 @@ export function buildPasswordlessVerify(
       await tokenGen(jwt);
     const token = makeToken({
       otpId: otp.get.id(),
+      deviceId: tokenFound?.deviceId || deviceIdFound.deviceId,
       jwt: hashedJwt,
       jwtExpiresAt: new Date(jwtExp),
       jwtKey,
@@ -107,7 +118,6 @@ export function buildPasswordlessVerify(
       tokenReCreateCount: tokenFound?.tokenReCreateCount || 0,
       createdAt: tokenFound?.createdAt,
       modifiedAt: undefined,
-      softDeleted: false,
     });
 
     // TODO: check for database integrity later
@@ -120,6 +130,7 @@ export function buildPasswordlessVerify(
 
     return ok<usecaseTypes.IPasswordlessVerifyResult>({
       payload: {
+        deviceId: token.get.deviceId(),
         jwtToken: jwt,
         refreshToken,
         jwtTokenExpiresAt: jwtExp,
