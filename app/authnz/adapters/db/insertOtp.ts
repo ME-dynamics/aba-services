@@ -12,7 +12,7 @@ function insertQueryGen() {
     table: "otp",
     version: "v1",
     values: [
-      { column: "id", dynamicValue: true }, 
+      { column: "id", dynamicValue: true },
       { column: "phone_number", dynamicValue: true },
       { column: "phone_confirm", dynamicValue: true },
       { column: "otp_code", dynamicValue: true },
@@ -62,16 +62,8 @@ export function buildInsertOtp(args: adaptersTypes.IBuildInsert) {
       modified_at: modifiedAt,
     };
     await Promise.all([
-      insert({
-        query,
-        params,
-        errorPath,
-      }),
-      insert({
-        query: logQuery,
-        params,
-        errorPath,
-      }),
+      insert({ query, params, errorPath }),
+      insert({ query: logQuery, params, errorPath }),
     ]);
   };
 }
