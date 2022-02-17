@@ -1,9 +1,5 @@
 import { makeToken } from "../entities";
-import {
-  httpResultClientError,
-  httpResultServerError,
-  httpResultSuccess,
-} from "aba-node";
+import { httpResult } from "aba-node";
 import { strings } from "../config";
 import { usecaseTypes } from "../types";
 
@@ -16,13 +12,13 @@ export function buildRefresh(args: usecaseTypes.IBuildRefresh) {
     tokenGen,
     verifyHash,
   } = args;
-  const { ok } = httpResultSuccess;
-  const { notFound, forbidden } = httpResultClientError;
-  const { internalServerError } = httpResultServerError;
+  const { ok } = httpResult.success;
+  const { notFound, forbidden } = httpResult.clientError;
+  const { internalServerError } = httpResult.serverError;
   return async function refresh(refresh: usecaseTypes.IRefresh) {
-    const { userId, xJwtToken, xRefreshToken } = refresh;
-    const tokenFound = await findTokenByUserId(userId);
-    if (!tokenFound || tokenFound.softDeleted) {
+    const { userId, xJwtToken, xRefreshToken, deviceId } = refresh;
+    const tokenFound = await findTokenByUserId({ userId, deviceId });
+    if (!tokenFound) {
       return notFound({ error: strings.tokenNotFoundOrValid.fa });
     }
     if (tokenFound.permanentBlock) {
@@ -57,17 +53,17 @@ export function buildRefresh(args: usecaseTypes.IBuildRefresh) {
       await tokenGen(jwt);
     const token = makeToken({
       otpId: userId,
+      deviceId: tokenFound.deviceId,
       jwt: hashedJwt,
       jwtExpiresAt: new Date(jwtExp),
       jwtKey,
       refreshToken: hashedRefreshToken,
       refreshExpiresAt: new Date(refreshExpiresAt),
-      permanentBlock: tokenFound?.permanentBlock || false,
-      tokenTempBlock: tokenFound?.tokenTempBlock,
-      tokenReCreateCount: tokenFound?.tokenReCreateCount || 0,
-      createdAt: tokenFound?.createdAt,
+      permanentBlock: tokenFound.permanentBlock,
+      tokenTempBlock: tokenFound.tokenTempBlock,
+      tokenReCreateCount: tokenFound.tokenReCreateCount,
+      createdAt: tokenFound.createdAt,
       modifiedAt: undefined,
-      softDeleted: false,
     });
     await insertToken(token.object());
     return ok<usecaseTypes.IRefreshResult>({
