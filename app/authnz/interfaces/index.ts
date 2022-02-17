@@ -1,5 +1,5 @@
 // start your http, grpc, kafka , etc interface here
-import { types, routeGen } from "aba-node";
+import { types, buildRouteGenerator } from "aba-node";
 import { applicationVersion } from "../config";
 import {
   sPasswordlessStart,
@@ -16,49 +16,30 @@ import { retrievePublicKey } from "./retrievePublicKey";
 import { refresh } from "./refresh";
 
 export function startAuthnzServer(app: types.tHttpInstance) {
+  const routeGen = buildRouteGenerator({ service: "authnz", version: applicationVersion });
   app.post(
-    routeGen({
-      version: applicationVersion,
-      role: "shared",
-      routes: ["passwordless", "start"],
-    }),
+    routeGen(["passwordless", "start"]),
     { schema: sPasswordlessStart },
     passwordlessStart
   );
   app.post(
-    routeGen({
-      version: applicationVersion,
-      role: "shared",
-      routes: ["passwordless", "verify"],
-    }),
+    routeGen(["passwordless", "verify"]),
     { schema: sPasswordlessVerify },
     passwordlessVerify
   );
   app.post(
-    routeGen({
-      version: applicationVersion,
-      role: "admin",
-      routes: ["provider"],
-    }),
+    routeGen(["provider"]),
     { schema: sCreateProvider },
     createProvider
   );
   app.post(
-    routeGen({
-      version: applicationVersion,
-      role: "shared",
-      routes: ["refresh"],
-    }),
+    routeGen(["refresh"]),
     { schema: sRefresh },
     refresh
   );
 
   app.get(
-    routeGen({
-      version: "v1",
-      role: "internal",
-      routes: ["jwt", "key", "public"],
-    }),
+    routeGen(["jwt", "key", "public"]),
     { schema: sRetrievePublicKey },
     retrievePublicKey
   );
