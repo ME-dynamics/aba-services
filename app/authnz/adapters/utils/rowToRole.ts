@@ -18,6 +18,5 @@ export function rowToRole(row: types.tRow): entityTypes.IMadeRoleObject {
     accountantAL: row.get("accountant_al"),
     createdAt: row.get("created_at"),
     modifiedAt: row.get("modified_at"),
-    softDeleted: row.get("soft_deleted"),
   };
 }
