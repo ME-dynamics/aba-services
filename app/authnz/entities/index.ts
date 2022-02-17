@@ -5,6 +5,7 @@ import { nanoid } from "nanoid";
 import { buildMakeOtp } from "./otp";
 import { buildMakeToken } from "./token";
 import { buildMakeRole } from "./role";
+import { buildMakeDeviceId } from "./deviceId";
 
 export const makeOtp = buildMakeOtp({
   uuid: v4,
@@ -16,3 +17,5 @@ export const makeToken = buildMakeToken({
 });
 
 export const makeRole = buildMakeRole();
+
+export const makeDeviceId = buildMakeDeviceId();
