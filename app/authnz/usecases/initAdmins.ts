@@ -9,7 +9,6 @@ export function buildInitAdmins(args: usecaseTypes.IBuildInitAdmin) {
   function otpInput(phoneNumber: string): entityTypes.IOtp {
     return {
       id: undefined,
-      deviceId: undefined,
       phoneNumber,
       phoneConfirm: false,
       otpCode: undefined,
@@ -20,7 +19,6 @@ export function buildInitAdmins(args: usecaseTypes.IBuildInitAdmin) {
       permanentBlock: false,
       createdAt: undefined,
       modifiedAt: undefined,
-      softDeleted: false,
     };
   }
   function roleInput(otpId: string): entityTypes.IRole {
@@ -40,7 +38,6 @@ export function buildInitAdmins(args: usecaseTypes.IBuildInitAdmin) {
       accountantAL: 0,
       createdAt: undefined,
       modifiedAt: undefined,
-      softDeleted: false,
     };
   }
   return async function initAdmins() {
