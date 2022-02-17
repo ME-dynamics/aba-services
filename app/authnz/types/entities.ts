@@ -175,3 +175,63 @@ export interface IMadeRole {
   };
   object: () => IMadeRoleObject;
 }
+
+export interface IDeviceId {
+  deviceId: string;
+  phoneNumber: string;
+  deviceUniqueId: string;
+  isDevice: boolean;
+  platform: string;
+  brand: string;
+  manufacturer: string;
+  model: string;
+  modelId: string;
+  designName: string;
+  productName: string;
+  deviceYearClass: string;
+  supportedCpuArch: string;
+  os: string;
+  osVersion: string;
+  osBuildId: string;
+  osInternalBuildId: string;
+  androidApiLevel: string;
+  deviceName: string;
+  createdAt: Date | undefined;
+  modifiedAt: Date | undefined;
+}
+
+export type tDeviceInfo = Omit<
+  IDeviceId,
+  "deviceId" | "phoneNumber" | "createdAt" | "modifiedAt"
+>;
+export interface IMadeDeviceIdObject extends IDeviceId {
+  createdAt: Date;
+  modifiedAt: Date;
+}
+
+export interface IMadeDeviceId {
+  get: {
+    deviceId: () => string;
+    phoneNumber: () => string;
+    deviceUniqueId: () => string;
+    isDevice: () => boolean;
+    platform: () => string;
+    brand: () => string;
+    manufacturer: () => string;
+    model: () => string;
+    modelId: () => string;
+    designName: () => string;
+    productName: () => string;
+    deviceYearClass: () => string;
+    supportedCpuArch: () => string;
+    os: () => string;
+    osVersion: () => string;
+    osBuildId: () => string;
+    osInternalBuildId: () => string;
+    androidApiLevel: () => string;
+    deviceName: () => string;
+    createdAt: () => Date;
+    modifiedAt: () => Date;
+  };
+  object: () => IMadeDeviceIdObject;
+}

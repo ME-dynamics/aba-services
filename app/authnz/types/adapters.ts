@@ -1,7 +1,12 @@
 import { secureRandomNumber, time, types } from "aba-node";
 import { hash } from "argon2";
 import { SignJWT, generateKeyPair, importJWK, KeyLike, exportJWK } from "jose";
-import { IMadeOtpObject, IMadeRoleObject, IMadeTokenObject } from "./entities";
+import {
+  IMadeDeviceIdObject,
+  IMadeOtpObject,
+  IMadeRoleObject,
+  IMadeTokenObject,
+} from "./entities";
 
 // initialize database
 
@@ -26,23 +31,40 @@ export interface IBuildFindOtpBy {
   rowToOtp: tRowToOtpFunc;
 }
 
+export type tRowToDeviceIdFunc = (row: types.tRow) => IMadeDeviceIdObject;
+export interface IBuildFindDeviceId {
+  select: types.tDbSelectFunc;
+  rowToDeviceId: tRowToDeviceIdFunc;
+}
+export type tFindDeviceIdByPhoneFunc = (
+  info: IFindDeviceIdByPhone
+) => Promise<IMadeDeviceIdObject | undefined>;
+
+export interface IFindDeviceIdByPhone {
+  deviceId: string;
+  phoneNumber: string;
+}
+
 // insert otp
-export type tInsertOtpFunc = (otpObject: IMadeOtpObject) => Promise<boolean>;
+export type tInsertOtpFunc = (otpObject: IMadeOtpObject) => Promise<void>;
 
 export interface IBuildInsert {
   insert: types.tDbUpsertFunc;
 }
 
 // find token
-export interface IBuildFindTokeByUserId {
+export interface IBuildFindTokenByUserId {
   select: types.tDbSelectFunc;
   rowToToken: tRowToTokenFunc;
 }
+export interface IFindTokenByUserId {
+  userId: string;
+  deviceId: string;
+}
+
 export type tRowToTokenFunc = (row: types.tRow) => IMadeTokenObject;
 
-export type tInsertTokenFunc = (
-  tokenObject: IMadeTokenObject
-) => Promise<boolean>;
+export type tInsertTokenFunc = (tokenObject: IMadeTokenObject) => Promise<void>;
 
 // find admin role
 
@@ -97,15 +119,19 @@ export type tFindSecretKeysFunc = (
   version: number
 ) => Promise<IFindSecretKeysResult | undefined>;
 
+// insert device id
+
+export type tInsertDeviceIdFunc = (
+  deviceIdObject: IMadeDeviceIdObject
+) => Promise<void>;
+
 // insert secret keys
 
 export interface IInsertSecretKeys {
   privateKey: IKey;
   publicKey: IKey;
 }
-export type tInsertSecretKeysFunc = (
-  keys: IInsertSecretKeys
-) => Promise<boolean>;
+export type tInsertSecretKeysFunc = (keys: IInsertSecretKeys) => Promise<void>;
 
 // find role
 export type tRowToRoleFunc = (row: types.tRow) => IMadeRoleObject;
@@ -189,7 +215,7 @@ export type tTokenGenFunc = (jwt: string) => Promise<ITokenGenResult>;
 // find token by refresh
 
 export type tFindTokenByUserIdFunc = (
-  userId: string
+  info: IFindTokenByUserId
 ) => Promise<IMadeTokenObject | undefined>;
 
 // network
