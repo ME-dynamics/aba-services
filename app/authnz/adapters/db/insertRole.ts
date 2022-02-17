@@ -1,5 +1,5 @@
 import { queryGen } from "aba-node";
-import { adaptersTypes, entityTypes } from "../../types";
+import type { adaptersTypes, entityTypes } from "../../types";
 
 function insertQueryGen() {
   const { insertQuery } = queryGen;
