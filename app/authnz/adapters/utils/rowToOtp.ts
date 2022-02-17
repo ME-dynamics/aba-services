@@ -1,10 +1,9 @@
 import { nullToUndefined, types } from "aba-node";
-import { entityTypes } from "../../types";
+import type { entityTypes } from "../../types";
 
 export function rowToOtp(row: types.tRow): entityTypes.IMadeOtpObject {
   return {
-    id: row.get("id"),
-    deviceId: row.get("device_id"),
+    id: row.get("id")?.toString(),
     phoneNumber: row.get("phone_number"),
     phoneConfirm: row.get("phone_confirm"),
     otpCode: nullToUndefined<string>(row.get("otp_code")),
