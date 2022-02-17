@@ -73,6 +73,37 @@ export function buildInitDb(args: adaptersTypes.IBuildInit) {
       cluster: ["kid"],
     },
   });
+  const createDeviceIdTable = createTableQuery({
+    name: "device_id",
+    version: "v1",
+    columns: [
+      { columnName: "device_id", columnType: "TEXT" },
+      { columnName: "phone_number", columnType: "TEXT" },
+      { columnName: "device_unique_id", columnType: "TEXT" },
+      { columnName: "is_device", columnType: "BOOLEAN" },
+      { columnName: "platform", columnType: "TEXT" },
+      { columnName: "brand", columnType: "TEXT" },
+      { columnName: "manufacturer", columnType: "TEXT" },
+      { columnName: "model", columnType: "TEXT" },
+      { columnName: "model_id", columnType: "TEXT" },
+      { columnName: "design_name", columnType: "TEXT" },
+      { columnName: "product_name", columnType: "TEXT" },
+      { columnName: "device_year_class", columnType: "TEXT" },
+      { columnName: "supported_cpu_arch", columnType: "TEXT" },
+      { columnName: "os", columnType: "TEXT" },
+      { columnName: "os_version", columnType: "TEXT" },
+      { columnName: "os_build_id", columnType: "TEXT" },
+      { columnName: "os_internal_build_id", columnType: "TEXT" },
+      { columnName: "android_api_level", columnType: "TEXT" },
+      { columnName: "device_name", columnType: "TEXT" },
+      { columnName: "created_at", columnType: "TIMESTAMP" },
+      { columnName: "modified_at", columnType: "TIMESTAMP" },
+    ],
+    primaryKey: {
+      partition: ["device_id"],
+      cluster: ["phone_number"],
+    },
+  });
   // token table
   const createTokenTable = createTableQuery({
     name: "token",
@@ -129,11 +160,17 @@ export function buildInitDb(args: adaptersTypes.IBuildInit) {
   });
   return async function initDb() {
     await init({ query: createOtpTable.query, errorPath });
+    await init({ query: createOtpTable.logQuery, errorPath });
     await init({ query: otpTokenIndex, errorPath });
     await init({ query: userIdIndex, errorPath });
+    await init({ query: createDeviceIdTable.query, errorPath });
+    await init({ query: createDeviceIdTable.logQuery, errorPath });
     await init({ query: createSecretKeysTable.query, errorPath });
+    await init({ query: createSecretKeysTable.logQuery, errorPath });
     await init({ query: createTokenTable.query, errorPath });
+    await init({ query: createTokenTable.logQuery, errorPath });
     await init({ query: createRoleTable.query, errorPath });
+    await init({ query: createRoleTable.logQuery, errorPath });
     await init({ query: adminIndex, errorPath });
   };
 }
