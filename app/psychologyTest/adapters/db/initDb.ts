@@ -11,73 +11,42 @@ export function buildInitDb(args: adapterTypes.IBuildInit) {
       createMaterialView,
       selectQuery,
       createTypeQuery,
+      createIndexQuery,
       operators,
     } = queryGen;
-    const createAggregateType = createTypeQuery({
-      typeName: "aggregate",
-      version: applicationVersion,
-      columns: [
-        { columnName: "title", columnType: "TEXT" },
-        { columnName: "aggregate", columnType: "INT" },
-      ],
-    });
-    const createInterpretType = createTypeQuery({
-      typeName: "interpret",
+    const createTestResultType = createTypeQuery({
+      typeName: "test_result",
       version: applicationVersion,
       columns: [
         { columnName: "type", columnType: "TEXT" },
-        { columnName: "data", columnType: "TEXT" },
-      ],
-    });
-    const createWarningsType = createTypeQuery({
-      typeName: "warnings",
-      version: applicationVersion,
-      columns: [
-        { columnName: "title", columnType: "TEXT" },
-        { columnName: "warning", columnType: "TEXT" },
-      ],
-    });
-    const createErrorsType = createTypeQuery({
-      typeName: "errors",
-      version: applicationVersion,
-      columns: [
-        { columnName: "title", columnType: "TEXT" },
-        { columnName: "error", columnType: "TEXT" },
+        { columnName: "variable", columnType: "TEXT" },
+        {
+          columnName: "label",
+          columnType: "MAP",
+          mapType: { keyType: "TEXT", valueType: "TEXT" },
+        },
+        { columnName: "raw_score", columnType: "SMALLINT" },
+        { columnName: "base_rate", columnType: "SMALLINT" },
+        { columnName: "interpret", columnType: "TEXT" },
       ],
     });
 
-    // const createFromStructureTable = createTableQuery({
-    //   name: "form_structure",
-    //   version: applicationVersion,
-    //   columns: [
-    //     { name: "id", type: "UUID" },
-    //     { name: "title", type: "TEXT" },
-    //     { name: "description", type: "TEXT" },
-    //     {
-    //       name: "fields",
-    //       type: "MAP",
-    //       map: {
-    //         keyType: "TEXT",
-    //         valueType: "UDT",
-    //         valueUdtName: questionUDT.entityName,
-    //       },
-    //     },
-    //     { name: "created_at", type: "TIMESTAMP" },
-    //     { name: "modified_at", type: "TIMESTAMP" },
-    //     { name: "soft_deleted", type: "BOOLEAN" },
-    //   ],
-    //   primaryKey: {
-    //     partition: ["id"],
-    //   },
-    // });
-    const createFormDataTable = createTableQuery({
-      name: "form_data",
+    const createTestDataTable = createTableQuery({
+      name: "test_data",
       version: applicationVersion,
       columns: [
         { columnName: "id", columnType: "UUID" },
         { columnName: "user_id", columnType: "UUID" },
         { columnName: "structure_id", columnType: "TEXT" },
-        { columnName: "form_name", columnType: "TEXT" },
+        { columnName: "short_name", columnType: "TEXT" },
+        {
+          columnName: "title",
+          columnType: "MAP",
+          mapType: {
+            keyType: "TEXT",
+            valueType: "TEXT",
+          },
+        },
         {
           columnName: "fields",
           columnType: "MAP",
@@ -87,28 +56,14 @@ export function buildInitDb(args: adapterTypes.IBuildInit) {
           },
         },
         {
-          columnName: "aggregates",
+          columnName: "results",
           columnType: "SET",
           setType: "UDT",
-          udtName: createAggregateType.name,
+          udtName: createTestResultType.name,
         },
         {
-          columnName: "interpret",
-          columnType: "SET",
-          setType: "UDT",
-          udtName: createInterpretType.name,
-        },
-        {
-          columnName: "warnings",
-          columnType: "SET",
-          setType: "UDT",
-          udtName: createWarningsType.name,
-        },
-        {
-          columnName: "errors",
-          columnType: "SET",
-          setType: "UDT",
-          udtName: createErrorsType.name,
+          columnName: "result_summary",
+          columnType: "TEXT",
         },
         { columnName: "created_at", columnType: "TIMESTAMP" },
         { columnName: "modified_at", columnType: "TIMESTAMP" },
@@ -121,7 +76,7 @@ export function buildInitDb(args: adapterTypes.IBuildInit) {
     });
     const { notNull } = operators;
     const structureMVQuery = selectQuery({
-      table: "form_data",
+      table: "test_data",
       version: applicationVersion,
       columns: ["*"],
       where: [
@@ -131,21 +86,24 @@ export function buildInitDb(args: adapterTypes.IBuildInit) {
       ],
     });
     const createStructureIdMV = createMaterialView({
-      materialViewName: "form_data_by_structure",
+      materialViewName: "test_data_by_structure",
       version: applicationVersion,
       selectQuery: structureMVQuery,
       primaryKey: {
         partition: ["user_id"],
         cluster: ["structure_id", "created_at"],
       },
+      orderBy: [{ key: "created_at", type: "DESC" }],
     });
-    await Promise.all([
-      init({ query: createAggregateType.query, errorPath }),
-      init({ query: createInterpretType.query, errorPath }),
-      init({ query: createWarningsType.query, errorPath }),
-      init({ query: createErrorsType.query, errorPath }),
-    ]);
-    await init({ query: createFormDataTable.query, errorPath });
+    const createTestDataIdIndex = createIndexQuery({
+      indexName: "test_data_id",
+      indexOnTable: "test_data",
+      version: applicationVersion,
+      indexKey: "id",
+    });
+    await init({ query: createTestResultType.query, errorPath }),
+      await init({ query: createTestDataIdIndex, errorPath });
+    await init({ query: createTestDataTable.query, errorPath });
     await init({ query: createStructureIdMV.query, errorPath });
   };
 }
