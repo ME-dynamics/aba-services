@@ -1,6 +1,6 @@
 import { entityTypes } from "../../types";
 
-export const formStructure: entityTypes.IFormStructure = {
+export const testStructure: entityTypes.ITestStructure = {
   id: "beckDepressionII",
   title: {
     fa: "پرسشنامه افسردگی بک",
