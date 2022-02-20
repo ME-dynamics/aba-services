@@ -1,11 +1,11 @@
-import { auth, types, httpResultClientError } from "aba-node";
+import { auth, types, httpResult } from "aba-node";
 // TODO: inject this method
 import { fetchCustomerProvider } from "../adapters";
-import { retrieveFormData } from "../usecases";
+import { retrieveTestsData } from "../usecases";
 
 import { controllerTypes } from "../types";
 
-export function buildGetFormData() {
+export function buildGetTestsData() {
   const roles: types.IRoles = {
     customer: true,
     provider: true,
@@ -14,19 +14,19 @@ export function buildGetFormData() {
     assistant: false,
     support: false,
   };
-  const { badRequest, forbidden } = httpResultClientError;
-  return async function getFormData(httpRequest: controllerTypes.tGetFormData) {
+  const { badRequest, forbidden } = httpResult.clientError;
+  return async function getTestsData(httpRequest: controllerTypes.tGetTestsData) {
     const { success, error, payload } = auth(httpRequest, roles);
     if (!success) {
       return error;
     }
-    const id = httpRequest.params.id;
+    const id = httpRequest.params.userId;
     const { role, userId } = payload;
     if (role === "admin") {
       if (!id) {
         return badRequest({ error: "id should be defined" });
       }
-      return await retrieveFormData(id);
+      return await retrieveTestsData(id);
     }
     if (role === "provider") {
       if (!id) {
@@ -36,8 +36,8 @@ export function buildGetFormData() {
       if (userId !== providerId) {
         return forbidden({ error: "action not allowed" });
       }
-      return await retrieveFormData(id);
+      return await retrieveTestsData(id);
     }
-    return await retrieveFormData(userId);
+    return await retrieveTestsData(userId);
   };
 }
