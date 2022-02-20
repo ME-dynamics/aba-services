@@ -1,4 +1,4 @@
-import { httpResultSuccess } from "aba-node";
+import { httpResult } from "aba-node";
 
 import {
   mbtiStructure,
@@ -7,7 +7,7 @@ import {
 } from "../entities";
 
 export function buildRetrieveTests() {
-  const { ok } = httpResultSuccess;
+  const { ok } = httpResult.success;
   const mbti = {
     id: mbtiStructure.id,
     title: mbtiStructure.title,

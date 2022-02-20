@@ -1,8 +1,8 @@
-import { httpResultSuccess } from "aba-node";
+import { httpResult } from "aba-node";
 import { mbtiStructure } from "../entities";
 
 export function buildRetrieveMBTI() {
-  const { ok } = httpResultSuccess;
+  const { ok } = httpResult.success;
   return function retrieveMBTI() {
     return ok({
       payload: mbtiStructure,
