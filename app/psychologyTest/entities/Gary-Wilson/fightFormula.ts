@@ -24,32 +24,20 @@ export function fightFormula(fields: Record<string, number>) {
     reverse(fields["119"]);
   if (fight < 12) {
     return {
-      aggregates: {
-        total: fight,
-      },
-      interpret: {
-        fight: "خفیف",
-      },
+      aggregate: fight,
+      fightInterpret: "خفیف",
     };
   }
   if (12 <= fight && fight < 26) {
     return {
-      aggregates: {
-        total: fight,
-      },
-      interpret: {
-        fight: "متوسط",
-      },
+      aggregate: fight,
+      fightInterpret: "متوسط",
     };
   }
   if (26 <= fight && fight <= 40) {
     return {
-      aggregates: {
-        total: fight,
-      },
-      interpret: {
-        fight: "متوسط",
-      },
+      aggregate: fight,
+      fightInterpret: "شدید",
     };
   }
 }

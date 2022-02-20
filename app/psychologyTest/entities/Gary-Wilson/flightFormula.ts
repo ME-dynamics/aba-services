@@ -24,32 +24,20 @@ export function flightFormula(fields: Record<string, number>) {
     reverse(fields["114"]);
   if (flight < 11) {
     return {
-      aggregates: {
-        total: flight,
-      },
-      interpret: {
-        flight: "خفیف",
-      },
+      aggregate: flight,
+      flightInterpret: "خفیف",
     };
   }
   if (11 <= flight && flight < 24) {
     return {
-      aggregates: {
-        total: flight,
-      },
-      interpret: {
-        flight: "متوسط",
-      },
+      aggregate: flight,
+      flightInterpret: "متوسط",
     };
   }
   if (24 <= flight && flight <= 40) {
     return {
-      aggregates: {
-        total: flight,
-      },
-      interpret: {
-        flight: "شدید",
-      },
+      aggregate: flight,
+      flightInterpret: "شدید",
     };
   }
 }

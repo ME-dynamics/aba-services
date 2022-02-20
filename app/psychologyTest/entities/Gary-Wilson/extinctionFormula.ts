@@ -24,32 +24,20 @@ export function extinctionFormula(fields: Record<string, number>) {
     reverse(fields["112"]);
   if (extinction < 13) {
     return {
-      aggregates: {
-        total: extinction,
-      },
-      interpret: {
-        extinction: "خفیف",
-      },
+      aggregate: extinction,
+      extinctionInterpret: "خفیف",
     };
   }
   if (13 <= extinction && extinction < 26) {
     return {
-      aggregates: {
-        total: extinction,
-      },
-      interpret: {
-        extinction: "متوسط",
-      },
+      aggregate: extinction,
+      extinctionInterpret: "متوسط",
     };
   }
   if (26 <= extinction && extinction <= 40) {
     return {
-      aggregates: {
-        total: extinction,
-      },
-      interpret: {
-        extinction: "شدید",
-      },
+      aggregate: extinction,
+      extinctionInterpret: "شدید",
     };
   }
 }

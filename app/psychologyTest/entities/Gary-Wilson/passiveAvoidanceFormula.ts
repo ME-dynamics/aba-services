@@ -24,32 +24,20 @@ export function passiveAvoidanceFormula(fields: Record<string, number>) {
     reverse(fields["117"]);
   if (passiveAvoidance < 11) {
     return {
-      aggregates: {
-        total: passiveAvoidance,
-      },
-      interpret: {
-        passiveAvoidance: "خفیف",
-      },
+      aggregate: passiveAvoidance,
+      passiveAvoidanceInterpret: "خفیف",
     };
   }
   if (11 <= passiveAvoidance && passiveAvoidance < 24) {
     return {
-      aggregates: {
-        total: passiveAvoidance,
-      },
-      interpret: {
-        passiveAvoidance: "متوسط",
-      },
+      aggregate: passiveAvoidance,
+      passiveAvoidanceInterpret: "متوسط",
     };
   }
   if (24 <= passiveAvoidance && passiveAvoidance <= 40) {
     return {
-      aggregates: {
-        total: passiveAvoidance,
-      },
-      interpret: {
-        passiveAvoidance: "شدید",
-      },
+      aggregate: passiveAvoidance,
+      passiveAvoidanceInterpret: "شدید",
     };
   }
 }

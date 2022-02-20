@@ -24,32 +24,20 @@ export function approachFormula(fields: Record<string, number>) {
     reverse(fields["115"]);
   if (approach < 11) {
     return {
-      aggregates: {
-        total: approach,
-      },
-      interpret: {
-        approach: "خفیف",
-      },
+      aggregate: approach,
+      approachInterpret: "خفیف",
     };
   }
   if (11 <= approach && approach < 25) {
     return {
-      aggregates: {
-        total: approach,
-      },
-      interpret: {
-        approach: "متوسط",
-      },
+      aggregate: approach,
+      approachInterpret: "متوسط",
     };
   }
   if (25 <= approach && approach <= 40) {
     return {
-      aggregates: {
-        total: approach,
-      },
-      interpret: {
-        approach: "شدید",
-      },
+      aggregate: approach,
+      approachInterpret: "شدید",
     };
   }
 }
