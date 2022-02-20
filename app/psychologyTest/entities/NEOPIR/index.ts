@@ -10,7 +10,7 @@ export function buildMakeNEOPIR(args: entityTypes.IBuildNEOPIR) {
     const eGroup = eFormula(fields);
     const nGroup = nFormula(fields);
     const oGroup = oFormula(fields);
-    const { warnings, validation } = rules(fields);
+    const { errors, warnings } = rules(fields);
     return {
       aGroup,
       cGroup,
@@ -18,9 +18,9 @@ export function buildMakeNEOPIR(args: entityTypes.IBuildNEOPIR) {
       nGroup,
       oGroup,
       warnings,
-      validation,
+      errors,
     };
   };
 }
 
-export { formStructure as NEOPIRStructure } from "./formStructure";
+export { testStructure as NEOPIRStructure } from "./testStructure";

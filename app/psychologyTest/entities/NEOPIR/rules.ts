@@ -1,7 +1,7 @@
 export function rules(fields: Record<string, number>) {
   const keys = Object.keys(fields);
-  const warnings: Record<string, string> = {};
-  const validation: Record<string, string> = {};
+  const warnings: string[] = [];
+  const errors: string[] = [];
   // if agree or really agree is over 150 and if is less than 50 there should be warning
   let allAgrees = 0;
   // if choice 2 => no idea is chosen more than 41 times, test is not valid
@@ -44,16 +44,18 @@ export function rules(fields: Record<string, number>) {
     if (value === 0) {
       ++fullyDisagree;
       if (fullyDisagree === 6) {
-        validation["fullyAgree"] =
-          "تعداد پاسخ های متوالی کاملا مخالف بیشتر از ۶ است. پاسخنامه بی اعتبار است";
+        errors.push(
+          "تعداد پاسخ های متوالی کاملا مخالف بیشتر از ۶ است. پاسخنامه بی اعتبار است"
+        );
       }
       reset("fullyDisagree");
     }
     if (value === 1) {
       ++disagree;
       if (disagree === 9) {
-        validation["disagree"] =
-          "تعداد پاسخ های متوالی مخالفم بیشتر از ۹ است. پاسخنامه بی اعتبار است";
+        errors.push(
+          "تعداد پاسخ های متوالی مخالفم بیشتر از ۹ است. پاسخنامه بی اعتبار است"
+        );
       }
       reset("disagree");
     }
@@ -61,8 +63,9 @@ export function rules(fields: Record<string, number>) {
       ++allNoIdeas;
       ++noIdea;
       if (noIdea === 10) {
-        validation["noIdea"] =
-          "تعداد پاسخ های متوالی نظری ندارم بیشتر از ۱۰ است. پاسخنامه بی اعتبار است";
+        errors.push(
+          "تعداد پاسخ های متوالی نظری ندارم بیشتر از ۱۰ است. پاسخنامه بی اعتبار است"
+        );
       }
       reset("noIdea");
     }
@@ -70,8 +73,9 @@ export function rules(fields: Record<string, number>) {
       ++allAgrees;
       ++agree;
       if (agree === 14) {
-        validation["agree"] =
-          "تعداد پاسخ های متوالی موافق بیشتر از ۱۴ است. پاسخنامه بی اعتبار است";
+        errors.push(
+          "تعداد پاسخ های متوالی موافق بیشتر از ۱۴ است. پاسخنامه بی اعتبار است"
+        );
       }
       reset("agree");
     }
@@ -79,22 +83,25 @@ export function rules(fields: Record<string, number>) {
       ++allAgrees;
       ++fullyAgree;
       if (fullyAgree === 9) {
-        validation["fullyAgree"] =
-          "تعداد پاسخ های متوالی کاملا موافق بیشتر از ۹ است. پاسخنامه بی اعتبار است";
+        errors.push(
+          "تعداد پاسخ های متوالی کاملا موافق بیشتر از ۹ است. پاسخنامه بی اعتبار است"
+        );
       }
       reset("fullyAgree");
     }
   }
   if (allAgrees >= 150) {
-    warnings["allAgrees"] =
-      "تعداد پاسخ های موافق و کاملا موافق بیشتر از ۱۵۰ است. پاسخنامه با احتیاط بررسی شود.";
+    warnings.push(
+      "تعداد پاسخ های موافق و کاملا موافق بیشتر از ۱۵۰ است. پاسخنامه با احتیاط بررسی شود."
+    );
   }
   if (allAgrees <= 50) {
-    warnings["allAgrees"] =
-      "تعداد پاسخ های موافق و کاملا موافق کمتر از ۵۰ است. پاسخنامه با احتیاط بررسی شود.";
+    warnings.push(
+      "تعداد پاسخ های موافق و کاملا موافق کمتر از ۵۰ است. پاسخنامه با احتیاط بررسی شود."
+    );
   }
   if (allNoIdeas >= 41) {
-    validation["allNoIdeas"] = "تعداد پاسخ های ";
+    errors.push("تعداد پاسخ های نظری ندارم بیشتر از ۴۱ است. پاسخنامه بی اعتبار است");
   }
-  return { warnings, validation };
+  return { warnings, errors };
 }
