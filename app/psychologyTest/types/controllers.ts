@@ -19,12 +19,18 @@ export type tGetTests = types.tRequest<unknown>;
 export type tGetBeckAnxiety = types.tRequest<unknown>;
 export type tGetBeckDepressionII = types.tRequest<unknown>;
 
-
-interface IGetFormData {
+interface IGetTestsData {
   Params: {
-    id: string | undefined
-  }
+    userId: string | undefined;
+  };
 }
 
+export type tGetTestsData = types.tRequest<IGetTestsData>;
 
-export type tGetFormData = types.tRequest<IGetFormData>;
+interface IGetTestDataById {
+  Params: {
+    id: string;
+    userId: string | undefined;
+  };
+}
+export type tGetTestDataById = types.tRequest<IGetTestDataById>;

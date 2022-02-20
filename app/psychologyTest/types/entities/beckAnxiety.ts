@@ -1,4 +1,5 @@
 export type tBeckAnxietyFields = Record<string, number>;
+export type tBeckDepressionIIFields = Record<string, number>;
 
 export interface IBeckAnxietyResult {
   aggregate: {

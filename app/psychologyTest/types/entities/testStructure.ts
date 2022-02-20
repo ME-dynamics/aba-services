@@ -11,7 +11,7 @@ export interface IQuestion {
   choices: IChoice[];
 }
 export type tQuestionFields = Record<string, IQuestion>;
-export interface IFormStructure {
+export interface ITestStructure {
   id: string;
   title: {
     fa: string;

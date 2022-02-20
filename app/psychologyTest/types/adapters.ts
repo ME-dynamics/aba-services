@@ -1,5 +1,5 @@
 import { types } from "aba-node";
-import { IMadeFormDataObject } from "./entities";
+import { IMadeTestDataObject } from "./entities";
 
 export interface IBuildInit {
   init: types.tDbInitFunc;
@@ -7,14 +7,18 @@ export interface IBuildInit {
 
 // find form data by user id
 
-export interface IBuildFindFormDataByUserId {
+export interface IBuildFindTestData {
   select: types.tDbSelectFunc;
-  rowToFormData: tRowToFormDataFunc;
+  rowToTestData: tRowToTestDataFunc;
 }
 
-export type tFindFormDataByUserIdFunc = (
+export type tFindTestDataByIdFunc = (
+  testId: string
+) => Promise<IMadeTestDataObject | undefined>;
+
+export type tFindTestsDataByUserIdFunc = (
   userId: string
-) => Promise<IMadeFormDataObject[] | undefined>;
+) => Promise<IMadeTestDataObject[] | undefined>;
 
 export interface IBuildInsert {
   insert: types.tDbUpsertFunc;
@@ -28,10 +32,10 @@ export interface IBuildInsert {
 
 // insert form data
 
-export type tInsertFormDataFunc = (
-  formData: IMadeFormDataObject
+export type tInsertTestDataFunc = (
+  testData: IMadeTestDataObject
 ) => Promise<void>;
 
 // utils
 
-export type tRowToFormDataFunc = (row: types.tRow) => IMadeFormDataObject;
+export type tRowToTestDataFunc = (row: types.tRow) => IMadeTestDataObject;

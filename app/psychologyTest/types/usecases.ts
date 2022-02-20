@@ -1,4 +1,8 @@
-import { tInsertFormDataFunc, tFindFormDataByUserIdFunc } from "./adapters";
+import {
+  tInsertTestDataFunc,
+  tFindTestsDataByUserIdFunc,
+  tFindTestDataByIdFunc,
+} from "./adapters";
 import { tNEOFields, tQuestionFields, tMbtiFields } from "./entities";
 
 // submit form structure
@@ -14,7 +18,7 @@ export interface ISubmitFormStructure {
 // submit NEOPIR
 
 export interface IBuildSubmitNEOPIR {
-  insertFormData: tInsertFormDataFunc;
+  insertTestData: tInsertTestDataFunc;
 }
 export interface ISubmitNEOPIR {
   userId: string;
@@ -22,13 +26,22 @@ export interface ISubmitNEOPIR {
 }
 
 export interface IBuildSubmitMBTI {
-  insertFormData: tInsertFormDataFunc;
+  insertTestData: tInsertTestDataFunc;
 }
 export interface ISubmitMBTI {
   userId: string;
   fields: tMbtiFields;
 }
 
-export interface IBuildRetrieveFormData {
-  findFormDataByUserId: tFindFormDataByUserIdFunc;
+export interface IBuildRetrieveTestsData {
+  findTestsDataByUserId: tFindTestsDataByUserIdFunc;
+}
+
+export interface IBuildRetrieveTestDataById {
+  findTestDataById: tFindTestDataByIdFunc;
+}
+
+export interface IRetrieveTestDataById {
+  testId: string;
+  userId: string;
 }

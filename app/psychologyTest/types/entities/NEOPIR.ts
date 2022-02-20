@@ -47,8 +47,8 @@ export interface IOGroup {
   o: number;
 }
 interface IRules {
-  warnings: Record<string, string>;
-  validation: Record<string, string>;
+  warnings: string[];
+  errors: string[];
 }
 export interface IBuildNEOPIR {
   aFormula: (fields: tNEOFields) => IAGroup;
@@ -65,6 +65,6 @@ export interface INEOPIRResult {
   eGroup: IEGroup;
   nGroup: INGroup;
   oGroup: IOGroup;
-  warnings: Record<string, string>;
-  validation: Record<string, string>;
+  warnings: string[];
+  errors: string[];
 }
