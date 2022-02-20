@@ -19,7 +19,7 @@ const choices = [
   },
 ];
 
-export const formStructure: entityTypes.IFormStructure = {
+export const testStructure: entityTypes.ITestStructure = {
   id: "beckAnxiety",
   title: {
     fa: "پرسشنامه اضطراب بک",
