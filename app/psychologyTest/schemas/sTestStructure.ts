@@ -1,7 +1,7 @@
 import { fluentSchema } from "aba-node";
 import { schemaTypes } from "../types";
 
-export function formStructureGen(args: schemaTypes.IFormStructureGen) {
+export function testStructureGen(args: schemaTypes.ITestStructureGen) {
   const { questionCount, value } = args;
   let schema = fluentSchema.object().maxProperties(questionCount);
   for (let index = 1; index <= questionCount; index++) {
@@ -30,7 +30,7 @@ export function formStructureGen(args: schemaTypes.IFormStructureGen) {
         )
     );
   }
-  const sFormStructure = fluentSchema
+  const sTestStructure = fluentSchema
     .object()
     .prop("id", fluentSchema.string().required())
     .prop(
@@ -43,5 +43,5 @@ export function formStructureGen(args: schemaTypes.IFormStructureGen) {
     )
     .prop("description", fluentSchema.string().required())
     .prop("fields", schema);
-  return sFormStructure;
+  return sTestStructure;
 }

@@ -1,16 +1,19 @@
-import { statusCodes, fluentSchema, errorSchema } from "aba-node";
-import { sFormData } from "./sFormData";
+import { statusCodes, fluentSchema, errorSchemaObject } from "aba-node";
+import { sTestData } from "./sTestData";
 function mbtiGen() {
   let schema = fluentSchema.object().maxProperties(87);
   for (let index = 1; index <= 87; index++) {
-    schema = schema.prop(`${index}`, fluentSchema.enum(["1", "2"]).required());
+    schema = schema.prop(
+      `${index}`,
+      fluentSchema.number().minimum(1).maximum(2).required()
+    );
   }
   return fluentSchema.object().prop("fields", schema);
 }
 
 const response = {
-  [statusCodes.CREATED]: fluentSchema.object().prop("payload", sFormData),
-  [statusCodes.INTERNAL_SERVER_ERROR]: errorSchema,
+  [statusCodes.CREATED]: fluentSchema.object().prop("payload", sTestData),
+  ...errorSchemaObject,
 };
 
 export const sSubmitMbti = {

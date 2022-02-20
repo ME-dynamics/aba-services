@@ -1,12 +1,12 @@
 import { types } from "aba-node";
-import { getFormData } from "../controllers";
+import { getTestDataById } from "../controllers";
 import { controllerTypes } from "../types";
-export async function retrieveFormData(
-  request: controllerTypes.tGetFormData,
+export async function retrieveTestDataById(
+  request: controllerTypes.tGetTestDataById,
   reply: types.tReply
 ) {
   try {
-    const response = await getFormData(request);
+    const response = await getTestDataById(request);
     reply.code(response.code);
     return response;
   } catch (error) {

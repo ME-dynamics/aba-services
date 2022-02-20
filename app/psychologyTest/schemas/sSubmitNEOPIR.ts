@@ -1,5 +1,5 @@
-import { statusCodes, fluentSchema, errorSchema } from "aba-node";
-import { sFormData } from "./sFormData";
+import { statusCodes, fluentSchema, errorSchemaObject } from "aba-node";
+import { sTestData } from "./sTestData";
 export function buildNEOPIRSchema() {
   let schema = fluentSchema.object().maxProperties(240);
   for (let index = 1; index <= 240; index++) {
@@ -12,8 +12,8 @@ export function buildNEOPIRSchema() {
 }
 
 const response = {
-  [statusCodes.CREATED]: sFormData,
-  [statusCodes.INTERNAL_SERVER_ERROR]: errorSchema,
+  [statusCodes.CREATED]: sTestData,
+  ...errorSchemaObject,
 };
 
 export const sSubmitNEOPIR = {
