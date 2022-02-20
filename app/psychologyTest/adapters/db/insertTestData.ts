@@ -5,18 +5,17 @@ import { adapterTypes, entityTypes } from "../../types";
 function insertQueryGen() {
   const { insertQuery } = queryGen;
   const query = insertQuery({
-    table: "form_data",
+    table: "test_data",
     version: applicationVersion,
     values: [
       { column: "id", dynamicValue: true },
       { column: "user_id", dynamicValue: true },
       { column: "structure_id", dynamicValue: true },
-      { column: "form_name", dynamicValue: true },
+      { column: "title", dynamicValue: true },
+      { column: "short_name", dynamicValue: true },
       { column: "fields", dynamicValue: true },
-      { column: "aggregates", dynamicValue: true },
-      { column: "interpret", dynamicValue: true },
-      { column: "warnings", dynamicValue: true },
-      { column: "errors", dynamicValue: true },
+      { column: "results", dynamicValue: true },
+      { column: "result_summary", dynamicValue: true },
       { column: "created_at", dynamicValue: true },
       { column: "modified_at", dynamicValue: true },
     ],
@@ -24,23 +23,22 @@ function insertQueryGen() {
   return query;
 }
 
-export function buildInsertFormData(args: adapterTypes.IBuildInsert) {
+export function buildInsertTestData(args: adapterTypes.IBuildInsert) {
   const { insert } = args;
-  const errorPath = "form, adapters, insert form data";
+  const errorPath = "psychologyTest, adapters, insert test data";
   const { query, logQuery } = insertQueryGen();
-  return async function insertFormData(
-    formData: entityTypes.IMadeFormDataObject
+  return async function insertTestData(
+    formData: entityTypes.IMadeTestDataObject
   ) {
     const {
       userId,
       id,
       structureId,
-      formName,
+      title,
+      shortName,
       fields,
-      aggregates,
-      interpret,
-      warnings,
-      errors,
+      results,
+      resultSummary,
       createdAt,
       modifiedAt,
     } = formData;
@@ -48,12 +46,11 @@ export function buildInsertFormData(args: adapterTypes.IBuildInsert) {
       id,
       user_id: userId,
       structure_id: structureId,
-      form_name: formName,
+      title,
+      short_name: shortName,
       fields,
-      aggregates,
-      interpret,
-      warnings,
-      errors,
+      results,
+      result_summary: resultSummary,
       created_at: createdAt,
       modified_at: modifiedAt,
     };
