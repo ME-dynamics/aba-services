@@ -11,7 +11,7 @@ import {
   startStorageServer,
 } from "./app/storage";
 import { initDb as initBusinessDb, startBusinessServer } from "./app/business";
-import { initDb as initFormDb, startFormServer } from "./app/form";
+import { initDb as initFormDb, startFormServer } from "./app/psychologyTest";
 import { initDb as initNoteDb, startNoteServer } from "./app/note";
 import { initDb as initUserDb, startUserServer } from "./app/user";
 import { initDb as initTaskDb, startTaskServer } from "./app/task";
