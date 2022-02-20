@@ -1,4 +1,4 @@
-import { auth, types, httpResultClientError } from "aba-node";
+import { auth, types, httpResult } from "aba-node";
 import { taskDone } from "../usecases";
 import { controllerTypes } from "../types";
 export function buildPatchTaskDone(args: controllerTypes.IBuildPatchTaskDone) {
@@ -11,7 +11,7 @@ export function buildPatchTaskDone(args: controllerTypes.IBuildPatchTaskDone) {
     assistant: false,
     support: false,
   };
-  const { badRequest, forbidden } = httpResultClientError;
+  const { badRequest, forbidden } = httpResult.clientError;
   return async function patchTaskDone(
     httpRequest: controllerTypes.tPatchTaskDone
   ) {

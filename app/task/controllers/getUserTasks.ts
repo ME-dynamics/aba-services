@@ -1,4 +1,4 @@
-import { auth, types, httpResultClientError, nullToUndefined } from "aba-node";
+import { auth, types, httpResult, nullToUndefined } from "aba-node";
 import { retrieveTasksByUserId } from "../usecases";
 import { controllerTypes } from "../types";
 export function buildGetUserTasks(args: controllerTypes.IBuildGetUserTasks) {
@@ -11,7 +11,7 @@ export function buildGetUserTasks(args: controllerTypes.IBuildGetUserTasks) {
     assistant: false,
     support: false,
   };
-  const { badRequest, forbidden } = httpResultClientError;
+  const { badRequest, forbidden,   } = httpResult.clientError;
   return async function getUserTasks(
     httpRequest: controllerTypes.tGetUserTasks
   ) {
@@ -21,13 +21,16 @@ export function buildGetUserTasks(args: controllerTypes.IBuildGetUserTasks) {
     }
 
     const userId = nullToUndefined(httpRequest.params.userId);
-
     const { role } = payload;
     if (role === "admin") {
       if (!userId) {
         return badRequest({ error: "user id must be defined" });
       }
-      return await retrieveTasksByUserId(userId);
+      const userProviderId = await fetchCustomerProvider(userId);
+      if(!userProviderId) {
+        return forbidden({ error: "provider not found" });
+      }
+      return await retrieveTasksByUserId({userId, providerId: userProviderId});
     }
     if (role === "provider") {
       const providerId = payload.userId;
@@ -38,8 +41,12 @@ export function buildGetUserTasks(args: controllerTypes.IBuildGetUserTasks) {
       if (!userProviderId || userProviderId !== providerId) {
         return forbidden({ error: "action not allowed" });
       }
-      return await retrieveTasksByUserId(userId);
+      return await retrieveTasksByUserId({userId, providerId: userProviderId});
     }
-    return await retrieveTasksByUserId(payload.userId);
+    const userProviderId = await fetchCustomerProvider(payload.userId);
+    if(!userProviderId) {
+      return forbidden({ error: "you should have provider" });
+    }
+    return await retrieveTasksByUserId({userId: payload.userId, providerId: userProviderId});
   };
 }
