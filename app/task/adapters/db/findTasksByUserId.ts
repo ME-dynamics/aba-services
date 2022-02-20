@@ -8,7 +8,10 @@ function selectQueryGen(): string {
     table: "tasks",
     version: "v1",
     columns: ["*"],
-    where: [equal({ argument: "user_id", dynamicValue: true })],
+    where: [
+      equal({ argument: "user_id", dynamicValue: true }),
+      equal({ argument: "provider_id", dynamicValue: true }),
+    ],
   });
   return query;
 }
@@ -20,11 +23,12 @@ export function buildFindTasksByUserId(
   const errorPath = "tasks, adapters, find tasks by user id";
   const query = selectQueryGen();
   return async function findTasksByUserId(
-    userId: string
+    info: adapterTypes.IFindTasksByUserId
   ): Promise<entityTypes.IMadeTaskObject[] | undefined> {
+    const { userId, providerId } = info;
     const result = await select({
       query,
-      params: { user_id: userId },
+      params: { user_id: userId, provider_id: providerId },
       errorPath,
       unique: false,
       queryOptions: undefined,

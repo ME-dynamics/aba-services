@@ -8,6 +8,7 @@ function insertQueryGen() {
     version: "v1",
     values: [
       { column: "user_id", dynamicValue: true },
+      { column: "provider_id", dynamicValue: true },
       { column: "id", dynamicValue: true },
       { column: "content", dynamicValue: true },
       { column: "done", dynamicValue: true },
@@ -23,9 +24,11 @@ export function buildInsertTask(args: adapterTypes.IBuildInsertTask) {
   const errorPath = "tasks, adapter, insert task";
   const { query, logQuery } = insertQueryGen();
   return async function insertTask(task: entityTypes.IMadeTaskObject) {
-    const { userId, id, content, done, createdAt, modifiedAt } = task;
+    const { userId, providerId, id, content, done, createdAt, modifiedAt } =
+      task;
     const params = {
       user_id: userId,
+      provider_id: providerId,
       id,
       content,
       done,

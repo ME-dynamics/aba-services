@@ -12,6 +12,7 @@ export function buildInitDb(args: adapterTypes.IBuildInitDb) {
       version: applicationVersion,
       columns: [
         { columnName: "user_id", columnType: "UUID" },
+        { columnName: "provider_id", columnType: "UUID" },
         { columnName: "id", columnType: "UUID" },
         { columnName: "content", columnType: "TEXT" },
         { columnName: "done", columnType: "BOOLEAN" },
