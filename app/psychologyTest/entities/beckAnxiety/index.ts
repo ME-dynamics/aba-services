@@ -3,7 +3,7 @@ import { entityTypes } from "../../types";
 export function buildMakeBeckAnxiety(args: entityTypes.IBuildMakeBeckAnxiety) {
   const { formula } = args;
 
-  return function makeMBTI(fields: entityTypes.tBeckAnxietyFields) {
+  return function makeBeckAnxiety(fields: entityTypes.tBeckAnxietyFields) {
     const { aggregate, interpret } = formula(fields);
     return {
       aggregate,
@@ -12,4 +12,4 @@ export function buildMakeBeckAnxiety(args: entityTypes.IBuildMakeBeckAnxiety) {
   };
 }
 
-export { formStructure as beckAnxietyStructure } from "./formStructure";
+export { testStructure as beckAnxietyStructure } from "./testStructure";
