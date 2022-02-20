@@ -1,23 +1,24 @@
-import { httpResultClientError, httpResultSuccess } from "aba-node";
+import { httpResult } from "aba-node";
 import { makeTask } from "../entities";
 import { usecaseTypes } from "../types";
 
 export function buildRemoveTask(args: usecaseTypes.IBuildRemoveTask) {
-  const { findTaskById, insertTask } = args;
-  const { notFound, forbidden } = httpResultClientError;
-  const { ok } = httpResultSuccess;
+  const { findTaskById, deleteTask } = args;
+  const { notFound, forbidden } = httpResult.clientError;
+  const { ok } = httpResult.success;
   return async function removeTask(info: usecaseTypes.IRemoveTask) {
     const { taskId, userId } = info;
     const taskFound = await findTaskById(taskId);
-    if (!taskFound || taskFound.softDeleted) {
+    if (!taskFound) {
       return notFound({ error: "task not found" });
     }
     if (taskFound.userId !== userId) {
       return forbidden({ error: "action not allowed" });
     }
-    const task = makeTask(taskFound);
-    task.set.remove();
-    await insertTask(task.object());
+    await deleteTask({
+      userId: taskFound.userId,
+      providerId: taskFound.providerId,
+    });
     return ok<string>({
       payload: "task is removed",
     });
