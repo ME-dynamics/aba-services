@@ -17,4 +17,4 @@ export function buildMakeMBTI(args: entityTypes.IBuildMakeMBTI) {
   };
 }
 
-export { formStructure as mbtiStructure } from "./formStructure";
+export { testStructure as mbtiStructure } from "./testStructure";
