@@ -10,8 +10,14 @@ export interface IBuildFindTasksByUserId {
   select: types.tDbSelectFunc;
   rowToTask: tRowTask;
 }
+
+export interface IFindTasksByUserId {
+  userId: string;
+  providerId: string;
+}
+
 export type tFindTasksByUserId = (
-  userId: string
+  info: IFindTasksByUserId
 ) => Promise<IMadeTaskObject[] | undefined>;
 export interface IBuildFindTaskById {
   select: types.tDbSelectFunc;
@@ -34,3 +40,16 @@ export type tRowTask = (row: types.tRow) => IMadeTaskObject;
 export type tFetchCustomerProviderFunc = (
   customerId: string
 ) => Promise<string | undefined>;
+
+// delete task
+export interface IBuildDeleteTask {
+  remove: types.tDbDeleteFunc;
+  insert: types.tDbUpsertFunc;
+}
+
+export interface IDeleteTask {
+  userId: string;
+  providerId: string;
+}
+
+export type tDeleteTaskFunc = (info: IDeleteTask) => Promise<void>;

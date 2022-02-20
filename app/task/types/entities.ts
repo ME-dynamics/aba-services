@@ -4,12 +4,12 @@ export interface IBuildMakeTask {
 
 export interface IMakeTask {
   userId: string;
+  providerId: string;
   id: string | undefined;
   content: string;
   done: boolean;
   createdAt: Date | undefined;
   modifiedAt: Date | undefined;
-  softDeleted: boolean;
 }
 
 export interface IMadeTaskObject extends IMakeTask {
@@ -26,14 +26,11 @@ export interface IMadeTask {
     done: () => boolean;
     createdAt: () => Date;
     modifiedAt: () => Date;
-    softDeleted: () => boolean;
   };
   set: {
     content: (newContent: string) => void;
     done: () => void;
     undone: () => void;
-    remove: () => void;
-    restore: () => void;
   };
   object: () => IMadeTaskObject;
 }
