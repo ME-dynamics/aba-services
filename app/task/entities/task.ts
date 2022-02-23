@@ -5,11 +5,12 @@ export function buildMakeTask(args: entityTypes.IBuildMakeTask) {
   return function makeTask(task: entityTypes.IMakeTask) {
     const {
       userId,
+      providerId,
       id = uuid(),
       createdAt = new Date(),
       modifiedAt = new Date(),
     } = task;
-    let { content, done, softDeleted } = task;
+    let { content, done } = task;
 
     // Setters
     function setContent(newContent: string) {
@@ -24,40 +25,31 @@ export function buildMakeTask(args: entityTypes.IBuildMakeTask) {
       done = false;
       modifiedAt.setTime(Date.now());
     }
-    function remove() {
-      softDeleted = true;
-      modifiedAt.setTime(Date.now());
-    }
-    function restore() {
-      softDeleted = false;
-      modifiedAt.setTime(Date.now());
-    }
+
     const madeTask: entityTypes.IMadeTask = {
       get: {
         userId: () => userId,
+        providerId: () => providerId,
         id: () => id,
         content: () => content,
         done: () => done,
         createdAt: () => createdAt,
         modifiedAt: () => modifiedAt,
-        softDeleted: () => softDeleted,
       },
       set: {
         content: setContent,
         done: setDone,
         undone,
-        remove,
-        restore,
       },
       object: () => {
         return {
           userId,
+          providerId,
           id,
           content,
           done,
           createdAt,
           modifiedAt,
-          softDeleted,
         };
       },
     };
