@@ -1,14 +1,15 @@
-import { types, routeGen } from "aba-node";
+import { types, buildRouteGenerator } from "aba-node";
 
 import { confirmRequest } from "./confirmRequest";
 import { createRequest } from "./createRequest";
 import { rejectRequest } from "./rejectRequest";
 import { removeCustomer } from "./removeCustomer";
+import { removeProvider } from "./removeProvider";
 import { removeRequest } from "./removeRequest";
 import { retrieveCustomers } from "./retrieveCustomers";
-import { retrieveRequests } from "./retrieveRequests";
+import { retrieveProviderRequests } from "./retrieveRequests";
 import { retrieveCustomerProviderInfo } from "./retrieveCustomerProviderInfo";
-import { retrieveRequestByCustomerId } from "./retrieveRequestByCustomerId";
+import { retrieveCustomerRequest } from "./retrieveCustomerRequest";
 import {
   sConfirmSchema,
   sCreateRequest,
@@ -19,90 +20,56 @@ import {
   sRemoveRequest,
   sRetrieveCustomerProviderInfo,
   sRetrieveRequestByCustomerId,
+  sRemoveProvider,
 } from "../schemas";
 import { applicationVersion } from "../config";
 
 export function startBusinessServer(app: types.tHttpInstance) {
+  const routeGen = buildRouteGenerator({
+    service: "business",
+    version: applicationVersion,
+  });
   app.post(
-    routeGen({
-      version: applicationVersion,
-      role: "provider",
-      routes: ["requests", "confirm"],
-    }),
+    routeGen(["requests", "confirm"]),
     { schema: sConfirmSchema },
     confirmRequest
   );
-  app.post(
-    routeGen({
-      version: applicationVersion,
-      role: "customer",
-      routes: ["requests"],
-    }),
-    { schema: sCreateRequest },
-    createRequest
-  );
+  app.post(routeGen(["requests"]), { schema: sCreateRequest }, createRequest);
 
   app.delete(
-    routeGen({
-      version: applicationVersion,
-      role: "provider",
-      routes: ["requests", "reject", ":customerId"],
-    }),
+    routeGen(["requests", "reject", ":customerId"]),
     { schema: sRejectRequest },
     rejectRequest
   );
   app.delete(
-    routeGen({
-      version: applicationVersion,
-      role: "provider",
-      routes: ["customers", ":customerId"],
-    }),
+    routeGen(["customers", ":customerId"]),
     { schema: sRemoveCustomer },
     removeCustomer
   );
   app.delete(
-    routeGen({
-      version: applicationVersion,
-      role: "customer",
-      routes: ["requests"],
-    }),
-    { schema: sRemoveRequest },
-    removeRequest
+    routeGen(["provider"]),
+    { schema: sRemoveProvider },
+    removeProvider
   );
+  app.delete(routeGen(["requests"]), { schema: sRemoveRequest }, removeRequest);
   app.get(
-    routeGen({
-      version: applicationVersion,
-      role: "provider",
-      routes: ["customers"],
-    }),
+    routeGen(["customers"]),
     { schema: sRetrieveCustomers },
     retrieveCustomers
   );
   app.get(
-    routeGen({
-      version: applicationVersion,
-      role: "provider",
-      routes: ["requests"],
-    }),
+    routeGen(["requests", "provider"]),
     { schema: sRetrieveRequests },
-    retrieveRequests
+    retrieveProviderRequests
   );
   app.get(
-    routeGen({
-      version: applicationVersion,
-      role: "customer",
-      routes: ["providers"],
-    }),
+    routeGen(["providers"]),
     { schema: sRetrieveCustomerProviderInfo },
     retrieveCustomerProviderInfo
   );
   app.get(
-    routeGen({
-      version: applicationVersion,
-      role: "customer",
-      routes: ["requests"],
-    }),
+    routeGen(["requests", "customer"]),
     { schema: sRetrieveRequestByCustomerId },
-    retrieveRequestByCustomerId
+    retrieveCustomerRequest
   );
 }
