@@ -17,6 +17,7 @@ export interface ITestStructure {
     fa: string;
     en: string;
   };
+  shortName: string;
   description: string;
   fields: tQuestionFields;
   // createdAt: Date | undefined;
