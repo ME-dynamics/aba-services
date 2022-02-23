@@ -15,8 +15,8 @@ export function buildSubmitMBTI(args: usecaseTypes.IBuildSubmitMBTI) {
       {
         type: "factor",
         variable: "e",
-        rawScore: e.score,
-        baseRate: e.score,
+        rawscore: e.score,
+        baserate: e.score,
         label: {
           en: e.enTitle,
           fa: e.faTitle,
@@ -26,8 +26,8 @@ export function buildSubmitMBTI(args: usecaseTypes.IBuildSubmitMBTI) {
       {
         type: "factor",
         variable: "f",
-        rawScore: f.score,
-        baseRate: f.score,
+        rawscore: f.score,
+        baserate: f.score,
         label: {
           en: f.enTitle,
           fa: f.faTitle,
@@ -37,8 +37,8 @@ export function buildSubmitMBTI(args: usecaseTypes.IBuildSubmitMBTI) {
       {
         type: "factor",
         variable: "i",
-        rawScore: i.score,
-        baseRate: i.score,
+        rawscore: i.score,
+        baserate: i.score,
         label: {
           en: i.enTitle,
           fa: i.faTitle,
@@ -48,8 +48,8 @@ export function buildSubmitMBTI(args: usecaseTypes.IBuildSubmitMBTI) {
       {
         type: "factor",
         variable: "j",
-        rawScore: j.score,
-        baseRate: j.score,
+        rawscore: j.score,
+        baserate: j.score,
         label: {
           en: j.enTitle,
           fa: j.faTitle,
@@ -59,8 +59,8 @@ export function buildSubmitMBTI(args: usecaseTypes.IBuildSubmitMBTI) {
       {
         type: "factor",
         variable: "i",
-        rawScore: n.score,
-        baseRate: n.score,
+        rawscore: n.score,
+        baserate: n.score,
         label: {
           en: n.enTitle,
           fa: n.faTitle,
@@ -70,8 +70,8 @@ export function buildSubmitMBTI(args: usecaseTypes.IBuildSubmitMBTI) {
       {
         type: "factor",
         variable: "p",
-        rawScore: p.score,
-        baseRate: p.score,
+        rawscore: p.score,
+        baserate: p.score,
         label: {
           en: p.enTitle,
           fa: p.faTitle,
@@ -81,8 +81,8 @@ export function buildSubmitMBTI(args: usecaseTypes.IBuildSubmitMBTI) {
       {
         type: "factor",
         variable: "s",
-        rawScore: s.score,
-        baseRate: s.score,
+        rawscore: s.score,
+        baserate: s.score,
         label: {
           en: s.enTitle,
           fa: s.faTitle,
@@ -92,8 +92,8 @@ export function buildSubmitMBTI(args: usecaseTypes.IBuildSubmitMBTI) {
       {
         type: "factor",
         variable: "t",
-        rawScore: t.score,
-        baseRate: t.score,
+        rawscore: t.score,
+        baserate: t.score,
         label: {
           en: t.enTitle,
           fa: t.faTitle,

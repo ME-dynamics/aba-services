@@ -20,8 +20,8 @@ export function buildSubmitNEOPIR(args: usecaseTypes.IBuildSubmitNEOPIR) {
       const warning = warnings[index];
       result.push({
         type: "warning",
-        rawScore: -1,
-        baseRate: -1,
+        rawscore: -1,
+        baserate: -1,
         variable: "",
         interpret: "",
         label: {
@@ -34,8 +34,8 @@ export function buildSubmitNEOPIR(args: usecaseTypes.IBuildSubmitNEOPIR) {
       const error = errors[index];
       result.push({
         type: "warning",
-        rawScore: -1,
-        baseRate: -1,
+        rawscore: -1,
+        baserate: -1,
         variable: "",
         interpret: "",
         label: {
@@ -46,8 +46,8 @@ export function buildSubmitNEOPIR(args: usecaseTypes.IBuildSubmitNEOPIR) {
     }
     result.push({
       type: "factor",
-      rawScore: n,
-      baseRate: n,
+      rawscore: n,
+      baserate: n,
       variable: "n",
       interpret: "",
       label: {
@@ -57,8 +57,8 @@ export function buildSubmitNEOPIR(args: usecaseTypes.IBuildSubmitNEOPIR) {
     });
     result.push({
       type: "factor",
-      rawScore: n1,
-      baseRate: n1,
+      rawscore: n1,
+      baserate: n1,
       variable: "n1",
       interpret: "",
       label: {
@@ -68,8 +68,8 @@ export function buildSubmitNEOPIR(args: usecaseTypes.IBuildSubmitNEOPIR) {
     });
     result.push({
       type: "factor",
-      rawScore: n2,
-      baseRate: n2,
+      rawscore: n2,
+      baserate: n2,
       variable: "n2",
       interpret: "",
       label: {
@@ -79,8 +79,8 @@ export function buildSubmitNEOPIR(args: usecaseTypes.IBuildSubmitNEOPIR) {
     });
     result.push({
       type: "factor",
-      rawScore: n3,
-      baseRate: n3,
+      rawscore: n3,
+      baserate: n3,
       variable: "n3",
       interpret: "",
       label: {
