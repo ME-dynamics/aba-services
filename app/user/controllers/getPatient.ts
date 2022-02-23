@@ -1,4 +1,4 @@
-import { auth, types, httpResultClientError } from "aba-node";
+import { auth, types, httpResult } from "aba-node";
 import { controllerTypes } from "../types";
 import { retrievePatient } from "../usecases";
 
@@ -12,7 +12,7 @@ export function buildGetPatient(args: controllerTypes.IBuildGetPatient) {
     assistant: false,
     support: false,
   };
-  const { badRequest, forbidden } = httpResultClientError;
+  const { badRequest, forbidden } = httpResult.clientError;
   return async function getPatient(httpRequest: controllerTypes.tGetPatient) {
     const { success, error, payload } = auth(httpRequest, roles);
     if (!success) {
@@ -33,10 +33,7 @@ export function buildGetPatient(args: controllerTypes.IBuildGetPatient) {
       // AUTHORIZE
       // USER MUST BE provider customer
       const providerId = await fetchCustomerProvider(id);
-      if (!providerId) {
-        return forbidden({ error: "action not allowed" });
-      }
-      if (userId !== providerId) {
+      if (!providerId && userId !== providerId) {
         return forbidden({ error: "action not allowed" });
       }
       return await retrievePatient(id);
