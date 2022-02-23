@@ -89,7 +89,7 @@ static_resources:
                           clock_skew_seconds: 0
                           remote_jwks:
                             http_uri:
-                              uri: http://127.0.0.1:3000/api/v1/internal/jwt/key/public
+                              uri: http://127.0.0.1:3000/api/v1/authnz/jwt/key/public
                               cluster: node_app
                               timeout: 1s
                             cache_duration:
@@ -103,9 +103,9 @@ static_resources:
                           forward_payload_header: x-jwt-payload
                       rules:
                         - match:
-                            prefix: /api/v1/refresh
+                            prefix: /api/v1/authnz/refresh
                         - match:
-                            prefix: /api/v1/passwordless
+                            prefix: /api/v1/authnz/passwordless
                         - match:
                             prefix: /api/v1
                           requires:
@@ -163,7 +163,7 @@ static_resources:
                       domains: ["*"]
                       routes:
                         - match: 
-                            prefix: /api/v1/internal
+                            prefix: /api/v1/authnz/jwt/key/public
                           direct_response: {status: 403, body: {inline_string: forbidden}}
                         - match:
                             prefix: "/api/v1"
