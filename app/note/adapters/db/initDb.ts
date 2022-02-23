@@ -33,6 +33,7 @@ export function buildInitDb(args: adapterTypes.IBuildInitDb) {
       version: applicationVersion,
     });
     await init({ query: createNoteTable.query, errorPath });
+    await init({ query: createNoteTable.logQuery, errorPath });
     await init({ query: noteIdIndex, errorPath });
   };
 }
