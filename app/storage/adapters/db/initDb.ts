@@ -43,5 +43,6 @@ export function buildInitDb(args: adapterTypes.IBuildInit) {
     });
     // await init({ query: createFileSessionTable.query, errorPath });
     await init({ query: createImagesTable.query, errorPath });
+    await init({ query: createImagesTable.logQuery, errorPath });
   };
 }
