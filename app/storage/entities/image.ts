@@ -13,7 +13,7 @@ export function buildMakeImage(args: entityTypes.IBuildMakeImage) {
       createdAt = new Date(),
       modifiedAt = new Date(),
     } = image;
-    let { url, softDeleted } = image;
+    let { url } = image;
     if (access === "private" && url) {
       throw new ErrorFactory({
         name: "url_must_not_be_defined",
@@ -26,15 +26,7 @@ export function buildMakeImage(args: entityTypes.IBuildMakeImage) {
     if (access === "public") {
       url = `${serverUrl}/public/${id}`;
     }
-    // * Setters
-    function remove() {
-      softDeleted = true;
-      modifiedAt.setTime(Date.now());
-    }
-    function restore() {
-      softDeleted = false;
-      modifiedAt.setTime(Date.now());
-    }
+    
     const madeImage: entityTypes.IMadeImage = {
       get: {
         userId: () => userId,
@@ -43,11 +35,6 @@ export function buildMakeImage(args: entityTypes.IBuildMakeImage) {
         url: () => url,
         createdAt: () => createdAt,
         modifiedAt: () => modifiedAt,
-        softDeleted: () => softDeleted,
-      },
-      set: {
-        remove,
-        restore,
       },
       object: () => {
         return {
@@ -57,7 +44,6 @@ export function buildMakeImage(args: entityTypes.IBuildMakeImage) {
           url,
           createdAt,
           modifiedAt,
-          softDeleted,
         };
       },
     };
