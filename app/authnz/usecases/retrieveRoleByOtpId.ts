@@ -6,7 +6,7 @@ export function buildRetrieveRoleByOtpId(
   const { findRole } = args;
   return async function retrieveRoleByOtpId(id: string) {
     const role = await findRole(id);
-    if (!role || role.softDeleted) {
+    if (!role) {
       return undefined;
     }
     const { admin, provider, customer, accountant, support, assistant } = role;
