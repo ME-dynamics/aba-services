@@ -1,11 +1,11 @@
-import { httpResultClientError, httpResultSuccess } from "aba-node";
+import { httpResult } from "aba-node";
 import { makeNote } from "../entities";
 import { entityTypes, usecaseTypes } from "../types";
 
 export function buildUpdateNote(args: usecaseTypes.IBuildUpdateNote) {
   const { findNoteById, insertNote, imageIdsValidation } = args;
-  const { notFound, forbidden } = httpResultClientError;
-  const { ok } = httpResultSuccess;
+  const { notFound, forbidden } = httpResult.clientError;
+  const { ok } = httpResult.success;
   return async function updateNote(info: usecaseTypes.IUpdateNote) {
     const { id, providerId, title, content, imageIds } = info;
     const noteFound = await findNoteById(id);
