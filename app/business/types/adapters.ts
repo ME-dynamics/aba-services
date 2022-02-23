@@ -52,6 +52,20 @@ export type tFindRequestsByProviderIdFunc = (
   ProviderId: string
 ) => Promise<IMadeCustomersObject[] | undefined>;
 
+// delete customer
+
+export interface IBuildDeleteCustomer {
+  remove: types.tDbDeleteFunc;
+  insert: types.tDbUpsertFunc;
+}
+
+export interface IDeleteCustomer {
+  customerId: string;
+  providerId: string;
+  businessId: string;
+}
+
+export type tDeleteCustomerFunc = (info: IDeleteCustomer) => Promise<void>;
 // insert customer
 
 export type tInsertCustomerFunc = (
