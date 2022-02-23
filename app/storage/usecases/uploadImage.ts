@@ -1,5 +1,5 @@
 import { makeImage } from "../entities";
-import { httpResultClientError, httpResultSuccess } from "aba-node";
+import { httpResult } from "aba-node";
 import { entityTypes, usecaseTypes } from "../types";
 export function buildUploadImage(args: usecaseTypes.IBuildUploadImage) {
   const {
@@ -10,8 +10,8 @@ export function buildUploadImage(args: usecaseTypes.IBuildUploadImage) {
     fileType,
     minio,
   } = args;
-  const { forbidden } = httpResultClientError;
-  const { ok } = httpResultSuccess;
+  const { forbidden } = httpResult.clientError;
+  const { ok } = httpResult.success;
   function imageInput(info: usecaseTypes.IUploadImage): entityTypes.IMakeImage {
     const { userId, access } = info;
     return {
@@ -21,14 +21,13 @@ export function buildUploadImage(args: usecaseTypes.IBuildUploadImage) {
       url: undefined,
       createdAt: undefined,
       modifiedAt: undefined,
-      softDeleted: false,
     };
   }
   function transformSize(transform: "profile" | "note") {
     if (transform === "profile") {
       return { width: 360, height: 360 };
     }
-    return { width: 1280, height: 800 };
+    return { width: 768, height: 1360 };
   }
   return async function uploadImage(info: usecaseTypes.IUploadImage) {
     const { file, access, transform } = info;
