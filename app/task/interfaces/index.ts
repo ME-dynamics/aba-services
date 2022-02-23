@@ -20,17 +20,17 @@ export function startTaskServer(app: types.tHttpInstance) {
     service: "tasks",
     version: applicationVersion,
   });
-  app.post(routeGen(["tasks"]), { schema: sCreateTask }, createTask);
-  app.patch(routeGen(["tasks", "done"]), { schema: sTaskDone }, taskDone);
-  app.patch(routeGen(["tasks", "undone"]), { schema: sTaskUndone }, taskUndone);
-  app.patch(routeGen(["tasks"]), { schema: sUpdateTask }, updateTask);
+  app.post(routeGen([]), { schema: sCreateTask }, createTask);
+  app.patch(routeGen(["done"]), { schema: sTaskDone }, taskDone);
+  app.patch(routeGen(["undone"]), { schema: sTaskUndone }, taskUndone);
+  app.patch(routeGen([]), { schema: sUpdateTask }, updateTask);
   app.get(
-    routeGen(["tasks", ":userId"]),
+    routeGen([":userId"]),
     { schema: sRetrieveUserTasks },
     retrieveUserTasks
   );
   app.delete(
-    routeGen(["tasks", ":taskId", ":userId"]),
+    routeGen([":taskId", ":userId"]),
     { schema: sRemoveTask },
     removeTask
   );
