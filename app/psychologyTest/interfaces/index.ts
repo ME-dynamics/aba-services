@@ -22,19 +22,19 @@ export async function startFormServer(app: types.tHttpInstance) {
     version: applicationVersion,
   });
   try {
-    app.get(routeGen(["tests"]), { schema: sGetTests }, retrieveTests);
+    app.get(routeGen([]), { schema: sGetTests }, retrieveTests);
     app.get(
-      routeGen(["tests", "beckAnxiety"]),
+      routeGen(["beckAnxiety"]),
       { schema: sGetBeckAnxiety },
       retrieveBeckAnxiety
     );
     app.get(
-      routeGen(["tests", "beckDepressionII"]),
+      routeGen(["beckDepressionII"]),
       { schema: sGetBeckDepressionII },
       retrieveBeckDepressionII
     );
-    app.get(routeGen(["tests", "mbti"]), { schema: sGetMbti }, retrieveMBTI);
-    app.post(routeGen(["tests", "mbti"]), { schema: sSubmitMbti }, createMbti);
+    app.get(routeGen(["mbti"]), { schema: sGetMbti }, retrieveMBTI);
+    app.post(routeGen(["mbti"]), { schema: sSubmitMbti }, createMbti);
     app.get(routeGen(["testData", ":id", ":userId"]), retrieveTestDataById);
     app.get(routeGen(["testsData", ":userId"]), retrieveTestsData);
   } catch (error) {
