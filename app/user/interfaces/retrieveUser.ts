@@ -7,10 +7,10 @@ export async function retrieveUser(
 ) {
   try {
     const response = await getUser(request);
-    reply.status(response.code);
+    reply.code(response.code);
     return response;
   } catch (error) {
-    reply.send(500);
+    reply.code(500);
     reply.send(error);
   }
 }
