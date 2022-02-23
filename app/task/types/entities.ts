@@ -21,6 +21,7 @@ export interface IMadeTaskObject extends IMakeTask {
 export interface IMadeTask {
   get: {
     userId: () => string;
+    providerId: () => string;
     id: () => string;
     content: () => string;
     done: () => boolean;

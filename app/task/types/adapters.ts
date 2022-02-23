@@ -50,6 +50,7 @@ export interface IBuildDeleteTask {
 export interface IDeleteTask {
   userId: string;
   providerId: string;
+  createdAt: Date;
 }
 
 export type tDeleteTaskFunc = (info: IDeleteTask) => Promise<void>;
