@@ -29,7 +29,7 @@ export function buildInsertToken(args: adaptersTypes.IBuildInsert) {
   const { insert } = args;
   const errorPath = "authnz, adapters, insert token";
   const { query, logQuery } = insertQueryGen();
-  return async function insert_token(
+  return async function insertToken(
     tokenObject: entityTypes.IMadeTokenObject
   ): Promise<void> {
     const {
