@@ -2,7 +2,7 @@ export function rules(fields: Record<string, number>) {
   const keys = Object.keys(fields);
   const warnings: string[] = [];
   const errors: string[] = [];
-  // if agree or really agree is over 150 and if is less than 50 there should be warning
+  // if agree or fully agree is over 150 and if is less than 50 there should be warning
   let allAgrees = 0;
   // if choice 2 => no idea is chosen more than 41 times, test is not valid
   let allNoIdeas = 0;
