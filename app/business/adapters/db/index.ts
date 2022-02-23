@@ -7,3 +7,5 @@ export { buildFindRequestsByProviderId } from "./findRequestsByProviderId";
 export { buildFindProviderByCustomerId } from "./findProviderByCustomerId";
 
 export { buildInsertCustomer } from "./insertCustomer";
+
+export { buildDeleteCustomer } from "./deleteCustomer";
