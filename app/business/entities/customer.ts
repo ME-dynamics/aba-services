@@ -11,13 +11,7 @@ export function buildMakeCustomer() {
       createdAt = new Date(),
       modifiedAt = new Date(),
     } = customer;
-    let {
-      requestConfirmed,
-      name,
-      profilePictureUrl,
-      description,
-      softDeleted,
-    } = customer;
+    let { requestConfirmed, name, profilePictureUrl, description } = customer;
     function setRequestConfirmed() {
       requestConfirmed = true;
       modifiedAt.setTime(Date.now());
@@ -34,14 +28,7 @@ export function buildMakeCustomer() {
       description = newDesc;
       modifiedAt.setTime(Date.now());
     }
-    function remove() {
-      softDeleted = true;
-      modifiedAt.setTime(Date.now());
-    }
-    function restore() {
-      softDeleted = false;
-      modifiedAt.setTime(Date.now());
-    }
+
     const madeCustomers: entityTypes.IMadeCustomers = {
       get: {
         customerId: () => customerId,
@@ -53,15 +40,12 @@ export function buildMakeCustomer() {
         description: () => description,
         createdAt: () => createdAt,
         modifiedAt: () => modifiedAt,
-        softDeleted: () => softDeleted,
       },
       set: {
         requestConfirmed: setRequestConfirmed,
         name: setName,
         profilePictureUrl: setProfilePictureUrl,
         description: setDescription,
-        remove,
-        restore,
       },
       object: () => {
         return {
@@ -74,7 +58,6 @@ export function buildMakeCustomer() {
           description,
           createdAt,
           modifiedAt,
-          softDeleted,
         };
       },
     };
