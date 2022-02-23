@@ -14,8 +14,8 @@ const sTestResult = fluentSchema
       .prop("fa", fluentSchema.string())
       .prop("en", fluentSchema.string())
   )
-  .prop("rawScore", fluentSchema.number())
-  .prop("baseRate", fluentSchema.number())
+  .prop("rawscore", fluentSchema.number())
+  .prop("baserate", fluentSchema.number())
   .prop("interpret", fluentSchema.string());
 
 export const sTestData = fluentSchema
