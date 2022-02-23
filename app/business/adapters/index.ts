@@ -7,7 +7,8 @@ import {
   buildFindRequestsByProviderId,
   buildFindProviderByCustomerId,
   buildInsertCustomer,
-  buildFindCustomer
+  buildFindCustomer,
+  buildDeleteCustomer,
 } from "./db";
 
 import { rowToCustomer } from "./utils";
@@ -24,8 +25,10 @@ const dbClient = scyllaClient({
 
 export const initDb = buildInitDb({ init: dbClient.init });
 
-
-export const findCustomer = buildFindCustomer({select: dbClient.select, rowToCustomer})
+export const findCustomer = buildFindCustomer({
+  select: dbClient.select,
+  rowToCustomer,
+});
 
 export const findCustomersByProviderId = buildFindCustomersByProviderId({
   select: dbClient.select,
@@ -48,5 +51,9 @@ export const insertCustomer = buildInsertCustomer({
   insert: dbClient.insert,
 });
 
+export const deleteCustomer = buildDeleteCustomer({
+  insert: dbClient.insert,
+  remove: dbClient.delete,
+});
 
-export { fetchUserById, fetchUserRole } from "./network"
+export { fetchUserById, fetchUserRole } from "./network";
