@@ -7,7 +7,7 @@ import { removeCustomer } from "./removeCustomer";
 import { removeProvider } from "./removeProvider";
 import { removeRequest } from "./removeRequest";
 import { retrieveCustomers } from "./retrieveCustomers";
-import { retrieveProviderRequests } from "./retrieveRequests";
+import { retrieveProviderRequests } from "./retrieveProviderRequests";
 import { retrieveCustomerProviderInfo } from "./retrieveCustomerProviderInfo";
 import { retrieveCustomerRequest } from "./retrieveCustomerRequest";
 import {
