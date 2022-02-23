@@ -28,7 +28,7 @@ export function buildInsertTestData(args: adapterTypes.IBuildInsert) {
   const errorPath = "psychologyTest, adapters, insert test data";
   const { query, logQuery } = insertQueryGen();
   return async function insertTestData(
-    formData: entityTypes.IMadeTestDataObject
+    testData: entityTypes.IMadeTestDataObject
   ) {
     const {
       userId,
@@ -41,7 +41,7 @@ export function buildInsertTestData(args: adapterTypes.IBuildInsert) {
       resultSummary,
       createdAt,
       modifiedAt,
-    } = formData;
+    } = testData;
     const params = {
       id,
       user_id: userId,
