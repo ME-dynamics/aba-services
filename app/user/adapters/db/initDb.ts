@@ -110,7 +110,9 @@ export function buildInitDb(args: adapterTypes.IBuildInitDb) {
     });
     // await init({ query: siblingsUDT.query, errorPath });
     await init({ query: createUserTableQuery.query, errorPath });
+    await init({ query: createUserTableQuery.logQuery, errorPath });
     await init({ query: createPatientTable.query, errorPath });
+    await init({ query: createPatientTable.logQuery, errorPath });
     await init({ query: phoneNumberIndex, errorPath });
     await init({ query: providersMV.query, errorPath });
   };
