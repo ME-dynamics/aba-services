@@ -21,6 +21,7 @@ import {
   findAdmins,
   deleteAdmin,
   sha512,
+  validatePhoneNumber,
 } from "../adapters";
 
 import { buildPasswordlessStart } from "./passwordlessStart";
@@ -78,6 +79,7 @@ export const initAdmin = buildInitAdmins({
   findOtpByPhone,
   insertOtp,
   insertRole,
+  validatePhoneNumber,
 });
 
 export const retrieveRoleByOtpId = buildRetrieveRoleByOtpId({ findRole });
