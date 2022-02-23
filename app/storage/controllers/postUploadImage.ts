@@ -1,4 +1,4 @@
-import { httpResultClientError, auth, types } from "aba-node";
+import { httpResult, auth, types } from "aba-node";
 import { controllerTypes } from "../types";
 import { uploadImage } from "../usecases";
 export function buildPostUploadImage() {
@@ -10,7 +10,7 @@ export function buildPostUploadImage() {
     assistant: true,
     support: true,
   };
-  const { badRequest, forbidden } = httpResultClientError;
+  const { badRequest, forbidden } = httpResult.clientError;
   function validate(fileData: controllerTypes.tMultiPartFile):
     | {
         access: "private" | "public";
@@ -67,21 +67,21 @@ export function buildPostUploadImage() {
     });
 
     const isValid = validate(fileData);
-    if (isValid) {
-      const { access, transform } = isValid;
-      const { userId } = payload;
-      const result = await uploadImage({
-        file: fileData.file,
-        userId,
-        access,
-        transform,
+    if (!isValid) {
+      fileData.file.unpipe();
+      return badRequest({
+        error: "you should define access type and image file",
       });
-
-      return result;
     }
-    fileData.file.unpipe();
-    return badRequest({
-      error: "you should define access type and image file",
+    const { access, transform } = isValid;
+    const { userId } = payload;
+    const result = await uploadImage({
+      file: fileData.file,
+      userId,
+      access,
+      transform,
     });
+
+    return result;
   };
 }
