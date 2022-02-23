@@ -1,4 +1,4 @@
-import { httpResultClientError, httpResultSuccess } from "aba-node";
+import { httpResult } from "aba-node";
 import { makeCustomer } from "../entities";
 import { entityTypes, usecaseTypes } from "../types";
 
@@ -8,9 +8,10 @@ export function buildCreateRequest(args: usecaseTypes.IBuildCreateRequest) {
     insertCustomer,
     findRequestByCustomerId,
     fetchRoleByUserId,
+    deleteCustomer,
   } = args;
-  const { forbidden, badRequest } = httpResultClientError;
-  const { created, ok } = httpResultSuccess;
+  const { forbidden, badRequest } = httpResult.clientError;
+  const { created, ok } = httpResult.success;
   return async function createRequest(info: usecaseTypes.ICreateRequest) {
     // provider id in request body
     // customer id is extracted from the token
@@ -26,6 +27,7 @@ export function buildCreateRequest(args: usecaseTypes.IBuildCreateRequest) {
     }
     // if customer didn't define his name, this request cannot be completed
     if (!customer.name) {
+      // TODO: separate first name and last name
       return badRequest({
         error: "you should define your name before making a request",
       });
@@ -37,8 +39,7 @@ export function buildCreateRequest(args: usecaseTypes.IBuildCreateRequest) {
     // TODO: check if user is already a customer of the provider
     // check if request is already made to a provider, not specifically provider of this request
     const requestFound = await findRequestByCustomerId(customerId);
-
-    if (requestFound && !requestFound.softDeleted) {
+    if (requestFound) {
       if (requestFound.requestConfirmed) {
         return badRequest({ error: "request already confirmed" });
       }
@@ -52,8 +53,11 @@ export function buildCreateRequest(args: usecaseTypes.IBuildCreateRequest) {
       // only one request can be made for a customer
       // if request found, delete the request
       const customer = makeCustomer(requestFound);
-      customer.set.remove();
-      await insertCustomer(customer.object());
+      await deleteCustomer({
+        customerId: customer.get.customerId(),
+        providerId: customer.get.providerId(),
+        businessId: customer.get.businessId(),
+      });
     }
     // create the new request
     const request = makeCustomer({
@@ -66,7 +70,6 @@ export function buildCreateRequest(args: usecaseTypes.IBuildCreateRequest) {
       description: customer.description,
       createdAt: undefined,
       modifiedAt: undefined,
-      softDeleted: false,
     });
     await insertCustomer(request.object());
     return created<entityTypes.IMadeCustomersObject>({
