@@ -7,24 +7,27 @@ import {
   fetchUserById,
   fetchUserRole,
   insertCustomer,
+  deleteCustomer,
 } from "../adapters";
 
 import { buildConfirmRequest } from "./confirmRequest";
 import { buildCreateRequest } from "./createRequest";
 import { buildRejectRequest } from "./rejectRequest";
-import { buildRetrieveRequests } from "./retrieveRequests";
+import { buildRetrieveProviderRequests } from "./retrieveProviderRequests";
 import { buildRetrieveCustomers } from "./retrieveCustomers";
 import { buildRemoveCustomer } from "./removeCustomer";
+import { buildRemoveProvider } from "./removeProvider";
 import { buildRemoveRequest } from "./removeRequest";
 import { buildUpdateCustomerInfo } from "./updateCustomerInfo";
 import { buildRetrieveCustomerProvider } from "./retrieveCustomerProvider";
 import { buildRetrieveCustomerProviderInfo } from "./retrieveCustomerProviderInfo";
-import { buildRetrieveRequestByCustomerId } from "./retrieveRequestByCustomerId";
+import { buildRetrieveCustomerRequest } from "./retrieveCustomerRequest";
 
 export const confirmRequest = buildConfirmRequest({
   findRequestByCustomerId,
   fetchUserById,
   insertCustomer,
+  deleteCustomer,
 });
 
 export const createRequest = buildCreateRequest({
@@ -32,33 +35,39 @@ export const createRequest = buildCreateRequest({
   fetchUserById,
   fetchRoleByUserId: fetchUserRole,
   insertCustomer,
+  deleteCustomer,
 });
 
 export const rejectRequest = buildRejectRequest({
   findRequestByCustomerId,
-  insertCustomer,
+  deleteCustomer,
 });
 
-export const retrieveRequests = buildRetrieveRequests({
+export const retrieveProviderRequests = buildRetrieveProviderRequests({
   findRequestsByProviderId,
 });
 
 export const removeRequest = buildRemoveRequest({
   findRequestByCustomerId,
-  insertCustomer,
+  deleteCustomer,
 });
 
 export const retrieveCustomers = buildRetrieveCustomers({
   findCustomersByProviderId,
 });
 
-export const retrieveRequestByCustomerId = buildRetrieveRequestByCustomerId({
+export const retrieveCustomerRequest = buildRetrieveCustomerRequest({
   findRequestByCustomerId,
 });
 
 export const removeCustomer = buildRemoveCustomer({
   findCustomer,
-  insertCustomer,
+  deleteCustomer,
+});
+
+export const removeProvider = buildRemoveProvider({
+  findCustomer,
+  deleteCustomer,
 });
 
 export const updateCustomerInfo = buildUpdateCustomerInfo({
