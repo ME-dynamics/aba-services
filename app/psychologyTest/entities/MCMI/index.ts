@@ -1,18 +1,14 @@
 import { entityTypes } from "../../types";
+import { oneFormula } from "./RawScroe/Formula_1";
 
 export function buildMakeMBTI(args: entityTypes.IBuildMakeMBTI) {
-  const { eiFormula, jpFormula, snFormula, tfFormula } = args;
+  // const { eiFormula, jpFormula, snFormula, tfFormula } = args;
 
   return function makeMBTI(fields: entityTypes.tMbtiFields) {
-    const eiGroup = eiFormula(fields);
-    const jpGroup = jpFormula(fields);
-    const snGroup = snFormula(fields);
-    const tfGroup = tfFormula(fields);
+    const one = oneFormula(fields);
+
     return {
-      eiGroup,
-      jpGroup,
-      snGroup,
-      tfGroup,
+      one,
     };
   };
 }
