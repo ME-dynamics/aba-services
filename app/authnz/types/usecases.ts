@@ -16,6 +16,7 @@ import {
   tFindAdminsFunc,
   tFindDeviceIdByPhoneFunc,
   tInsertDeviceIdFunc,
+  IValidatePhoneNumberResult,
 } from "./adapters";
 import { otpGen } from "../adapters";
 import { tRole, tDeviceInfo } from "./entities";
@@ -136,6 +137,7 @@ export interface IBuildInitAdmin {
   insertRole: tInsertRoleFunc;
   deleteAdmin: tDeleteAdminFunc;
   findAdmins: tFindAdminsFunc;
+  validatePhoneNumber: (phoneNumber: string) => IValidatePhoneNumberResult;
 }
 
 export interface IBuildRetrieveRoleByOtpId {

@@ -4,8 +4,14 @@ import { admin } from "../config";
 import { makeOtp, makeRole } from "../entities";
 
 export function buildInitAdmins(args: usecaseTypes.IBuildInitAdmin) {
-  const { findAdmins, deleteAdmin, findOtpByPhone, insertOtp, insertRole } =
-    args;
+  const {
+    findAdmins,
+    deleteAdmin,
+    findOtpByPhone,
+    insertOtp,
+    insertRole,
+    validatePhoneNumber,
+  } = args;
   function otpInput(phoneNumber: string): entityTypes.IOtp {
     return {
       id: undefined,
@@ -51,7 +57,13 @@ export function buildInitAdmins(args: usecaseTypes.IBuildInitAdmin) {
     if (admin) {
       for (let index = 0; index < admin.length; index++) {
         const phoneNumber = admin[index];
-        const otpFound = await findOtpByPhone(phoneNumber);
+        const { isValid, phoneNumber: phNumber } =
+          validatePhoneNumber(phoneNumber);
+        if (!isValid) {
+          console.log(phoneNumber, "is not valid");
+          process.exit(1);
+        }
+        const otpFound = await findOtpByPhone(phNumber);
         if (otpFound) {
           const role = makeRole(roleInput(otpFound.id));
           await insertRole(role.object());
