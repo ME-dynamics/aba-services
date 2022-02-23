@@ -1,15 +1,15 @@
-import { httpResultClientError, httpResultSuccess } from "aba-node";
+import { httpResult } from "aba-node";
 import { usecaseTypes } from "../types";
 
-export function buildRetrieveRequestByCustomerId(
+export function buildRetrieveCustomerRequest( // TODO: fix retrieve customer request
   args: usecaseTypes.IBuildRetrieveRequestByCustomerId
 ) {
   const { findRequestByCustomerId } = args;
-  const { notFound } = httpResultClientError;
-  const { ok } = httpResultSuccess;
-  return async function retrieveRequestByCustomerId(customerId: string) {
+  const { notFound } = httpResult.clientError;
+  const { ok } = httpResult.success;
+  return async function retrieveCustomerRequest(customerId: string) {
     const request = await findRequestByCustomerId(customerId);
-    if (!request || request.softDeleted) {
+    if (!request) {
       return notFound({ error: "request not found" });
     }
     return ok({
