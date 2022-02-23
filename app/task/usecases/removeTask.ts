@@ -1,5 +1,4 @@
 import { httpResult } from "aba-node";
-import { makeTask } from "../entities";
 import { usecaseTypes } from "../types";
 
 export function buildRemoveTask(args: usecaseTypes.IBuildRemoveTask) {
@@ -18,6 +17,7 @@ export function buildRemoveTask(args: usecaseTypes.IBuildRemoveTask) {
     await deleteTask({
       userId: taskFound.userId,
       providerId: taskFound.providerId,
+      createdAt: taskFound.createdAt,
     });
     return ok<string>({
       payload: "task is removed",
