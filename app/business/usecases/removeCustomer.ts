@@ -1,11 +1,10 @@
-import { httpResultClientError, httpResultSuccess } from "aba-node";
-import { makeCustomer } from "../entities";
-import { usecaseTypes } from "../types";
+import { httpResult } from "aba-node";
+import type { usecaseTypes } from "../types";
 
 export function buildRemoveCustomer(args: usecaseTypes.IBuildRemoveCustomer) {
-  const { findCustomer, insertCustomer } = args;
-  const { notFound, forbidden } = httpResultClientError;
-  const { ok } = httpResultSuccess;
+  const { findCustomer, deleteCustomer } = args;
+  const { notFound, forbidden } = httpResult.clientError;
+  const { ok } = httpResult.success;
   return async function removeCustomer(info: usecaseTypes.IRemoveCustomer) {
     // provider from token, customer in params
     const { customerId, providerId } = info;
@@ -19,9 +18,11 @@ export function buildRemoveCustomer(args: usecaseTypes.IBuildRemoveCustomer) {
       return forbidden({ error: "action not allowed" });
     }
 
-    const customer = makeCustomer(customerFound);
-    customer.set.remove();
-    await insertCustomer(customer.object());
+    await deleteCustomer({
+      customerId: customerFound.customerId,
+      providerId: customerFound.providerId,
+      businessId: customerFound.businessId,
+    });
     return ok<string>({
       payload: "customer removed",
     });
