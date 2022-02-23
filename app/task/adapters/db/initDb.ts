@@ -20,7 +20,7 @@ export function buildInitDb(args: adapterTypes.IBuildInitDb) {
         { columnName: "modified_at", columnType: "TIMESTAMP" },
       ],
       primaryKey: {
-        partition: ["user_id"],
+        partition: ["user_id", "provider_id"],
         cluster: ["created_at"],
       },
       orderBy: [{ key: "created_at", type: "DESC" }],
@@ -32,6 +32,7 @@ export function buildInitDb(args: adapterTypes.IBuildInitDb) {
       indexKey: "id",
     });
     await init({ query: createTasksTable.query, errorPath });
+    await init({ query: createTasksTable.logQuery, errorPath });
     await init({ query: taskIdIndex, errorPath });
   };
 }
