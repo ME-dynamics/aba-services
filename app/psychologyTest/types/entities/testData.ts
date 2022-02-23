@@ -10,8 +10,8 @@ export interface ITestResult {
     fa: string;
     en: string;
   };
-  rawScore: number;
-  baseRate: number;
+  rawscore: number;
+  baserate: number;
   interpret: string;
 }
 
