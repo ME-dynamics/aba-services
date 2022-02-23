@@ -1,4 +1,4 @@
-import { types, auth, httpResultClientError } from "aba-node";
+import { types, auth, httpResult } from "aba-node";
 import { removeRequest, retrieveCustomerProvider } from "../usecases";
 import { controllerTypes } from "../types";
 
@@ -11,7 +11,7 @@ export function buildDeleteRequest() {
     assistant: false,
     support: false,
   };
-  const { badRequest, forbidden } = httpResultClientError;
+  const { badRequest, forbidden } = httpResult.clientError;
   return async function deleteRequest(
     httpRequest: controllerTypes.tDeleteRequest
   ) {
