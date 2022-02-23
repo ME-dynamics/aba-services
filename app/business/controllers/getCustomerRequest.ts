@@ -1,8 +1,7 @@
 import { auth, types } from "aba-node";
-import { retrieveRequestByCustomerId } from "../usecases";
+import { retrieveCustomerRequest } from "../usecases";
 import { controllerTypes } from "../types";
-
-export function buildGetRequestByCustomerId() {
+export function buildGetCustomerRequest() {
   const roles: types.IRoles = {
     customer: true,
     provider: false,
@@ -11,14 +10,14 @@ export function buildGetRequestByCustomerId() {
     assistant: false,
     support: false,
   };
-  return async function getRequestByCustomerId(
-    httpRequest: controllerTypes.tGetRequestByCustomerId
+  return async function getCustomerRequest(
+    httpRequest: controllerTypes.tGetRequests
   ) {
     const { success, error, payload } = auth(httpRequest, roles);
+    const { userId } = payload;
     if (!success) {
       return error;
     }
-    const { userId } = payload;
-    return await retrieveRequestByCustomerId(userId);
+    return await retrieveCustomerRequest(userId);
   };
 }
