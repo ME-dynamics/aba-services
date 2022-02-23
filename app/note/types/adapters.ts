@@ -36,6 +36,18 @@ export interface IBuildInsertNote {
 
 export type tInsertNoteFunc = (note: IMadeNoteObject) => Promise<void>;
 
+export interface IBuildDeleteNote {
+  remove: types.tDbDeleteFunc;
+  insert: types.tDbUpsertFunc;
+}
+
+export interface IDeleteNote {
+  providerId: string;
+  customerId: string;
+  createdAt: Date;
+}
+
+export type tDeleteNoteFunc = (info: IDeleteNote) => Promise<void>;
 // utils
 
 export type tRowToNoteFunc = (row: types.tRow) => IMadeNoteObject;

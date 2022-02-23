@@ -3,6 +3,7 @@ import {
   tFindCustomerNotesFunc,
   tFindNoteByIdFunc,
   tImageIdsValidationFunc,
+  tDeleteNoteFunc,
 } from "./adapters";
 
 // create note
@@ -38,7 +39,7 @@ export interface IRetrieveNote {
 
 export interface IBuildRemoveNote {
   findNoteById: tFindNoteByIdFunc;
-  insertNote: tInsertNoteFunc;
+  deleteNote: tDeleteNoteFunc;
 }
 
 // update note
