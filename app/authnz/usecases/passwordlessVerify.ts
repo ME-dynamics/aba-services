@@ -46,6 +46,7 @@ export function buildPasswordlessVerify(
     const { otpCode, otpToken, deviceId } = info;
     const otpFound = await findOtpByToken(otpToken);
     if (!otpFound) {
+      // console.log({ otpFound: otpFound }); TODO: replace with logger
       return badRequest({ error: strings.tokenNotFoundOrValid.fa });
     }
     const deviceIdFound = await findDeviceIdByPhone({
@@ -53,6 +54,7 @@ export function buildPasswordlessVerify(
       phoneNumber: otpFound.phoneNumber,
     });
     if (!deviceIdFound) {
+      // console.log({ deviceIdFound: deviceIdFound });
       return badRequest({ error: strings.tokenNotFoundOrValid.fa });
     }
     // check if it's not blocked
