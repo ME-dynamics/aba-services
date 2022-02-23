@@ -9,7 +9,7 @@ const body = fluentSchema
   )
   .prop(
     "deviceId",
-    fluentSchema.string().required().minLength(128).maxLength(128)
+    fluentSchema.string().required().minLength(127).maxLength(128)
   );
 
 const response = {

@@ -32,9 +32,12 @@ const response = {
     .object()
     .prop(
       "payload",
-      fluentSchema.object().prop("otpToken", fluentSchema.string().required())
-    )
-    .prop("deviceId", fluentSchema.string().required()),
+      fluentSchema
+        .object()
+        .prop("otpToken", fluentSchema.string().required())
+        .prop("deviceId", fluentSchema.string().required())
+    ),
+
   ...errorSchemaObject,
 };
 
