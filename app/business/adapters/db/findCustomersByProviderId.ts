@@ -10,7 +10,7 @@ function selectQueryGen(): string {
     columns: ["*"],
     where: [
       equal({ argument: "provider_id", dynamicValue: true }),
-      equal({ argument: "request_confirmed", dynamicValue: true }),
+      equal({ argument: "request_confirmed", staticValue: true }),
     ],
   });
   return query;
