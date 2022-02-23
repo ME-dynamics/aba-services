@@ -5,6 +5,7 @@ export const user = fluentSchema
   .prop("id", fluentSchema.string().format("uuid").required())
   .prop("role", fluentSchema.string().required())
   .prop("username", fluentSchema.string().default(""))
+  // .prop("phoneNumber", fluentSchema.string().required())
   .prop("firstName", fluentSchema.string().default(""))
   .prop("lastName", fluentSchema.string().default(""))
   .prop("description", fluentSchema.string().default(""))
