@@ -24,7 +24,6 @@ export interface IUser {
   deactivationReason: string | undefined;
   createdAt: Date | undefined;
   modifiedAt: Date | undefined;
-  softDeleted: boolean;
 }
 export interface IMadeUserObject extends IUser {
   id: string;
@@ -51,7 +50,6 @@ export interface IMadeUser {
     deactivationReason: () => string | undefined;
     createdAt: () => Date;
     modifiedAt: () => Date;
-    softDeleted: () => boolean;
   };
   set: {
     username: (username: string | undefined) => void;
@@ -64,8 +62,6 @@ export interface IMadeUser {
     address: (address: string | undefined) => void;
     telephone: (telephone: string | undefined) => void;
     deactivationReason: (newDeactivationReason: string) => void;
-    remove: () => void;
-    restore: () => void;
   };
   object: () => IMadeUserObject;
 }
@@ -131,7 +127,6 @@ export interface IPatient {
   siblings: string | undefined;
   createdAt: Date | undefined;
   modifiedAt: Date | undefined;
-  softDeleted: boolean;
 }
 
 export interface IMadePatientObject extends IPatient {
@@ -162,7 +157,6 @@ export interface IMadePatient {
     siblings: () => string | undefined;
     createdAt: () => Date;
     modifiedAt: () => Date;
-    softDeleted: () => boolean;
   };
   set: {
     problemDescription: (newDesc: string) => void;
@@ -183,8 +177,6 @@ export interface IMadePatient {
     cousinMarriage: (cousinMarriage: boolean | undefined) => void;
     siblingsPosition: (newPosition: number | undefined) => void;
     siblings: (desc: string | undefined) => void;
-    remove: () => void;
-    restore: () => void;
   };
   object: () => IMadePatientObject;
 }
