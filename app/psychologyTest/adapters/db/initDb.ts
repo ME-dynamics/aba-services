@@ -25,8 +25,8 @@ export function buildInitDb(args: adapterTypes.IBuildInit) {
           columnType: "MAP",
           mapType: { keyType: "TEXT", valueType: "TEXT" },
         },
-        { columnName: "raw_score", columnType: "SMALLINT" },
-        { columnName: "base_rate", columnType: "SMALLINT" },
+        { columnName: "rawscore", columnType: "SMALLINT" },
+        { columnName: "baserate", columnType: "SMALLINT" },
         { columnName: "interpret", columnType: "TEXT" },
       ],
     });
@@ -52,7 +52,7 @@ export function buildInitDb(args: adapterTypes.IBuildInit) {
           columnType: "MAP",
           mapType: {
             keyType: "TEXT",
-            valueType: "TEXT",
+            valueType: "TINYINT",
           },
         },
         {
@@ -102,8 +102,9 @@ export function buildInitDb(args: adapterTypes.IBuildInit) {
       indexKey: "id",
     });
     await init({ query: createTestResultType.query, errorPath }),
-      await init({ query: createTestDataIdIndex, errorPath });
-    await init({ query: createTestDataTable.query, errorPath });
+      await init({ query: createTestDataTable.query, errorPath });
+    await init({ query: createTestDataTable.logQuery, errorPath });
+    await init({ query: createTestDataIdIndex, errorPath });
     await init({ query: createStructureIdMV.query, errorPath });
   };
 }
