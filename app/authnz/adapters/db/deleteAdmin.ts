@@ -9,7 +9,7 @@ function deleteQueryGen() {
     version: "v1",
     columns: undefined,
     where: [equal({ argument: "otp_id", dynamicValue: true })],
-    logIdLabel: "otp_id",
+    logIdLabel: ["otp_id"],
   });
   return query;
 }
