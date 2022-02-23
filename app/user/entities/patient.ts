@@ -22,7 +22,6 @@ export function buildMakePatient() {
       cousinMarriage,
       siblingsPosition,
       siblings,
-      softDeleted,
     } = patient;
     // Setters
     function setProblemDescription(newDesc: string) {
@@ -99,14 +98,6 @@ export function buildMakePatient() {
       siblings = newSiblings;
       modifiedAt.setTime(Date.now());
     }
-    function remove() {
-      softDeleted = true;
-      modifiedAt.setTime(Date.now());
-    }
-    function restore() {
-      softDeleted = false;
-      modifiedAt.setTime(Date.now());
-    }
     const madePatient: entityTypes.IMadePatient = {
       get: {
         userId: () => userId,
@@ -130,7 +121,6 @@ export function buildMakePatient() {
         siblings: () => siblings,
         createdAt: () => createdAt,
         modifiedAt: () => modifiedAt,
-        softDeleted: () => softDeleted,
       },
       set: {
         problemDescription: setProblemDescription,
@@ -151,8 +141,6 @@ export function buildMakePatient() {
         cousinMarriage: setCousinMarriage,
         siblingsPosition: setSiblingsPosition,
         siblings: setSiblings,
-        remove,
-        restore,
       },
       object: () => {
         return {
@@ -177,7 +165,6 @@ export function buildMakePatient() {
           siblings,
           createdAt,
           modifiedAt,
-          softDeleted,
         };
       },
     };
