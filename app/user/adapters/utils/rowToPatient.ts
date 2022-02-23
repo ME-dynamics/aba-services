@@ -28,6 +28,5 @@ export function rowToPatient(row: types.tRow): entityTypes.IMadePatientObject {
     siblings: nullToUndefined<string>(row.get("siblings")),
     createdAt: row.get("created_at"),
     modifiedAt: row.get("modified_at"),
-    softDeleted: row.get("soft_deleted"),
   };
 }

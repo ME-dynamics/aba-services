@@ -18,6 +18,5 @@ export function rowToUser(row: types.tRow): entityTypes.IMadeUserObject {
     deactivationReason: nullToUndefined<string>(row.get("deactivation_reason")),
     createdAt: row.get("created_at"),
     modifiedAt: row.get("modified_at"),
-    softDeleted: row.get("soft_deleted"),
   };
 }
