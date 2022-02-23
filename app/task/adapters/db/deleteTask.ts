@@ -9,10 +9,11 @@ function deleteQueryGen() {
     table: "tasks",
     version: "v1",
     columns: undefined,
-    logIdLabel: ["user_id", "provider_id"],
+    logIdLabel: ["user_id", "provider_id", "created_at"],
     where: [
       equal({ argument: "user_id", dynamicValue: true }),
       equal({ argument: "provider_id", dynamicValue: true }),
+      equal({ argument: "created_at", dynamicValue: true }),
     ],
   });
   return queries;
@@ -23,8 +24,12 @@ export function buildDeleteTask(args: adapterTypes.IBuildDeleteTask) {
   const errorPath = "adapters, db, deleteTask";
   const { query, logQuery } = deleteQueryGen();
   return async function deleteTask(info: adapterTypes.IDeleteTask) {
-    const { userId, providerId } = info;
-    const params = { user_id: userId, provider_id: providerId };
+    const { userId, providerId, createdAt } = info;
+    const params = {
+      user_id: userId,
+      provider_id: providerId,
+      created_at: createdAt,
+    };
     await Promise.all([
       remove({ query, params, errorPath }),
       insert({ query: logQuery, params, errorPath }),
