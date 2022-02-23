@@ -20,13 +20,19 @@ const response = {
           .prop("content", fluentSchema.string().required().maxLength(9973))
           .prop(
             "imageIds",
-            fluentSchema
-              .array()
-              .items(fluentSchema.string().format("uuid"))
-              .default(null)
+            fluentSchema.oneOf([
+              fluentSchema.null(),
+              fluentSchema.array().items(fluentSchema.string().format("uuid")),
+            ])
           )
-          .prop("createdAt", fluentSchema.string().format("date-time").required())
-          .prop("modifiedAt", fluentSchema.string().format("date-time").required())
+          .prop(
+            "createdAt",
+            fluentSchema.string().format("date-time").required()
+          )
+          .prop(
+            "modifiedAt",
+            fluentSchema.string().format("date-time").required()
+          )
       )
   ),
   [statusCodes.NOT_FOUND]: errorSchema,
