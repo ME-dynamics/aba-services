@@ -3,6 +3,7 @@ import {
   findCustomerNotes,
   findNoteById,
   imageIdsValidation,
+  deleteNote
 } from "../adapters";
 import { buildCreateNote } from "./createNote";
 import { buildRetrieveCustomerNotes } from "./retrieveCustomerNotes";
@@ -16,4 +17,4 @@ export const updateNote = buildUpdateNote({
   insertNote,
   imageIdsValidation,
 });
-export const removeNote = buildRemoveNote({ findNoteById, insertNote });
+export const removeNote = buildRemoveNote({ findNoteById, deleteNote });
