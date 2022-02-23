@@ -1,4 +1,4 @@
-import { auth, types, httpResultClientError } from "aba-node";
+import { auth, types } from "aba-node";
 import { updateNote } from "../usecases";
 import { controllerTypes } from "../types";
 
