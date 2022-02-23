@@ -25,7 +25,6 @@ export function buildCreateUser(args: usecaseTypes.IBuildCreateUser) {
       deactivationReason: undefined,
       createdAt: undefined,
       modifiedAt: undefined,
-      softDeleted: false,
     };
   }
 

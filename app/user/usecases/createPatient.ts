@@ -1,11 +1,11 @@
-import { httpResultSuccess, httpResultClientError } from "aba-node";
+import { httpResult } from "aba-node";
 import { makePatient } from "../entities";
 import { usecaseTypes, entityTypes } from "../types";
 
 export function buildCreatePatient(args: usecaseTypes.IBuildCreatePatient) {
   const { findUserById, findPatientByUserId, insertPatient } = args;
-  const { notFound } = httpResultClientError;
-  const { created, ok } = httpResultSuccess;
+  const { notFound } = httpResult.clientError;
+  const { created, ok } = httpResult.success;
   function patientInput(
     info: usecaseTypes.tCreatePatient
   ): entityTypes.IPatient {
@@ -54,20 +54,19 @@ export function buildCreatePatient(args: usecaseTypes.IBuildCreatePatient) {
       religion,
       siblings,
       siblingsPosition,
-      softDeleted: false,
     };
   }
   return async function createPatient(info: usecaseTypes.tCreatePatient) {
     const { userId } = info;
     const userFound = await findUserById(userId);
-    if (!userFound || userFound.softDeleted) {
+    if (!userFound) {
       return notFound({ error: "user not found" });
     }
     const patientFound = await findPatientByUserId(userId);
     const patient = makePatient(patientInput(info));
     await insertPatient(patient.object());
 
-    if (!patientFound || patientFound.softDeleted) {
+    if (!patientFound) {
       return created({
         payload: patient.object(),
       });

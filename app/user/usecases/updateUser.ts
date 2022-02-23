@@ -1,17 +1,17 @@
-import { httpResultClientError, httpResultSuccess } from "aba-node";
+import { httpResult } from "aba-node";
 import { makeUser } from "../entities";
 import { usecaseTypes } from "../types";
 
 export function buildUpdateUser(args: usecaseTypes.IBuildUpdateUser) {
   const { findUserById, insertUser } = args;
-  const { notFound } = httpResultClientError;
-  const { ok } = httpResultSuccess;
+  const { notFound } = httpResult.clientError;
+  const { ok } = httpResult.success;
   return async function updateUser(
     userId: string,
     info: usecaseTypes.IUpdateUser
   ) {
     const userFound = await findUserById(userId);
-    if (!userFound || userFound.softDeleted) {
+    if (!userFound) {
       return notFound({ error: "user not found" });
     }
     const {
