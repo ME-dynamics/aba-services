@@ -9,6 +9,5 @@ export function rowToImage(row: types.tRow): entityTypes.IMadeImageObject {
     url: nullToUndefined<string>(row.get("url")),
     createdAt: row.get("created_at"),
     modifiedAt: row.get("modified_at"),
-    softDeleted: row.get("soft_deleted"),
   };
 }
