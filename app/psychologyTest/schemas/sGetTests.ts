@@ -1,4 +1,4 @@
-import { statusCodes, fluentSchema } from "aba-node";
+import { statusCodes, fluentSchema, errorSchemaObject } from "aba-node";
 
 const sTests = fluentSchema
   .array()
@@ -22,4 +22,5 @@ const response = {
 
 export const sGetTests = {
   response,
+  ...errorSchemaObject
 };
