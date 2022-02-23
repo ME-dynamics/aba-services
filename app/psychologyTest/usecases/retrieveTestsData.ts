@@ -8,7 +8,7 @@ export function buildRetrieveTestsData(args: usecaseTypes.IBuildRetrieveTestsDat
   return async function retrieveTestsData(userId: string) {
     const testsData = await findTestsDataByUserId(userId);
     if (!testsData) {
-      return notFound({ error: "forms not found" });
+      return notFound({ error: "user's tests not found" });
     }
     return ok({
       payload: testsData,
