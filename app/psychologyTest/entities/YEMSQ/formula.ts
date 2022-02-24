@@ -25,7 +25,7 @@ export function formula(fields: Record<string, number>) {
     fields["56"] + fields["57"] + fields["58"] + fields["59"] + fields["60"];
   const unrelentingStandards =
     fields["61"] + fields["62"] + fields["63"] + fields["64"] + fields["65"];
-  const entitkement =
+  const entitlement =
     fields["66"] + fields["67"] + fields["68"] + fields["69"] + fields["70"];
   const selfDiscipline =
     fields["71"] + fields["72"] + fields["73"] + fields["74"] + fields["75"];
@@ -44,7 +44,7 @@ export function formula(fields: Record<string, number>) {
     selfSacrifice,
     emotionalInhibition,
     unrelentingStandards,
-    entitkement,
+    entitlement,
     selfDiscipline,
   };
 }
