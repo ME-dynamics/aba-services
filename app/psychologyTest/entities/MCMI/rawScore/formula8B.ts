@@ -1,92 +1,73 @@
-const data_6B: Record<string, Record<string, number>> = {
-  "7": {
+const data8B: Record<string, Record<string, number>> = {
+  "18": {
     "1": 0,
     "2": 1,
   },
-  "13": {
+  "24": {
     "1": 0,
     "2": 1,
   },
-  "17": {
+  "25": {
     "1": 0,
     "2": 1,
   },
-  "33": {
+  "35": {
     "1": 0,
     "2": 1,
   },
-  "36": {
+  "40": {
     "1": 0,
     "2": 1,
   },
-  "39": {
+  "98": {
     "1": 0,
     "2": 1,
   },
-  "41": {
+  "148": {
     "1": 0,
     "2": 1,
   },
-  "49": {
+  "169": {
     "1": 0,
     "2": 1,
   },
-  "53": {
-    "1": 0,
-    "2": 1,
-  },
-  "79": {
-    "1": 0,
-    "2": 1,
-  },
-  "93": {
-    "1": 0,
-    "2": 1,
-  },
-  "96": {
-    "1": 0,
-    "2": 1,
-  },
-  "166": {
-    "1": 0,
-    "2": 1,
-  },
-  "9": {
+  "19": {
     "1": 0,
     "2": 2,
   },
-  "14": {
+  "43": {
     "1": 0,
     "2": 2,
   },
-  "28": {
+  "70": {
     "1": 0,
     "2": 2,
   },
-  "64": {
+  "90": {
     "1": 0,
     "2": 2,
   },
-  "87": {
+  "104": {
     "1": 0,
     "2": 2,
   },
-  "95": {
+  "122": {
     "1": 0,
     "2": 2,
   },
-  "116": {
+  "161": {
     "1": 0,
     "2": 2,
   },
 };
 
-export function sixBFormula(fields: Record<string, number>) {
-  let sixB = 0;
-  const keys = Object.keys(data_6B);
+export function formula8B(fields: Record<string, number>) {
+  let eightB = 0;
+  const keys = Object.keys(data8B);
   for (let index = 0; index < keys.length; index++) {
     const key = keys[index];
     const field = fields[`${key}`];
-    sixB = sixB + data_6B[key][field];
+    eightB = eightB + data8B[key][field];
   }
+  return eightB;
 }

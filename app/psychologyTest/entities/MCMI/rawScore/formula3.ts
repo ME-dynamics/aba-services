@@ -1,80 +1,77 @@
-const data_P: Record<string, Record<string, number>> = {
-  "8": {
+const data3: Record<string, Record<string, number>> = {
+  "82": {
+    "1": 1,
+    "2": 0,
+  },
+  "47": {
     "1": 0,
     "2": 1,
   },
-  "48": {
+  "56": {
     "1": 0,
     "2": 1,
   },
-  "60": {
+  "84": {
     "1": 0,
     "2": 1,
   },
-  "63": {
+  "120": {
     "1": 0,
     "2": 1,
   },
-  "115": {
+  "133": {
     "1": 0,
     "2": 1,
   },
-  "138": {
+  "141": {
     "1": 0,
     "2": 1,
   },
-  "158": {
+  "151": {
     "1": 0,
     "2": 1,
   },
-  "159": {
-    "1": 0,
-    "2": 1,
-  },
-  "6": {
+  "16": {
     "1": 0,
     "2": 2,
   },
-  "33": {
+  "35": {
     "1": 0,
     "2": 2,
   },
-  "42": {
+  "45": {
     "1": 0,
     "2": 2,
   },
-  "49": {
+  "73": {
     "1": 0,
     "2": 2,
   },
-  "89": {
+  "94": {
     "1": 0,
     "2": 2,
   },
-  "103": {
+  "108": {
     "1": 0,
     "2": 2,
   },
-  "146": {
+  "135": {
     "1": 0,
     "2": 2,
   },
-  "167": {
-    "1": 0,
-    "2": 2,
-  },
-  "175": {
+  "169": {
     "1": 0,
     "2": 2,
   },
 };
 
-export function PFormula(fields: Record<string, number>) {
-  let P = 0;
-  const keys = Object.keys(data_P);
+export function formula3(fields: Record<string, number>) {
+  let three = 0;
+  const keys = Object.keys(data3);
   for (let index = 0; index < keys.length; index++) {
     const key = keys[index];
     const field = fields[`${key}`];
-    P = P + data_P[key][field];
+    three = three + data3[key][field];
   }
+  return three;
 }

@@ -1,4 +1,4 @@
-const data_7: Record<string, Record<string, number>> = {
+const data7: Record<string, Record<string, number>> = {
   "7": {
     "1": 1,
     "2": 0,
@@ -69,12 +69,13 @@ const data_7: Record<string, Record<string, number>> = {
   },
 };
 
-export function sevenFormula(fields: Record<string, number>) {
+export function formula7(fields: Record<string, number>) {
   let seven = 0;
-  const keys = Object.keys(data_7);
+  const keys = Object.keys(data7);
   for (let index = 0; index < keys.length; index++) {
     const key = keys[index];
     const field = fields[`${key}`];
-    seven = seven + data_7[key][field];
+    seven = seven + data7[key][field];
   }
+  return seven;
 }

@@ -1,64 +1,73 @@
-const data_PP: Record<string, Record<string, number>> = {
-  "4": {
+const dataB: Record<string, Record<string, number>> = {
+  "22": {
+    "1": 1,
+    "2": 0,
+  },
+  "14": {
     "1": 0,
     "2": 1,
   },
-  "38": {
+  "41": {
     "1": 0,
     "2": 1,
   },
-  "49": {
+  "64": {
     "1": 0,
     "2": 1,
   },
-  "67": {
+  "93": {
     "1": 0,
     "2": 1,
   },
-  "89": {
+  "101": {
     "1": 0,
     "2": 1,
   },
-  "103": {
+  "113": {
     "1": 0,
     "2": 1,
   },
-  "138": {
+  "122": {
     "1": 0,
     "2": 1,
   },
-  "159": {
+  "139": {
     "1": 0,
     "2": 1,
   },
-  "175": {
+  "166": {
     "1": 0,
     "2": 1,
   },
-  "63": {
+  "52": {
     "1": 0,
     "2": 2,
   },
-  "119": {
+  "77": {
     "1": 0,
     "2": 2,
   },
-  "140": {
+  "100": {
     "1": 0,
     "2": 2,
   },
-  "153": {
+  "131": {
+    "1": 0,
+    "2": 2,
+  },
+  "152": {
     "1": 0,
     "2": 2,
   },
 };
 
-export function PPFormula(fields: Record<string, number>) {
-  let PP = 0;
-  const keys = Object.keys(data_PP);
+export function formulaB(fields: Record<string, number>) {
+  let B = 0;
+  const keys = Object.keys(dataB);
   for (let index = 0; index < keys.length; index++) {
     const key = keys[index];
     const field = fields[`${key}`];
-    PP = PP + data_PP[key][field];
+    B = B + dataB[key][field];
   }
+  return B;
 }

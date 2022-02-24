@@ -1,17 +1,5 @@
-const data_1: Record<string, Record<string, number>> = {
-  "32": {
-    "1": 1,
-    "2": 0,
-  },
-  "57": {
-    "1": 1,
-    "2": 0,
-  },
-  "4": {
-    "1": 0,
-    "2": 1,
-  },
-  "38": {
+const dataP: Record<string, Record<string, number>> = {
+  "8": {
     "1": 0,
     "2": 1,
   },
@@ -19,58 +7,75 @@ const data_1: Record<string, Record<string, number>> = {
     "1": 0,
     "2": 1,
   },
-  "101": {
+  "60": {
     "1": 0,
     "2": 1,
   },
-  "142": {
+  "63": {
     "1": 0,
     "2": 1,
   },
-  "156": {
+  "115": {
     "1": 0,
     "2": 1,
+  },
+  "138": {
+    "1": 0,
+    "2": 1,
+  },
+  "158": {
+    "1": 0,
+    "2": 1,
+  },
+  "159": {
+    "1": 0,
+    "2": 1,
+  },
+  "6": {
+    "1": 0,
+    "2": 2,
+  },
+  "33": {
+    "1": 0,
+    "2": 2,
+  },
+  "42": {
+    "1": 0,
+    "2": 2,
+  },
+  "49": {
+    "1": 0,
+    "2": 2,
+  },
+  "89": {
+    "1": 0,
+    "2": 2,
+  },
+  "103": {
+    "1": 0,
+    "2": 2,
+  },
+  "146": {
+    "1": 0,
+    "2": 2,
   },
   "167": {
     "1": 0,
-    "2": 1,
-  },
-  "10": {
-    "1": 0,
     "2": 2,
   },
-  "27": {
-    "1": 0,
-    "2": 2,
-  },
-  "46": {
-    "1": 0,
-    "2": 2,
-  },
-  "92": {
-    "1": 0,
-    "2": 2,
-  },
-  "105": {
-    "1": 0,
-    "2": 2,
-  },
-  "148": {
-    "1": 0,
-    "2": 2,
-  },
-  "165": {
+  "175": {
     "1": 0,
     "2": 2,
   },
 };
 
-export function oneFormula(fields: Record<string, number>) {
-  let one = 0;
-  const keys = Object.keys(data_1);
+export function formulaP(fields: Record<string, number>) {
+  let P = 0;
+  const keys = Object.keys(dataP);
   for (let index = 0; index < keys.length; index++) {
     const key = keys[index];
     const field = fields[`${key}`];
-    one = one + data_1[key][field];
+    P = P + dataP[key][field];
   }
+  return P;
 }

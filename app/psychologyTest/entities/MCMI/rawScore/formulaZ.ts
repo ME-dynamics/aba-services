@@ -1,4 +1,4 @@
-const data_Z: Record<string, Record<string, number>> = {
+const dataZ: Record<string, Record<string, number>> = {
   "1": {
     "1": 0,
     "2": 1,
@@ -133,12 +133,13 @@ const data_Z: Record<string, Record<string, number>> = {
   },
 };
 
-export function ZFormula(fields: Record<string, number>) {
+export function formulaZ(fields: Record<string, number>) {
   let Z = 0;
-  const keys = Object.keys(data_Z);
+  const keys = Object.keys(dataZ);
   for (let index = 0; index < keys.length; index++) {
     const key = keys[index];
     const field = fields[`${key}`];
-    Z = Z + data_Z[key][field];
+    Z = Z + dataZ[key][field];
   }
+  return Z;
 }

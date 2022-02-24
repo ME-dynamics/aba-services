@@ -1,25 +1,29 @@
-const data_H: Record<string, Record<string, number>> = {
-  "1": {
+const dataD: Record<string, Record<string, number>> = {
+  "15": {
     "1": 0,
     "2": 1,
   },
-  "75": {
+  "25": {
     "1": 0,
     "2": 1,
   },
-  "107": {
+  "55": {
     "1": 0,
     "2": 1,
   },
-  "111": {
+  "83": {
     "1": 0,
     "2": 1,
   },
-  "130": {
+  "104": {
     "1": 0,
     "2": 1,
   },
-  "145": {
+  "141": {
+    "1": 0,
+    "2": 1,
+  },
+  "142": {
     "1": 0,
     "2": 1,
   },
@@ -27,34 +31,39 @@ const data_H: Record<string, Record<string, number>> = {
     "1": 0,
     "2": 1,
   },
-  "4": {
+  "24": {
     "1": 0,
     "2": 2,
   },
-  "11": {
+  "56": {
     "1": 0,
     "2": 2,
   },
-  "37": {
+  "62": {
     "1": 0,
     "2": 2,
   },
-  "55": {
+  "86": {
     "1": 0,
     "2": 2,
   },
-  "74": {
+  "111": {
+    "1": 0,
+    "2": 2,
+  },
+  "130": {
     "1": 0,
     "2": 2,
   },
 };
 
-export function HFormula(fields: Record<string, number>) {
-  let H = 0;
-  const keys = Object.keys(data_H);
+export function formulaD(fields: Record<string, number>) {
+  let D = 0;
+  const keys = Object.keys(dataD);
   for (let index = 0; index < keys.length; index++) {
     const key = keys[index];
     const field = fields[`${key}`];
-    H = H + data_H[key][field];
+    D = D + dataD[key][field];
   }
+  return D;
 }

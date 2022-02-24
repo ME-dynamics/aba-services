@@ -1,4 +1,4 @@
-export const brWomen = {
+export const brWomen: Record<string, Record<string, number>> = {
   "1": {
     "0": 0,
     "1": 0,

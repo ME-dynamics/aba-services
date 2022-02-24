@@ -1,4 +1,4 @@
-const data_Y: Record<string, Record<string, number>> = {
+const dataY: Record<string, Record<string, number>> = {
   "32": {
     "1": 0,
     "2": 1,
@@ -41,12 +41,13 @@ const data_Y: Record<string, Record<string, number>> = {
   },
 };
 
-export function YFormula(fields: Record<string, number>) {
+export function formulaY(fields: Record<string, number>) {
   let Y = 0;
-  const keys = Object.keys(data_Y);
+  const keys = Object.keys(dataY);
   for (let index = 0; index < keys.length; index++) {
     const key = keys[index];
     const field = fields[`${key}`];
-    Y = Y + data_Y[key][field];
+    Y = Y + dataY[key][field];
   }
+  return Y;
 }

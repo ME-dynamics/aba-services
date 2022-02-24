@@ -1,9 +1,13 @@
-const data_B: Record<string, Record<string, number>> = {
-  "22": {
-    "1": 1,
-    "2": 0,
+const dataT: Record<string, Record<string, number>> = {
+  "7": {
+    "1": 0,
+    "2": 1,
   },
-  "14": {
+  "21": {
+    "1": 0,
+    "2": 1,
+  },
+  "38": {
     "1": 0,
     "2": 1,
   },
@@ -11,11 +15,7 @@ const data_B: Record<string, Record<string, number>> = {
     "1": 0,
     "2": 1,
   },
-  "64": {
-    "1": 0,
-    "2": 1,
-  },
-  "93": {
+  "53": {
     "1": 0,
     "2": 1,
   },
@@ -27,46 +27,43 @@ const data_B: Record<string, Record<string, number>> = {
     "1": 0,
     "2": 1,
   },
-  "122": {
-    "1": 0,
-    "2": 1,
-  },
   "139": {
     "1": 0,
     "2": 1,
   },
-  "166": {
-    "1": 0,
-    "2": 1,
-  },
-  "52": {
+  "13": {
     "1": 0,
     "2": 2,
   },
-  "77": {
+  "39": {
     "1": 0,
     "2": 2,
   },
-  "100": {
+  "66": {
     "1": 0,
     "2": 2,
   },
-  "131": {
+  "91": {
     "1": 0,
     "2": 2,
   },
-  "152": {
+  "118": {
+    "1": 0,
+    "2": 2,
+  },
+  "136": {
     "1": 0,
     "2": 2,
   },
 };
 
-export function BFormula(fields: Record<string, number>) {
-  let B = 0;
-  const keys = Object.keys(data_B);
+export function formulaT(fields: Record<string, number>) {
+  let T = 0;
+  const keys = Object.keys(dataT);
   for (let index = 0; index < keys.length; index++) {
     const key = keys[index];
     const field = fields[`${key}`];
-    B = B + data_B[key][field];
+    T = T + dataT[key][field];
   }
+  return T;
 }

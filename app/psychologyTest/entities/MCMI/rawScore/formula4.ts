@@ -1,4 +1,4 @@
-const data_4: Record<string, Record<string, number>> = {
+const data4: Record<string, Record<string, number>> = {
   "10": {
     "1": 1,
     "2": 0,
@@ -69,12 +69,13 @@ const data_4: Record<string, Record<string, number>> = {
   },
 };
 
-export function fourFormula(fields: Record<string, number>) {
+export function formula4(fields: Record<string, number>) {
   let four = 0;
-  const keys = Object.keys(data_4);
+  const keys = Object.keys(data4);
   for (let index = 0; index < keys.length; index++) {
     const key = keys[index];
     const field = fields[`${key}`];
-    four = four + data_4[key][field];
+    four = four + data4[key][field];
   }
+  return four;
 }

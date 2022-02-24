@@ -1,13 +1,9 @@
-const data_SS: Record<string, Record<string, number>> = {
-  "32": {
+const dataA: Record<string, Record<string, number>> = {
+  "40": {
     "1": 0,
     "2": 1,
   },
-  "56": {
-    "1": 0,
-    "2": 1,
-  },
-  "72": {
+  "61": {
     "1": 0,
     "2": 1,
   },
@@ -15,66 +11,59 @@ const data_SS: Record<string, Record<string, number>> = {
     "1": 0,
     "2": 1,
   },
-  "83": {
+  "108": {
     "1": 0,
     "2": 1,
   },
-  "117": {
+  "109": {
     "1": 0,
     "2": 1,
   },
-  "134": {
+  "135": {
     "1": 0,
     "2": 1,
   },
-  "142": {
+  "145": {
     "1": 0,
     "2": 1,
   },
-  "148": {
+  "149": {
     "1": 0,
     "2": 1,
   },
-  "151": {
-    "1": 0,
-    "2": 1,
-  },
-  "162": {
-    "1": 0,
-    "2": 1,
-  },
-  "34": {
+  "58": {
     "1": 0,
     "2": 2,
   },
-  "61": {
+  "75": {
     "1": 0,
     "2": 2,
   },
-  "68": {
+  "124": {
     "1": 0,
     "2": 2,
   },
-  "78": {
+  "147": {
     "1": 0,
     "2": 2,
   },
-  "102": {
+  "164": {
     "1": 0,
     "2": 2,
   },
-  "168": {
+  "170": {
     "1": 0,
     "2": 2,
   },
 };
 
-export function SSFormula(fields: Record<string, number>) {
-  let SS = 0;
-  const keys = Object.keys(data_SS);
+export function formulaA(fields: Record<string, number>) {
+  let A = 0;
+  const keys = Object.keys(dataA);
   for (let index = 0; index < keys.length; index++) {
     const key = keys[index];
     const field = fields[`${key}`];
-    SS = SS + data_SS[key][field];
+    A = A + dataA[key][field];
   }
+  return A;
 }

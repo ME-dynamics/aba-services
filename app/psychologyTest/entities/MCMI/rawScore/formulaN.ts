@@ -1,21 +1,25 @@
-const data_C: Record<string, Record<string, number>> = {
-  "7": {
-    "1": 0,
-    "2": 1,
-  },
+const dataN: Record<string, Record<string, number>> = {
   "22": {
     "1": 0,
     "2": 1,
   },
-  "122": {
+  "41": {
     "1": 0,
     "2": 1,
   },
-  "135": {
+  "51": {
     "1": 0,
     "2": 1,
   },
-  "161": {
+  "83": {
+    "1": 0,
+    "2": 1,
+  },
+  "117": {
+    "1": 0,
+    "2": 1,
+  },
+  "134": {
     "1": 0,
     "2": 1,
   },
@@ -23,54 +27,39 @@ const data_C: Record<string, Record<string, number>> = {
     "1": 0,
     "2": 1,
   },
-  "171": {
+  "170": {
     "1": 0,
     "2": 1,
   },
-  "30": {
+  "3": {
     "1": 0,
     "2": 2,
   },
-  "41": {
+  "54": {
     "1": 0,
     "2": 2,
   },
-  "72": {
+  "96": {
     "1": 0,
     "2": 2,
   },
-  "83": {
+  "106": {
     "1": 0,
     "2": 2,
   },
-  "98": {
-    "1": 0,
-    "2": 2,
-  },
-  "120": {
-    "1": 0,
-    "2": 2,
-  },
-  "134": {
-    "1": 0,
-    "2": 2,
-  },
-  "142": {
-    "1": 0,
-    "2": 2,
-  },
-  "154": {
+  "125": {
     "1": 0,
     "2": 2,
   },
 };
 
-export function CFormula(fields: Record<string, number>) {
-  let C = 0;
-  const keys = Object.keys(data_C);
+export function formulaN(fields: Record<string, number>) {
+  let N = 0;
+  const keys = Object.keys(dataN);
   for (let index = 0; index < keys.length; index++) {
     const key = keys[index];
     const field = fields[`${key}`];
-    C = C + data_C[key][field];
+    N = N + dataN[key][field];
   }
+  return N;
 }

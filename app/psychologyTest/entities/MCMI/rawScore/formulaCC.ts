@@ -1,4 +1,4 @@
-const data_CC: Record<string, Record<string, number>> = {
+const dataCC: Record<string, Record<string, number>> = {
   "4": {
     "1": 0,
     "2": 1,
@@ -69,12 +69,13 @@ const data_CC: Record<string, Record<string, number>> = {
   },
 };
 
-export function CCFormula(fields: Record<string, number>) {
+export function formulaCC(fields: Record<string, number>) {
   let CC = 0;
-  const keys = Object.keys(data_CC);
+  const keys = Object.keys(dataCC);
   for (let index = 0; index < keys.length; index++) {
     const key = keys[index];
     const field = fields[`${key}`];
-    CC = CC + data_CC[key][field];
+    CC = CC + dataCC[key][field];
   }
+  return CC;
 }

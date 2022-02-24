@@ -1,4 +1,4 @@
-export const brMen = {
+export const brMen: Record<string, Record<string, number>> = {
   "1": {
     "0": 0,
     "1": 0,
@@ -455,7 +455,7 @@ export const brMen = {
     "18": 115,
   },
   D: {
-    "0": 3,//2
+    "0": 3, //2
     "1": 11,
     "2": 19,
     "3": 27,
@@ -558,7 +558,7 @@ export const brMen = {
     "6": 50,
     "7": 55,
     "8": 60,
-    "9": 62,//63
+    "9": 62, //63
     "10": 64,
     "11": 66,
     "12": 68,

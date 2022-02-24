@@ -1,4 +1,4 @@
-const data_R: Record<string, Record<string, number>> = {
+const dataR: Record<string, Record<string, number>> = {
   "62": {
     "1": 0,
     "2": 1,
@@ -61,12 +61,13 @@ const data_R: Record<string, Record<string, number>> = {
   },
 };
 
-export function RFormula(fields: Record<string, number>) {
+export function formulaR(fields: Record<string, number>) {
   let R = 0;
-  const keys = Object.keys(data_R);
+  const keys = Object.keys(dataR);
   for (let index = 0; index < keys.length; index++) {
     const key = keys[index];
     const field = fields[`${key}`];
-    R = R + data_R[key][field];
+    R = R + dataR[key][field];
   }
+  return R;
 }

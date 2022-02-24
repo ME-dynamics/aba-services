@@ -1,21 +1,21 @@
-const data_3: Record<string, Record<string, number>> = {
-  "82": {
-    "1": 1,
-    "2": 0,
-  },
-  "47": {
+const data8A: Record<string, Record<string, number>> = {
+  "6": {
     "1": 0,
     "2": 1,
   },
-  "56": {
+  "42": {
     "1": 0,
     "2": 1,
   },
-  "84": {
+  "83": {
     "1": 0,
     "2": 1,
   },
-  "120": {
+  "98": {
+    "1": 0,
+    "2": 1,
+  },
+  "122": {
     "1": 0,
     "2": 1,
   },
@@ -23,54 +23,55 @@ const data_3: Record<string, Record<string, number>> = {
     "1": 0,
     "2": 1,
   },
-  "141": {
+  "166": {
     "1": 0,
     "2": 1,
   },
-  "151": {
-    "1": 0,
-    "2": 1,
-  },
-  "16": {
+  "7": {
     "1": 0,
     "2": 2,
   },
-  "35": {
+  "15": {
     "1": 0,
     "2": 2,
   },
-  "45": {
+  "22": {
     "1": 0,
     "2": 2,
   },
-  "73": {
+  "36": {
     "1": 0,
     "2": 2,
   },
-  "94": {
+  "50": {
     "1": 0,
     "2": 2,
   },
-  "108": {
+  "60": {
     "1": 0,
     "2": 2,
   },
-  "135": {
+  "79": {
     "1": 0,
     "2": 2,
   },
-  "169": {
+  "115": {
+    "1": 0,
+    "2": 2,
+  },
+  "126": {
     "1": 0,
     "2": 2,
   },
 };
 
-export function threeFormula(fields: Record<string, number>) {
-  let three = 0;
-  const keys = Object.keys(data_3);
+export function formula8A(fields: Record<string, number>) {
+  let eightA = 0;
+  const keys = Object.keys(data8A);
   for (let index = 0; index < keys.length; index++) {
     const key = keys[index];
     const field = fields[`${key}`];
-    three = three + data_3[key][field];
+    eightA = eightA + data8A[key][field];
   }
+  return eightA;
 }
