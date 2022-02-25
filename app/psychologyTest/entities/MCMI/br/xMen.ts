@@ -95,4 +95,5 @@ export function xToBr(x: number) {
   if (252 < x) {
     return 100;
   }
+  return -1;
 }
