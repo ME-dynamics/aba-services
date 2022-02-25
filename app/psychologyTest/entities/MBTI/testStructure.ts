@@ -7,6 +7,7 @@ export const testStructure: entityTypes.ITestStructure = {
     en: "Myers-Briggs Type Indicator (MBTI)",
   },
   description: "",
+  shortName: "MBTI",
   fields: {
     "1": {
       question: "شناختن شما:",
