@@ -40,4 +40,8 @@ export function passiveAvoidanceFormula(fields: Record<string, number>) {
       passiveAvoidanceInterpret: "شدید",
     };
   }
+  return {
+    aggregate: -1,
+    passiveAvoidanceInterpret: "نامشخص",
+  };
 }

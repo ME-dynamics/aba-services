@@ -40,4 +40,8 @@ export function fightFormula(fields: Record<string, number>) {
       fightInterpret: "شدید",
     };
   }
+  return {
+    aggregate: -1,
+    fightInterpret: "نامشخص",
+  };
 }

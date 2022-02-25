@@ -40,4 +40,8 @@ export function flightFormula(fields: Record<string, number>) {
       flightInterpret: "شدید",
     };
   }
+  return {
+    aggregate: -1,
+    flightInterpret: "نامشخص",
+  };
 }

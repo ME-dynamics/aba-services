@@ -40,4 +40,8 @@ export function approachFormula(fields: Record<string, number>) {
       approachInterpret: "شدید",
     };
   }
+  return {
+    aggregate: -1,
+    approachInterpret: "نامشخص",
+  };
 }

@@ -24,20 +24,24 @@ export function activeAvoidanceFormula(fields: Record<string, number>) {
     reverse(fields["2"]);
   if (activeAvoidance < 17) {
     return {
-      aggregates: activeAvoidance,
+      aggregate: activeAvoidance,
       activeAvoidanceInterpret: "خفیف",
     };
   }
   if (17 <= activeAvoidance && activeAvoidance < 30) {
     return {
-      aggregates: activeAvoidance,
+      aggregate: activeAvoidance,
       activeAvoidanceInterpret: "متوسط",
     };
   }
   if (30 <= activeAvoidance && activeAvoidance <= 40) {
     return {
-      aggregates: activeAvoidance,
+      aggregate: activeAvoidance,
       activeAvoidanceInterpret: "شدید",
     };
   }
+  return {
+    aggregate: -1,
+    activeAvoidanceInterpret: "نامشخص",
+  };
 }

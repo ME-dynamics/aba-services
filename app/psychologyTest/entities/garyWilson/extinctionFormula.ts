@@ -40,4 +40,8 @@ export function extinctionFormula(fields: Record<string, number>) {
       extinctionInterpret: "شدید",
     };
   }
+  return {
+    aggregate: -1,
+    extinctionInterpret: "نامشخص",
+  };
 }
