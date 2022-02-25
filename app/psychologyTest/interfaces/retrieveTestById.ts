@@ -1,14 +1,14 @@
 import { types } from "aba-node";
-import { getTestData } from "../controllers";
+import { getTestById } from "../controllers";
 import { controllerTypes } from "../types";
-export async function retrieveTestDataById(
-  request: controllerTypes.tGetTestDataById,
+export function retrieveTestById(
+  request: controllerTypes.tGetTestById,
   reply: types.tReply
 ) {
   try {
-    const response = await getTestData(request);
+    const response = getTestById(request);
     reply.code(response.code);
-    return response;
+    reply.send(response);
   } catch (error) {
     reply.code(500);
     reply.send("unknown error");
