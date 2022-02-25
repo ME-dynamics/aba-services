@@ -1,4 +1,5 @@
 import { httpResult } from "aba-node";
+import { updateCustomerInfo } from "../../business"; // TODO: move this function to network;
 import { makeUser } from "../entities";
 import { usecaseTypes } from "../types";
 
@@ -55,7 +56,15 @@ export function buildUpdateUser(args: usecaseTypes.IBuildUpdateUser) {
       user.set.telephone(telephone);
     }
 
-    await insertUser(user.object());
+    await Promise.all([
+      insertUser(user.object()),
+      updateCustomerInfo({
+        id: user.get.id(),
+        name: `${user.get.firstName()} ${user.get.lastName()}`,
+        description: user.get.description(),
+        profilePictureUrl: user.get.profilePictureUrl(),
+      }),
+    ]);
     return ok({
       payload: user.object(),
     });
