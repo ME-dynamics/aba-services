@@ -101,6 +101,7 @@ export function buildInitDb(args: adapterTypes.IBuildInitDb) {
         { columnName: "cousin_marriage", columnType: "BOOLEAN" },
         { columnName: "siblings_position", columnType: "TINYINT" },
         { columnName: "siblings", columnType: "TEXT" },
+        { columnName: "sibling_diseases", columnType: "TEXT" },
         { columnName: "created_at", columnType: "TIMESTAMP" },
         { columnName: "modified_at", columnType: "TIMESTAMP" },
       ],

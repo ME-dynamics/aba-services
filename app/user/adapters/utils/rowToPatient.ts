@@ -26,6 +26,7 @@ export function rowToPatient(row: types.tRow): entityTypes.IMadePatientObject {
     cousinMarriage: nullToUndefined<boolean>(row.get("cousin_marriage")),
     siblingsPosition: nullToUndefined<number>(row.get("siblings_position")),
     siblings: nullToUndefined<string>(row.get("siblings")),
+    siblingDiseases: nullToUndefined<string>(row.get("sibling_diseases")),
     createdAt: row.get("created_at"),
     modifiedAt: row.get("modified_at"),
   };

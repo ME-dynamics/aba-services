@@ -125,6 +125,7 @@ export interface IPatient {
   cousinMarriage: boolean | undefined;
   siblingsPosition: number | undefined;
   siblings: string | undefined;
+  siblingDiseases: string | undefined;
   createdAt: Date | undefined;
   modifiedAt: Date | undefined;
 }
@@ -155,6 +156,7 @@ export interface IMadePatient {
     cousinMarriage: () => boolean | undefined;
     siblingsPosition: () => number | undefined;
     siblings: () => string | undefined;
+    siblingDiseases: () => string | undefined;
     createdAt: () => Date;
     modifiedAt: () => Date;
   };
@@ -177,6 +179,7 @@ export interface IMadePatient {
     cousinMarriage: (cousinMarriage: boolean | undefined) => void;
     siblingsPosition: (newPosition: number | undefined) => void;
     siblings: (desc: string | undefined) => void;
+    siblingDiseases: (diseases: string | undefined) => void;
   };
   object: () => IMadePatientObject;
 }

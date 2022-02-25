@@ -26,6 +26,7 @@ function insertQueryGen() {
       { column: "cousin_marriage", dynamicValue: true },
       { column: "siblings_position", dynamicValue: true },
       { column: "siblings", dynamicValue: true },
+      { column: "sibling_diseases", dynamicValue: true },
       { column: "created_at", dynamicValue: true },
       { column: "modified_at", dynamicValue: true },
     ],
@@ -58,6 +59,7 @@ export function buildInsertPatient(args: adapterTypes.IBuildInsert) {
       cousinMarriage,
       siblingsPosition,
       siblings,
+      siblingDiseases,
       createdAt,
       modifiedAt,
     } = patient;
@@ -81,6 +83,7 @@ export function buildInsertPatient(args: adapterTypes.IBuildInsert) {
       cousin_marriage: cousinMarriage,
       siblings_position: siblingsPosition,
       siblings,
+      sibling_diseases: siblingDiseases,
       created_at: createdAt,
       modified_at: modifiedAt,
     };

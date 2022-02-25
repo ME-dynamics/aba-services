@@ -38,6 +38,7 @@ export function buildPostCreatePatient(
       religion,
       siblings,
       siblingsPosition,
+      siblingDiseases,
       createdAt,
       modifiedAt,
     } = info;
@@ -63,6 +64,7 @@ export function buildPostCreatePatient(
       religion,
       siblings,
       siblingsPosition,
+      siblingDiseases,
     };
   }
   const { badRequest, forbidden } = httpResult.clientError;
