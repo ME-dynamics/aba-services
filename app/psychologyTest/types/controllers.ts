@@ -1,5 +1,17 @@
 import { types } from "aba-node";
-import { ISubmitFormStructure, ISubmitMBTI } from "./usecases";
+import {
+  ISubmitFormStructure,
+  ISubmitMBTI,
+  ISubmitBeckAnxiety,
+  ISubmitBeckDepressionII,
+  ISubmitTestById,
+} from "./usecases";
+
+interface IPostSubmitTest {
+  Body: Omit<ISubmitTestById, "userId">;
+}
+
+export type tPostSubmitTest = types.tRequest<IPostSubmitTest>;
 
 interface IPostSubmitFormStruct {
   Body: ISubmitFormStructure;
@@ -13,11 +25,28 @@ interface IPostSubmitMBTI {
 
 export type tPostCreateMbti = types.tRequest<IPostSubmitMBTI>;
 
-export type tGetNEOPIR = types.tRequest<unknown>;
-export type tGetMBTI = types.tRequest<unknown>;
+interface IPostSubmitBeckAnxiety {
+  Body: Omit<ISubmitBeckAnxiety, "userId">;
+}
+
+export type tPostCreateBeckAnxiety = types.tRequest<IPostSubmitBeckAnxiety>;
+
+interface IPostSubmitBeckDepressionII {
+  Body: Omit<ISubmitBeckDepressionII, "userId">;
+}
+
+export type tPostCreateDepressionII =
+  types.tRequest<IPostSubmitBeckDepressionII>;
+
 export type tGetTests = types.tRequest<unknown>;
-export type tGetBeckAnxiety = types.tRequest<unknown>;
-export type tGetBeckDepressionII = types.tRequest<unknown>;
+
+interface IGetTestById {
+  Params: {
+    testId: string;
+  };
+}
+
+export type tGetTestById = types.tRequest<IGetTestById>;
 
 interface IGetTestsData {
   Params: {

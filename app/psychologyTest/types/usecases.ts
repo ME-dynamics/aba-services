@@ -1,9 +1,19 @@
+import { types } from "aba-node";
 import {
   tInsertTestDataFunc,
   tFindTestsDataByUserIdFunc,
   tFindTestDataByIdFunc,
 } from "./adapters";
-import { tNEOFields, tQuestionFields, tMbtiFields } from "./entities";
+import type {
+  tNEOFields,
+  tQuestionFields,
+  tMbtiFields,
+  tBeckAnxietyFields,
+  tBeckDepressionIIFields,
+  tGaryWilsonFields,
+  tMCMIFields,
+  IMadeTestDataObject,
+} from "./entities";
 
 // submit form structure
 // export interface IBuildSubmitFormStructure {
@@ -13,6 +23,10 @@ export interface ISubmitFormStructure {
   title: string;
   description: string | undefined;
   fields: tQuestionFields;
+}
+
+export interface IBuildSubmitTest {
+  insertTestData: tInsertTestDataFunc;
 }
 
 // submit NEOPIR
@@ -25,6 +39,83 @@ export interface ISubmitNEOPIR {
   fields: tNEOFields;
 }
 
+// submit MCMI
+
+export interface ISubmitMCMI {
+  userId: string;
+  fields: tMCMIFields;
+}
+
+// gary wilson
+export interface ISubmitGaryWilson {
+  userId: string;
+  fields: tGaryWilsonFields;
+}
+
+// beck anxiety
+
+export interface ISubmitBeckAnxiety {
+  userId: string;
+  fields: tBeckAnxietyFields;
+}
+
+export interface ISubmitBeckDepressionII {
+  userId: string;
+  fields: tBeckDepressionIIFields;
+}
+
+export interface ISubmitYEMSQ {
+  userId: string;
+  fields: Record<string, number>;
+}
+
+// mcmi
+
+export interface ISubmitMCMI {
+  userId: string;
+  fields: tMCMIFields;
+  gender: "male" | "female";
+}
+
+// yemsq
+
+export interface ISubmitYEMSQ {
+  userId: string;
+  fields: Record<string, number>;
+}
+
+//* submit test
+
+export interface IBuildSubmitTestById {
+  submitBeckAnxiety: (
+    info: ISubmitBeckAnxiety
+  ) => Promise<types.IPayloadResult<IMadeTestDataObject>>;
+  submitBeckDepressionII: (
+    info: ISubmitBeckDepressionII
+  ) => Promise<types.IPayloadResult<IMadeTestDataObject>>;
+  submitGaryWilson: (
+    info: ISubmitGaryWilson
+  ) => Promise<types.IPayloadResult<IMadeTestDataObject>>;
+  submitMCMI: (
+    info: ISubmitMCMI
+  ) => Promise<types.IPayloadResult<IMadeTestDataObject>>;
+  submitNEOPIR: (
+    info: ISubmitNEOPIR
+  ) => Promise<types.IPayloadResult<IMadeTestDataObject>>;
+  submitMBTI: (
+    info: ISubmitMBTI
+  ) => Promise<types.IPayloadResult<IMadeTestDataObject>>;
+  submitYEMSQ: (
+    info: ISubmitYEMSQ
+  ) => Promise<types.IPayloadResult<IMadeTestDataObject>>;
+}
+
+export interface ISubmitTestById {
+  userId: string;
+  testId: string;
+  fields: Record<string, number>;
+  gender: "male" | "female" | undefined;
+}
 export interface IBuildSubmitMBTI {
   insertTestData: tInsertTestDataFunc;
 }

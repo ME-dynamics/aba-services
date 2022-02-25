@@ -1,5 +1,13 @@
-export type tMbtiFields = Record<string, 1 | 2>;
-export type tMbtiStructureFields = Record<string, Record<"1" | "2", number>>;
+export type tMbtiFields = Record<string, number>;
+export type tMbtiStructureFields = Record<string, Record<string, number>>;
+
+export interface IBuildMakeMBTI {
+  eiFormula: (fields: tMbtiFields) => IEIGroup;
+  jpFormula: (fields: tMbtiFields) => IJPGroup;
+  snFormula: (fields: tMbtiFields) => ISNGroup;
+  tfFormula: (fields: tMbtiFields) => ITFGroup;
+}
+
 export interface IEIGroup {
   e: number;
   i: number;
@@ -35,11 +43,4 @@ export interface IMbtiAggregates {
   n: IMbtiFactor;
   t: IMbtiFactor;
   f: IMbtiFactor;
-}
-
-export interface IBuildMakeMBTI {
-  eiFormula: (fields: tMbtiFields) => IEIGroup;
-  jpFormula: (fields: tMbtiFields) => IJPGroup;
-  snFormula: (fields: tMbtiFields) => ISNGroup;
-  tfFormula: (fields: tMbtiFields) => ITFGroup;
 }
