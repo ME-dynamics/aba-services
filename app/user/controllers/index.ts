@@ -16,6 +16,7 @@ export const postCreateUser = buildPostCreateUser();
 export const putUpdateUser = buildPutUpdateUser({
   fetchImageInfo,
   parseStoragePublicUrl,
+  fetchCustomerProvider,
 });
 export const postCreatePatient = buildPostCreatePatient({
   fetchCustomerProvider,
