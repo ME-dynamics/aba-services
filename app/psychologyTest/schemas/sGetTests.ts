@@ -13,7 +13,7 @@ const sTests = fluentSchema
           .prop("fa", fluentSchema.string().required())
           .prop("en", fluentSchema.string().required())
       )
-      .prop("description", fluentSchema.string().required())
+      .prop("shortName", fluentSchema.string().required())
   );
 
 const response = {
@@ -22,5 +22,5 @@ const response = {
 
 export const sGetTests = {
   response,
-  ...errorSchemaObject
+  ...errorSchemaObject,
 };
