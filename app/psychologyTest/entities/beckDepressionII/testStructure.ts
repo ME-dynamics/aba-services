@@ -7,6 +7,7 @@ export const testStructure: entityTypes.ITestStructure = {
     en: "Beck Depression Inventory ( BDI )",
   },
   description: "",
+  shortName: "BDI",
   fields: {
     "1": {
       question: "غمگینی",
