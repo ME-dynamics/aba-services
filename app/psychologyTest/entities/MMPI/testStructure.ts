@@ -7,6 +7,7 @@ export const testStructure: entityTypes.ITestStructure = {
         fa: "",
         en: ""
     },
+    shortName: "MMPI",
     description: "", 
     fields : {
         "1": {
