@@ -25,6 +25,7 @@ export const testStructure: entityTypes.ITestStructure = {
     fa: "پرسشنامه اضطراب بک",
     en: "Beck anxiety inventory (BAI)",
   },
+  shortName: "BAI",
   description: "",
   fields: {
     "1": {

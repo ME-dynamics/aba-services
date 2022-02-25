@@ -13,3 +13,4 @@ export function buildMakeBeckAnxiety(args: entityTypes.IBuildMakeBeckAnxiety) {
 }
 
 export { testStructure as beckAnxietyStructure } from "./testStructure";
+export { formula as beckAnxietyFormula } from "./formula";
