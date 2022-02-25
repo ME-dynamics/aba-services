@@ -23,6 +23,7 @@ import { formulaS } from "./rawScore/formulaS";
 import { formulaSS } from "./rawScore/formulaSS";
 import { formulaT } from "./rawScore/formulaT";
 import { formulaV } from "./rawScore/formulaV";
+import { formulaX } from "./rawScore/formulaX";
 import { formulaY } from "./rawScore/formulaY";
 import { formulaZ } from "./rawScore/formulaZ";
 import { brMen } from "./br/brMen";
@@ -58,6 +59,19 @@ export function buildMakeMCMI() {
     const v = formulaV(fields);
     const y = formulaY(fields);
     const z = formulaZ(fields);
+    const x = formulaX({
+      one,
+      twoA,
+      twoB,
+      three,
+      four,
+      five,
+      eightA,
+      eightB,
+      seven,
+      sixA,
+      sixB,
+    });
     const menBaseRate = {
       one: brMen["1"][`${one}`],
       twoA: brMen["2A"][`${twoA}`],
@@ -84,6 +98,7 @@ export function buildMakeMCMI() {
       SS: brMen["SS"][`${ss}`],
       T: brMen["T"][`${t}`],
       V: brMen["V"][`${v}`],
+      X: xToMenBr(x),
       Y: brMen["Y"][`${y}`],
       Z: brMen["Z"][`${z}`],
     };
@@ -113,13 +128,45 @@ export function buildMakeMCMI() {
       SS: brWomen["SS"][`${ss}`],
       T: brWomen["T"][`${t}`],
       V: brWomen["V"][`${v}`],
+      X: xToWomenBr(x),
       Y: brWomen["Y"][`${y}`],
       Z: brWomen["Z"][`${z}`],
     };
     return {
-      one,
+      menBaseRate,
+      womenBaseRate,
+      rawScore: {
+        one,
+        twoA,
+        twoB,
+        three,
+        four,
+        five,
+        sixA,
+        sixB,
+        seven,
+        eightA,
+        eightB,
+        a,
+        b,
+        c,
+        cc,
+        d,
+        h,
+        n,
+        p,
+        pp,
+        r,
+        s,
+        ss,
+        t,
+        v,
+        x,
+        y,
+        z,
+      },
     };
   };
 }
 
-export { testStructure as mbtiStructure } from "./testStructure";
+export { testStructure as mcmiStructure } from "./testStructure";
