@@ -6,13 +6,28 @@ import { eFormula } from "./NEOPIR/eFormula";
 import { nFormula } from "./NEOPIR/nFormula";
 import { oFormula } from "./NEOPIR/oFormula";
 import { rules } from "./NEOPIR/rules";
-import { buildMakeNEOPIR } from "./NEOPIR";
+import { buildMakeNEOPIR, NEOPIRStructure } from "./NEOPIR";
 
 import { eiFormula } from "./MBTI/eiFormula";
 import { jpFormula } from "./MBTI/jpFormula";
 import { snFormula } from "./MBTI/snFormula";
 import { tfFormula } from "./MBTI/tfFormula";
-import { buildMakeMBTI } from "./MBTI";
+import { buildMakeMBTI, mbtiStructure } from "./MBTI";
+
+import { buildMakeGaryWilson, garyWilsonStructure } from "./garyWilson";
+
+import {
+  buildMakeBeckAnxiety,
+  beckAnxietyFormula,
+  beckAnxietyStructure,
+} from "./beckAnxiety";
+import {
+  buildMakeBeckDepressionII,
+  beckDepressionIIStructure,
+} from "./beckDepressionII";
+import { buildMakeMCMI, mcmiStructure } from "./MCMI";
+
+import { buildMakeYEMSQ, yemsqStructure } from "./YEMSQ";
 
 export const makeTestData = buildMakeTestData({ uuid: v4 });
 export const makeNEOPIR = buildMakeNEOPIR({
@@ -30,7 +45,21 @@ export const makeMBTI = buildMakeMBTI({
   snFormula,
   tfFormula,
 });
-export { NEOPIRStructure } from "./NEOPIR";
-export { mbtiStructure } from "./MBTI";
-export { beckAnxietyStructure } from "./beckAnxiety";
-export { beckDepressionIIStructure } from "./beckDepressionII";
+
+export const makeBeckAnxiety = buildMakeBeckAnxiety({
+  formula: beckAnxietyFormula,
+});
+export const makeBeckDepressionII = buildMakeBeckDepressionII();
+export const makeGaryWilson = buildMakeGaryWilson();
+export const makeMCMI = buildMakeMCMI();
+export const makeYEMSQ = buildMakeYEMSQ();
+
+export const testStructures = {
+  NEOPIRStructure,
+  mbtiStructure,
+  beckAnxietyStructure,
+  beckDepressionIIStructure,
+  mcmiStructure,
+  garyWilsonStructure,
+  yemsqStructure,
+};
