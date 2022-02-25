@@ -1,11 +1,11 @@
 import { auth, types, httpResult } from "aba-node";
 // TODO: inject this method
 import { fetchCustomerProvider } from "../adapters";
-import { retrieveTestsData } from "../usecases";
+import { retrieveTestHistory } from "../usecases";
 
 import { controllerTypes } from "../types";
 
-export function buildGetTestsData() {
+export function buildGetTestHistory() {
   const roles: types.IRoles = {
     customer: true,
     provider: true,
@@ -15,7 +15,9 @@ export function buildGetTestsData() {
     support: false,
   };
   const { badRequest, forbidden } = httpResult.clientError;
-  return async function getTestsData(httpRequest: controllerTypes.tGetTestsData) {
+  return async function getTestHistory(
+    httpRequest: controllerTypes.tGetTestsData
+  ) {
     const { success, error, payload } = auth(httpRequest, roles);
     if (!success) {
       return error;
@@ -26,7 +28,7 @@ export function buildGetTestsData() {
       if (!id) {
         return badRequest({ error: "id should be defined" });
       }
-      return await retrieveTestsData(id);
+      return await retrieveTestHistory(id);
     }
     if (role === "provider") {
       if (!id) {
@@ -36,8 +38,8 @@ export function buildGetTestsData() {
       if (userId !== providerId) {
         return forbidden({ error: "action not allowed" });
       }
-      return await retrieveTestsData(id);
+      return await retrieveTestHistory(id);
     }
-    return await retrieveTestsData(userId);
+    return await retrieveTestHistory(userId);
   };
 }
