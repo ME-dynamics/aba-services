@@ -21,6 +21,6 @@ export function startUserServer(app: types.tHttpInstance) {
   );
   app.get(routeGen(["patients", ":id"]), retrievePatient);
 
-  app.put(routeGen([]), { schema: sUpdateUser }, updateUser);
-  app.post(routeGen(["patients"]), createPatient);
+  app.put(routeGen([":id"]), { schema: sUpdateUser }, updateUser);
+  app.post(routeGen(["patients", ":id"]), createPatient);
 }
