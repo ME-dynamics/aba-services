@@ -8,7 +8,7 @@ export function buildRemoveRequest(args: usecaseTypes.IBuildRemoveRequest) {
   const { ok } = httpResult.success;
   return async function removeRequest(customerId: string) {
     const requestFound = await findRequestByCustomerId(customerId);
-    if (!requestFound) {
+    if (!requestFound || requestFound.requestConfirmed) {
       return notFound({ error: "request not found" });
     }
     const request = makeCustomer(requestFound);
