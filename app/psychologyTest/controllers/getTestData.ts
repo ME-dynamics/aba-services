@@ -5,7 +5,7 @@ import { retrieveTestDataById } from "../usecases";
 
 import { controllerTypes } from "../types";
 
-export function buildGetTestDataById() {
+export function buildGetTestData() {
   const roles: types.IRoles = {
     customer: true,
     provider: true,
@@ -15,7 +15,7 @@ export function buildGetTestDataById() {
     support: false,
   };
   const { badRequest, forbidden } = httpResult.clientError;
-  return async function getTestDataById(
+  return async function getTestData(
     httpRequest: controllerTypes.tGetTestDataById
   ) {
     const { success, error, payload } = auth(httpRequest, roles);
