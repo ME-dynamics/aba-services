@@ -12,20 +12,20 @@ const body = fluentSchema
   )
   .prop("isDevice", fluentSchema.boolean().required())
   .prop("platform", fluentSchema.string().required().maxLength(16))
-  .prop("brand", fluentSchema.string().required().maxLength(16))
-  .prop("manufacturer", fluentSchema.string().required().maxLength(24))
-  .prop("model", fluentSchema.string().required().maxLength(24))
-  .prop("modelId", fluentSchema.string().required().maxLength(32))
-  .prop("designName", fluentSchema.string().required().maxLength(16))
-  .prop("productName", fluentSchema.string().required().maxLength(16))
+  .prop("brand", fluentSchema.string().required().maxLength(32))
+  .prop("manufacturer", fluentSchema.string().required().maxLength(48))
+  .prop("model", fluentSchema.string().required().maxLength(42))
+  .prop("modelId", fluentSchema.string().required().maxLength(64))
+  .prop("designName", fluentSchema.string().required().maxLength(32))
+  .prop("productName", fluentSchema.string().required().maxLength(32))
   .prop("deviceYearClass", fluentSchema.string().required().maxLength(8))
-  .prop("supportedCpuArch", fluentSchema.string().required().maxLength(128))
-  .prop("os", fluentSchema.string().required().maxLength(16))
-  .prop("osVersion", fluentSchema.string().required().maxLength(16))
-  .prop("osBuildId", fluentSchema.string().required().maxLength(32))
-  .prop("osInternalBuildId", fluentSchema.string().required().maxLength(32))
-  .prop("androidApiLevel", fluentSchema.string().required().maxLength(8))
-  .prop("deviceName", fluentSchema.string().required().maxLength(16));
+  .prop("supportedCpuArch", fluentSchema.string().required().maxLength(256))
+  .prop("os", fluentSchema.string().required().maxLength(32))
+  .prop("osVersion", fluentSchema.string().required().maxLength(32))
+  .prop("osBuildId", fluentSchema.string().required().maxLength(64))
+  .prop("osInternalBuildId", fluentSchema.string().required().maxLength(64))
+  .prop("androidApiLevel", fluentSchema.string().required().maxLength(16))
+  .prop("deviceName", fluentSchema.string().required().maxLength(32));
 
 const response = {
   [statusCodes.CREATED]: fluentSchema
