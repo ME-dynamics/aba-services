@@ -1,10 +1,11 @@
 import { httpResult } from "aba-node";
-import { makeMBTI, makeTestData, mbtiStructure } from "../entities";
+import { makeMBTI, makeTestData, testStructures } from "../entities";
 
 import { entityTypes, usecaseTypes } from "../types";
 
 export function buildSubmitMBTI(args: usecaseTypes.IBuildSubmitMBTI) {
   const { insertTestData } = args;
+  const { mbtiStructure } = testStructures;
   const { created } = httpResult.success;
   function formDataInput(
     info: usecaseTypes.ISubmitMBTI
