@@ -41,6 +41,7 @@ export function testStructureGen(args: schemaTypes.ITestStructureGen) {
         .prop("fa", fluentSchema.string().required())
         .prop("en", fluentSchema.string().required())
     )
+    .prop("shortName", fluentSchema.string().required())
     .prop("description", fluentSchema.string().required())
     .prop("fields", schema);
   return sTestStructure;
