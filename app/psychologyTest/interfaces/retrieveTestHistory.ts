@@ -1,12 +1,12 @@
 import { types } from "aba-node";
-import { getTestsData } from "../controllers";
+import { getTestHistory } from "../controllers";
 import { controllerTypes } from "../types";
-export async function retrieveTestsData(
+export async function retrieveTestHistory(
   request: controllerTypes.tGetTestsData,
   reply: types.tReply
 ) {
   try {
-    const response = await getTestsData(request);
+    const response = await getTestHistory(request);
     reply.code(response.code);
     return response;
   } catch (error) {
