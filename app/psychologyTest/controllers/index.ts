@@ -1,17 +1,16 @@
-import { buildGetNEOPIR } from "./getNEOPIR";
+import { buildGetTestById } from "./getTestById";
 import { buildGetTests } from "./getTests";
-import { buildGetBeckAnxiety } from "./getBeckAnxiety";
-import { buildGetBeckDepressionII } from "./getBeckDepressionII";
-import { buildGetMBTI } from "./getMBTI";
-import { buildGetTestsData } from "./getTestsData";
-import { buildGetTestDataById } from "./getTestsDataById";
-import { buildPostCreateMbti } from "./postCreateMbti";
+import { buildGetTestHistory } from "./getTestHistory";
+import { buildGetTestData } from "./getTestData";
 
-export const getNEOPIR = buildGetNEOPIR();
+import { buildPostSubmitTest } from "./postSubmitTest";
+
+export const getTestById = buildGetTestById();
 export const getTests = buildGetTests();
-export const getBeckAnxiety = buildGetBeckAnxiety();
-export const getBeckDepressionII = buildGetBeckDepressionII();
-export const getMBTI = buildGetMBTI();
-export const getTestsData = buildGetTestsData();
-export const getTestDataById = buildGetTestDataById();
-export const postCreateMbti = buildPostCreateMbti();
+export const getTestHistory = buildGetTestHistory();
+export const getTestData = buildGetTestData();
+// export const postCreateMbti = buildPostCreateMbti();
+// export const postCreateBeckAnxiety = buildPostCreateBeckAnxiety();
+// export const postCreateBeckDepressionII = buildPostCreateBeckDepressionII();
+// export const postCreateGaryWilson = buildPostCreateGaryWilson();
+export const postSubmitTest = buildPostSubmitTest();
