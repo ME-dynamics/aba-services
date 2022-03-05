@@ -276,6 +276,39 @@ export function buildSubmitMCMI(args: usecaseTypes.IBuildSubmitTest) {
           fa: "اختلال هذیانی",
         },
       },
+      {
+        type: "factor",
+        variable: "V",
+        rawscore: rawScore.v,
+        baserate: rawScore.v,
+        interpret: "",
+        label: {
+          en: "Validity",
+          fa: "روایی",
+        },
+      },
+      {
+        type: "factor",
+        variable: "Y",
+        rawscore: rawScore.y,
+        baserate: baseRate.Y,
+        interpret: "",
+        label: {
+          en: "Desirability",
+          fa: "جامعه پسندی",
+        },
+      },
+      {
+        type: "factor",
+        variable: "Z",
+        rawscore: rawScore.z,
+        baserate: baseRate.Z,
+        interpret: "",
+        label: {
+          en: "Debasement",
+          fa: "بدجلوه دهی",
+        },
+      },
     ];
     const testData = makeTestData({
       id: undefined,
