@@ -190,15 +190,15 @@ export const testStructure: entityTypes.ITestStructure = {
         {
           label:
             "درباره اینکه به خودم آسیبی برسانم فکر می کنم، ولی این کار را نمی کنم.",
-          value: 0,
+          value: 1,
         },
         {
           label: "دلم می خواهد خودم را بکشم",
-          value: 0,
+          value: 2,
         },
         {
           label: "اگر امکان داشت، خودم را می گشتم.",
-          value: 0,
+          value: 3,
         },
       ],
     },
@@ -478,11 +478,11 @@ export const testStructure: entityTypes.ITestStructure = {
         },
         {
           label: "در حال حاضر خیلی کم به امور جنسی علاقه دارم.",
-          value: 0,
+          value: 2,
         },
         {
           label: "علاقه جنسی ام را کاملا از دست داده ام.",
-          value: 0,
+          value: 3,
         },
       ],
     },
