@@ -32,7 +32,7 @@ export function buildGetTestHistory() {
     }
     if (role === "provider") {
       if (!id) {
-        return badRequest({ error: "id should be defined" });
+        return await retrieveTestHistory(userId);
       }
       const providerId = await fetchCustomerProvider(id);
       if (userId !== providerId) {

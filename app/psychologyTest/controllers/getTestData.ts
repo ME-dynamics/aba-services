@@ -32,7 +32,7 @@ export function buildGetTestData() {
     }
     if (role === "provider") {
       if (!userId) {
-        return badRequest({ error: "user id should be defined" });
+        return await retrieveTestDataById({ testId: id, userId: payload.userId });
       }
       const providerId = await fetchCustomerProvider(userId);
       if (payload.userId !== providerId) {
