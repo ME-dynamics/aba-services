@@ -31,7 +31,7 @@ import { brWomen } from "./br/brWomen";
 import { xToBr as xToMenBr } from "./br/xMen";
 import { xToBr as xToWomenBr } from "./br/xWomen";
 export function buildMakeMCMI() {
-  return function makeMBTI(fields: Record<string, number>) {
+  return function makeMCMI(fields: Record<string, number>) {
     const one = formula1(fields);
     const twoA = formula2A(fields);
     const twoB = formula2B(fields);
@@ -83,7 +83,7 @@ export function buildMakeMCMI() {
       sixB: brMen["6B"][`${sixB}`],
       seven: brMen["7"][`${seven}`],
       eightA: brMen["8A"][`${eightA}`],
-      eightB: brMen["8B"][`$${eightB}`],
+      eightB: brMen["8B"][`${eightB}`],
       A: brMen["A"][`${a}`],
       B: brMen["B"][`${b}`],
       C: brMen["C"][`${c}`],
@@ -97,7 +97,7 @@ export function buildMakeMCMI() {
       S: brMen["S"][`${s}`],
       SS: brMen["SS"][`${ss}`],
       T: brMen["T"][`${t}`],
-      V: brMen["V"][`${v}`],
+      // V: brMen["D"][`${d}`],
       X: xToMenBr(x),
       Y: brMen["Y"][`${y}`],
       Z: brMen["Z"][`${z}`],
@@ -113,7 +113,7 @@ export function buildMakeMCMI() {
       sixB: brWomen["6B"][`${sixB}`],
       seven: brWomen["7"][`${seven}`],
       eightA: brWomen["8A"][`${eightA}`],
-      eightB: brWomen["8B"][`$${eightB}`],
+      eightB: brWomen["8B"][`${eightB}`],
       A: brWomen["A"][`${a}`],
       B: brWomen["B"][`${b}`],
       C: brWomen["C"][`${c}`],
@@ -127,11 +127,12 @@ export function buildMakeMCMI() {
       S: brWomen["S"][`${s}`],
       SS: brWomen["SS"][`${ss}`],
       T: brWomen["T"][`${t}`],
-      V: brWomen["V"][`${v}`],
+      // V: brWomen["V"][`${v}`],
       X: xToWomenBr(x),
       Y: brWomen["Y"][`${y}`],
       Z: brWomen["Z"][`${z}`],
     };
+
     return {
       menBaseRate,
       womenBaseRate,
