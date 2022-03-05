@@ -34,7 +34,7 @@ export const testStructure: entityTypes.ITestStructure = {
     en: "Young Early Maladaptive Schema Questionnaire (YEMSQ)",
   },
   shortName: "YEMSQ",
-  description: "من آدم نگرانی نیستم.",
+  description: "",
   fields: {
     "1": {
       question:
