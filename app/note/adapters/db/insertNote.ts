@@ -8,15 +8,14 @@ function insertQueryGen() {
     table: "notes",
     version: applicationVersion,
     values: [
-      { column: "provider_id", self: true },
-      { column: "customer_id", self: true },
-      { column: "id", self: true },
-      { column: "title", self: true },
-      { column: "content", self: true },
-      { column: "image_ids", self: true },
-      { column: "created_at", self: true },
-      { column: "modified_at", self: true },
-      { column: "soft_deleted", self: true },
+      { column: "provider_id", dynamicValue: true },
+      { column: "customer_id", dynamicValue: true },
+      { column: "id", dynamicValue: true },
+      { column: "title", dynamicValue: true },
+      { column: "content", dynamicValue: true },
+      { column: "image_ids", dynamicValue: true },
+      { column: "created_at", dynamicValue: true },
+      { column: "modified_at", dynamicValue: true },
     ],
   });
   return query;
@@ -25,7 +24,7 @@ function insertQueryGen() {
 export function buildInsertNote(args: adapterTypes.IBuildInsertNote) {
   const { insert } = args;
   const errorPath = "notes, adapters , insert note";
-  const query = insertQueryGen();
+  const { query, logQuery } = insertQueryGen();
   return async function insertNote(note: entityTypes.IMadeNoteObject) {
     const {
       providerId,
@@ -36,22 +35,20 @@ export function buildInsertNote(args: adapterTypes.IBuildInsertNote) {
       imageIds,
       createdAt,
       modifiedAt,
-      softDeleted,
     } = note;
-    await insert({
-      query,
-      params: {
-        provider_id: providerId,
-        customer_id: customerId,
-        id,
-        title,
-        content,
-        image_ids: undefinedToNull(imageIds),
-        created_at: createdAt,
-        modified_at: modifiedAt,
-        soft_deleted: softDeleted,
-      },
-      errorPath,
-    });
+    const params = {
+      provider_id: providerId,
+      customer_id: customerId,
+      id,
+      title,
+      content,
+      image_ids: undefinedToNull(imageIds),
+      created_at: createdAt,
+      modified_at: modifiedAt,
+    };
+    await Promise.all([
+      insert({ query, params, errorPath }),
+      insert({ query: logQuery, params, errorPath }),
+    ]);
   };
 }

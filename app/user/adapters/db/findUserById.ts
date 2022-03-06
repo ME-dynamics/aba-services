@@ -8,7 +8,7 @@ function selectQueryGen() {
     table: "users",
     version: "v1",
     columns: ["*"],
-    where: [equal({ argument: "id", self: true })],
+    where: [equal({ argument: "id", dynamicValue: true })],
   });
   return query;
 }

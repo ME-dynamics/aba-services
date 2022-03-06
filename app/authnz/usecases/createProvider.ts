@@ -1,14 +1,13 @@
-import { httpResultSuccess } from "aba-node";
+import { httpResult } from "aba-node";
 import { makeOtp, makeRole } from "../entities";
 import { usecaseTypes, entityTypes } from "../types";
 
 export function buildCreateProvider(args: usecaseTypes.IBuildCreateProvider) {
   const { findOtpByPhone, findRole, insertOtp, insertRole } = args;
-  const { created, ok } = httpResultSuccess;
+  const { created, ok } = httpResult.success;
   function otpInput(phoneNumber: string): entityTypes.IOtp {
     return {
       id: undefined,
-      deviceId: undefined,
       phoneNumber,
       phoneConfirm: false,
       otpCode: undefined,
@@ -19,7 +18,6 @@ export function buildCreateProvider(args: usecaseTypes.IBuildCreateProvider) {
       permanentBlock: false,
       createdAt: undefined,
       modifiedAt: undefined,
-      softDeleted: false,
     };
   }
   function roleInput(otpId: string): entityTypes.IRole {
@@ -39,7 +37,6 @@ export function buildCreateProvider(args: usecaseTypes.IBuildCreateProvider) {
       accountantAL: 0,
       createdAt: undefined,
       modifiedAt: undefined,
-      softDeleted: false,
     };
   }
   return async function createProvider(info: usecaseTypes.ICreateProvider) {

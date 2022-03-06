@@ -14,6 +14,5 @@ export function rowToCustomer(
     description: nullToUndefined<string>(row.get("description")),
     createdAt: row.get("created_at"),
     modifiedAt: row.get("modified_at"),
-    softDeleted: row.get("soft_deleted"),
   };
 }

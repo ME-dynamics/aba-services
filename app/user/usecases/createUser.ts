@@ -1,11 +1,11 @@
 import { makeUser } from "../entities";
-import { httpResultSuccess } from "aba-node";
+import { httpResult } from "aba-node";
 import { entityTypes, usecaseTypes } from "../types";
 
 export function buildCreateUser(args: usecaseTypes.IBuildCreateUser) {
   const { insertUser, findUserByPhoneNumber } = args;
 
-  const { created, ok } = httpResultSuccess;
+  const { created, ok } = httpResult.success;
 
   function userInput(info: usecaseTypes.ICreateUser): entityTypes.IUser {
     const { id, role, phoneNumber } = info;
@@ -25,7 +25,6 @@ export function buildCreateUser(args: usecaseTypes.IBuildCreateUser) {
       deactivationReason: undefined,
       createdAt: undefined,
       modifiedAt: undefined,
-      softDeleted: false,
     };
   }
 

@@ -7,6 +7,7 @@ import {
   tFetchUserByIdFunc,
   tInsertCustomerFunc,
   tFetchRoleByUserIdFunc,
+  tDeleteCustomerFunc,
 } from "./adapters";
 
 // create request;
@@ -15,6 +16,7 @@ export interface IBuildCreateRequest {
   fetchRoleByUserId: tFetchRoleByUserIdFunc;
   findRequestByCustomerId: tFindRequestByCustomerId;
   insertCustomer: tInsertCustomerFunc;
+  deleteCustomer: tDeleteCustomerFunc;
 }
 
 export interface ICreateRequest {
@@ -26,7 +28,7 @@ export interface ICreateRequest {
 
 export interface IBuildRemoveRequest {
   findRequestByCustomerId: tFindRequestByCustomerId;
-  insertCustomer: tInsertCustomerFunc;
+  deleteCustomer: tDeleteCustomerFunc;
 }
 
 // confirm request
@@ -35,6 +37,7 @@ export interface IBuildConfirmRequest {
   fetchUserById: tFetchUserByIdFunc;
   findRequestByCustomerId: tFindRequestByCustomerId;
   insertCustomer: tInsertCustomerFunc;
+  deleteCustomer: tDeleteCustomerFunc;
 }
 export interface IConfirmRequest {
   providerId: string;
@@ -43,7 +46,7 @@ export interface IConfirmRequest {
 // reject request
 export interface IBuildRejectRequest {
   findRequestByCustomerId: tFindRequestByCustomerId;
-  insertCustomer: tInsertCustomerFunc;
+  deleteCustomer: tDeleteCustomerFunc;
 }
 
 export interface IRejectRequest {
@@ -88,12 +91,19 @@ export interface IBuildRetrieveCustomerProviderInfo {
 // remove customer by id
 export interface IBuildRemoveCustomer {
   findCustomer: tFindCustomerFunc;
-  insertCustomer: tInsertCustomerFunc;
+  deleteCustomer: tDeleteCustomerFunc;
 }
 
 export interface IRemoveCustomer {
   providerId: string;
   customerId: string;
+}
+
+// remove provider
+
+export interface IBuildRemoveProvider {
+  findCustomer: tFindCustomerFunc;
+  deleteCustomer: tDeleteCustomerFunc;
 }
 
 // update customer info -- internal

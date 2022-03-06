@@ -10,14 +10,18 @@ import {
   fetchSendOtpBySms,
   findOtpByToken,
   findTokenByUserId,
+  findDeviceIdByPhone,
   insertToken,
   signJwt,
   tokenGen,
   findRole,
   insertRole,
+  insertDeviceId,
   findSecretKeys,
   findAdmins,
   deleteAdmin,
+  sha512,
+  validatePhoneNumber,
 } from "../adapters";
 
 import { buildPasswordlessStart } from "./passwordlessStart";
@@ -31,13 +35,16 @@ import { buildRetrieveRoleByOtpId } from "./retrieveRoleByOtpId";
 export const passwordlessStart = buildPasswordlessStart({
   findOtpByPhone,
   insertOtp,
+  insertDeviceId,
   otpGen,
   sendOtpBySms: fetchSendOtpBySms,
+  sha512,
 });
 
 export const passwordlessVerify = buildPasswordlessVerify({
   findRole,
   insertRole,
+  findDeviceIdByPhone,
   createUser: fetchCreateUser,
   findOtpByToken,
   insertToken,
@@ -72,6 +79,7 @@ export const initAdmin = buildInitAdmins({
   findOtpByPhone,
   insertOtp,
   insertRole,
+  validatePhoneNumber,
 });
 
 export const retrieveRoleByOtpId = buildRetrieveRoleByOtpId({ findRole });

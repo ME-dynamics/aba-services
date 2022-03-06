@@ -1,12 +1,12 @@
-import { httpResultClientError, httpResultSuccess } from "aba-node";
+import { httpResult } from "aba-node";
 import { usecaseTypes } from "../types";
 
 export function buildRetrieveCustomerProviderInfo(
   args: usecaseTypes.IBuildRetrieveCustomerProviderInfo
 ) {
   const { retrieveCustomerProviderId, fetchUserById } = args;
-  const { notFound } = httpResultClientError;
-  const { ok } = httpResultSuccess;
+  const { notFound } = httpResult.clientError;
+  const { ok } = httpResult.success;
   return async function retrieveCustomerProviderInfo(customerId: string) {
     const providerId = await retrieveCustomerProviderId(customerId);
     if (!providerId) {

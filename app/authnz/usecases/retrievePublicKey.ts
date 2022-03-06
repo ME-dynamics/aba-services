@@ -1,11 +1,11 @@
-import { httpResultClientError } from "aba-node";
+import { httpResult } from "aba-node";
 import { usecaseTypes } from "../types";
 
 export function buildRetrievePublicKey(
   args: usecaseTypes.IBuildRetrieveSecretKeys
 ) {
   const { findSecretKeys } = args;
-  const { notFound } = httpResultClientError;
+  const { notFound } = httpResult.clientError;
   return async function retrievePublicKey() {
     const keys = await findSecretKeys(1);
     if (!keys) {

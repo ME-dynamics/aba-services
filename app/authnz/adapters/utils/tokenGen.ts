@@ -7,7 +7,7 @@ export function buildTokenGen(args: adaptersTypes.IBuildTokenGen) {
     jwt: string
   ): Promise<adaptersTypes.ITokenGenResult> {
     const hashedJwt = await hash(jwt);
-    const refreshToken = nanoid(64);
+    const refreshToken = nanoid(128);
     const hashedRefreshToken = await hash(refreshToken);
     const refreshExpiresAt = daysFromNow(180, errorPath);
     return {

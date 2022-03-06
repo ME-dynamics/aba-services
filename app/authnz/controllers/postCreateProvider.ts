@@ -1,4 +1,4 @@
-import { httpResultClientError, auth, types } from "aba-node";
+import { httpResult, auth, types } from "aba-node";
 import { createProvider } from "../usecases";
 import { strings } from "../config";
 import { controllerTypes } from "../types";
@@ -7,7 +7,7 @@ export function buildPostCreateProvider(
   args: controllerTypes.IBuildPostCreateProvider
 ) {
   const { validatePhoneNumber } = args;
-  const { badRequest } = httpResultClientError;
+  const { badRequest } = httpResult.clientError;
   const roles: types.IRoles = {
     admin: true,
     accountant: false,

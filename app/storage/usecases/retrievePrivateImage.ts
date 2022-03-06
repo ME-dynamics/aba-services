@@ -1,4 +1,4 @@
-import { httpResultClientError, httpResultSuccess } from "aba-node";
+import { httpResult } from "aba-node";
 import { serverUrl } from "../config"
 import { usecaseTypes } from "../types";
 
@@ -6,8 +6,8 @@ export function buildRetrievePrivateImage(
   args: usecaseTypes.IBuildRetrievePrivateImage
 ) {
   const { findImageById, minio } = args;
-  const { notFound, forbidden } = httpResultClientError;
-  const { ok } = httpResultSuccess;
+  const { notFound, forbidden } = httpResult.clientError;
+  const { ok } = httpResult.success;
   const expiry = 17 * 60; // 17 minutes in seconds
   const minioUrl = "http://127.0.0.1:9000";
   return async function retrievePrivateImage(

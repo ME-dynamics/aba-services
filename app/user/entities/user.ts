@@ -24,7 +24,6 @@ export function buildMakeUser(args: entityTypes.IBuildMakeUser) {
       birthday,
       telephone,
       deactivationReason,
-      softDeleted,
     } = user;
     if (!username) {
       username = nanoid(8);
@@ -70,14 +69,6 @@ export function buildMakeUser(args: entityTypes.IBuildMakeUser) {
       deactivationReason = newDeactivationReason;
       modifiedAt.setTime(Date.now());
     }
-    function remove() {
-      softDeleted = true;
-      modifiedAt.setTime(Date.now());
-    }
-    function restore() {
-      softDeleted = false;
-      modifiedAt.setTime(Date.now());
-    }
     const madeUser: entityTypes.IMadeUser = {
       get: {
         id: () => id,
@@ -95,7 +86,6 @@ export function buildMakeUser(args: entityTypes.IBuildMakeUser) {
         createdAt: () => createdAt,
         modifiedAt: () => modifiedAt,
         deactivationReason: () => deactivationReason,
-        softDeleted: () => softDeleted,
       },
       set: {
         username: setUsername,
@@ -108,8 +98,6 @@ export function buildMakeUser(args: entityTypes.IBuildMakeUser) {
         address: setAddress,
         telephone: setTelephone,
         deactivationReason: setDeactivationReason,
-        remove,
-        restore,
       },
       object: () => {
         return {
@@ -128,7 +116,6 @@ export function buildMakeUser(args: entityTypes.IBuildMakeUser) {
           deactivationReason,
           createdAt,
           modifiedAt,
-          softDeleted,
         };
       },
     };

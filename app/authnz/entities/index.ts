@@ -5,14 +5,17 @@ import { nanoid } from "nanoid";
 import { buildMakeOtp } from "./otp";
 import { buildMakeToken } from "./token";
 import { buildMakeRole } from "./role";
+import { buildMakeDeviceId } from "./deviceId";
 
 export const makeOtp = buildMakeOtp({
-  nanoid,
   uuid: v4,
 });
 
 export const makeToken = buildMakeToken({
   hoursFromNow: time.hoursFromNow,
+  nanoid,
 });
 
 export const makeRole = buildMakeRole();
+
+export const makeDeviceId = buildMakeDeviceId();

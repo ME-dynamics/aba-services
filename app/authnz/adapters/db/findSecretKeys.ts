@@ -9,8 +9,8 @@ function selectQueryGen() {
     version: "v1",
     columns: ["*"],
     where: [
-      equal({ argument: "key_type", equals: "'private'" }), // should be "'private'" for query to work
-      equal({ argument: "kid", self: true }),
+      equal({ argument: "key_type", staticValue: "'private'" }), // should be "'private'" for query to work
+      equal({ argument: "kid", dynamicValue: true }),
     ],
   });
   const publicKeyQuery = selectQuery({
@@ -18,8 +18,8 @@ function selectQueryGen() {
     version: "v1",
     columns: ["*"],
     where: [
-      equal({ argument: "key_type", equals: "'public'" }),
-      equal({ argument: "kid", self: true }),
+      equal({ argument: "key_type", staticValue: "'public'" }),
+      equal({ argument: "kid", dynamicValue: true }),
     ],
   });
   return { privateKeyQuery, publicKeyQuery };

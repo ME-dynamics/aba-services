@@ -1,0 +1,46 @@
+export type tMbtiFields = Record<string, number>;
+export type tMbtiStructureFields = Record<string, Record<string, number>>;
+
+export interface IBuildMakeMBTI {
+  eiFormula: (fields: tMbtiFields) => IEIGroup;
+  jpFormula: (fields: tMbtiFields) => IJPGroup;
+  snFormula: (fields: tMbtiFields) => ISNGroup;
+  tfFormula: (fields: tMbtiFields) => ITFGroup;
+}
+
+export interface IEIGroup {
+  e: number;
+  i: number;
+}
+
+export interface IJPGroup {
+  j: number;
+  p: number;
+}
+
+export interface ISNGroup {
+  s: number;
+  n: number;
+}
+
+export interface ITFGroup {
+  t: number;
+  f: number;
+}
+export type tMbtiAggregates = IEIGroup & IJPGroup & ISNGroup & ITFGroup;
+
+export interface IMbtiFactor {
+  enTitle: string;
+  faTitle: string;
+  score: number;
+}
+export interface IMbtiAggregates {
+  e: IMbtiFactor;
+  i: IMbtiFactor;
+  j: IMbtiFactor;
+  p: IMbtiFactor;
+  s: IMbtiFactor;
+  n: IMbtiFactor;
+  t: IMbtiFactor;
+  f: IMbtiFactor;
+}

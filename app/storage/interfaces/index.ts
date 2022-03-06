@@ -1,5 +1,5 @@
 // start your http, grpc, kafka , etc interface here
-import { types, routeGen } from "aba-node";
+import { types, buildRouteGenerator } from "aba-node";
 import multipart from "fastify-multipart";
 import { uploadImage } from "./uploadImage";
 // import { uploadSession } from "./fileSession";
@@ -12,6 +12,10 @@ import {
 import { applicationVersion } from "../config";
 
 export async function startStorageServer(app: types.tHttpInstance) {
+  const routeGen = buildRouteGenerator({
+    service: "storage",
+    version: applicationVersion,
+  });
   app.register(multipart, {
     limits: {
       fieldNameSize: 8000,
@@ -23,23 +27,11 @@ export async function startStorageServer(app: types.tHttpInstance) {
     },
   });
   app.get(
-    routeGen({
-      version: applicationVersion,
-      role: "shared",
-      routes: ["images", "private", ":imageId"],
-    }),
+    routeGen(["private", ":imageId"]),
     { schema: sRetrievePrivateImage },
     retrievePrivateImage
   );
-  app.post(
-    routeGen({
-      version: applicationVersion,
-      role: "shared",
-      routes: ["images", "upload"],
-    }),
-    { schema: sUploadImage },
-    uploadImage
-  );
+  app.post(routeGen(["upload"]), { schema: sUploadImage }, uploadImage);
   // app.post(
   //   `${internal}/file/session`,
   //   { schema: sFileSessionSchema },

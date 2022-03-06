@@ -1,8 +1,6 @@
 import { ErrorFactory } from "aba-node";
 import { adaptersTypes } from "../types";
 
-
-
 export function buildInitSecret(args: adaptersTypes.IBuildInitSecret) {
   const { findSecretKeys, exportJWK, generateKey, insertSecretKeys } = args;
   const errorPath = "authnz, adapters, init secret";
@@ -21,14 +19,14 @@ export function buildInitSecret(args: adaptersTypes.IBuildInitSecret) {
     const parsedPrivateKey = await exportJWK(privateKey);
     const parsedPublicKey = await exportJWK(publicKey);
     // check key is defined
-    if(!parsedPrivateKey.kty || !parsedPrivateKey.crv || !parsedPrivateKey.x) {
+    if (!parsedPrivateKey.kty || !parsedPrivateKey.crv || !parsedPrivateKey.x) {
       throw new ErrorFactory({
         name: "undefinedPrivateKey",
         message: "private key properties should be defined",
         detail: "",
         nativeError: undefined,
-        path: errorPath
-      })
+        path: errorPath,
+      });
     }
     const privateData: adaptersTypes.IKey = {
       keyType: "private",
@@ -39,14 +37,14 @@ export function buildInitSecret(args: adaptersTypes.IBuildInitSecret) {
       d: parsedPrivateKey.d,
     };
     // check key is defined
-    if(!parsedPublicKey.kty || !parsedPublicKey.crv || !parsedPublicKey.x) {
+    if (!parsedPublicKey.kty || !parsedPublicKey.crv || !parsedPublicKey.x) {
       throw new ErrorFactory({
         name: "undefinedPublicKey",
         message: "public key properties should be defined",
         detail: "",
         nativeError: undefined,
-        path: errorPath
-      })
+        path: errorPath,
+      });
     }
     const publicData: adaptersTypes.IKey = {
       keyType: "public",
@@ -56,10 +54,9 @@ export function buildInitSecret(args: adaptersTypes.IBuildInitSecret) {
       x: parsedPublicKey.x,
       d: parsedPublicKey.d,
     };
-    const inserted = await insertSecretKeys({
+    await insertSecretKeys({
       privateKey: privateData,
       publicKey: publicData,
     });
-    return inserted;
   };
 }

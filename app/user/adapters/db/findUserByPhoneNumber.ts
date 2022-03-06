@@ -9,7 +9,7 @@ function selectQueryGen() {
     table: "users",
     version: "v1",
     columns: ["*"],
-    where: [equal({ argument: "phone_number", self: true })],
+    where: [equal({ argument: "phone_number", dynamicValue: true })],
   });
   return query;
 }

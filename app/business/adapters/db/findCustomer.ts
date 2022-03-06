@@ -9,7 +9,7 @@ function selectQueryGen(): string {
     table: "customers",
     version: applicationVersion,
     columns: ["*"],
-    where: [equal({ argument: "customer_id", self: true })],
+    where: [equal({ argument: "customer_id", dynamicValue: true })],
   });
   return query;
 }
@@ -24,26 +24,14 @@ export function buildFindCustomer(args: adaptersTypes.IBuildFindCustomer) {
     const result = await select({
       query,
       params: { customer_id: customerId },
-      unique: false,
+      unique: true,
       queryOptions: undefined,
       errorPath,
     });
     if (result.rowLength === 0) {
       return undefined;
     }
-    const customers = [];
-    for (let index = 0; index < result.rowLength; index++) {
-      const customer = result.rows[index];
-      if (customer.get("soft_deleted")) {
-        continue;
-      }
-      customers.push(rowToCustomer(customer));
-    }
-    if (customers.length > 1) {
-      console.error("More than one customer found");
-      console.log(JSON.stringify(customers, null, 2));
-      return undefined;
-    }
-    return customers[0];
+
+    return rowToCustomer(result.first());
   };
 }

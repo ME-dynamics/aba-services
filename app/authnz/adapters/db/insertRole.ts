@@ -1,28 +1,27 @@
 import { queryGen } from "aba-node";
-import { adaptersTypes, entityTypes } from "../../types";
+import type { adaptersTypes, entityTypes } from "../../types";
 
-function insertQueryGen(): string {
+function insertQueryGen() {
   const { insertQuery } = queryGen;
   const query = insertQuery({
     table: "role",
     version: "v1",
     values: [
-      { column: "otp_id", self: true },
-      { column: "admin", self: true },
-      { column: "provider", self: true },
-      { column: "assistant", self: true },
-      { column: "customer", self: true },
-      { column: "support", self: true },
-      { column: "accountant", self: true },
-      { column: "admin_al", self: true },
-      { column: "provider_al", self: true },
-      { column: "assistant_al", self: true },
-      { column: "customer_al", self: true },
-      { column: "support_al", self: true },
-      { column: "accountant_al", self: true },
-      { column: "created_at", self: true },
-      { column: "modified_at", self: true },
-      { column: "soft_deleted", self: true },
+      { column: "otp_id", dynamicValue: true },
+      { column: "admin", dynamicValue: true },
+      { column: "provider", dynamicValue: true },
+      { column: "assistant", dynamicValue: true },
+      { column: "customer", dynamicValue: true },
+      { column: "support", dynamicValue: true },
+      { column: "accountant", dynamicValue: true },
+      { column: "admin_al", dynamicValue: true },
+      { column: "provider_al", dynamicValue: true },
+      { column: "assistant_al", dynamicValue: true },
+      { column: "customer_al", dynamicValue: true },
+      { column: "support_al", dynamicValue: true },
+      { column: "accountant_al", dynamicValue: true },
+      { column: "created_at", dynamicValue: true },
+      { column: "modified_at", dynamicValue: true },
     ],
   });
   return query;
@@ -31,8 +30,10 @@ function insertQueryGen(): string {
 export function buildInsertRole(args: adaptersTypes.IBuildInsert) {
   const { insert } = args;
   const errorPath = "authnz, adapters, insert role";
-  const query = insertQueryGen();
-  return async function insertRole(roleObject: entityTypes.IMadeRoleObject): Promise<void> {
+  const { query, logQuery } = insertQueryGen();
+  return async function insertRole(
+    roleObject: entityTypes.IMadeRoleObject
+  ): Promise<void> {
     const {
       otpId,
       admin,
@@ -49,29 +50,27 @@ export function buildInsertRole(args: adaptersTypes.IBuildInsert) {
       accountantAL,
       createdAt,
       modifiedAt,
-      softDeleted,
     } = roleObject;
-    await insert({
-      query,
-      params: {
-        otp_id: otpId,
-        admin,
-        provider,
-        assistant,
-        customer,
-        support,
-        accountant,
-        admin_al: adminAL,
-        provider_al: providerAL,
-        assistant_al: assistantAL,
-        customer_al: customerAL,
-        support_al: supportAL,
-        accountant_al: accountantAL,
-        created_at: createdAt,
-        modified_at: modifiedAt,
-        soft_deleted: softDeleted,
-      },
-      errorPath,
-    });
+    const params = {
+      otp_id: otpId,
+      admin,
+      provider,
+      assistant,
+      customer,
+      support,
+      accountant,
+      admin_al: adminAL,
+      provider_al: providerAL,
+      assistant_al: assistantAL,
+      customer_al: customerAL,
+      support_al: supportAL,
+      accountant_al: accountantAL,
+      created_at: createdAt,
+      modified_at: modifiedAt,
+    };
+    await Promise.all([
+      insert({ query, params, errorPath }),
+      insert({ query: logQuery, params, errorPath }),
+    ]);
   };
 }

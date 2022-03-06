@@ -1,4 +1,4 @@
-import { auth, types, httpResultClientError } from "aba-node";
+import { auth, types, httpResult } from "aba-node";
 import { controllerTypes } from "../types";
 import { retrieveUser } from "../usecases";
 
@@ -12,7 +12,7 @@ export function buildGetUser(args: controllerTypes.IBuildGetUser) {
     assistant: false,
     support: false,
   };
-  const { badRequest, forbidden } = httpResultClientError;
+  const { badRequest, forbidden } = httpResult.clientError;
   return async function getUser(httpRequest: controllerTypes.tGetUser) {
     const { success, error, payload } = auth(httpRequest, roles);
     if (!success) {
@@ -20,7 +20,7 @@ export function buildGetUser(args: controllerTypes.IBuildGetUser) {
     }
     const { role, userId } = payload;
     const { id } = httpRequest.params;
-    if (role === "admin" ) {
+    if (role === "admin") {
       if (!id) {
         return badRequest({ error: "id must be defined" });
       }
@@ -33,10 +33,7 @@ export function buildGetUser(args: controllerTypes.IBuildGetUser) {
       // AUTHORIZE
       // USER MUST BE provider customer
       const providerId = await fetchCustomerProvider(id);
-      if (!providerId) {
-        return forbidden({ error: "action not allowed" });
-      }
-      if (userId !== providerId) {
+      if (!providerId && userId !== providerId) {
         return forbidden({ error: "action not allowed" });
       }
       return await retrieveUser(id);

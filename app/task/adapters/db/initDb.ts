@@ -11,27 +11,28 @@ export function buildInitDb(args: adapterTypes.IBuildInitDb) {
       name: "tasks",
       version: applicationVersion,
       columns: [
-        { name: "user_id", type: "UUID" },
-        { name: "id", type: "UUID" },
-        { name: "content", type: "TEXT" },
-        { name: "done", type: "BOOLEAN" },
-        { name: "created_at", type: "TIMESTAMP" },
-        { name: "modified_at", type: "TIMESTAMP" },
-        { name: "soft_deleted", type: "BOOLEAN" },
+        { columnName: "user_id", columnType: "UUID" },
+        { columnName: "provider_id", columnType: "UUID" },
+        { columnName: "id", columnType: "UUID" },
+        { columnName: "content", columnType: "TEXT" },
+        { columnName: "done", columnType: "BOOLEAN" },
+        { columnName: "created_at", columnType: "TIMESTAMP" },
+        { columnName: "modified_at", columnType: "TIMESTAMP" },
       ],
       primaryKey: {
-        partition: ["user_id"],
+        partition: ["user_id", "provider_id"],
         cluster: ["created_at"],
       },
       orderBy: [{ key: "created_at", type: "DESC" }],
     });
     const taskIdIndex = createIndexQuery({
-      name: "task_id",
+      indexName: "task_id",
       version: applicationVersion,
-      table: "tasks",
+      indexOnTable: "tasks",
       indexKey: "id",
     });
     await init({ query: createTasksTable.query, errorPath });
+    await init({ query: createTasksTable.logQuery, errorPath });
     await init({ query: taskIdIndex, errorPath });
   };
 }

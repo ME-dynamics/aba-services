@@ -10,35 +10,33 @@ export function buildInitDb(args: adaptersTypes.IBuildInit) {
     name: "otp",
     version: "v1",
     columns: [
-      { name: "id", type: "UUID" },
-      { name: "device_id", type: "TEXT" },
-      { name: "phone_number", type: "TEXT" },
-      { name: "phone_confirm", type: "BOOLEAN" },
-      { name: "otp_code", type: "TEXT" },
-      { name: "otp_token", type: "TEXT" },
-      { name: "otp_token_valid_date", type: "TIMESTAMP" },
-      { name: "otp_code_resend_count", type: "SMALLINT" },
-      { name: "otp_temp_block_date", type: "TIMESTAMP" },
-      { name: "permanent_block", type: "BOOLEAN" },
-      { name: "created_at", type: "TIMESTAMP" },
-      { name: "modified_at", type: "TIMESTAMP" },
-      { name: "soft_deleted", type: "BOOLEAN" },
+      { columnName: "id", columnType: "UUID" },
+      { columnName: "phone_number", columnType: "TEXT" },
+      { columnName: "phone_confirm", columnType: "BOOLEAN" },
+      { columnName: "otp_code", columnType: "TEXT" },
+      { columnName: "otp_token", columnType: "TEXT" },
+      { columnName: "otp_token_valid_date", columnType: "TIMESTAMP" },
+      { columnName: "otp_code_resend_count", columnType: "SMALLINT" },
+      { columnName: "otp_temp_block_date", columnType: "TIMESTAMP" },
+      { columnName: "permanent_block", columnType: "BOOLEAN" },
+      { columnName: "created_at", columnType: "TIMESTAMP" },
+      { columnName: "modified_at", columnType: "TIMESTAMP" },
     ],
     primaryKey: {
-      partition: ["phone_number"],
+      partition: ["id"],
     },
   });
   const otpTokenIndex = createIndexQuery({
-    name: "otp_token",
+    indexName: "otp_token",
     version: "v1",
     indexKey: "otp_token",
-    table: "otp",
+    indexOnTable: "otp",
   });
   const userIdIndex = createIndexQuery({
-    name: "otp_id",
+    indexName: "otp_phone_number",
     version: "v1",
-    indexKey: "id",
-    table: "otp",
+    indexKey: "phone_number",
+    indexOnTable: "otp",
   });
   // secret keys table query
   const createSecretKeysTable = createTableQuery({
@@ -46,28 +44,28 @@ export function buildInitDb(args: adaptersTypes.IBuildInit) {
     version: "v1",
     columns: [
       {
-        name: "key_type",
-        type: "TEXT",
+        columnName: "key_type",
+        columnType: "TEXT",
       },
       {
-        name: "kid",
-        type: "INT",
+        columnName: "kid",
+        columnType: "INT",
       },
       {
-        name: "kty",
-        type: "TEXT",
+        columnName: "kty",
+        columnType: "TEXT",
       },
       {
-        name: "crv",
-        type: "TEXT",
+        columnName: "crv",
+        columnType: "TEXT",
       },
       {
-        name: "x",
-        type: "TEXT",
+        columnName: "x",
+        columnType: "TEXT",
       },
       {
-        name: "d",
-        type: "TEXT",
+        columnName: "d",
+        columnType: "TEXT",
       },
     ],
     primaryKey: {
@@ -75,26 +73,58 @@ export function buildInitDb(args: adaptersTypes.IBuildInit) {
       cluster: ["kid"],
     },
   });
+  const createDeviceIdTable = createTableQuery({
+    name: "device_id",
+    version: "v1",
+    columns: [
+      { columnName: "device_id", columnType: "TEXT" },
+      { columnName: "phone_number", columnType: "TEXT" },
+      { columnName: "device_unique_id", columnType: "TEXT" },
+      { columnName: "is_device", columnType: "BOOLEAN" },
+      { columnName: "platform", columnType: "TEXT" },
+      { columnName: "brand", columnType: "TEXT" },
+      { columnName: "manufacturer", columnType: "TEXT" },
+      { columnName: "model", columnType: "TEXT" },
+      { columnName: "model_id", columnType: "TEXT" },
+      { columnName: "design_name", columnType: "TEXT" },
+      { columnName: "product_name", columnType: "TEXT" },
+      { columnName: "device_year_class", columnType: "TEXT" },
+      { columnName: "supported_cpu_arch", columnType: "TEXT" },
+      { columnName: "os", columnType: "TEXT" },
+      { columnName: "os_version", columnType: "TEXT" },
+      { columnName: "os_build_id", columnType: "TEXT" },
+      { columnName: "os_internal_build_id", columnType: "TEXT" },
+      { columnName: "android_api_level", columnType: "TEXT" },
+      { columnName: "device_name", columnType: "TEXT" },
+      { columnName: "created_at", columnType: "TIMESTAMP" },
+      { columnName: "modified_at", columnType: "TIMESTAMP" },
+    ],
+    primaryKey: {
+      partition: ["device_id"],
+      cluster: ["phone_number"],
+    },
+  });
   // token table
   const createTokenTable = createTableQuery({
     name: "token",
     version: "v1",
     columns: [
-      { name: "otp_id", type: "UUID" },
-      { name: "refresh_token", type: "TEXT" },
-      { name: "jwt", type: "TEXT" },
-      { name: "jwt_key", type: "TEXT" },
-      { name: "jwt_expires_at", type: "TIMESTAMP" },
-      { name: "refresh_expires_at", type: "TIMESTAMP" },
-      { name: "token_recreate_count", type: "SMALLINT" },
-      { name: "token_temp_block", type: "TIMESTAMP" },
-      { name: "permanent_block", type: "BOOLEAN" },
-      { name: "created_at", type: "TIMESTAMP" },
-      { name: "modified_at", type: "TIMESTAMP" },
-      { name: "soft_deleted", type: "BOOLEAN" },
+      { columnName: "otp_id", columnType: "UUID" },
+      { columnName: "device_id", columnType: "TEXT" },
+      { columnName: "refresh_token", columnType: "TEXT" },
+      { columnName: "jwt", columnType: "TEXT" },
+      { columnName: "jwt_key", columnType: "TEXT" },
+      { columnName: "jwt_expires_at", columnType: "TIMESTAMP" },
+      { columnName: "refresh_expires_at", columnType: "TIMESTAMP" },
+      { columnName: "token_recreate_count", columnType: "SMALLINT" },
+      { columnName: "token_temp_block", columnType: "TIMESTAMP" },
+      { columnName: "permanent_block", columnType: "BOOLEAN" },
+      { columnName: "created_at", columnType: "TIMESTAMP" },
+      { columnName: "modified_at", columnType: "TIMESTAMP" },
     ],
     primaryKey: {
       partition: ["otp_id"],
+      cluster: ["device_id"],
     },
   });
 
@@ -102,40 +132,45 @@ export function buildInitDb(args: adaptersTypes.IBuildInit) {
     name: "role",
     version: "v1",
     columns: [
-      { name: "otp_id", type: "UUID" },
-      { name: "admin", type: "BOOLEAN" },
-      { name: "provider", type: "BOOLEAN" },
-      { name: "assistant", type: "BOOLEAN" },
-      { name: "customer", type: "BOOLEAN" },
-      { name: "support", type: "BOOLEAN" },
-      { name: "accountant", type: "BOOLEAN" },
-      { name: "admin_al", type: "TINYINT" },
-      { name: "provider_al", type: "TINYINT" },
-      { name: "assistant_al", type: "TINYINT" },
-      { name: "customer_al", type: "TINYINT" },
-      { name: "support_al", type: "TINYINT" },
-      { name: "accountant_al", type: "TINYINT" },
-      { name: "created_at", type: "TIMESTAMP" },
-      { name: "modified_at", type: "TIMESTAMP" },
-      { name: "soft_deleted", type: "BOOLEAN" },
+      { columnName: "otp_id", columnType: "UUID" },
+      { columnName: "admin", columnType: "BOOLEAN" },
+      { columnName: "provider", columnType: "BOOLEAN" },
+      { columnName: "assistant", columnType: "BOOLEAN" },
+      { columnName: "customer", columnType: "BOOLEAN" },
+      { columnName: "support", columnType: "BOOLEAN" },
+      { columnName: "accountant", columnType: "BOOLEAN" },
+      { columnName: "admin_al", columnType: "SMALLINT" },
+      { columnName: "provider_al", columnType: "SMALLINT" },
+      { columnName: "assistant_al", columnType: "SMALLINT" },
+      { columnName: "customer_al", columnType: "SMALLINT" },
+      { columnName: "support_al", columnType: "SMALLINT" },
+      { columnName: "accountant_al", columnType: "SMALLINT" },
+      { columnName: "created_at", columnType: "TIMESTAMP" },
+      { columnName: "modified_at", columnType: "TIMESTAMP" },
     ],
     primaryKey: {
       partition: ["otp_id"],
     },
   });
   const adminIndex = createIndexQuery({
-    name: "admin",
+    indexName: "admin",
     version: "v1",
-    table: "role",
+    indexOnTable: "role",
     indexKey: "admin",
   });
   return async function initDb() {
     await init({ query: createOtpTable.query, errorPath });
+    await init({ query: createOtpTable.logQuery, errorPath });
     await init({ query: otpTokenIndex, errorPath });
     await init({ query: userIdIndex, errorPath });
+    await init({ query: createDeviceIdTable.query, errorPath });
+    await init({ query: createDeviceIdTable.logQuery, errorPath });
     await init({ query: createSecretKeysTable.query, errorPath });
+    await init({ query: createSecretKeysTable.logQuery, errorPath });
     await init({ query: createTokenTable.query, errorPath });
+    await init({ query: createTokenTable.logQuery, errorPath });
     await init({ query: createRoleTable.query, errorPath });
+    await init({ query: createRoleTable.logQuery, errorPath });
     await init({ query: adminIndex, errorPath });
   };
 }

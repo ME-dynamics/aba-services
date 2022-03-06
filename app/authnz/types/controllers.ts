@@ -1,6 +1,6 @@
 import { types } from "aba-node";
 import { IValidatePhoneNumberResult } from "./adapters";
-import { IPasswordlessVerify } from "./usecases";
+import { IPasswordlessVerify, IPasswordlessStart, IRefresh } from "./usecases";
 export interface IPostPasswordlessVerify {
   Body: IPasswordlessVerify;
 }
@@ -11,19 +11,13 @@ export interface IBuildPostPasswordlessStart {
   validatePhoneNumber: (phoneNumber: string) => IValidatePhoneNumberResult;
 }
 export interface IPostPasswordlessStart {
-  Body: {
-    phoneNumber: string;
-  };
+  Body: IPasswordlessStart;
 }
 
 export type tPostPasswordlessStart = types.tRequest<IPostPasswordlessStart>;
 
 export interface IPostRefresh {
-  Body: {
-    userId: string;
-    xJwtToken: string;
-    xRefreshToken: string;
-  };
+  Body: IRefresh;
 }
 export type tPostRefresh = types.tRequest<IPostRefresh>;
 

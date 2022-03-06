@@ -6,7 +6,11 @@ const body = fluentSchema
   .prop("xJwtToken", fluentSchema.string().required())
   .prop(
     "xRefreshToken",
-    fluentSchema.string().required().minLength(64).maxLength(64)
+    fluentSchema.string().required().minLength(128).maxLength(128)
+  )
+  .prop(
+    "deviceId",
+    fluentSchema.string().required().minLength(128).maxLength(128)
   );
 
 const response = {

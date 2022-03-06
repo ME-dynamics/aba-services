@@ -1,4 +1,4 @@
-import { types, routeGen } from "aba-node";
+import { types, buildRouteGenerator } from "aba-node";
 import { sRetrieveUser, sUpdateUser, sRetrieveProviders } from "../schemas";
 import { applicationVersion } from "../config";
 
@@ -9,56 +9,18 @@ import { createPatient } from "./createPatient";
 import { retrievePatient } from "./retrievePatient";
 
 export function startUserServer(app: types.tHttpInstance) {
+  const routeGen = buildRouteGenerator({
+    service: "users",
+    version: applicationVersion,
+  });
+  app.get(routeGen([":id"]), { schema: sRetrieveUser }, retrieveUser);
   app.get(
-    routeGen({
-      version: applicationVersion,
-      role: "shared",
-      routes: ["users", ":id"],
-    }),
-    { schema: sRetrieveUser },
-    retrieveUser
-  );
-  app.get(
-    routeGen({
-      version: applicationVersion,
-      role: "shared",
-      routes: ["users", "providers"],
-    }),
+    routeGen(["providers"]),
     { schema: sRetrieveProviders },
     retrieveProviders
   );
-  app.put(
-    routeGen({
-      version: applicationVersion,
-      role: "shared",
-      routes: ["users"],
-    }),
-    { schema: sUpdateUser },
-    updateUser
-  );
-  app.post(
-    routeGen({
-      version: applicationVersion,
-      role: "shared",
-      routes: ["patients"],
-    }),
-    createPatient
-  );
-  app.get(
-    routeGen({
-      version: applicationVersion,
-      role: "shared",
-      routes: ["patients", ":id"],
-    }),
-    retrievePatient
-  );
-  // app.post(
-  //   routeGen({
-  //     version: applicationVersion,
-  //     role: "internal",
-  //     routes: ["users"],
-  //   }),
-  //   { schema: sCreateUser },
-  //   createUser
-  // );
+  app.get(routeGen(["patients", ":id"]), retrievePatient);
+
+  app.put(routeGen([":id"]), { schema: sUpdateUser }, updateUser);
+  app.post(routeGen(["patients", ":id"]), createPatient);
 }

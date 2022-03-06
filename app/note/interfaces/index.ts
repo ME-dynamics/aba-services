@@ -1,4 +1,4 @@
-import { types, routeGen } from "aba-node";
+import { types, buildRouteGenerator } from "aba-node";
 
 import {
   sCreateNote,
@@ -13,41 +13,17 @@ import { removeNote } from "./removeNote";
 import { applicationVersion } from "../config";
 
 export function startNoteServer(app: types.tHttpInstance) {
+  const routeGen = buildRouteGenerator({
+    service: "notes",
+    version: applicationVersion,
+  });
   app.get(
-    routeGen({
-      version: applicationVersion,
-      role: "provider",
-      routes: ["notes", ":id"],
-    }),
+    routeGen([":id"]), // TODO: to user id
     { schema: sRetrieveCustomerNotes },
     retrieveCustomerNotes
   );
 
-  app.post(
-    routeGen({
-      version: applicationVersion,
-      role: "provider",
-      routes: ["notes"],
-    }),
-    { schema: sCreateNote },
-    createNote
-  );
-  app.put(
-    routeGen({
-      version: applicationVersion,
-      role: "provider",
-      routes: ["notes"],
-    }),
-    { schema: sUpdateNote },
-    updateNote
-  );
-  app.delete(
-    routeGen({
-      version: applicationVersion,
-      role: "provider",
-      routes: ["notes", ":noteId"],
-    }),
-    { schema: sRemoveNote },
-    removeNote
-  );
+  app.post(routeGen([]), { schema: sCreateNote }, createNote);
+  app.put(routeGen([]), { schema: sUpdateNote }, updateNote);
+  app.delete(routeGen([":noteId"]), { schema: sRemoveNote }, removeNote);
 }

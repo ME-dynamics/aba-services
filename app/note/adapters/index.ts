@@ -5,6 +5,7 @@ import {
   buildFindCustomerNotes,
   buildInitDb,
   buildInsertNote,
+  buildDeleteNote,
 } from "./db";
 import { rowToNote } from "./utils";
 
@@ -30,6 +31,11 @@ export const findCustomerNotes = buildFindCustomerNotes({
 });
 
 export const insertNote = buildInsertNote({ insert: dbClient.insert });
+
+export const deleteNote = buildDeleteNote({
+  insert: dbClient.insert,
+  remove: dbClient.delete,
+});
 
 // network
 

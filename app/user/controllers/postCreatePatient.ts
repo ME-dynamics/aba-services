@@ -1,4 +1,4 @@
-import { auth, types, httpResultClientError } from "aba-node";
+import { auth, types, httpResult } from "aba-node";
 
 import { createPatient } from "../usecases";
 import { controllerTypes, usecaseTypes } from "../types";
@@ -38,6 +38,7 @@ export function buildPostCreatePatient(
       religion,
       siblings,
       siblingsPosition,
+      siblingDiseases,
       createdAt,
       modifiedAt,
     } = info;
@@ -63,9 +64,10 @@ export function buildPostCreatePatient(
       religion,
       siblings,
       siblingsPosition,
+      siblingDiseases,
     };
   }
-  const { badRequest, forbidden } = httpResultClientError;
+  const { badRequest, forbidden } = httpResult.clientError;
   return async function postCreatePatient(
     httpRequest: controllerTypes.tPostCreatePatient
   ) {

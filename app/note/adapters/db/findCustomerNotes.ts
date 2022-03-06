@@ -10,14 +10,16 @@ function selectQueryGen(): string {
     version: applicationVersion,
     columns: ["*"],
     where: [
-      equal({ argument: "provider_id", self: true }),
-      equal({ argument: "customer_id", self: true }),
+      equal({ argument: "provider_id", dynamicValue: true }),
+      equal({ argument: "customer_id", dynamicValue: true }),
     ],
   });
   return query;
 }
 
-export function buildFindCustomerNotes(args: adapterTypes.IBuildFindCustomerNotes) {
+export function buildFindCustomerNotes(
+  args: adapterTypes.IBuildFindCustomerNotes
+) {
   const { select, rowToNote } = args;
   const errorPath = "notes, adapters, find customer notes";
   const query = selectQueryGen();
@@ -42,9 +44,6 @@ export function buildFindCustomerNotes(args: adapterTypes.IBuildFindCustomerNote
     const notes: entityTypes.IMadeNoteObject[] = [];
     for (let index = 0; index < length; index++) {
       const note = rowToNote(result.rows[index]);
-      if (note.softDeleted) {
-        continue;
-      }
       notes.push(note);
     }
     return notes;

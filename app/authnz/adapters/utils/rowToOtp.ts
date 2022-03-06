@@ -1,10 +1,9 @@
 import { nullToUndefined, types } from "aba-node";
-import { entityTypes } from "../../types";
+import type { entityTypes } from "../../types";
 
 export function rowToOtp(row: types.tRow): entityTypes.IMadeOtpObject {
   return {
-    id: row.get("id"),
-    deviceId: row.get("device_id"),
+    id: row.get("id")?.toString(),
     phoneNumber: row.get("phone_number"),
     phoneConfirm: row.get("phone_confirm"),
     otpCode: nullToUndefined<string>(row.get("otp_code")),
@@ -15,6 +14,5 @@ export function rowToOtp(row: types.tRow): entityTypes.IMadeOtpObject {
     permanentBlock: row.get("permanent_block"),
     createdAt: row.get("created_at"),
     modifiedAt: row.get("modified_at"),
-    softDeleted: row.get("soft_deleted"),
   };
 }

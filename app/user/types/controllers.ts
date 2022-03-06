@@ -54,6 +54,8 @@ export type tGetProviders = types.tRequest<unknown>;
 export interface IBuildPutUpdateUser {
   parseStoragePublicUrl: tParseStoragePublicUrlFunc;
   fetchImageInfo: tFetchImageInfoFunc;
+  fetchCustomerProvider: tFetchCustomerProviderFunc;
+
 }
 interface IPutUpdateUser {
   Body: IUpdateUser;

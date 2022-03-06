@@ -4,6 +4,7 @@ import {
   buildFindTasksByUserId,
   buildInitDb,
   buildInsertTask,
+  buildDeleteTask,
 } from "./db";
 import { rowToTask } from "./utils";
 
@@ -28,5 +29,9 @@ export const findTaskById = buildFindTaskById({
 });
 export const insertTask = buildInsertTask({ insert: dbClient.insert });
 
+export const deleteTask = buildDeleteTask({
+  insert: dbClient.insert,
+  remove: dbClient.delete,
+});
 // network
 export { fetchCustomerProvider } from "./network";

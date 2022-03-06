@@ -1,17 +1,18 @@
-import { httpResultClientError, httpResultSuccess } from "aba-node";
+import { httpResult } from "aba-node";
+import { updateCustomerInfo } from "../../business"; // TODO: move this function to network;
 import { makeUser } from "../entities";
 import { usecaseTypes } from "../types";
 
 export function buildUpdateUser(args: usecaseTypes.IBuildUpdateUser) {
   const { findUserById, insertUser } = args;
-  const { notFound } = httpResultClientError;
-  const { ok } = httpResultSuccess;
+  const { notFound } = httpResult.clientError;
+  const { ok } = httpResult.success;
   return async function updateUser(
     userId: string,
     info: usecaseTypes.IUpdateUser
   ) {
     const userFound = await findUserById(userId);
-    if (!userFound || userFound.softDeleted) {
+    if (!userFound) {
       return notFound({ error: "user not found" });
     }
     const {
@@ -55,7 +56,15 @@ export function buildUpdateUser(args: usecaseTypes.IBuildUpdateUser) {
       user.set.telephone(telephone);
     }
 
-    await insertUser(user.object());
+    await Promise.all([
+      insertUser(user.object()),
+      updateCustomerInfo({
+        id: user.get.id(),
+        name: `${user.get.firstName()} ${user.get.lastName()}`,
+        description: user.get.description(),
+        profilePictureUrl: user.get.profilePictureUrl(),
+      }),
+    ]);
     return ok({
       payload: user.object(),
     });

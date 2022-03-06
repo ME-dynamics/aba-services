@@ -14,9 +14,12 @@ import {
   tFindSecretKeysFunc,
   tDeleteAdminFunc,
   tFindAdminsFunc,
+  tFindDeviceIdByPhoneFunc,
+  tInsertDeviceIdFunc,
+  IValidatePhoneNumberResult,
 } from "./adapters";
 import { otpGen } from "../adapters";
-import { tRole } from "./entities";
+import { tRole, tDeviceInfo } from "./entities";
 
 // passwordless start
 export interface IBuildPasswordlessStart {
@@ -24,10 +27,11 @@ export interface IBuildPasswordlessStart {
   insertOtp: tInsertOtpFunc;
   sendOtpBySms: tSendOtpSms;
   otpGen: typeof otpGen;
+  sha512: (value: string) => string;
+  insertDeviceId: tInsertDeviceIdFunc;
 }
-export interface IPasswordlessStart {
+export interface IPasswordlessStart extends tDeviceInfo {
   phoneNumber: string;
-  // role: tRole;
 }
 export interface IPasswordlessStartResult {
   otpToken: string;
@@ -38,6 +42,7 @@ export interface IPasswordlessStartResult {
 
 export interface IBuildPasswordlessVerify {
   findOtpByToken: tFindOtpByTokenFunc;
+  findDeviceIdByPhone: tFindDeviceIdByPhoneFunc;
   signJwt: tSignJwtFunc;
   verifyHash: typeof verify;
   findTokenByUserId: tFindTokenByUserIdFunc;
@@ -52,9 +57,11 @@ export interface IBuildPasswordlessVerify {
 export interface IPasswordlessVerify {
   otpCode: number;
   otpToken: string;
+  deviceId: string;
 }
 
 export interface IPasswordlessVerifyResult {
+  deviceId: string;
   refreshToken: string;
   jwtToken: string;
   refreshTokenExpiresAt: number;
@@ -75,6 +82,7 @@ export interface IBuildRefresh {
 }
 
 export interface IRefresh {
+  deviceId: string;
   userId: string;
   xRefreshToken: string;
   xJwtToken: string;
@@ -129,6 +137,7 @@ export interface IBuildInitAdmin {
   insertRole: tInsertRoleFunc;
   deleteAdmin: tDeleteAdminFunc;
   findAdmins: tFindAdminsFunc;
+  validatePhoneNumber: (phoneNumber: string) => IValidatePhoneNumberResult;
 }
 
 export interface IBuildRetrieveRoleByOtpId {

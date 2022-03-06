@@ -22,7 +22,7 @@ export function buildMakePatient() {
       cousinMarriage,
       siblingsPosition,
       siblings,
-      softDeleted,
+      siblingDiseases,
     } = patient;
     // Setters
     function setProblemDescription(newDesc: string) {
@@ -99,12 +99,8 @@ export function buildMakePatient() {
       siblings = newSiblings;
       modifiedAt.setTime(Date.now());
     }
-    function remove() {
-      softDeleted = true;
-      modifiedAt.setTime(Date.now());
-    }
-    function restore() {
-      softDeleted = false;
+    function setSiblingDiseases(diseases: string | undefined) {
+      siblingDiseases = diseases;
       modifiedAt.setTime(Date.now());
     }
     const madePatient: entityTypes.IMadePatient = {
@@ -128,9 +124,9 @@ export function buildMakePatient() {
         cousinMarriage: () => cousinMarriage,
         siblingsPosition: () => siblingsPosition,
         siblings: () => siblings,
+        siblingDiseases: () => siblingDiseases,
         createdAt: () => createdAt,
         modifiedAt: () => modifiedAt,
-        softDeleted: () => softDeleted,
       },
       set: {
         problemDescription: setProblemDescription,
@@ -150,9 +146,8 @@ export function buildMakePatient() {
         motherDeathReason: setMotherDeathReason,
         cousinMarriage: setCousinMarriage,
         siblingsPosition: setSiblingsPosition,
+        siblingDiseases: setSiblingDiseases,
         siblings: setSiblings,
-        remove,
-        restore,
       },
       object: () => {
         return {
@@ -175,9 +170,9 @@ export function buildMakePatient() {
           cousinMarriage,
           siblingsPosition,
           siblings,
+          siblingDiseases,
           createdAt,
           modifiedAt,
-          softDeleted,
         };
       },
     };

@@ -37,22 +37,22 @@ static_resources:
       per_connection_buffer_limit_bytes: 32768 # 32 KiB
       filter_chains:
       - filter_chain_match:
-        # server_names: ["879c-81-19-222-69.ngrok.io"]
-        # transport_socket:
-        #     name: envoy.transport_sockets.tls
-        #     typed_config:
-        #       "@type": type.googleapis.com/envoy.extensions.transport_sockets.tls.v3.DownstreamTlsContext
-        #       common_tls_context:
-        #         tls_certificates:
-        #         - certificate_chain:
-        #             filename: /taskyn-ir.crt
-        #           private_key:
-        #             filename: /taskyn-ir.key
-        #           password:
-        #             inline_string: "taskyn"
-        #         alpn_protocols: ["h2"]
-        #         tls_params:
-        #           tls_minimum_protocol_version: "TLSv1_2"
+        server_names: ["taskyn.ir"]
+        transport_socket:
+            name: envoy.transport_sockets.tls
+            typed_config:
+              "@type": type.googleapis.com/envoy.extensions.transport_sockets.tls.v3.DownstreamTlsContext
+              common_tls_context:
+                tls_certificates:
+                - certificate_chain:
+                    filename: /taskyn-ir.crt
+                  private_key:
+                    filename: /taskyn-ir.key
+                  password:
+                    inline_string: "taskyn"
+                alpn_protocols: ["h2"]
+                tls_params:
+                  tls_minimum_protocol_version: "TLSv1_2"
         filters:
             - name: envoy.filters.network.http_connection_manager
               typed_config:
@@ -89,7 +89,7 @@ static_resources:
                           clock_skew_seconds: 0
                           remote_jwks:
                             http_uri:
-                              uri: http://127.0.0.1:3000/api/v1/internal/jwt/key/public
+                              uri: http://127.0.0.1:3000/api/v1/authnz/jwt/key/public
                               cluster: node_app
                               timeout: 1s
                             cache_duration:
@@ -103,24 +103,24 @@ static_resources:
                           forward_payload_header: x-jwt-payload
                       rules:
                         - match:
-                            prefix: /api/v1/refresh
+                            prefix: /api/v1/authnz/refresh
                         - match:
-                            prefix: /api/v1/passwordless
+                            prefix: /api/v1/authnz/passwordless
                         - match:
                             prefix: /api/v1
                           requires:
                             provider_name: authnzJWT
                         - match:
                             prefix: /
-                          requires:
-                            provider_name: authnzJWT
+                          # requires:
+                          #   provider_name: authnzJWT
                   - name: envoy.filters.http.local_ratelimit
                     typed_config:
                       "@type": type.googleapis.com/envoy.extensions.filters.http.local_ratelimit.v3.LocalRateLimit
                       stat_prefix: rate_limit
                       token_bucket:
-                        max_tokens: 1000
-                        tokens_per_fill: 100
+                        max_tokens: 500
+                        tokens_per_fill: 200
                         fill_interval: 60s
                       filter_enabled:
                         runtime_key: local_rate_limit
@@ -137,7 +137,7 @@ static_resources:
                         header:
                           key: x-too-much-taskyn-buddy
                           value: 'true'
-                      local_rate_limit_per_downstream_connection: false
+                      local_rate_limit_per_downstream_connection: true
                   - name: envoy.filters.http.compressor
                     typed_config: 
                       "@type": type.googleapis.com/envoy.extensions.filters.http.compressor.v3.Compressor
@@ -159,12 +159,11 @@ static_resources:
                   
                   virtual_hosts:
                     - name: node_service
-                      # domains: ["taskyn.ir", "www.taskyn.ir"]
-                      domains: ["*"]
+                      domains: ["taskyn.ir", "www.taskyn.ir"]
                       routes:
                         - match: 
-                            prefix: /api/v1/internal
-                          direct_response: {status: 403, body: {inline_string: forbidden}}
+                            prefix: /api/v1/authnz/jwt/key/public
+                          direct_response: {status: 403, body: {inline_string: "{error: 'forbidden'}"}}
                         - match:
                             prefix: "/api/v1"
                           route:

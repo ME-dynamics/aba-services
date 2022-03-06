@@ -1,28 +1,27 @@
 import { queryGen, undefinedToNull } from "aba-node";
 import { adapterTypes, entityTypes } from "../../types";
 
-function insertQueryGen(): string {
+function insertQueryGen() {
   const { insertQuery } = queryGen;
   const query = insertQuery({
     table: "users",
     version: "v1",
     values: [
-      { column: "id", self: true },
-      { column: "role", self: true },
-      { column: "username", self: true },
-      { column: "phone_number", self: true },
-      { column: "first_name", self: true },
-      { column: "last_name", self: true },
-      { column: "description", self: true },
-      { column: "birthday", self: true },
-      { column: "profile_picture_url", self: true },
-      { column: "gender", self: true },
-      { column: "address", self: true },
-      { column: "telephone", self: true },
-      { column: "deactivation_reason", self: true },
-      { column: "created_at", self: true },
-      { column: "modified_at", self: true },
-      { column: "soft_deleted", self: true },
+      { column: "id", dynamicValue: true },
+      { column: "role", dynamicValue: true },
+      { column: "username", dynamicValue: true },
+      { column: "phone_number", dynamicValue: true },
+      { column: "first_name", dynamicValue: true },
+      { column: "last_name", dynamicValue: true },
+      { column: "description", dynamicValue: true },
+      { column: "birthday", dynamicValue: true },
+      { column: "profile_picture_url", dynamicValue: true },
+      { column: "gender", dynamicValue: true },
+      { column: "address", dynamicValue: true },
+      { column: "telephone", dynamicValue: true },
+      { column: "deactivation_reason", dynamicValue: true },
+      { column: "created_at", dynamicValue: true },
+      { column: "modified_at", dynamicValue: true },
     ],
   });
   return query;
@@ -31,7 +30,7 @@ function insertQueryGen(): string {
 export function buildInsertUser(args: adapterTypes.IBuildInsert) {
   const { insert } = args;
   const errorPath = "user service, adapters, insert user";
-  const query = insertQueryGen();
+  const { query, logQuery } = insertQueryGen();
   return async function insertUser(info: entityTypes.IMadeUserObject) {
     const {
       id,
@@ -49,29 +48,27 @@ export function buildInsertUser(args: adapterTypes.IBuildInsert) {
       deactivationReason,
       createdAt,
       modifiedAt,
-      softDeleted,
     } = info;
-    await insert({
-      query,
-      errorPath,
-      params: {
-        id,
-        role,
-        username,
-        phone_number: phoneNumber,
-        first_name: firstName,
-        last_name: lastName,
-        description: undefinedToNull<string>(description || ""),
-        profile_picture_url: profilePictureUrl,
-        gender,
-        birthday,
-        address,
-        telephone,
-        deactivation_reason: deactivationReason,
-        created_at: createdAt,
-        modified_at: modifiedAt,
-        soft_deleted: softDeleted,
-      },
-    });
+    const params = {
+      id,
+      role,
+      username,
+      phone_number: phoneNumber,
+      first_name: firstName,
+      last_name: lastName,
+      description: undefinedToNull<string>(description || ""),
+      profile_picture_url: profilePictureUrl,
+      gender,
+      birthday,
+      address,
+      telephone,
+      deactivation_reason: deactivationReason,
+      created_at: createdAt,
+      modified_at: modifiedAt,
+    };
+    await Promise.all([
+      await insert({ query, errorPath, params }),
+      await insert({ query: logQuery, errorPath, params }),
+    ]);
   };
 }

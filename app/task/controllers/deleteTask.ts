@@ -1,4 +1,4 @@
-import { auth, types, httpResultClientError } from "aba-node";
+import { auth, types, httpResult } from "aba-node";
 import { removeTask } from "../usecases";
 import { controllerTypes } from "../types";
 export function buildDeleteTask(args: controllerTypes.IBuildRemoveTask) {
@@ -11,7 +11,7 @@ export function buildDeleteTask(args: controllerTypes.IBuildRemoveTask) {
     assistant: false,
     support: false,
   };
-  const { badRequest, forbidden } = httpResultClientError;
+  const { badRequest, forbidden } = httpResult.clientError;
   return async function deleteTask(httpRequest: controllerTypes.tDeleteTask) {
     const { success, error, payload } = auth(httpRequest, roles);
     if (!success) {

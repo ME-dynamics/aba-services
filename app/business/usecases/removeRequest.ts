@@ -1,19 +1,22 @@
-import { httpResultClientError, httpResultSuccess } from "aba-node";
+import { httpResult } from "aba-node";
 import { makeCustomer } from "../entities";
 import { usecaseTypes } from "../types";
 
 export function buildRemoveRequest(args: usecaseTypes.IBuildRemoveRequest) {
-  const { findRequestByCustomerId, insertCustomer } = args;
-  const { notFound } = httpResultClientError;
-  const { ok } = httpResultSuccess;
+  const { findRequestByCustomerId, deleteCustomer } = args;
+  const { notFound } = httpResult.clientError;
+  const { ok } = httpResult.success;
   return async function removeRequest(customerId: string) {
     const requestFound = await findRequestByCustomerId(customerId);
-    if (!requestFound || requestFound.softDeleted) {
+    if (!requestFound || requestFound.requestConfirmed) {
       return notFound({ error: "request not found" });
     }
     const request = makeCustomer(requestFound);
-    request.set.remove();
-    await insertCustomer(request.object());
+    await deleteCustomer({
+      customerId: request.get.customerId(),
+      providerId: request.get.providerId(),
+      businessId: request.get.businessId(),
+    });
     return ok<string>({
       payload: "request removed",
     });

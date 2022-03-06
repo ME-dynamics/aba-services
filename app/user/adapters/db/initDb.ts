@@ -21,22 +21,21 @@ export function buildInitDb(args: adapterTypes.IBuildInitDb) {
       name: "users",
       version: "v1",
       columns: [
-        { name: "id", type: "UUID" },
-        { name: "role", type: "TEXT" },
-        { name: "username", type: "TEXT" },
-        { name: "phone_number", type: "TEXT" },
-        { name: "first_name", type: "TEXT" },
-        { name: "last_name", type: "TEXT" },
-        { name: "description", type: "TEXT" },
-        { name: "gender", type: "TEXT" },
-        { name: "birthday", type: "TIMESTAMP" },
-        { name: "profile_picture_url", type: "TEXT" },
-        { name: "address", type: "TEXT" },
-        { name: "telephone", type: "TEXT" },
-        { name: "deactivation_reason", type: "TEXT" },
-        { name: "created_at", type: "TIMESTAMP" },
-        { name: "modified_at", type: "TIMESTAMP" },
-        { name: "soft_deleted", type: "BOOLEAN" },
+        { columnName: "id", columnType: "UUID" },
+        { columnName: "role", columnType: "TEXT" },
+        { columnName: "username", columnType: "TEXT" },
+        { columnName: "phone_number", columnType: "TEXT" },
+        { columnName: "first_name", columnType: "TEXT" },
+        { columnName: "last_name", columnType: "TEXT" },
+        { columnName: "description", columnType: "TEXT" },
+        { columnName: "gender", columnType: "TEXT" },
+        { columnName: "birthday", columnType: "TIMESTAMP" },
+        { columnName: "profile_picture_url", columnType: "TEXT" },
+        { columnName: "address", columnType: "TEXT" },
+        { columnName: "telephone", columnType: "TEXT" },
+        { columnName: "deactivation_reason", columnType: "TEXT" },
+        { columnName: "created_at", columnType: "TIMESTAMP" },
+        { columnName: "modified_at", columnType: "TIMESTAMP" },
       ],
       primaryKey: {
         partition: ["id"],
@@ -48,12 +47,12 @@ export function buildInitDb(args: adapterTypes.IBuildInitDb) {
       version: "v1",
       columns: ["*"],
       where: [
-        equal({ argument: "role", equals: "'provider'" }),
+        equal({ argument: "role", staticValue: "'provider'" }),
         notNull("created_at"),
       ],
     });
     const providersMV = createMaterialView({
-      name: "providers",
+      materialViewName: "providers",
       version: "v1",
       selectQuery: providerSelect,
       primaryKey: {
@@ -74,37 +73,37 @@ export function buildInitDb(args: adapterTypes.IBuildInitDb) {
     //   ],
     // });
     const phoneNumberIndex = createIndexQuery({
-      name: "user_by_phone_number",
+      indexName: "user_by_phone_number",
       indexKey: "phone_number",
-      table: "users",
+      indexOnTable: "users",
       version: "v1",
     });
     const createPatientTable = createTableQuery({
       name: "patients",
       version: "v1",
       columns: [
-        { name: "user_id", type: "UUID" },
-        { name: "problem_description", type: "TEXT" },
-        { name: "marital_status", type: "TEXT" },
-        { name: "marital_state", type: "TEXT" },
-        { name: "education", type: "TEXT" },
-        { name: "academic_field", type: "TEXT" },
-        { name: "religion", type: "TEXT" },
-        { name: "job", type: "TEXT" },
-        { name: "body_diseases", type: "TEXT" },
-        { name: "mind_diseases", type: "TEXT" },
-        { name: "drug_use", type: "TEXT" },
-        { name: "addiction", type: "TEXT" },
-        { name: "is_father_alive", type: "BOOLEAN" },
-        { name: "is_mother_alive", type: "BOOLEAN" },
-        { name: "father_death_reason", type: "TEXT" },
-        { name: "mother_death_reason", type: "TEXT" },
-        { name: "cousin_marriage", type: "BOOLEAN" },
-        { name: "siblings_position", type: "TINYINT" },
-        { name: "siblings", type: "TEXT" },
-        { name: "created_at", type: "TIMESTAMP" },
-        { name: "modified_at", type: "TIMESTAMP" },
-        { name: "soft_deleted", type: "BOOLEAN" },
+        { columnName: "user_id", columnType: "UUID" },
+        { columnName: "problem_description", columnType: "TEXT" },
+        { columnName: "marital_status", columnType: "TEXT" },
+        { columnName: "marital_state", columnType: "TEXT" },
+        { columnName: "education", columnType: "TEXT" },
+        { columnName: "academic_field", columnType: "TEXT" },
+        { columnName: "religion", columnType: "TEXT" },
+        { columnName: "job", columnType: "TEXT" },
+        { columnName: "body_diseases", columnType: "TEXT" },
+        { columnName: "mind_diseases", columnType: "TEXT" },
+        { columnName: "drug_use", columnType: "TEXT" },
+        { columnName: "addiction", columnType: "TEXT" },
+        { columnName: "is_father_alive", columnType: "BOOLEAN" },
+        { columnName: "is_mother_alive", columnType: "BOOLEAN" },
+        { columnName: "father_death_reason", columnType: "TEXT" },
+        { columnName: "mother_death_reason", columnType: "TEXT" },
+        { columnName: "cousin_marriage", columnType: "BOOLEAN" },
+        { columnName: "siblings_position", columnType: "TINYINT" },
+        { columnName: "siblings", columnType: "TEXT" },
+        { columnName: "sibling_diseases", columnType: "TEXT" },
+        { columnName: "created_at", columnType: "TIMESTAMP" },
+        { columnName: "modified_at", columnType: "TIMESTAMP" },
       ],
       primaryKey: {
         partition: ["user_id"],
@@ -112,7 +111,9 @@ export function buildInitDb(args: adapterTypes.IBuildInitDb) {
     });
     // await init({ query: siblingsUDT.query, errorPath });
     await init({ query: createUserTableQuery.query, errorPath });
+    await init({ query: createUserTableQuery.logQuery, errorPath });
     await init({ query: createPatientTable.query, errorPath });
+    await init({ query: createPatientTable.logQuery, errorPath });
     await init({ query: phoneNumberIndex, errorPath });
     await init({ query: providersMV.query, errorPath });
   };

@@ -4,7 +4,7 @@ export function buildPostPasswordlessVerify() {
   return async function postPasswordlessVerify(
     httpRequest: controllerTypes.tPostPasswordlessVerify
   ) {
-    const { otpCode, otpToken } = httpRequest.body;
-    return await passwordlessVerify({ otpCode, otpToken });
+    const { otpCode, otpToken, deviceId } = httpRequest.body;
+    return await passwordlessVerify({ otpCode, otpToken, deviceId });
   };
 }

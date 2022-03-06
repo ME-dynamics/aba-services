@@ -12,7 +12,6 @@ export interface IMakeFileSession {
   sizeLimit: number;
   createdAt: Date | undefined;
   modifiedAt: Date | undefined;
-  softDeleted: boolean;
 }
 
 export interface IMadeFileSessionObject extends IMakeFileSession {
@@ -55,7 +54,6 @@ export interface IMakeImage {
   url: string | undefined;
   createdAt: Date | undefined;
   modifiedAt: Date | undefined;
-  softDeleted: boolean;
 }
 
 export interface IMadeImageObject extends IMakeImage {
@@ -72,11 +70,6 @@ export interface IMadeImage {
     url: () => string | undefined;
     createdAt: () => Date;
     modifiedAt: () => Date;
-    softDeleted: () => boolean;
-  };
-  set: {
-    remove: () => void;
-    restore: () => void;
   };
   object: () => IMadeImageObject;
 }

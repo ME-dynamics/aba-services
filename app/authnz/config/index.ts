@@ -33,6 +33,12 @@ export const jwtExpires = process.env.JWT_EXPIRES
 function exitIfAdminNotDefined() {
   console.log("admin not defined");
   console.log({ admin: process.env.ADMIN });
+  if (process.env.NODE_ENV !== "production") {
+    console.warn(
+      "process won't exit in development mode, but admin must be defined"
+    );
+    return;
+  }
   process.exit(1);
 }
 

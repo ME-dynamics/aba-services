@@ -1,6 +1,11 @@
 // create task
 
-import { tFindTaskById, tFindTasksByUserId, tInsertTaskFunc } from "./adapters";
+import {
+  tDeleteTaskFunc,
+  tFindTaskById,
+  tFindTasksByUserId,
+  tInsertTaskFunc,
+} from "./adapters";
 
 export interface IBuildCreateTask {
   insertTask: tInsertTaskFunc;
@@ -8,6 +13,7 @@ export interface IBuildCreateTask {
 
 export interface ICreateTask {
   userId: string;
+  providerId: string;
   content: string;
 }
 
@@ -19,7 +25,7 @@ export interface IBuildUpdateTask {
 }
 
 export interface IUpdateTask {
-  userId: string
+  userId: string;
   taskId: string;
   content: string;
 }
@@ -29,7 +35,10 @@ export interface IUpdateTask {
 export interface IBuildRetrieveTasksByUserId {
   findTasksByUserId: tFindTasksByUserId;
 }
-
+export interface IRetrieveTasksByUserId {
+  userId: string;
+  providerId: string;
+}
 // retrieve task by id
 
 export interface IBuildRetrieveTaskById {
@@ -61,7 +70,7 @@ export interface ITaskDone {
 
 export interface IBuildRemoveTask {
   findTaskById: tFindTaskById;
-  insertTask: tInsertTaskFunc;
+  deleteTask: tDeleteTaskFunc;
 }
 
 export interface IRemoveTask {

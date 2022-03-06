@@ -11,15 +11,14 @@ export function buildInitDb(args: adapterTypes.IBuildInitDb) {
       name: "notes",
       version: applicationVersion,
       columns: [
-        { name: "provider_id", type: "UUID" },
-        { name: "customer_id", type: "UUID" },
-        { name: "id", type: "UUID" },
-        { name: "title", type: "TEXT" },
-        { name: "content", type: "TEXT" },
-        { name: "image_ids", type: "SET", setType: "TEXT" },
-        { name: "created_at", type: "TIMESTAMP" },
-        { name: "modified_at", type: "TIMESTAMP" },
-        { name: "soft_deleted", type: "BOOLEAN" },
+        { columnName: "provider_id", columnType: "UUID" },
+        { columnName: "customer_id", columnType: "UUID" },
+        { columnName: "id", columnType: "UUID" },
+        { columnName: "title", columnType: "TEXT" },
+        { columnName: "content", columnType: "TEXT" },
+        { columnName: "image_ids", columnType: "SET", setType: "TEXT" },
+        { columnName: "created_at", columnType: "TIMESTAMP" },
+        { columnName: "modified_at", columnType: "TIMESTAMP" },
       ],
       primaryKey: {
         partition: ["provider_id", "customer_id"],
@@ -28,12 +27,13 @@ export function buildInitDb(args: adapterTypes.IBuildInitDb) {
       orderBy: [{ key: "created_at", type: "DESC" }],
     });
     const noteIdIndex = createIndexQuery({
-      table: "notes",
-      name: "note_id",
+      indexOnTable: "notes",
+      indexName: "note_id",
       indexKey: "id",
       version: applicationVersion,
     });
     await init({ query: createNoteTable.query, errorPath });
+    await init({ query: createNoteTable.logQuery, errorPath });
     await init({ query: noteIdIndex, errorPath });
   };
 }

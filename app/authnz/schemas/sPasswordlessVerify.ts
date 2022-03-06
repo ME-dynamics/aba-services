@@ -1,4 +1,4 @@
-import { statusCodes, fluentSchema, errorSchema } from "aba-node";
+import { statusCodes, fluentSchema, errorSchemaObject } from "aba-node";
 
 const body = fluentSchema
   .object()
@@ -6,6 +6,10 @@ const body = fluentSchema
   .prop(
     "otpToken",
     fluentSchema.string().required().minLength(64).maxLength(64)
+  )
+  .prop(
+    "deviceId",
+    fluentSchema.string().required().minLength(127).maxLength(128)
   );
 
 const response = {
@@ -22,9 +26,7 @@ const response = {
         .prop("role", fluentSchema.string().required())
         .prop("userId", fluentSchema.string().format("uuid").required())
     ),
-  [statusCodes.BAD_REQUEST]: errorSchema,
-  [statusCodes.INTERNAL_SERVER_ERROR]: errorSchema,
-  [statusCodes.FORBIDDEN]: errorSchema,
+  ...errorSchemaObject,
 };
 
 export const sPasswordlessVerify = {

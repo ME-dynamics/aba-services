@@ -1,11 +1,11 @@
-import { auth, types, httpResultClientError } from "aba-node";
+import { auth, types, httpResult } from "aba-node";
 
 import { updateUser } from "../usecases";
 
 import { controllerTypes } from "../types";
 
 export function buildPutUpdateUser(args: controllerTypes.IBuildPutUpdateUser) {
-  const { parseStoragePublicUrl, fetchImageInfo } = args;
+  const { parseStoragePublicUrl, fetchImageInfo, fetchCustomerProvider } = args;
   const roles: types.IRoles = {
     customer: true,
     provider: true,
@@ -14,7 +14,7 @@ export function buildPutUpdateUser(args: controllerTypes.IBuildPutUpdateUser) {
     assistant: false,
     support: false,
   };
-  const { badRequest, forbidden } = httpResultClientError;
+  const { badRequest, forbidden } = httpResult.clientError;
   return async function putUpdateUser(
     httpRequest: controllerTypes.tPutUpdateUser
   ) {
@@ -28,6 +28,18 @@ export function buildPutUpdateUser(args: controllerTypes.IBuildPutUpdateUser) {
     if (role === "admin") {
       if (!id) {
         return badRequest({ error: "id must be defined" });
+      }
+      return await updateUser(id, userInfo);
+    }
+    if (role === "provider") {
+      if (!id) {
+        return await updateUser(userId, userInfo);
+      }
+      const providerId = await fetchCustomerProvider(id);
+      if (providerId !== userId) {
+        return forbidden({
+          error: "you are not authorized to update this user",
+        });
       }
       return await updateUser(id, userInfo);
     }

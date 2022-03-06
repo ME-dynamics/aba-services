@@ -1,6 +1,6 @@
 import { types, auth } from "aba-node"
-import { controllerTypes } from "../types";
 import { removeCustomer } from "../usecases";
+import type { controllerTypes } from "../types";
 
 export function buildDeleteCustomer() {
   const roles: types.IRoles = {

@@ -39,6 +39,7 @@ interface IDeleteRequest {
 }
 
 export type tDeleteRequest = types.tRequest<IDeleteRequest>;
+export type tDeleteProvider = types.tRequest<unknown>;
 
 export type tGetCustomers = types.tRequest<unknown>;
 

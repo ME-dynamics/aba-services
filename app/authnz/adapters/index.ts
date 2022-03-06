@@ -1,19 +1,21 @@
 import { scyllaClient, secureRandomNumber, time } from "aba-node";
 import { hash } from "argon2";
 import { nanoid } from "nanoid";
-import {SignJWT, generateKeyPair, importJWK, exportJWK} from "jose";
+import { SignJWT, generateKeyPair, importJWK, exportJWK } from "jose";
 import {
   buildFindOtpByPhone,
   buildFindOtpByToken,
   buildFindPrivateKey,
   buildFindSecretKeys,
   buildFindTokenByUserId,
+  buildFindDeviceIdByPhone,
   buildInitDb,
   buildInsertOtp,
   buildInsertSecretKeys,
   buildInsertToken,
   buildFindRole,
   buildInsertRole,
+  buildInsertDeviceId,
   buildDeleteAdmin,
   buildFindAdmins,
 } from "./db";
@@ -23,6 +25,7 @@ import {
   rowToOtp,
   rowToToken,
   rowToRole,
+  rowToDeviceId,
   buildOtpGen,
   buildTokenGen,
 } from "./utils";
@@ -71,6 +74,10 @@ export const findRole = buildFindRole({
   select: dbClient.select,
   rowToRole,
 });
+export const findDeviceIdByPhone = buildFindDeviceIdByPhone({
+  select: dbClient.select,
+  rowToDeviceId,
+});
 export const insertRole = buildInsertRole({
   insert: dbClient.insert,
 });
@@ -80,11 +87,16 @@ export const insertSecretKeys = buildInsertSecretKeys({
 });
 export const insertToken = buildInsertToken({ insert: dbClient.insert });
 
+export const insertDeviceId = buildInsertDeviceId({ insert: dbClient.insert });
+
 export const findAdmins = buildFindAdmins({
   select: dbClient.select,
   rowToRole,
 });
-export const deleteAdmin = buildDeleteAdmin({ remove: dbClient.delete });
+export const deleteAdmin = buildDeleteAdmin({
+  remove: dbClient.delete,
+  insert: dbClient.insert,
+});
 
 // utils
 export const signJwt = buildSignJwt({
@@ -107,7 +119,7 @@ export const tokenGen = buildTokenGen({
   daysFromNow: time.daysFromNow,
 });
 
-export { validatePhoneNumber } from "./utils";
+export { validatePhoneNumber, sha512 } from "./utils";
 // init secret
 
 export const initSecret = buildInitSecret({

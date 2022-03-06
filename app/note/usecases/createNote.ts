@@ -1,11 +1,11 @@
-import { httpResultSuccess, httpResultClientError } from "aba-node";
+import { httpResult } from "aba-node";
 import { makeNote } from "../entities";
 import { entityTypes, usecaseTypes } from "../types";
 
 export function buildCreateNote(args: usecaseTypes.IBuildCreateNote) {
   const { insertNote, imageIdsValidation } = args;
-  const { created } = httpResultSuccess;
-  const { forbidden } = httpResultClientError;
+  const { created } = httpResult.success;
+  const { forbidden } = httpResult.clientError;
   function noteInput(info: usecaseTypes.ICreateNote): entityTypes.IMakeNote {
     const { providerId, customerId, title, content, imageIds } = info;
     return {

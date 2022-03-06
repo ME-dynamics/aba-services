@@ -1,12 +1,12 @@
-import { httpResultClientError, httpResultSuccess } from "aba-node";
+import { httpResult } from "aba-node";
 import { entityTypes, usecaseTypes } from "../types";
 
 export function buildRetrieveCustomerNotes(
   args: usecaseTypes.IBuildRetrieveNote
 ) {
   const { findCustomerNotes } = args;
-  const { ok } = httpResultSuccess;
-  const { notFound } = httpResultClientError;
+  const { ok } = httpResult.success;
+  const { notFound } = httpResult.clientError;
   return async function retrieveCustomerNotes(
     info: usecaseTypes.IRetrieveNote
   ) {

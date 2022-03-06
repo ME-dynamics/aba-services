@@ -1,4 +1,4 @@
-import { auth, types, httpResultClientError } from "aba-node";
+import { auth, types, httpResult } from "aba-node";
 import { retrieveUserNotes } from "../usecases";
 import { controllerTypes } from "../types";
 
@@ -14,7 +14,7 @@ export function buildGetCustomerNotes(
     assistant: false,
     support: false,
   };
-  const { forbidden } = httpResultClientError;
+  const { forbidden } = httpResult.clientError;
   return async function getCustomerNotes(
     httpRequest: controllerTypes.tGetCustomerNotes
   ) {
