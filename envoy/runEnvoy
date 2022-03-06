@@ -1,3 +1,0 @@
-#!/bin/bash
-docker run --name $1 -v $(pwd)/envoy_node.yaml:/envoy_node.yaml -v $(pwd)/certs/taskyn-ir.crt:/taskyn-ir.crt -v $(pwd)/certs/taskyn-ir.key:/taskyn-ir.key --network host --memory 128mb --cpuset-cpus 4 envoyproxy/envoy-distroless:v1.20.1 -c /envoy_node.yaml
-
