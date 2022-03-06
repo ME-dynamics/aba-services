@@ -27,7 +27,6 @@ export function formula(fields: Record<string, number>) {
     fields["23"] +
     fields["24"] +
     fields["25"];
-    console.log(result);
   return { result };
 }
 // const field = {
