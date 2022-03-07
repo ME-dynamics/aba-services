@@ -30,23 +30,21 @@ static_resources:
               typed_config:
                 '@type': >-
                   type.googleapis.com/envoy.extensions.filters.network.http_connection_manager.v3.HttpConnectionManager
-                stat_prefix: in_http
+                stat_prefix: ingress_http
                 codec_type: auto
                 route_config:
                   name: http_local_route
                   virtual_hosts:
                     - name: http_service
-                      domains:
-                        - taskyn.ir
-                        - www.taskyn.ir
-                        - storage.taskyn.ir
+                      domains: ["*"]
                       routes:
                         - match:
-                            prefix: /
+                            prefix: "/"
                           redirect:
-                            path_redirect: /
+                            prefix_rewrite: "/"
                             https_redirect: true
-                           
+                http_filters:
+                - name: envoy.filters.http.router           
     - name: listener_https
       address:
         socket_address:
@@ -76,6 +74,7 @@ static_resources:
                       inline_string: taskyn
                 alpn_protocols:
                   - h2
+                  - http/1.1
                 tls_params:
                   tls_minimum_protocol_version: TLSv1_2
           filters:
