@@ -19,33 +19,33 @@ overload_manager:
             value: 0.98
 static_resources:
   listeners:
-    # - name: listener_http
-    #   address:
-    #     socket_address:
-    #       address: 0.0.0.0
-    #       port_value: 80
-    #   filter_chains:
-    #     - filters:
-    #         - name: envoy.filters.network.http_connection_manager
-    #           typed_config:
-    #             '@type': >-
-    #               type.googleapis.com/envoy.extensions.filters.network.http_connection_manager.v3.HttpConnectionManager
-    #             stat_prefix: in_http
-    #             codec_type: auto
-    #             route_config:
-    #               name: http_local_route
-    #               virtual_hosts:
-    #                 - name: http_service
-    #                   domains:
-    #                     - taskyn.ir
-    #                     - www.taskyn.ir
-    #                     - storage.taskyn.ir
-    #                   routes:
-    #                     - match:
-    #                         prefix: /
-    #                       redirect:
-    #                         path_redirect: /
-    #                         https_redirect: true
+    - name: listener_http
+      address:
+        socket_address:
+          address: 0.0.0.0
+          port_value: 8080
+      filter_chains:
+        - filters:
+            - name: envoy.filters.network.http_connection_manager
+              typed_config:
+                '@type': >-
+                  type.googleapis.com/envoy.extensions.filters.network.http_connection_manager.v3.HttpConnectionManager
+                stat_prefix: in_http
+                codec_type: auto
+                route_config:
+                  name: http_local_route
+                  virtual_hosts:
+                    - name: http_service
+                      domains:
+                        - taskyn.ir
+                        - www.taskyn.ir
+                        - storage.taskyn.ir
+                      routes:
+                        - match:
+                            prefix: /
+                          redirect:
+                            path_redirect: /
+                            https_redirect: true
                            
     - name: listener_https
       address:
