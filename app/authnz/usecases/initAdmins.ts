@@ -57,18 +57,18 @@ export function buildInitAdmins(args: usecaseTypes.IBuildInitAdmin) {
     if (admin) {
       for (let index = 0; index < admin.length; index++) {
         const phoneNumber = admin[index];
-        const { isValid, phoneNumber: phNumber } =
+        const { isValid, phoneNumber: parsedPhoneNumber } =
           validatePhoneNumber(phoneNumber);
         if (!isValid) {
           console.log(phoneNumber, "is not valid");
           process.exit(1);
         }
-        const otpFound = await findOtpByPhone(phNumber);
+        const otpFound = await findOtpByPhone(parsedPhoneNumber);
         if (otpFound) {
           const role = makeRole(roleInput(otpFound.id));
           await insertRole(role.object());
         } else {
-          const otp = makeOtp(otpInput(phoneNumber));
+          const otp = makeOtp(otpInput(parsedPhoneNumber));
           const role = makeRole(roleInput(otp.get.id()));
           await Promise.all([
             insertOtp(otp.object()),
