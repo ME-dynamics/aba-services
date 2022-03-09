@@ -14,7 +14,7 @@ const dbClient = scyllaClient({
   applicationVersion: "v1",
   contactPoints: ["127.0.1.1"],
   errorPath: "task, adapters, db client",
-  keyspace: "task",
+  keyspace: "tasks",
   localDataCenter: "datacenter1",
 });
 
