@@ -22,7 +22,7 @@ const dbClient = scyllaClient({
   id: undefined,
   contactPoints: [scyllaContactPoint],
   errorPath: "user service, adapters",
-  keyspace: "user",
+  keyspace: "users",
   localDataCenter: "datacenter1",
 });
 // db
