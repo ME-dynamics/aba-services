@@ -5,7 +5,7 @@ const body = fluentSchema
   .prop("otpCode", fluentSchema.number().minimum(1e4).maximum(99999).required())
   .prop(
     "otpToken",
-    fluentSchema.string().required().minLength(64).maxLength(64)
+    fluentSchema.string().required().minLength(63).maxLength(64)
   )
   .prop(
     "deviceId",
