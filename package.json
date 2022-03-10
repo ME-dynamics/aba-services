@@ -14,8 +14,8 @@
     "typedoc": "typedoc --readme ./README.md",
     "prepack": "npm run clean && tsc && npm run typedoc",
     "test": "jest",
-    "package-lock": "rimraf package-lock.json && npm install --package-lock-only",
-    "build:docker": "npm run package-lock && docker build --tag taskyn-server . && rimraf package-lock.json"
+    "package-lock": "npm install --package-lock-only",
+    "build:docker": "docker build --tag taskyn-server . && docker save taskyn-server > taskyn-server.tar"
   },
   "devDependencies": {
     "@types/busboy": "^1.3.0",
