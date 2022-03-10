@@ -1,5 +1,6 @@
 import { httpResult } from "aba-node";
 import { makeOtp, makeRole } from "../entities";
+import { updateUserRole } from "../../user"; // TODO: move this to network
 import { usecaseTypes, entityTypes } from "../types";
 
 export function buildCreateProvider(args: usecaseTypes.IBuildCreateProvider) {
@@ -57,7 +58,13 @@ export function buildCreateProvider(args: usecaseTypes.IBuildCreateProvider) {
       role.set.support(false);
       role.set.accountant(false);
     }
-    await Promise.all([insertOtp(otp.object()), insertRole(role.object())]);
+    await Promise.all([
+      insertOtp(otp.object()),
+      insertRole(role.object()),
+      otpFound
+        ? updateUserRole({ userId: otp.get.id(), role: role.get.role() })
+        : undefined,
+    ]);
     if (otpFound) {
       return ok<usecaseTypes.ICreateProviderResult>({
         payload: {
