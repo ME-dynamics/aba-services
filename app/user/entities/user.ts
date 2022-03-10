@@ -8,12 +8,12 @@ export function buildMakeUser(args: entityTypes.IBuildMakeUser) {
   ): Readonly<entityTypes.IMadeUser> {
     const {
       id,
-      role,
       phoneNumber,
       createdAt = new Date(),
       modifiedAt = new Date(),
     } = user;
     let {
+      role,
       username,
       firstName,
       lastName,
@@ -27,6 +27,10 @@ export function buildMakeUser(args: entityTypes.IBuildMakeUser) {
     } = user;
     if (!username) {
       username = nanoid(8);
+    }
+    function setRole(newRole: string) {
+      role = newRole;
+      modifiedAt.setTime(Date.now());
     }
     function setUsername(newUsername: string | undefined) {
       username = newUsername;
@@ -88,6 +92,7 @@ export function buildMakeUser(args: entityTypes.IBuildMakeUser) {
         deactivationReason: () => deactivationReason,
       },
       set: {
+        role: setRole,
         username: setUsername,
         firstName: setFirstName,
         lastName: setLastName,
