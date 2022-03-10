@@ -1,3 +1,4 @@
+import { updateUserRole } from "../../user"; // TODO:
 import { entityTypes, usecaseTypes } from "../types";
 
 import { admin } from "../config";
@@ -66,13 +67,18 @@ export function buildInitAdmins(args: usecaseTypes.IBuildInitAdmin) {
         const otpFound = await findOtpByPhone(parsedPhoneNumber);
         if (otpFound) {
           const role = makeRole(roleInput(otpFound.id));
-          await insertRole(role.object());
+
+          await Promise.all([
+            insertRole(role.object()),
+            updateUserRole({ userId: otpFound.id, role: role.get.role() }),
+          ]);
         } else {
           const otp = makeOtp(otpInput(parsedPhoneNumber));
           const role = makeRole(roleInput(otp.get.id()));
           await Promise.all([
             insertOtp(otp.object()),
             insertRole(role.object()),
+            updateUserRole({ userId: otp.get.id(), role: role.get.role() }),
           ]);
         }
       }
