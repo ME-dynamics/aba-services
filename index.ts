@@ -11,7 +11,7 @@ import {
   startStorageServer,
 } from "./app/storage";
 import { initDb as initBusinessDb, startBusinessServer } from "./app/business";
-import { initDb as initFormDb, startFormServer } from "./app/psychologyTest";
+import { initDb as initTestDb, startTestServer } from "./app/psychologyTest";
 import { initDb as initNoteDb, startNoteServer } from "./app/note";
 import { initDb as initUserDb, startUserServer } from "./app/user";
 import { initDb as initTaskDb, startTaskServer } from "./app/task";
@@ -24,7 +24,7 @@ export async function startService() {
       initStorageDb(),
       initPublicBucket(),
       initBusinessDb(),
-      initFormDb(),
+      initTestDb(),
       initNoteDb(),
       initUserDb(),
       initTaskDb(),
@@ -33,7 +33,7 @@ export async function startService() {
     startAuthnzServer(app);
     startStorageServer(app);
     startBusinessServer(app);
-    startFormServer(app);
+    startTestServer(app);
     startNoteServer(app);
     startTaskServer(app);
     startUserServer(app);
