@@ -1,4 +1,5 @@
-export function formula(fields: Record<string, number>) {
+import type { entityTypes } from "../../types"
+export function formula(fields: entityTypes.tTestFields) {
   const emotionalDeprivation =
     fields["1"] + fields["2"] + fields["3"] + fields["4"] + fields["5"];
   const abandonment =
