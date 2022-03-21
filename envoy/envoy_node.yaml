@@ -70,8 +70,8 @@ static_resources:
                       filename: /taskyn-ir.crt
                     private_key:
                       filename: /taskyn-ir.key
-                    password:
-                      inline_string: taskyn
+                    # password:
+                    #   inline_string: taskyn
                 alpn_protocols:
                   - h2
                   - http/1.1
@@ -140,6 +140,10 @@ static_resources:
                           requires:
                             provider_name: authnzJWT
                         - match:
+                            prefix: /public
+                          requires:
+                            provider_name: authnzJWT
+                        - match:
                             prefix: /
                   - name: envoy.filters.http.local_ratelimit
                     typed_config:
@@ -197,7 +201,7 @@ static_resources:
                           direct_response:
                             status: 403
                             body:
-                              inline_string: '{error: ''forbidden''}'
+                              inline_string: '{error: "forbidden"}'
                         - match:
                             prefix: /api/v1
                           route:
