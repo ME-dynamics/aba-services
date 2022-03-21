@@ -1,8 +1,8 @@
 import { reverse } from "./reverse";
-
-export function formula(fields: Record<string, number>) {
+import type { entityTypes } from "../../types";
+export function formula(fields: entityTypes.tTestFields) {
   //ابراز عواطف و احساسات جنسی
-  const a =
+  const expressingSexualEmotions =
     fields["1"] +
     fields["2"] +
     fields["3"] +
@@ -16,7 +16,7 @@ export function formula(fields: Record<string, number>) {
     fields["21"] +
     fields["25"];
   //مولفه روابط جنسی
-  const b =
+  const sexualIntercourse =
     fields["7"] +
     fields["10"] +
     reverse(fields["13"]) +
@@ -30,7 +30,7 @@ export function formula(fields: Record<string, number>) {
     fields["22"] +
     fields["23"] +
     fields["24"];
-  return { a, b };
+  return { expressingSexualEmotions, sexualIntercourse };
 }
 // const field = {
 //   "1": 1,
