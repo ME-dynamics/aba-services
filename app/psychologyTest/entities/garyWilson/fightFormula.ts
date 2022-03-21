@@ -1,6 +1,6 @@
 import { reverse } from "./reverse";
-
-export function fightFormula(fields: Record<string, number>) {
+import type { entityTypes } from "../../types"
+export function fightFormula(fields: entityTypes.tTestFields) {
   const fight =
     fields["5"] +
     fields["17"] +

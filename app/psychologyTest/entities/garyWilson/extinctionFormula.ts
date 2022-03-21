@@ -1,6 +1,6 @@
 import { reverse } from "./reverse";
-
-export function extinctionFormula(fields: Record<string, number>) {
+import type { entityTypes } from "../../types"
+export function extinctionFormula(fields: entityTypes.tTestFields) {
   const extinction =
     fields["10"] +
     fields["22"] +
