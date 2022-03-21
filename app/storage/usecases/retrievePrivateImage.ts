@@ -8,7 +8,7 @@ export function buildRetrievePrivateImage(
   const { findImageById, minio } = args;
   const { notFound, forbidden } = httpResult.clientError;
   const { ok } = httpResult.success;
-  const expiry = 17 * 60; // 17 minutes in seconds
+  const expiry = 3 * 60; // 5 minutes in seconds
   const minioUrl = "http://127.0.0.1:9000";
   return async function retrievePrivateImage(
     info: usecaseTypes.IRetrievePrivateImage
@@ -23,7 +23,7 @@ export function buildRetrievePrivateImage(
       return forbidden({ error: "access is not allowed" });
     }
     try {
-      const url = await minio.presignedUrl("GET", userId, imageId, expiry);
+      const url = await minio.presignedUrl("GET", userId, imageId, expiry, {prefix: "privateImage"});
       return ok<usecaseTypes.IRetrievePrivateImageResult>({
         payload: {
           url: url.replace(minioUrl, serverUrl),
