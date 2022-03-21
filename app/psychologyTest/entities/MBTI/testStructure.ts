@@ -6,11 +6,13 @@ export const testStructure: entityTypes.ITestStructure = {
     fa: "تیپ نمای مایرز-بریگز",
     en: "Myers-Briggs Type Indicator (MBTI)",
   },
+  minutesToFill: 60,
   description: "",
   shortName: "MBTI",
   fields: {
     "1": {
       question: "شناختن شما:",
+      questionHint: undefined,
       choices: [
         {
           label: " آسان است.",
@@ -24,6 +26,7 @@ export const testStructure: entityTypes.ITestStructure = {
     },
     "2": {
       question: "آیا:",
+      questionHint: undefined,
       choices: [
         {
           label: "  با هرکسی تا حدی که لازم می دانید به راحتی صحبت می کنید.",
@@ -38,6 +41,7 @@ export const testStructure: entityTypes.ITestStructure = {
     },
     "3": {
       question: "به طور معمول شما:",
+      questionHint: undefined,
       choices: [
         {
           label: " زودجوش هستید.",
@@ -51,6 +55,7 @@ export const testStructure: entityTypes.ITestStructure = {
     },
     "4": {
       question: "روابط دوستانه شما:",
+      questionHint: undefined,
       choices: [
         {
           label: "با افرادی معدود ولی عمیق است.",
@@ -64,6 +69,7 @@ export const testStructure: entityTypes.ITestStructure = {
     },
     "5": {
       question: "میتوانید به طور نامحدود ",
+      questionHint: undefined,
       choices: [
         {
           label: "فقط با کسانی که علایق مشترکی با شما دارند صحبت کنید.",
@@ -77,6 +83,7 @@ export const testStructure: entityTypes.ITestStructure = {
     },
     "6": {
       question: "در صحبت کردن با دوستانتان:",
+      questionHint: undefined,
       choices: [
         {
           label: "گاهی مسائل شخصی را به طور خصوصی به آنان می گویید.",
@@ -90,6 +97,7 @@ export const testStructure: entityTypes.ITestStructure = {
     },
     "7": {
       question: "به طور معمول:",
+      questionHint: undefined,
       choices: [
         {
           label: "آزادانه احساسات خود را نشان می دهید.",
@@ -103,6 +111,7 @@ export const testStructure: entityTypes.ITestStructure = {
     },
     "8": {
       question: "وقتی غریبه ها به شما توجه می کنند:",
+      questionHint: undefined,
       choices: [
         {
           label: " احساس ناراحتی می کنید.",
@@ -116,6 +125,7 @@ export const testStructure: entityTypes.ITestStructure = {
     },
     "9": {
       question: "آیا عادت دارید:",
+      questionHint: undefined,
       choices: [
         {
           label: " به هیچ کس اعتماد نکنید یا حداکثر به یک نفر اعتماد کنید.",
@@ -129,6 +139,7 @@ export const testStructure: entityTypes.ITestStructure = {
     },
     "10": {
       question: "آیا:",
+      questionHint: undefined,
       choices: [
         {
           label:
@@ -143,6 +154,7 @@ export const testStructure: entityTypes.ITestStructure = {
     },
     "11": {
       question: "وقتی با گروهی از افراد هستید معمولا ترجیح می دهید:",
+      questionHint: undefined,
       choices: [
         {
           label: " به صحبت گروهی بپردازید.",
@@ -156,6 +168,7 @@ export const testStructure: entityTypes.ITestStructure = {
     },
     "12": {
       question: " شما در میان دوستانتان:",
+      questionHint: undefined,
       choices: [
         {
           label: " یکی از آخرین کسانی هستید که خبرها را می شنوید.",
@@ -169,6 +182,7 @@ export const testStructure: entityTypes.ITestStructure = {
     },
     "13": {
       question: "در یک محفل اجتماعی:",
+      questionHint: undefined,
       choices: [
         {
           label:
@@ -183,6 +197,7 @@ export const testStructure: entityTypes.ITestStructure = {
     },
     "14": {
       question: "در میهمانی ها:",
+      questionHint: undefined,
       choices: [
         {
           label: " گاهی کسل می شوید.",
@@ -196,6 +211,7 @@ export const testStructure: entityTypes.ITestStructure = {
     },
     "15": {
       question: "کدام لغت برای شما جالب تر است:",
+      questionHint: undefined,
       choices: [
         {
           label: "  صحبت کردن",
@@ -209,6 +225,7 @@ export const testStructure: entityTypes.ITestStructure = {
     },
     "16": {
       question: "کدام لغت برای شما جالب تر است:",
+      questionHint: undefined,
       choices: [
         {
           label: " آرام",
@@ -222,6 +239,7 @@ export const testStructure: entityTypes.ITestStructure = {
     },
     "17": {
       question: "کدام لغت برای شما جالب تر است:",
+      questionHint: undefined,
       choices: [
         {
           label: " ساکت",
@@ -235,6 +253,7 @@ export const testStructure: entityTypes.ITestStructure = {
     },
     "18": {
       question: "در یک مهمانی دوست دارید:",
+      questionHint: undefined,
       choices: [
         {
           label: "کاری کنید که مراسم به خوبی برگزار شود.",
@@ -248,6 +267,7 @@ export const testStructure: entityTypes.ITestStructure = {
     },
     "19": {
       question: "هنگامی که با گروهی از دوستان نزدیک خودتان هستید:",
+      questionHint: undefined,
       choices: [
         {
           label: "بیشتر از بقیه صحبت می کنید.",
@@ -261,6 +281,7 @@ export const testStructure: entityTypes.ITestStructure = {
     },
     "20": {
       question: "در یک گروه بزرگ اغلب:",
+      questionHint: undefined,
       choices: [
         {
           label: " دیگران را معرفی می کنید.",
@@ -274,6 +295,7 @@ export const testStructure: entityTypes.ITestStructure = {
     },
     "21": {
       question: "زمانی که در مورد یک پیشامد فکر می کنید ترجیح می دهید:",
+      questionHint: undefined,
       choices: [
         {
           label: " در این مورد با شخصی صحبت کنید.",
@@ -288,6 +310,7 @@ export const testStructure: entityTypes.ITestStructure = {
     "22": {
       question:
         "به طور معمول افرادی که تازه با شما آشنا می شوند در چه مدت زمانی می توانند بگویند به چه چیزی علاقه دارید:",
+      questionHint: undefined,
       choices: [
         {
           label: " خیلی سریع",
@@ -301,6 +324,7 @@ export const testStructure: entityTypes.ITestStructure = {
     },
     "23": {
       question: "به طور معمول منظور شما از آنچه به زبان می آورید:",
+      questionHint: undefined,
       choices: [
         {
           label: " بیشتر است.",
@@ -314,6 +338,7 @@ export const testStructure: entityTypes.ITestStructure = {
     },
     "24": {
       question: "به هنگام ملاقات با غریبه ها:",
+      questionHint: undefined,
       choices: [
         {
           label: "برای تان خوشایند یا دست کم راحت است.",
@@ -327,6 +352,7 @@ export const testStructure: entityTypes.ITestStructure = {
     },
     "25": {
       question: "وقتی در جلسه ای راجع به چیزی نظری دارید که باید گفته شود:",
+      questionHint: undefined,
       choices: [
         {
           label: "آن را مطرح می کنید.",
@@ -340,6 +366,7 @@ export const testStructure: entityTypes.ITestStructure = {
     },
     "26": {
       question: "ترجیح می دهید در نزد مردم  چگونه به نظر برسید؟",
+      questionHint: undefined,
       choices: [
         {
           label: " فردی اهل عمل.",
@@ -353,6 +380,7 @@ export const testStructure: entityTypes.ITestStructure = {
     },
     "27": {
       question: "زمانی که با هدف سرگرم شدن مطالعه می کنید:",
+      questionHint: undefined,
       choices: [
         {
           label: " از شیوه بیان عجیب و ابتکاری مطالب لذت می برید.",
@@ -366,6 +394,7 @@ export const testStructure: entityTypes.ITestStructure = {
     },
     "28": {
       question: "اگر معلم بودید ترجیح میدادید:",
+      questionHint: undefined,
       choices: [
         {
           label: " واقعیتها را تدریس کنید.",
@@ -379,6 +408,7 @@ export const testStructure: entityTypes.ITestStructure = {
     },
     "29": {
       question: " معمولا با کدام شخص راحت تر ارتباط برقرار می کنید:",
+      questionHint: undefined,
       choices: [
         {
           label: " با فردی تخیلی.",
@@ -392,6 +422,7 @@ export const testStructure: entityTypes.ITestStructure = {
     },
     "30": {
       question: "در انجام کاری که بسیاری از مردم انجام می دهند ترجیح می دهید:",
+      questionHint: undefined,
       choices: [
         {
           label: " آن را به شیوه پذیرفته شده انجام دهید.",
@@ -405,6 +436,7 @@ export const testStructure: entityTypes.ITestStructure = {
     },
     "31": {
       question: "در شیوه زندگی تان ترجیح می دهید:",
+      questionHint: undefined,
       choices: [
         {
           label: " متفاوت باشید.",
@@ -418,6 +450,7 @@ export const testStructure: entityTypes.ITestStructure = {
     },
     "32": {
       question: "کدام لغت برای شما جالب تر است:",
+      questionHint: undefined,
       choices: [
         {
           label: " عبارت",
@@ -431,6 +464,7 @@ export const testStructure: entityTypes.ITestStructure = {
     },
     "33": {
       question: "کدام لغت برای شما جالب تر است:",
+      questionHint: undefined,
       choices: [
         {
           label: " ساختن",
@@ -444,6 +478,7 @@ export const testStructure: entityTypes.ITestStructure = {
     },
     "34": {
       question: "کدام لغت برای شما جالب تر است:",
+      questionHint: undefined,
       choices: [
         {
           label: " واقعی ",
@@ -457,6 +492,7 @@ export const testStructure: entityTypes.ITestStructure = {
     },
     "35": {
       question: "کدام لغت برای شما جالب تر است:",
+      questionHint: undefined,
       choices: [
         {
           label: " حروفي",
@@ -470,6 +506,7 @@ export const testStructure: entityTypes.ITestStructure = {
     },
     "36": {
       question: "کدام لغت برای شما جالب تر است:",
+      questionHint: undefined,
       choices: [
         {
           label: " تولید",
@@ -483,6 +520,7 @@ export const testStructure: entityTypes.ITestStructure = {
     },
     "37": {
       question: "کدام لغت برای شما جالب تر است:",
+      questionHint: undefined,
       choices: [
         {
           label: " علامت",
@@ -496,6 +534,7 @@ export const testStructure: entityTypes.ITestStructure = {
     },
     "38": {
       question: "کدام لغت برای شما جالب تر است:",
+      questionHint: undefined,
       choices: [
         {
           label: " پذیرش",
@@ -509,6 +548,7 @@ export const testStructure: entityTypes.ITestStructure = {
     },
     "39": {
       question: "کدام لغت برای شما جالب تر است:",
+      questionHint: undefined,
       choices: [
         {
           label: " شناخته شده",
@@ -522,6 +562,7 @@ export const testStructure: entityTypes.ITestStructure = {
     },
     "40": {
       question: "کدام لغت برای شما جالب تر است:",
+      questionHint: undefined,
       choices: [
         {
           label: " واقعیت ها",
@@ -535,6 +576,7 @@ export const testStructure: entityTypes.ITestStructure = {
     },
     "41": {
       question: "کدام لغت برای شما جالب تر است:",
+      questionHint: undefined,
       choices: [
         {
           label: " زیربنا",
@@ -548,6 +590,7 @@ export const testStructure: entityTypes.ITestStructure = {
     },
     "42": {
       question: "کدام لغت برای شما جالب تر است:",
+      questionHint: undefined,
       choices: [
         {
           label: " نظریه",
@@ -561,6 +604,7 @@ export const testStructure: entityTypes.ITestStructure = {
     },
     "43": {
       question: "کدام لغت برای شما جالب تر است:",
+      questionHint: undefined,
       choices: [
         {
           label: " مایع",
@@ -574,6 +618,7 @@ export const testStructure: entityTypes.ITestStructure = {
     },
     "44": {
       question: "کدام یک تمجید بیشتری از یک فرد است:",
+      questionHint: undefined,
       choices: [
         {
           label: "فردی که بصیرت دارد.",
@@ -588,6 +633,7 @@ export const testStructure: entityTypes.ITestStructure = {
     "45": {
       question:
         "اگر بخواهید در همسایگی خود برای مسائلی مانند کمک به کمیته امداد به جمع آوری اعانه بپردازید:",
+      questionHint: undefined,
       choices: [
         {
           label: "درخواست شما خلاصه و تجاری است.",
@@ -601,6 +647,7 @@ export const testStructure: entityTypes.ITestStructure = {
     },
     "46": {
       question: "کدام گزاره تعریف و تمجید بیشتری از شما به شمار می آید:",
+      questionHint: undefined,
       choices: [
         {
           label: "شخصی با احساسات واقعی",
@@ -614,6 +661,7 @@ export const testStructure: entityTypes.ITestStructure = {
     },
     "47": {
       question: "در تصمیم گیری های شما بیشتر:",
+      questionHint: undefined,
       choices: [
         {
           label: " احساساتتان بر عقلتان غلبه دارد.",
@@ -627,6 +675,7 @@ export const testStructure: entityTypes.ITestStructure = {
     },
     "48": {
       question: "هنگام گفت و گو بیشتر تمایل دارید:",
+      questionHint: undefined,
       choices: [
         {
           label: " تمجید کنید.",
@@ -640,6 +689,7 @@ export const testStructure: entityTypes.ITestStructure = {
     },
     "49": {
       question: "احساس می کنید که کدام یک عیب بدتری به شمار می آید:",
+      questionHint: undefined,
       choices: [
         {
           label: " همدردی نکردن",
@@ -654,6 +704,7 @@ export const testStructure: entityTypes.ITestStructure = {
     "50": {
       question:
         "اگر بخواهید عمل خاصی را انجام دهید، کدام یک از این دو گزینه در نظر شما جالب تر است:",
+      questionHint: undefined,
       choices: [
         {
           label: " مردم خیلی دوست دارند که شما آن را انجام دهید.",
@@ -667,6 +718,7 @@ export const testStructure: entityTypes.ITestStructure = {
     },
     "51": {
       question: "فکر می کنید وحود کدام یک در فرد نقص بیشتری به حساب می آید:",
+      questionHint: undefined,
       choices: [
         {
           label: " خیلی احساساتی بودن.",
@@ -680,6 +732,7 @@ export const testStructure: entityTypes.ITestStructure = {
     },
     "52": {
       question: "احساس می کنید کدام یک عیب بدتری به شمار می آید:",
+      questionHint: undefined,
       choices: [
         {
           label: " گرمی زیاد نشان دادن.",
@@ -693,6 +746,7 @@ export const testStructure: entityTypes.ITestStructure = {
     },
     "53": {
       question: "شما به طور معمول:",
+      questionHint: undefined,
       choices: [
         {
           label: " برای احساسات بیشتر از منطق ارزش قائل هستید.",
@@ -706,6 +760,7 @@ export const testStructure: entityTypes.ITestStructure = {
     },
     "54": {
       question: "کدام لغت برای شما جذاب تر است:",
+      questionHint: undefined,
       choices: [
         {
           label: " متقاعد کردن",
@@ -719,6 +774,7 @@ export const testStructure: entityTypes.ITestStructure = {
     },
     "55": {
       question: "کدام لغت برای شما جذاب تر است:",
+      questionHint: undefined,
       choices: [
         {
           label: " موافقت کردن",
@@ -732,6 +788,7 @@ export const testStructure: entityTypes.ITestStructure = {
     },
     "56": {
       question: "کدام لغت برای شما جذاب تر است:",
+      questionHint: undefined,
       choices: [
         {
           label: " مزایا",
@@ -745,6 +802,7 @@ export const testStructure: entityTypes.ITestStructure = {
     },
     "57": {
       question: "کدام لغت برای شما جذاب تر است:",
+      questionHint: undefined,
       choices: [
         {
           label: " تحلیل کردن",
@@ -758,6 +816,7 @@ export const testStructure: entityTypes.ITestStructure = {
     },
     "58": {
       question: "کدام لغت برای شما جذاب تر است:",
+      questionHint: undefined,
       choices: [
         {
           label: " نرم",
@@ -771,6 +830,7 @@ export const testStructure: entityTypes.ITestStructure = {
     },
     "59": {
       question: "کدام لغت برای شما جذاب تر است:",
+      questionHint: undefined,
       choices: [
         {
           label: " پایبند به اندیشه خود",
@@ -784,6 +844,7 @@ export const testStructure: entityTypes.ITestStructure = {
     },
     "60": {
       question: "کدام لغت برای شما جذاب تر است:",
+      questionHint: undefined,
       choices: [
         {
           label: " چه کسی؟",
@@ -797,6 +858,7 @@ export const testStructure: entityTypes.ITestStructure = {
     },
     "61": {
       question: "کدام لغت برای شما جذاب تر است:",
+      questionHint: undefined,
       choices: [
         {
           label: " محتاط",
@@ -810,6 +872,7 @@ export const testStructure: entityTypes.ITestStructure = {
     },
     "62": {
       question: "کدام لغت برای شما جذاب تر است:",
+      questionHint: undefined,
       choices: [
         {
           label: " ملایم",
@@ -823,6 +886,7 @@ export const testStructure: entityTypes.ITestStructure = {
     },
     "63": {
       question: "کدام لغت برای شما جذاب تر است:",
+      questionHint: undefined,
       choices: [
         {
           label: " عدالت",
@@ -836,6 +900,7 @@ export const testStructure: entityTypes.ITestStructure = {
     },
     "64": {
       question: "کدام لغت برای شما جذاب تر است:",
+      questionHint: undefined,
       choices: [
         {
           label: " غیر انتقادی",
@@ -849,6 +914,7 @@ export const testStructure: entityTypes.ITestStructure = {
     },
     "65": {
       question: "کدام لغت برای شما جذاب تر است:",
+      questionHint: undefined,
       choices: [
         {
           label: " متفکر ",
@@ -862,6 +928,7 @@ export const testStructure: entityTypes.ITestStructure = {
     },
     "66": {
       question: "کدام لغت برای شما جذاب تر است:",
+      questionHint: undefined,
       choices: [
         {
           label: " دلسوزی",
@@ -875,6 +942,7 @@ export const testStructure: entityTypes.ITestStructure = {
     },
     "67": {
       question: "به کدام یک بیشتر اهمیت می دهید:",
+      questionHint: undefined,
       choices: [
         {
           label: " احساسات افراد",
@@ -888,6 +956,7 @@ export const testStructure: entityTypes.ITestStructure = {
     },
     "68": {
       question: "به طور طبیعی",
+      questionHint: undefined,
       choices: [
         {
           label: " به مردم بیشتر از اشیاء علاقه مندید.",
@@ -902,6 +971,7 @@ export const testStructure: entityTypes.ITestStructure = {
     },
     "69": {
       question: "برای انجام یک کار:",
+      questionHint: undefined,
       choices: [
         {
           label:
@@ -918,6 +988,7 @@ export const testStructure: entityTypes.ITestStructure = {
     "70": {
       question:
         "هنگامی که رخدادی پیش بینی نشده شما را مجبور به کنار گذاشتن برنامه روزانه تان می نماید:",
+      questionHint: undefined,
       choices: [
         {
           label:
@@ -932,6 +1003,7 @@ export const testStructure: entityTypes.ITestStructure = {
     },
     "71": {
       question: "آیا مطابق برنامه عمل کردن:",
+      questionHint: undefined,
       choices: [
         {
           label: "مورد رضایت شماست.",
@@ -945,6 +1017,7 @@ export const testStructure: entityTypes.ITestStructure = {
     },
     "72": {
       question: "هنگام شرو یک پروژه بزرگ که تا یک هفته باید انجام شود:",
+      questionHint: undefined,
       choices: [
         {
           label:
@@ -960,6 +1033,7 @@ export const testStructure: entityTypes.ITestStructure = {
     "73": {
       question:
         "اگر قرار باشد که کاری خاص را  طبق برنامه ریزی انجام شده و مشخصی انجام دهید:",
+      questionHint: undefined,
       choices: [
         {
           label: "طبق برنامه عمل کردن برای شما خوشایند است.",
@@ -973,6 +1047,7 @@ export const testStructure: entityTypes.ITestStructure = {
     },
     "74": {
       question: "آیا ترجیح می دهید:",
+      questionHint: undefined,
       choices: [
         {
           label: " قرار ملاقاتها وعده ها و میهمانی ها را از پیش تعیین کنید؟",
@@ -987,6 +1062,7 @@ export const testStructure: entityTypes.ITestStructure = {
     },
     "75": {
       question: "آیا:",
+      questionHint: undefined,
       choices: [
         {
           label: "ترجیح می دهید کارها را در دقیقه آخر انجام دهید. ",
@@ -1000,6 +1076,7 @@ export const testStructure: entityTypes.ITestStructure = {
     },
     "76": {
       question: "آیا فکر می کنید که داشتن یک برنامه روزانه:",
+      questionHint: undefined,
       choices: [
         {
           label: "راحت ترین روش برای دادن کارهاست.",
@@ -1013,6 +1090,7 @@ export const testStructure: entityTypes.ITestStructure = {
     },
     "77": {
       question: "وقتی که کار خاصی برای انجام دادن دارید آیا مایلید:",
+      questionHint: undefined,
       choices: [
         {
           label: " پیش از آغاز کار، با دقت آن را سازماندهی کنید.",
@@ -1026,6 +1104,7 @@ export const testStructure: entityTypes.ITestStructure = {
     },
     "78": {
       question: "آیا:",
+      questionHint: undefined,
       choices: [
         {
           label: "روزمره بودن برای تان ساده تر است.",
@@ -1039,6 +1118,7 @@ export const testStructure: entityTypes.ITestStructure = {
     },
     "79": {
       question: "در زندگی شخصی وقتی به پایان آماده مسئولیتی میرسید:",
+      questionHint: undefined,
       choices: [
         {
           label: "می دانید کار بعدی چیست و آماده درگیر شدن با آن هستید.",
@@ -1052,6 +1132,7 @@ export const testStructure: entityTypes.ITestStructure = {
     },
     "80": {
       question: "کدام لغت برای شما جالب تر است:",
+      questionHint: undefined,
       choices: [
         {
           label: "وقت شناس",
@@ -1065,6 +1146,7 @@ export const testStructure: entityTypes.ITestStructure = {
     },
     "81": {
       question: "کدام لغت برای شما جالب تر است:",
+      questionHint: undefined,
       choices: [
         {
           label: "منظبط",
@@ -1078,6 +1160,7 @@ export const testStructure: entityTypes.ITestStructure = {
     },
     "82": {
       question: "کدام لغت برای شما جالب تر است:",
+      questionHint: undefined,
       choices: [
         {
           label: "منظم",
@@ -1091,6 +1174,7 @@ export const testStructure: entityTypes.ITestStructure = {
     },
     "83": {
       question: "کدام لغت برای شما جالب تر است:",
+      questionHint: undefined,
       choices: [
         {
           label: "برنامه ریز",
@@ -1104,6 +1188,7 @@ export const testStructure: entityTypes.ITestStructure = {
     },
     "84": {
       question: "آیا به طور کلی ترجیح می دهید:",
+      questionHint: undefined,
       choices: [
         {
           label: "برای دیدار کسی از قبل برنامه ریزی کنید.",
@@ -1117,6 +1202,7 @@ export const testStructure: entityTypes.ITestStructure = {
     },
     "85": {
       question: "وقتی برای یک روز جایی می روید، ترجیح می دهید:",
+      questionHint: undefined,
       choices: [
         {
           label: "برای این که چه کاری و چه موقع انجام دهید برنامه ریزی کنید.",
@@ -1130,6 +1216,7 @@ export const testStructure: entityTypes.ITestStructure = {
     },
     "86": {
       question: "در مورد کارهای روزمره ترجیح می دهید.",
+      questionHint: undefined,
       choices: [
         {
           label: "ابتدای صبح همه کارها را انجام دهید.",
@@ -1144,6 +1231,7 @@ export const testStructure: entityTypes.ITestStructure = {
     },
     "87": {
       question: "به طور معمول:",
+      questionHint: undefined,
       choices: [
         {
           label: "از اتمام کارها پیش از زمان موعد احساس رضایت می کنید.",

@@ -8,6 +8,7 @@ export interface IChoice {
 }
 export interface IQuestion {
   question: string;
+  questionHint: string | undefined;
   choices: IChoice[];
 }
 export type tQuestionFields = Record<string, IQuestion>;
@@ -17,6 +18,7 @@ export interface ITestStructure {
     fa: string;
     en: string;
   };
+  minutesToFill: number;
   shortName: string;
   description: string;
   fields: tQuestionFields;
