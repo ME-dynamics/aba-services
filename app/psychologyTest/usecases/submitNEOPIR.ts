@@ -16,10 +16,10 @@ export function buildSubmitNEOPIR(args: usecaseTypes.IBuildSubmitNEOPIR) {
     const { o, o1, o2, o3, o4, o5, o6 } = oGroup;
     const { a, a1, a2, a3, a4, a5, a6 } = aGroup;
     const { c, c1, c2, c3, c4, c5, c6 } = cGroup;
-    const result: entityTypes.ITestResult[] = [];
+    const results: entityTypes.ITestResult[] = [];
     for (let index = 0; index < warnings.length; index++) {
       const warning = warnings[index];
-      result.push({
+      results.push({
         type: "warning",
         rawscore: -1,
         baserate: -1,
@@ -33,8 +33,8 @@ export function buildSubmitNEOPIR(args: usecaseTypes.IBuildSubmitNEOPIR) {
     }
     for (let index = 0; index < errors.length; index++) {
       const error = errors[index];
-      result.push({
-        type: "warning",
+      results.push({
+        type: "error",
         rawscore: -1,
         baserate: -1,
         variable: "",
@@ -45,7 +45,7 @@ export function buildSubmitNEOPIR(args: usecaseTypes.IBuildSubmitNEOPIR) {
         },
       });
     }
-    result.push({
+    results.push({
       type: "factor",
       rawscore: n,
       baserate: n,
@@ -56,7 +56,7 @@ export function buildSubmitNEOPIR(args: usecaseTypes.IBuildSubmitNEOPIR) {
         fa: "آزرده گرایی",
       },
     });
-    result.push({
+    results.push({
       type: "facet",
       rawscore: n1,
       baserate: n1,
@@ -67,7 +67,7 @@ export function buildSubmitNEOPIR(args: usecaseTypes.IBuildSubmitNEOPIR) {
         fa: "اضطراب",
       },
     });
-    result.push({
+    results.push({
       type: "facet",
       rawscore: n2,
       baserate: n2,
@@ -78,7 +78,7 @@ export function buildSubmitNEOPIR(args: usecaseTypes.IBuildSubmitNEOPIR) {
         fa: "خصومت",
       },
     });
-    result.push({
+    results.push({
       type: "facet",
       rawscore: n3,
       baserate: n3,
@@ -89,7 +89,7 @@ export function buildSubmitNEOPIR(args: usecaseTypes.IBuildSubmitNEOPIR) {
         fa: "افسردگی",
       },
     });
-    result.push({
+    results.push({
       type: "facet",
       rawscore: n4,
       baserate: n4,
@@ -100,7 +100,7 @@ export function buildSubmitNEOPIR(args: usecaseTypes.IBuildSubmitNEOPIR) {
         fa: "هوشیاری نسبت به خود",
       },
     });
-    result.push({
+    results.push({
       type: "facet",
       rawscore: n4,
       baserate: n4,
@@ -111,7 +111,7 @@ export function buildSubmitNEOPIR(args: usecaseTypes.IBuildSubmitNEOPIR) {
         fa: "هوشیاری نسبت به خود",
       },
     });
-    result.push({
+    results.push({
       type: "facet",
       rawscore: n5,
       baserate: n5,
@@ -122,7 +122,7 @@ export function buildSubmitNEOPIR(args: usecaseTypes.IBuildSubmitNEOPIR) {
         fa: "شتابزدگی یا تکانشوری",
       },
     });
-    result.push({
+    results.push({
       type: "facet",
       rawscore: n6,
       baserate: n6,
@@ -133,7 +133,7 @@ export function buildSubmitNEOPIR(args: usecaseTypes.IBuildSubmitNEOPIR) {
         fa: "آسیب پذیری",
       },
     });
-    result.push({
+    results.push({
       type: "factor",
       rawscore: e,
       baserate: e,
@@ -144,7 +144,7 @@ export function buildSubmitNEOPIR(args: usecaseTypes.IBuildSubmitNEOPIR) {
         fa: "برون گرایی",
       },
     });
-    result.push({
+    results.push({
       type: "facet",
       rawscore: e1,
       baserate: e1,
@@ -155,7 +155,7 @@ export function buildSubmitNEOPIR(args: usecaseTypes.IBuildSubmitNEOPIR) {
         fa: "گرم بودن",
       },
     });
-    result.push({
+    results.push({
       type: "facet",
       rawscore: e2,
       baserate: e2,
@@ -166,7 +166,7 @@ export function buildSubmitNEOPIR(args: usecaseTypes.IBuildSubmitNEOPIR) {
         fa: "معاشرتی بودن",
       },
     });
-    result.push({
+    results.push({
       type: "facet",
       rawscore: e3,
       baserate: e3,
@@ -177,7 +177,7 @@ export function buildSubmitNEOPIR(args: usecaseTypes.IBuildSubmitNEOPIR) {
         fa: "ابراز وجود",
       },
     });
-    result.push({
+    results.push({
       type: "facet",
       rawscore: e4,
       baserate: e4,
@@ -188,7 +188,7 @@ export function buildSubmitNEOPIR(args: usecaseTypes.IBuildSubmitNEOPIR) {
         fa: "فعال بودن",
       },
     });
-    result.push({
+    results.push({
       type: "facet",
       rawscore: e5,
       baserate: e5,
@@ -199,7 +199,7 @@ export function buildSubmitNEOPIR(args: usecaseTypes.IBuildSubmitNEOPIR) {
         fa: "هیجان خواهی",
       },
     });
-    result.push({
+    results.push({
       type: "facet",
       rawscore: e6,
       baserate: e6,
@@ -210,7 +210,7 @@ export function buildSubmitNEOPIR(args: usecaseTypes.IBuildSubmitNEOPIR) {
         fa: "هیجان مثبت",
       },
     });
-    result.push({
+    results.push({
       type: "factor",
       rawscore: o,
       baserate: o,
@@ -221,7 +221,7 @@ export function buildSubmitNEOPIR(args: usecaseTypes.IBuildSubmitNEOPIR) {
         fa: "گشودگی",
       },
     });
-    result.push({
+    results.push({
       type: "facet",
       rawscore: o1,
       baserate: o1,
@@ -232,7 +232,7 @@ export function buildSubmitNEOPIR(args: usecaseTypes.IBuildSubmitNEOPIR) {
         fa: "تخیل",
       },
     });
-    result.push({
+    results.push({
       type: "facet",
       rawscore: o2,
       baserate: o2,
@@ -243,7 +243,7 @@ export function buildSubmitNEOPIR(args: usecaseTypes.IBuildSubmitNEOPIR) {
         fa: "زیباپسندی یا زیبایی شناسی",
       },
     });
-    result.push({
+    results.push({
       type: "facet",
       rawscore: o3,
       baserate: o3,
@@ -254,7 +254,7 @@ export function buildSubmitNEOPIR(args: usecaseTypes.IBuildSubmitNEOPIR) {
         fa: "احساسات",
       },
     });
-    result.push({
+    results.push({
       type: "facet",
       rawscore: o4,
       baserate: o4,
@@ -265,7 +265,7 @@ export function buildSubmitNEOPIR(args: usecaseTypes.IBuildSubmitNEOPIR) {
         fa: "کنش ها",
       },
     });
-    result.push({
+    results.push({
       type: "facet",
       rawscore: o5,
       baserate: o5,
@@ -276,7 +276,7 @@ export function buildSubmitNEOPIR(args: usecaseTypes.IBuildSubmitNEOPIR) {
         fa: "دیدگاه ها",
       },
     });
-    result.push({
+    results.push({
       type: "facet",
       rawscore: o6,
       baserate: o6,
@@ -287,7 +287,7 @@ export function buildSubmitNEOPIR(args: usecaseTypes.IBuildSubmitNEOPIR) {
         fa: "ارزش ها",
       },
     });
-    result.push({
+    results.push({
       type: "factor",
       rawscore: a,
       baserate: a,
@@ -298,7 +298,7 @@ export function buildSubmitNEOPIR(args: usecaseTypes.IBuildSubmitNEOPIR) {
         fa: "موافق بودن",
       },
     });
-    result.push({
+    results.push({
       type: "facet",
       rawscore: a1,
       baserate: a1,
@@ -309,7 +309,7 @@ export function buildSubmitNEOPIR(args: usecaseTypes.IBuildSubmitNEOPIR) {
         fa: "اعتماد",
       },
     });
-    result.push({
+    results.push({
       type: "facet",
       rawscore: a2,
       baserate: a2,
@@ -320,7 +320,7 @@ export function buildSubmitNEOPIR(args: usecaseTypes.IBuildSubmitNEOPIR) {
         fa: "رک گویی",
       },
     });
-    result.push({
+    results.push({
       type: "facet",
       rawscore: a3,
       baserate: a3,
@@ -331,7 +331,7 @@ export function buildSubmitNEOPIR(args: usecaseTypes.IBuildSubmitNEOPIR) {
         fa: "نوع دوستی",
       },
     });
-    result.push({
+    results.push({
       type: "facet",
       rawscore: a4,
       baserate: a4,
@@ -342,7 +342,7 @@ export function buildSubmitNEOPIR(args: usecaseTypes.IBuildSubmitNEOPIR) {
         fa: "همراهی",
       },
     });
-    result.push({
+    results.push({
       type: "facet",
       rawscore: a5,
       baserate: a5,
@@ -353,7 +353,7 @@ export function buildSubmitNEOPIR(args: usecaseTypes.IBuildSubmitNEOPIR) {
         fa: "تواضع",
       },
     });
-    result.push({
+    results.push({
       type: "facet",
       rawscore: a6,
       baserate: a6,
@@ -364,7 +364,7 @@ export function buildSubmitNEOPIR(args: usecaseTypes.IBuildSubmitNEOPIR) {
         fa: "دلرحم بودن",
       },
     });
-    result.push({
+    results.push({
       type: "factor",
       rawscore: c,
       baserate: c,
@@ -375,7 +375,7 @@ export function buildSubmitNEOPIR(args: usecaseTypes.IBuildSubmitNEOPIR) {
         fa: "باوجدان بودن",
       },
     });
-    result.push({
+    results.push({
       type: "facet",
       rawscore: c1,
       baserate: c1,
@@ -386,7 +386,7 @@ export function buildSubmitNEOPIR(args: usecaseTypes.IBuildSubmitNEOPIR) {
         fa: "کفایت یا شایستگی",
       },
     });
-    result.push({
+    results.push({
       type: "facet",
       rawscore: c2,
       baserate: c2,
@@ -397,7 +397,7 @@ export function buildSubmitNEOPIR(args: usecaseTypes.IBuildSubmitNEOPIR) {
         fa: "نظم و ترتیب",
       },
     });
-    result.push({
+    results.push({
       type: "facet",
       rawscore: c3,
       baserate: c3,
@@ -408,7 +408,7 @@ export function buildSubmitNEOPIR(args: usecaseTypes.IBuildSubmitNEOPIR) {
         fa: "وظیفه شناسی",
       },
     });
-    result.push({
+    results.push({
       type: "facet",
       rawscore: c4,
       baserate: c4,
@@ -419,7 +419,7 @@ export function buildSubmitNEOPIR(args: usecaseTypes.IBuildSubmitNEOPIR) {
         fa: "تلاش برای موفقیت",
       },
     });
-    result.push({
+    results.push({
       type: "facet",
       rawscore: c5,
       baserate: c5,
@@ -430,7 +430,7 @@ export function buildSubmitNEOPIR(args: usecaseTypes.IBuildSubmitNEOPIR) {
         fa: "خویشتن داری، نظم درونی",
       },
     });
-    result.push({
+    results.push({
       type: "facet",
       rawscore: c6,
       baserate: c6,
@@ -451,7 +451,7 @@ export function buildSubmitNEOPIR(args: usecaseTypes.IBuildSubmitNEOPIR) {
         fa: NEOPIRStructure.title.fa,
       },
       fields,
-      results: [],
+      results,
       resultSummary: "",
       createdAt: undefined,
       modifiedAt: undefined,
