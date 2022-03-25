@@ -20,9 +20,9 @@ export function buildSubmitBeckAnxiety(args: usecaseTypes.IBuildSubmitTest) {
       {
         type: "factor",
         variable: "anxiety",
-        rawscore: aggregate.total,
-        baserate: aggregate.total,
-        interpret: interpret.result,
+        rawscore: aggregate,
+        baserate: aggregate,
+        interpret: interpret,
         label: {
           fa: "اضطراب",
           en: "anxiety",
