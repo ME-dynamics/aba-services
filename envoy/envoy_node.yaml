@@ -144,6 +144,10 @@ static_resources:
                           requires:
                             provider_name: authnzJWT
                         - match:
+                            prefix: /private
+                          requires:
+                            provider_name: authnzJWT
+                        - match:
                             prefix: /
                   - name: envoy.filters.http.local_ratelimit
                     typed_config:
@@ -211,8 +215,9 @@ static_resources:
                         - storage.taskyn.ir
                       routes:
                         - match:
-                            prefix: /
+                            prefix: "/private/"
                           route:
+                            prefix_rewrite: "/"
                             cluster: minio
                             host_rewrite_literal: '127.0.0.1:9000'
                           request_headers_to_remove:
