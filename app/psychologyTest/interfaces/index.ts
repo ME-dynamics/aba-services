@@ -1,5 +1,5 @@
 import { types, buildRouteGenerator } from "aba-node";
-import { sGetTests } from "../schemas";
+// import { sGetTests } from "../schemas";
 import { retrieveTests } from "./retrieveTests";
 import { retrieveTestById } from "./retrieveTestById";
 import { submitTest } from "./submitTest";
@@ -12,7 +12,7 @@ export async function startTestServer(app: types.tHttpInstance) {
     version: applicationVersion,
   });
   try {
-    app.get(routeGen([]), { schema: sGetTests }, retrieveTests);
+    app.get(routeGen([]), retrieveTests);
 
     app.get(routeGen([":testId"]), retrieveTestById);
     app.post(routeGen([]), submitTest);
