@@ -1,4 +1,4 @@
-import { statusCodes, fluentSchema, errorSchema } from "aba-node";
+import { statusCodes, fluentSchema, errorSchemaObject } from "aba-node";
 
 const response = {
   [statusCodes.OK]: fluentSchema
@@ -12,8 +12,7 @@ const response = {
         .prop("profilePictureUrl", fluentSchema.string().required())
         .prop("description", fluentSchema.string().required())
     ),
-  [statusCodes.NOT_FOUND]: errorSchema,
-  [statusCodes.INTERNAL_SERVER_ERROR]: errorSchema,
+  ...errorSchemaObject,
 };
 
 export const sRetrieveCustomerProviderInfo = {

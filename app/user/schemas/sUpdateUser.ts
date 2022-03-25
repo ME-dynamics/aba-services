@@ -1,4 +1,4 @@
-import { statusCodes, fluentSchema, errorSchema } from "aba-node";
+import { statusCodes, fluentSchema, errorSchemaObject } from "aba-node";
 import { userSchema } from "./userSchema";
 const body = fluentSchema
   .object()
@@ -17,9 +17,7 @@ const body = fluentSchema
 
 const response = {
   [statusCodes.OK]: userSchema,
-  [statusCodes.FORBIDDEN]: errorSchema,
-  [statusCodes.UNAUTHORIZED]: errorSchema,
-  [statusCodes.BAD_REQUEST]: errorSchema,
+  ...errorSchemaObject,
 };
 
 export const sUpdateUser = {

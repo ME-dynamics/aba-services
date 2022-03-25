@@ -1,4 +1,4 @@
-import { fluentSchema, errorSchema, statusCodes } from "aba-node";
+import { fluentSchema, errorSchemaObject, statusCodes } from "aba-node";
 
 const body = fluentSchema
   .object()
@@ -33,8 +33,7 @@ const response = {
       .prop("createdAt", fluentSchema.string().format("date-time").required())
       .prop("modifiedAt", fluentSchema.string().format("date-time").required())
   ),
-  [statusCodes.INTERNAL_SERVER_ERROR]: errorSchema,
-  [statusCodes.FORBIDDEN]: errorSchema,
+  ...errorSchemaObject,
 };
 
 export const sCreateNote = {
