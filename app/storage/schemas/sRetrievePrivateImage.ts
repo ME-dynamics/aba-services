@@ -1,4 +1,4 @@
-import { statusCodes, fluentSchema, errorSchema } from "aba-node";
+import { statusCodes, fluentSchema, errorSchemaObject } from "aba-node";
 
 const params = fluentSchema
   .object()
@@ -11,8 +11,7 @@ const response = {
       "payload",
       fluentSchema.object().prop("url", fluentSchema.string().required())
     ),
-  [statusCodes.NOT_FOUND]: errorSchema,
-  [statusCodes.FORBIDDEN]: errorSchema,
+  ...errorSchemaObject,
 };
 
 export const sRetrievePrivateImage = {
