@@ -357,7 +357,7 @@ export function buildSubmitNEOPIR(args: usecaseTypes.IBuildSubmitNEOPIR) {
       type: "facet",
       rawscore: a6,
       baserate: a6,
-      variable: "o6",
+      variable: "a6",
       interpret: "",
       label: {
         en: "Tender-Mindedness",
