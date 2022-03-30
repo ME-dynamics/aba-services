@@ -1,4 +1,4 @@
-FROM node:16.14.0-alpine3.15 as builder
+FROM node:16.14.2-alpine3.15 as builder
 RUN apk add --no-cache vips-dev build-base 
 RUN mkdir -p /home/node/app
 RUN mkdir /home/node/.npm-global
@@ -21,7 +21,7 @@ RUN chown -R node:node ./build
 
 
 
-FROM node:16.14.0-alpine3.15
+FROM node:16.14.2-alpine3.15
 RUN mkdir -p /home/node/app && chown -R node:node /home/node
 RUN apk add --no-cache tini
 USER node
