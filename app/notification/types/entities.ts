@@ -42,3 +42,33 @@ export interface IMadeNotification {
   };
   object: () => IMadeNotificationObject;
 }
+
+// notification tokens
+export type tProviderType = "sms" | "whatsapp" | "push";
+export interface INotificationToken {
+  providerType: tProviderType;
+  provider: string;
+  token: string;
+  createdAt: Date | undefined;
+  modifiedAt: Date | undefined;
+}
+
+export interface IMadeNotificationTokenObject extends INotificationToken {
+  createdAt: Date;
+  modifiedAt: Date;
+}
+
+export interface IMadeNotificationToken {
+  get: {
+    providerType: () => tProviderType;
+    provider: () => string;
+    token: () => string;
+    isTokenExpired: () => boolean;
+    createdAt: () => Date;
+    modifiedAt: () => Date;
+  };
+  set: {
+    token: (newToken: string) => void;
+  };
+  object: () => IMadeNotificationTokenObject;
+}
