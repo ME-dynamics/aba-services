@@ -1,0 +1,1 @@
+export { rowToNotificationToken } from "./rowToNotificationToken";
