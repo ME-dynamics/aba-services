@@ -1105,10 +1105,10 @@
   resolved "https://registry.npmjs.org/@zxing/text-encoding/-/text-encoding-0.9.0.tgz"
   integrity sha512-U/4aVJ2mxI0aDNI8Uq0wEhMgY+u4CNtEb0om3+y3+niDAsoTCOB33UF0sxpzqzdqXLqmvc+vZyAt4O8pPdfkwA==
 
-aba-node@0.4.5:
-  version "0.4.5"
-  resolved "https://registry.yarnpkg.com/aba-node/-/aba-node-0.4.5.tgz#dff6c4310741c08f19c4d8bdc7740a6f3c97a9f8"
-  integrity sha512-LMYKM9PAg1KWfXFy8L5uhYezfalGeTOoBBRd8RhFLYr0wkJece2fn+NKo/e97WQVtn5Kfwt4Z9k051RCRG9n5Q==
+aba-node@0.4.6:
+  version "0.4.6"
+  resolved "https://registry.yarnpkg.com/aba-node/-/aba-node-0.4.6.tgz#5eb63a4a2f064fc97d43c6c10e608290d52c4c18"
+  integrity sha512-WoxexHKyMEsgcC8rb9vXZoCjlvJD4jpzsHZQ9iV7TOpDVUrk1P/VC46/4ZoB18H22SRpPB3vx6kiLYjlGcSmlg==
   dependencies:
     aba-utils "0.5.6"
     cassandra-driver "^4.6.3"
