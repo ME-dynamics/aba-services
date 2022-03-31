@@ -57,8 +57,8 @@ export function buildInitDb(args: adapterTypes.IBuildInit) {
         },
         {
           columnName: "results",
-          columnType: "SET",
-          setType: "UDT",
+          columnType: "LIST",
+          listType: "UDT",
           udtName: createTestResultType.name,
         },
         {
