@@ -15,6 +15,10 @@ import { initDb as initTestDb, startTestServer } from "./app/psychologyTest";
 import { initDb as initNoteDb, startNoteServer } from "./app/note";
 import { initDb as initUserDb, startUserServer } from "./app/user";
 import { initDb as initTaskDb, startTaskServer } from "./app/task";
+import {
+  initDb as initNotificationDb,
+  retrieveSmsirToken,
+} from "./app/notification";
 const app = httpClient({ logger: true });
 
 export async function startService() {
@@ -28,8 +32,9 @@ export async function startService() {
       initNoteDb(),
       initUserDb(),
       initTaskDb(),
+      initNotificationDb(),
     ]);
-    await Promise.all([initAdmin(), initAuthnzSecret()]);
+    await Promise.all([initAdmin(), initAuthnzSecret(), retrieveSmsirToken()]);
     startAuthnzServer(app);
     startStorageServer(app);
     startBusinessServer(app);
