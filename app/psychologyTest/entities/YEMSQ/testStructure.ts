@@ -34,9 +34,10 @@ export const testStructure: entityTypes.ITestStructure = {
     en: "Young Early Maladaptive Schema Questionnaire (YEMSQ)",
   },
   chartType: ["line", "pie"],
-  minutesToFill: 60,
+  minutesToFill: 30,
   shortName: "YEMSQ",
-  description: "",
+  description:
+    "یک پرسشنامه‌ی 75 سوالی است که برای سنجش 15 طرح‌واره‌ی شناختی اولیه، طراحی شده است. این طرح‌واره‌ها عبارتند از: محرومیت هیجانی ، رهاشدگی ، بی‌اعتمادی/ بدرفتاری ، انزوای اجتماعی ، نقص/ شرم ، وابستگی/ بی کفایتی ،آسیب‌پذیری نسبت به ضرر ، خود تحول نیافته و گرفتار ، اطاعت ، فداکاری، بازداری عاطفی، معیار های سر سختانه ، استحقاق یا بزرگ منشی ، خود کنترلی ناکافی و شکست",
   fields: {
     "1": {
       question:
