@@ -1,4 +1,5 @@
 import { scyllaClient } from "aba-node";
+import { scyllaContactPoint } from "../config"
 import {
   buildFindTaskById,
   buildFindTasksByUserId,
@@ -12,7 +13,7 @@ const dbClient = scyllaClient({
   id: undefined,
   applicationName: "task",
   applicationVersion: "v1",
-  contactPoints: ["127.0.1.1"],
+  contactPoints: [scyllaContactPoint],
   errorPath: "task, adapters, db client",
   keyspace: "task",
   localDataCenter: "datacenter1",

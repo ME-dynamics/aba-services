@@ -1,5 +1,5 @@
 import { scyllaClient } from "aba-node";
-import { applicationVersion } from "../config";
+import { applicationVersion, scyllaContactPoint } from "../config";
 import {
   buildInitDb,
   buildFindTestsDataByUserId,
@@ -11,7 +11,7 @@ import { rowToTestData } from "./utils";
 const dbClient = scyllaClient({
   applicationName: "",
   applicationVersion,
-  contactPoints: ["127.0.1.1"],
+  contactPoints: [scyllaContactPoint],
   errorPath: "psychology test, adapters",
   id: undefined,
   keyspace: "psychology_test",

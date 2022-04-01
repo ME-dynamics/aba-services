@@ -1,4 +1,5 @@
 import { scyllaClient } from "aba-node";
+import { scyllaContactPoint } from "../config"
 
 import {
   buildInitDb,
@@ -15,7 +16,7 @@ const dbClient = scyllaClient({
   applicationVersion: "v1",
   keyspace: "notification",
   localDataCenter: "datacenter1",
-  contactPoints: ["127.0.1.1"],
+  contactPoints: [scyllaContactPoint],
   errorPath: "notification, adapters",
 });
 
