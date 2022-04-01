@@ -30,7 +30,7 @@ COPY ["package.json", "package-lock.json", "./"]
 RUN npm ci --production
 ENV NODE_ENV production
 ENV ADMIN 09034704227
-ENV JWT_EXPIRES 10000
+ENV JWT_EXPIRES 13
 COPY --from=builder /home/node/build ./app
 ENTRYPOINT ["/sbin/tini", "--"]
 CMD ["node", "app/index.js", "--max-old-space-size=512"]
