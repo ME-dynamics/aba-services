@@ -26,6 +26,7 @@ export const testStructure: entityTypes.ITestStructure = {
     en: "Beck anxiety inventory (BAI)",
   },
   minutesToFill: 15,
+  chartType: ["line"],
   shortName: "BAI",
   description: "",
   fields: {

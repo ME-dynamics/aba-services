@@ -6,6 +6,7 @@ export const testStructure: entityTypes.ITestStructure = {
     fa: "پرسشنامه شخصیتی گری-ویلسون",
     en: "Gary-Wilson Personality Questionnaire (GWPQ)",
   },
+  chartType: ["line"],
   minutesToFill: 30,
   shortName: "GWPQ",
   description:

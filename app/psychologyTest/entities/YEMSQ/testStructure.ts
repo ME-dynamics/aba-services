@@ -33,6 +33,7 @@ export const testStructure: entityTypes.ITestStructure = {
     fa: "پرسش نامه طرحواره های ناسازگار اولیه یانگ",
     en: "Young Early Maladaptive Schema Questionnaire (YEMSQ)",
   },
+  chartType: ["line", "pie"],
   minutesToFill: 60,
   shortName: "YEMSQ",
   description: "",

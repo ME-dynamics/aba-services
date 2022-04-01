@@ -142,6 +142,7 @@ export const testStructure: entityTypes.ITestStructure = {
     fa: "پرسشنامه افسردگی بک",
     en: "Beck Depression Inventory ( BDI )",
   },
+  chartType: ["line"],
   minutesToFill: 10,
   description: "",
   shortName: "BDI",

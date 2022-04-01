@@ -6,6 +6,7 @@ export const testStructure: entityTypes.ITestStructure = {
     fa: "پرسشنامه چند محوری بالینی میلون ۳",
     en: "Millon Clinical Multiaxial Inventory (MCMI-III)",
   },
+  chartType: ["line"],
   minutesToFill: 120,
   shortName: "MCMI",
   description: "",

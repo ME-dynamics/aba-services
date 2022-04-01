@@ -6,6 +6,7 @@ export const testStructure: entityTypes.ITestStructure = {
     fa: "تیپ نمای مایرز-بریگز",
     en: "Myers-Briggs Type Indicator (MBTI)",
   },
+  chartType: ["progress"],
   minutesToFill: 60,
   description: "",
   shortName: "MBTI",

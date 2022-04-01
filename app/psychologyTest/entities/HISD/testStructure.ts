@@ -29,6 +29,7 @@ export const testStructure: entityTypes.ITestStructure = {
     fa: "شاخص تمایل جنسی هالبرت",
     en: "Hullbert Index of Sexual Desire (HISD)",
   },
+  chartType: ["line"],
   minutesToFill: 10,
   shortName: "HISD",
   description: "",

@@ -29,6 +29,7 @@ export const testStructure: entityTypes.ITestStructure = {
     fa: "شاخص احقاق جنسی هالبرت",
     en: "Hulbert Index of Sexual Assertiveness (HISA)",
   },
+  chartType: ["line"],
   minutesToFill: 25,
   shortName: "HISA",
   description: "",

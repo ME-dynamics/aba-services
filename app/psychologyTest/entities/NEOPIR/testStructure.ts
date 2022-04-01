@@ -29,6 +29,7 @@ export const testStructure: entityTypes.ITestStructure = {
     fa: "پرسشنامه شخصیتی NEO",
     en: "NEO-Personality Inventory-Revised ( NEO-PI-R )",
   },
+  chartType: ["line", "pie"],
   minutesToFill: 120,
   shortName: "NEO",
   description: "",
