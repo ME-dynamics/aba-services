@@ -9,6 +9,6 @@ export function rowToNotificationToken(
     provider: row.get("provider"),
     token: row.get("xtoken"),
     createdAt: row.get("created_at"),
-    modifiedAt: row.get("modified_aIt"),
+    modifiedAt: row.get("modified_at"),
   };
 }
