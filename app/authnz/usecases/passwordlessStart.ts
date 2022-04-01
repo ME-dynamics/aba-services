@@ -1,5 +1,7 @@
 import { httpResult } from "aba-node";
 import { makeOtp, makeDeviceId } from "../entities";
+// TODO: move this to network
+import { sendOtpBySms } from "../../notification"
 import { strings } from "../config";
 import { usecaseTypes, entityTypes } from "../types";
 
@@ -9,7 +11,7 @@ export function buildPasswordlessStart(
   const {
     findOtpByPhone,
     insertOtp,
-    sendOtpBySms,
+    // sendOtpBySms,
     otpGen,
     sha512,
     insertDeviceId,
@@ -134,8 +136,8 @@ export function buildPasswordlessStart(
       insertDeviceId(deviceId.object()),
     ]);
     // send otp code by sms
-    const smsSent = await sendOtpBySms({ otpCode, phoneNumber });
-    if (!smsSent) {
+    const smsSent = await sendOtpBySms({ otpCode, phoneNumber, userId: otp.get.id() });
+    if (smsSent.error) {
       return serviceUnavailable({
         error: strings.smsNotSent.fa,
       });

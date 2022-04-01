@@ -59,6 +59,16 @@ export interface IBuildUpdateUser {
   insertUser: tInsertUserFunc;
 }
 
+export interface IBuildUpdateUserRole {
+  findUserById: tFindUserByIdFunc;
+  insertUser: tInsertUserFunc;
+}
+
+export interface IUpdateUserRole {
+  userId: string;
+  role: string;
+}
+
 export interface IUpdateUser {
   username: string | undefined;
   firstName: string | undefined;

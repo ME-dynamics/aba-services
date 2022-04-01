@@ -52,6 +52,7 @@ export interface IMadeUser {
     modifiedAt: () => Date;
   };
   set: {
+    role: (role: string) => void;
     username: (username: string | undefined) => void;
     firstName: (firstName: string | undefined) => void;
     lastName: (lastName: string | undefined) => void;

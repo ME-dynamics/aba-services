@@ -1,4 +1,4 @@
-import { fluentSchema, errorSchema, statusCodes } from "aba-node";
+import { fluentSchema, errorSchemaObject, statusCodes } from "aba-node";
 
 const params = fluentSchema
   .object()
@@ -35,8 +35,7 @@ const response = {
           )
       )
   ),
-  [statusCodes.NOT_FOUND]: errorSchema,
-  [statusCodes.INTERNAL_SERVER_ERROR]: errorSchema,
+  ...errorSchemaObject,
 };
 
 export const sRetrieveCustomerNotes = {

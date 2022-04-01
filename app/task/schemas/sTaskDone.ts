@@ -1,4 +1,4 @@
-import { fluentSchema, errorSchema, statusCodes } from "aba-node";
+import { fluentSchema, errorSchemaObject, statusCodes } from "aba-node";
 
 const body = fluentSchema
   .object()
@@ -15,10 +15,7 @@ const response = {
   [statusCodes.OK]: fluentSchema
     .object()
     .prop("payload", fluentSchema.string().required()),
-  [statusCodes.UNAUTHORIZED]: errorSchema,
-  [statusCodes.NOT_FOUND]: errorSchema,
-  [statusCodes.FORBIDDEN]: errorSchema,
-  [statusCodes.BAD_REQUEST]: errorSchema,
+  ...errorSchemaObject,
 };
 
 export const sTaskDone = {

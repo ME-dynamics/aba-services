@@ -1,6 +1,6 @@
 import { reverse } from "./reverse";
-
-export function activeAvoidanceFormula(fields: Record<string, number>) {
+import type { entityTypes} from "../../types"
+export function activeAvoidanceFormula(fields: entityTypes.tTestFields) {
   const activeAvoidance =
     fields["8"] +
     fields["20"] +

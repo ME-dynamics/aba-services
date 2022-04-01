@@ -1,5 +1,10 @@
 import { types, buildRouteGenerator } from "aba-node";
-import { sRetrieveUser, sUpdateUser, sRetrieveProviders } from "../schemas";
+import {
+  sRetrieveUser,
+  sUpdateUser,
+  sRetrieveProviders,
+  sCreatePatient,
+} from "../schemas";
 import { applicationVersion } from "../config";
 
 import { retrieveUser } from "./retrieveUser";
@@ -22,5 +27,9 @@ export function startUserServer(app: types.tHttpInstance) {
   app.get(routeGen(["patients", ":id"]), retrievePatient);
 
   app.put(routeGen([":id"]), { schema: sUpdateUser }, updateUser);
-  app.post(routeGen(["patients", ":id"]), createPatient);
+  app.post(
+    routeGen(["patients", ":id"]),
+    { schema: sCreatePatient },
+    createPatient
+  );
 }

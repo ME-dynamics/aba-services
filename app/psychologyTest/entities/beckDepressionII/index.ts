@@ -3,13 +3,14 @@ import type { entityTypes } from "../../types";
 
 export function buildMakeBeckDepressionII() {
   return function makeBeckDepressionII(
-    fields: entityTypes.tBeckDepressionIIFields
-  ) {
-    const { aggregate, interpret, warning } = formula(fields);
+    fields: entityTypes.tTestFields
+  ): entityTypes.ISingleResultTest {
+    const { aggregate, interpret, warnings, errors } = formula(fields);
     return {
       aggregate,
       interpret,
-      warning,
+      warnings,
+      errors
     };
   };
 }

@@ -10,7 +10,10 @@ export function buildPostUploadImage() {
     assistant: true,
     support: true,
   };
+  const fieldNotDefinedError =
+    "you should define access, transform, image file";
   const { badRequest, forbidden } = httpResult.clientError;
+  const { internalServerError } = httpResult.serverError;
   function validate(fileData: controllerTypes.tMultiPartFile):
     | {
         access: "private" | "public";
@@ -58,30 +61,39 @@ export function buildPostUploadImage() {
     if (!success) {
       return error;
     }
-    const fileData = await httpRequest.file();
-    fileData.file.on("limit", function onFileLimit() {
-      fileData.file.unpipe();
-      const { code, error } = forbidden({ error: "reach files limit" });
-      reply.code(code);
-      reply.send({ error });
-    });
+    try {
+      const fileData = await httpRequest.file();
+      fileData.file.on("limit", function onFileLimit() {
+        fileData.file.unpipe();
+        const { code, error } = forbidden({ error: "reach files limit" });
+        reply.code(code);
+        reply.send({ error });
+      });
 
-    const isValid = validate(fileData);
-    if (!isValid) {
-      fileData.file.unpipe();
-      return badRequest({
-        error: "you should define access type and image file",
+      const isValid = validate(fileData);
+      if (!isValid) {
+        fileData.file.unpipe();
+        return badRequest({
+          error: fieldNotDefinedError,
+        });
+      }
+      const { access, transform } = isValid;
+      const { userId } = payload;
+      const result = await uploadImage({
+        file: fileData.file,
+        userId,
+        access,
+        transform,
+      });
+
+      return result;
+    } catch (error) {
+      if (error instanceof TypeError) {
+        return badRequest({ error: fieldNotDefinedError });
+      }
+      return internalServerError({
+        error: "unknown error, will investigate shortly",
       });
     }
-    const { access, transform } = isValid;
-    const { userId } = payload;
-    const result = await uploadImage({
-      file: fileData.file,
-      userId,
-      access,
-      transform,
-    });
-
-    return result;
   };
 }

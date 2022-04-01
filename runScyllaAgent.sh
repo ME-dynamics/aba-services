@@ -1,0 +1,1 @@
+docker run --name scyllaManagerAgent -d -v ~/scylla:/var/lib/scylla -v ~/scylla-manager-agent.yaml:/etc/scylla-manager-agent/scylla-manager-agent.yaml --network host --restart=always scylladb/scylla-manager-agent:2.6.3

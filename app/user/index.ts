@@ -1,3 +1,3 @@
 export { initDb } from "./adapters";
-export { createUser, retrieveUser } from "./usecases";
+export { createUser, retrieveUser, updateUserRole } from "./usecases";
 export { startUserServer } from "./interfaces";

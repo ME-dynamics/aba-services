@@ -1,34 +1,20 @@
 import { fluentSchema } from "aba-node";
-import { schemaTypes } from "../types";
 
-export function testStructureGen(args: schemaTypes.ITestStructureGen) {
-  const { questionCount, value } = args;
+export const sChoice = fluentSchema
+  .object()
+  .prop("label", fluentSchema.string().required())
+  .prop("value", fluentSchema.number().required());
+
+export const sQuestion = fluentSchema
+  .object()
+  .prop("question", fluentSchema.string().required())
+  .prop("questionHint", fluentSchema.string().default(""))
+  .prop("choices", fluentSchema.array().items(sChoice).required());
+
+export function testStructureGen(questionCount: number) {
   let schema = fluentSchema.object().maxProperties(questionCount);
   for (let index = 1; index <= questionCount; index++) {
-    schema = schema.prop(
-      `${index}`,
-      fluentSchema
-        .object()
-        .prop("question", fluentSchema.string().required())
-        .prop(
-          "choices",
-          fluentSchema
-            .array()
-            .items(
-              fluentSchema
-                .object()
-                .prop("label", fluentSchema.string().required())
-                .prop(
-                  "value",
-                  fluentSchema
-                    .number()
-                    .required()
-                    .minimum(value.min)
-                    .maximum(value.max)
-                )
-            )
-        )
-    );
+    schema = schema.prop(`${index}`, sQuestion);
   }
   const sTestStructure = fluentSchema
     .object()
@@ -41,6 +27,7 @@ export function testStructureGen(args: schemaTypes.ITestStructureGen) {
         .prop("fa", fluentSchema.string().required())
         .prop("en", fluentSchema.string().required())
     )
+    .prop("minutesToFill", fluentSchema.number().required())
     .prop("shortName", fluentSchema.string().required())
     .prop("description", fluentSchema.string().required())
     .prop("fields", schema);

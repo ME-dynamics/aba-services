@@ -1,16 +1,155 @@
 import { entityTypes } from "../../types";
 
+export const bdiChoiceMap: Record<string, Record<number, number>> = {
+  "1": {
+    0: 0,
+    1: 1,
+    2: 2,
+    3: 3,
+  },
+  "2": {
+    0: 0,
+    1: 1,
+    2: 2,
+    3: 3,
+  },
+  "3": {
+    0: 0,
+    1: 1,
+    2: 2,
+    3: 3,
+  },
+  "4": {
+    0: 0,
+    1: 1,
+    2: 2,
+    3: 3,
+  },
+  "5": {
+    0: 0,
+    1: 1,
+    2: 2,
+    3: 3,
+  },
+  "6": {
+    0: 0,
+    1: 1,
+    2: 2,
+    3: 3,
+  },
+  "7": {
+    0: 0,
+    1: 1,
+    2: 2,
+    3: 3,
+  },
+  "8": {
+    0: 0,
+    1: 1,
+    2: 2,
+    3: 3,
+  },
+  "9": {
+    0: 0,
+    1: 1,
+    2: 2,
+    3: 3,
+  },
+  "10": {
+    0: 0,
+    1: 1,
+    2: 2,
+    3: 3,
+  },
+  "11": {
+    0: 0,
+    1: 1,
+    2: 2,
+    3: 3,
+  },
+  "12": {
+    0: 0,
+    1: 1,
+    2: 2,
+    3: 3,
+  },
+  "13": {
+    0: 0,
+    1: 1,
+    2: 2,
+    3: 3,
+  },
+  "14": {
+    0: 0,
+    1: 1,
+    2: 2,
+    3: 3,
+  },
+  "15": {
+    0: 0,
+    1: 1,
+    2: 2,
+    3: 3,
+  },
+  "16": {
+    0: 0,
+    1: 1,
+    2: 1,
+    3: 2,
+    4: 2,
+    5: 3,
+    6: 3,
+  },
+  "17": {
+    0: 0,
+    1: 1,
+    2: 2,
+    3: 3,
+  },
+  "18": {
+    0: 0,
+    1: 1,
+    2: 1,
+    3: 2,
+    4: 2,
+    5: 2,
+    6: 3,
+    7: 3,
+  },
+  "19": {
+    0: 0,
+    1: 1,
+    2: 2,
+    3: 3,
+  },
+  "20": {
+    0: 0,
+    1: 1,
+    2: 2,
+    3: 3,
+  },
+  "21": {
+    0: 0,
+    1: 1,
+    2: 2,
+    3: 3,
+  },
+};
+
 export const testStructure: entityTypes.ITestStructure = {
   id: "beckDepressionII",
   title: {
     fa: "پرسشنامه افسردگی بک",
     en: "Beck Depression Inventory ( BDI )",
   },
+  chartType: ["line"],
+  minutesToFill: 10,
   description: "",
   shortName: "BDI",
   fields: {
     "1": {
       question: "غمگینی",
+      questionHint: undefined,
       choices: [
         {
           label: "احساس غمگینی نمی کنم.",
@@ -32,6 +171,7 @@ export const testStructure: entityTypes.ITestStructure = {
     },
     "2": {
       question: "بدبینی",
+      questionHint: undefined,
       choices: [
         {
           label: "نسبت به آینده بدبین نیستم.",
@@ -53,6 +193,7 @@ export const testStructure: entityTypes.ITestStructure = {
     },
     "3": {
       question: "احساس شکست",
+      questionHint: undefined,
       choices: [
         {
           label: " احساس نمی کنم فردی شکست خورده ام.",
@@ -74,6 +215,7 @@ export const testStructure: entityTypes.ITestStructure = {
     },
     "4": {
       question: "نارضایتی",
+      questionHint: undefined,
       choices: [
         {
           label: "به اندازه گذشته، از زندگی لذت می برم.",
@@ -97,6 +239,7 @@ export const testStructure: entityTypes.ITestStructure = {
     },
     "5": {
       question: "احساس گناه",
+      questionHint: undefined,
       choices: [
         {
           label: "احساس گناه خاصی ندارم.",
@@ -119,6 +262,7 @@ export const testStructure: entityTypes.ITestStructure = {
     },
     "6": {
       question: "انتظار تنبیه",
+      questionHint: undefined,
       choices: [
         {
           label: "احساس نمی کنم دارم تنبیه می شوم.",
@@ -140,6 +284,7 @@ export const testStructure: entityTypes.ITestStructure = {
     },
     "7": {
       question: "دوست نداشتن خود",
+      questionHint: undefined,
       choices: [
         {
           label: "همان احساسی را در مورد خودم دارم که همیشه داشته ام.",
@@ -161,6 +306,7 @@ export const testStructure: entityTypes.ITestStructure = {
     },
     "8": {
       question: "خود سرزنشی",
+      questionHint: undefined,
       choices: [
         {
           label: "بیشتر از حد معمول، خود را مورد انتقاد و سرزنش قرار نمی دهم.",
@@ -182,6 +328,7 @@ export const testStructure: entityTypes.ITestStructure = {
     },
     "9": {
       question: "افکار خودکشی",
+      questionHint: undefined,
       choices: [
         {
           label: "اصلا در فکر آن نیستم که به خودم آسیبی برسانم.",
@@ -204,6 +351,7 @@ export const testStructure: entityTypes.ITestStructure = {
     },
     "10": {
       question: "گریه کردن",
+      questionHint: undefined,
       choices: [
         {
           label: "بیشتر از گذشته، گریه نمی کنم.",
@@ -225,6 +373,7 @@ export const testStructure: entityTypes.ITestStructure = {
     },
     "11": {
       question: " بی قراری",
+      questionHint: undefined,
       choices: [
         {
           label: "بیشتر از حد معمول بی قرار و تحریک پذیر نیستم.",
@@ -247,6 +396,7 @@ export const testStructure: entityTypes.ITestStructure = {
     },
     "12": {
       question: "کناره گیری اجتماعی",
+      questionHint: undefined,
       choices: [
         {
           label: "علاقه ام را نسبت به مردم و فعالیت ها از دست نداده ام.",
@@ -268,6 +418,7 @@ export const testStructure: entityTypes.ITestStructure = {
     },
     "13": {
       question: "بی تصمیمی",
+      questionHint: undefined,
       choices: [
         {
           label: "تقریبا به خوبی گذشته، تصمیم گیری می کنم.",
@@ -289,6 +440,7 @@ export const testStructure: entityTypes.ITestStructure = {
     },
     "14": {
       question: "بی ارزشی",
+      questionHint: undefined,
       choices: [
         {
           label: "احساس می کنم آدم ارزشمندی هستم.",
@@ -310,6 +462,7 @@ export const testStructure: entityTypes.ITestStructure = {
     },
     "15": {
       question: "از دست دادن انرژی",
+      questionHint: undefined,
       choices: [
         {
           label: "من به اندازه گذشته، انرژی دارم",
@@ -331,6 +484,7 @@ export const testStructure: entityTypes.ITestStructure = {
     },
     "16": {
       question: "تغییر در الگوی خواب",
+      questionHint: undefined,
       choices: [
         {
           label: "در الگوی خوابم، هیچ تغییری ایجاد نشده است.",
@@ -342,29 +496,30 @@ export const testStructure: entityTypes.ITestStructure = {
         },
         {
           label: "تا حدودی کمتر از حد معمول می خوابم.",
-          value: 1,
+          value: 2,
         },
         {
           label: "خیلی بیشتر از حد معمول می خوابم.",
-          value: 2,
+          value: 3,
         },
         {
           label: "خیلی کمتر از حد معمول می خوابم.",
-          value: 2,
+          value: 4,
         },
         {
           label: "بیشتر اوقات روز را می خوابم.",
-          value: 3,
+          value: 5,
         },
         {
           label:
             "صبحها یک تا دو ساعت زودتر بیدار می شوم و دیگر نمی توانم بخوابم.",
-          value: 3,
+          value: 6,
         },
       ],
     },
     "17": {
       question: "تحریک پذیری",
+      questionHint: undefined,
       choices: [
         {
           label: "بیش از حد معمول تحریک پذیر نیستم.",
@@ -386,6 +541,7 @@ export const testStructure: entityTypes.ITestStructure = {
     },
     "18": {
       question: "تغییر در اشتها",
+      questionHint: undefined,
       choices: [
         {
           label: "اشتهایم تغییری نکرده است.",
@@ -397,32 +553,33 @@ export const testStructure: entityTypes.ITestStructure = {
         },
         {
           label: "اشتهایم بیشتر از حد معمول است.",
-          value: 1,
+          value: 2,
         },
         {
           label: "اشتهایم خیلی کمتر از حد معمول است.",
-          value: 2,
+          value: 3,
         },
         {
           label: "اشتهایم خیلی بیشتر از حد معمول است.",
-          value: 2,
+          value: 4,
         },
         {
           label: "اشتهایم خیلی بیشتر از حد معمول است.",
-          value: 2,
+          value: 5,
         },
         {
           label: "اصلا اشتها ندارم.",
-          value: 3,
+          value: 6,
         },
         {
           label: "همیشه میل زیادی به غذا خوردن دارم.",
-          value: 3,
+          value: 7,
         },
       ],
     },
     "19": {
       question: "اشکال در تمرکز",
+      questionHint: undefined,
       choices: [
         {
           label: "تمرکزم به خوبی گذشته است.",
@@ -444,6 +601,7 @@ export const testStructure: entityTypes.ITestStructure = {
     },
     "20": {
       question: "خستگی پذیری",
+      questionHint: undefined,
       choices: [
         {
           label: "بیش از حد معمول، خسته یا کسل نیستم.",
@@ -467,6 +625,7 @@ export const testStructure: entityTypes.ITestStructure = {
     },
     "21": {
       question: "کاهش علاقه جنسی",
+      questionHint: undefined,
       choices: [
         {
           label: "متوجه تغییر تازه ای در علاقه جنسی ام نشده ام.",

@@ -1,4 +1,4 @@
-import { statusCodes, fluentSchema, errorSchema } from "aba-node";
+import { statusCodes, fluentSchema, errorSchemaObject } from "aba-node";
 
 const response = {
   [statusCodes.OK]: fluentSchema
@@ -10,8 +10,7 @@ const response = {
         .prop("id", fluentSchema.string().required())
         .prop("url", fluentSchema.string().default(null))
     ),
-  [statusCodes.FORBIDDEN]: errorSchema,
-  [statusCodes.INTERNAL_SERVER_ERROR]: errorSchema,
+  ...errorSchemaObject,
 };
 
 export const sUploadImage = {

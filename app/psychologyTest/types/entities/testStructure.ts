@@ -8,15 +8,26 @@ export interface IChoice {
 }
 export interface IQuestion {
   question: string;
+  questionHint: string | undefined;
   choices: IChoice[];
 }
 export type tQuestionFields = Record<string, IQuestion>;
+
+export type chartType =
+  | "line"
+  | "bar"
+  | "pie"
+  | "progress"
+  | "contributionGraph"
+  | "stackedBar";
 export interface ITestStructure {
   id: string;
   title: {
     fa: string;
     en: string;
   };
+  chartType: chartType[];
+  minutesToFill: number;
   shortName: string;
   description: string;
   fields: tQuestionFields;

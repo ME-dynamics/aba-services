@@ -1,4 +1,4 @@
-import { fluentSchema, errorSchema, statusCodes } from "aba-node";
+import { fluentSchema, errorSchemaObject, statusCodes } from "aba-node";
 
 const params = fluentSchema
   .object()
@@ -8,8 +8,7 @@ const response = {
   [statusCodes.OK]: fluentSchema
     .object()
     .prop("payload", fluentSchema.string().required()),
-  [statusCodes.NOT_FOUND]: errorSchema,
-  [statusCodes.FORBIDDEN]: errorSchema,
+  ...errorSchemaObject,
 };
 
 export const sRemoveNote = {

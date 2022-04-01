@@ -1,6 +1,6 @@
 import { reverse } from "./reverse";
-
-export function flightFormula(fields: Record<string, number>) {
+import type { entityTypes } from "../../types"
+export function flightFormula(fields: entityTypes.tTestFields) {
   const flight =
     fields["12"] +
     fields["24"] +

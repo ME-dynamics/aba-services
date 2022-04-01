@@ -18,6 +18,7 @@ export const testStructure: entityTypes.ITestStructure = {
   },
   shortName: "MMPI",
   description: "",
+  
   fields: {
     "1": {
       question: "مجله هاي فني را دوست دارم .",

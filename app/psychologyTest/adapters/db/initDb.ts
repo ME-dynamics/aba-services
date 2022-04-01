@@ -4,7 +4,7 @@ import { adapterTypes } from "../../types";
 
 export function buildInitDb(args: adapterTypes.IBuildInit) {
   const { init } = args;
-  const errorPath = "form, adapters, init db";
+  const errorPath = "test, adapters, init db";
   return async function initDb() {
     const {
       createTableQuery,
@@ -57,8 +57,8 @@ export function buildInitDb(args: adapterTypes.IBuildInit) {
         },
         {
           columnName: "results",
-          columnType: "SET",
-          setType: "UDT",
+          columnType: "LIST",
+          listType: "UDT",
           udtName: createTestResultType.name,
         },
         {

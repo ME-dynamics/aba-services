@@ -8,9 +8,12 @@ import {
 } from "../adapters";
 
 import { buildCreateUser } from "./createUser";
-import { buildRetrieveUser } from "./retrieveUser";
-import { buildUpdateUser } from "./updateUser";
 import { buildCreatePatient } from "./createPatient";
+
+import { buildUpdateUser } from "./updateUser";
+import { buildUpdateUserRole } from "./updateUserRole";
+
+import { buildRetrieveUser } from "./retrieveUser";
 import { buildRetrievePatient } from "./retrievePatient";
 import { buildRetrieveProviders } from "./retrieveProviders";
 
@@ -26,4 +29,6 @@ export const createPatient = buildCreatePatient({
   findPatientByUserId,
   insertPatient,
 });
+
 export const updateUser = buildUpdateUser({ findUserById, insertUser });
+export const updateUserRole = buildUpdateUserRole({findUserById, insertUser})

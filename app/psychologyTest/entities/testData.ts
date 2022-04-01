@@ -2,7 +2,7 @@ import { entityTypes } from "../types";
 
 export function buildMakeTestData(args: entityTypes.IBuildTestData) {
   const { uuid } = args;
-  return function makeFormData(formData: entityTypes.ITestData) {
+  return function makeTestData(TestData: entityTypes.ITestData) {
     const {
       id = uuid(),
       createdAt = new Date(),
@@ -14,9 +14,9 @@ export function buildMakeTestData(args: entityTypes.IBuildTestData) {
       results,
       resultSummary,
       fields,
-    } = formData;
+    } = TestData;
 
-    const madeFormData: entityTypes.IMadeTestData = {
+    const madeTestData: entityTypes.IMadeTestData = {
       get: {
         id: () => id,
         userId: () => userId,
@@ -42,6 +42,6 @@ export function buildMakeTestData(args: entityTypes.IBuildTestData) {
         };
       },
     };
-    return madeFormData;
+    return madeTestData;
   };
 }

@@ -1,4 +1,4 @@
-import { statusCodes, fluentSchema, errorSchema } from "aba-node";
+import { statusCodes, fluentSchema, errorSchemaObject } from "aba-node";
 import { customerSchema } from "./customerSchema";
 const body = fluentSchema
   .object()
@@ -8,8 +8,7 @@ const customer = fluentSchema.object().prop("payload", customerSchema);
 
 const response = {
   [statusCodes.OK]: customer,
-  [statusCodes.NOT_FOUND]: errorSchema,
-  [statusCodes.FORBIDDEN]: errorSchema,
+  ...errorSchemaObject
 };
 
 export const sConfirmSchema = {

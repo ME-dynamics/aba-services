@@ -12,9 +12,9 @@ const dbClient = scyllaClient({
   applicationName: "",
   applicationVersion,
   contactPoints: ["127.0.1.1"],
-  errorPath: "tests, adapters",
+  errorPath: "psychology test, adapters",
   id: undefined,
-  keyspace: "tests",
+  keyspace: "psychology_test",
   localDataCenter: "datacenter1",
 });
 
