@@ -1,5 +1,5 @@
 import { httpResult } from "aba-node";
-import { serverUrl } from "../config"
+import { serverUrl } from "../config";
 import { usecaseTypes } from "../types";
 
 export function buildRetrievePrivateImage(
@@ -23,10 +23,12 @@ export function buildRetrievePrivateImage(
       return forbidden({ error: "access is not allowed" });
     }
     try {
-      const url = await minio.presignedUrl("GET", userId, imageId, expiry, {prefix: "privateImage"});
+      const url = await minio.presignedUrl("GET", userId, imageId, expiry, {
+        prefix: "privateImage",
+      });
       return ok<usecaseTypes.IRetrievePrivateImageResult>({
         payload: {
-          url: url.replace(minioUrl, serverUrl),
+          url: url.replace(minioUrl, serverUrl + "/private"),
         },
       });
     } catch (error) {
