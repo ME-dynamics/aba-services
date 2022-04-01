@@ -5,3 +5,4 @@ export * from "./MBTI";
 export * from "./beckAnxiety";
 export * from "./garyWilson";
 export * from "./MCMI";
+export * from "./MMPI";
