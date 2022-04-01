@@ -19,7 +19,7 @@ export function buildMakeNotificationToken() {
     }
     function isTokenExpired() {
       // if service provider is sms.ir, token will expire after 30 minutes
-      if (provider === "sms.ir") {
+      if (provider === "smsir") {
         return (
           twentyFiveMinutesInMilliSeconds < Date.now() - modifiedAt.getTime()
         );
