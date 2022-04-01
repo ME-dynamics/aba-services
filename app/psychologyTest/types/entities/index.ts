@@ -6,7 +6,8 @@ export * from "./beckAnxiety";
 export * from "./garyWilson";
 export * from "./MCMI";
 export * from "./MMPI";
-
+export * from "./HISA";
+export * from "./HISD";
 export type tTestFields = Record<string, number>;
 export interface ISingleResultTest {
   warnings: string[];
