@@ -30,9 +30,10 @@ export const testStructure: entityTypes.ITestStructure = {
     en: "Hullbert Index of Sexual Desire (HISD)",
   },
   chartType: ["line"],
-  minutesToFill: 10,
+  minutesToFill: 5,
   shortName: "HISD",
-  description: "",
+  description:
+    " این پرسشنامه یک آزمون با پاسخ های درست و غلط نیست . لطفا هر یک از جملات زیر را با دقت بخوانید و به تمام آن ها ، حتی با وجود عدم اطمینان کافی پاسخ دهید. برای هرجمله پاسخ های “همیشه” ، “اکثرا” ، “گاهی اوقات” ، ” بندرت” و “هرگز” در نظر گرفته شده است. لطفا گزینه ای را که بهتر و دقیق تر بیانگر تمایل جنسی شماست، انتخاب کنید .",
   fields: {
     "1": {
       question:

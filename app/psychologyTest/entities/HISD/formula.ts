@@ -1,7 +1,7 @@
 import { reverse } from "./reverse";
-import type { entityTypes } from "../../types"
+import type { entityTypes } from "../../types";
 export function formula(fields: entityTypes.tTestFields) {
-  const result =
+  const IndexOfSexualDesire =
     reverse(fields["1"]) +
     fields["2"] +
     reverse(fields["3"]) +
@@ -27,33 +27,5 @@ export function formula(fields: entityTypes.tTestFields) {
     fields["23"] +
     fields["24"] +
     fields["25"];
-  return { result };
+  return { IndexOfSexualDesire };
 }
-// const field = {
-//   "1": 1,
-//   "2": 3,
-//   "3": 0,
-//   "4": 2,
-//   "5": 2,
-//   "6": 3,
-//   "7": 0,
-//   "8": 2,
-//   "9": 3,
-//   "10": 2,
-//   "11": 1,
-//   "12": 2,
-//   "13": 3,
-//   "14": 4,
-//   "15": 3,
-//   "16": 2,
-//   "17": 0,
-//   "18": 2,
-//   "19": 3,
-//   "20": 2,
-//   "21": 1,
-//   "22": 2,
-//   "23": 2,
-//   "24": 2,
-//   "25": 2,
-// };
-// formula(field);
