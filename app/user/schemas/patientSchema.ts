@@ -23,11 +23,13 @@ export const patient = fluentSchema
     "problemDescription",
     fluentSchema.string().required().minLength(5).maxLength(5717)
   )
-  .prop("maritalStatus", fluentSchema.enum(["engaged", "single"])).required()
+  .prop("maritalStatus", fluentSchema.enum(["engaged", "single"]))
+  .required()
   .prop(
     "maritalState",
-    fluentSchema
-      .enum([
+    fluentSchema.oneOf([
+      fluentSchema.null(),
+      fluentSchema.enum([
         "namzad",
         "aghed",
         "aghedDayem",
@@ -36,7 +38,8 @@ export const patient = fluentSchema
         "motarekeh",
         "motalagheh",
         "widow",
-      ]).default(undefined)
+      ]),
+    ])
   )
   .prop("education", education)
   .prop("academicField", fluentSchema.string())
