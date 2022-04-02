@@ -17,6 +17,7 @@ import { buildSubmitNEOPIR } from "./submitNEOPIR";
 import { buildSubmitMCMI } from "./submitMCMI";
 import { buildSubmitYEMSQ } from "./submitYEMSQ";
 import { buildSubmitHISA } from "./submitHISA";
+import { buildSubmitHISD } from "./submitHISD";
 
 import { buildSubmitTest } from "./submitTest";
 
@@ -41,7 +42,7 @@ export const submitNEOPIR = buildSubmitNEOPIR({ insertTestData });
 export const submitMCMI = buildSubmitMCMI({ insertTestData });
 export const submitYEMSQ = buildSubmitYEMSQ({ insertTestData });
 export const submitHISA = buildSubmitHISA({ insertTestData });
-
+export const submitHISD = buildSubmitHISD({ insertTestData });
 export const submitTest = buildSubmitTest({
   submitBeckAnxiety,
   submitBeckDepressionII,
@@ -51,4 +52,5 @@ export const submitTest = buildSubmitTest({
   submitMCMI,
   submitYEMSQ,
   submitHISA,
+  submitHISD,
 });
