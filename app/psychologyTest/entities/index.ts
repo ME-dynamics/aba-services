@@ -29,6 +29,8 @@ import { buildMakeMCMI, mcmiStructure } from "./MCMI";
 
 import { buildMakeYEMSQ, yemsqStructure } from "./YEMSQ";
 
+import { hisaTestStructure, buildMakeHISA } from "./HISA";
+
 export const makeTestData = buildMakeTestData({ uuid: v4 });
 export const makeNEOPIR = buildMakeNEOPIR({
   aFormula,
@@ -53,6 +55,7 @@ export const makeBeckDepressionII = buildMakeBeckDepressionII();
 export const makeGaryWilson = buildMakeGaryWilson();
 export const makeMCMI = buildMakeMCMI();
 export const makeYEMSQ = buildMakeYEMSQ();
+export const makeHISA = buildMakeHISA();
 
 export const testStructures = {
   NEOPIRStructure,
@@ -62,4 +65,5 @@ export const testStructures = {
   mcmiStructure,
   garyWilsonStructure,
   yemsqStructure,
+  hisaTestStructure,
 };
