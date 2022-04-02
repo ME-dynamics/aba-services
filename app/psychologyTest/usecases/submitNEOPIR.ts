@@ -102,17 +102,6 @@ export function buildSubmitNEOPIR(args: usecaseTypes.IBuildSubmitNEOPIR) {
     });
     results.push({
       type: "facet",
-      rawscore: n4,
-      baserate: n4,
-      variable: "n4",
-      interpret: "",
-      label: {
-        en: "Self-Consciousness",
-        fa: "هوشیاری نسبت به خود",
-      },
-    });
-    results.push({
-      type: "facet",
       rawscore: n5,
       baserate: n5,
       variable: "n5",
