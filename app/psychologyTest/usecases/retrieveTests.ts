@@ -13,6 +13,8 @@ export function buildRetrieveTests() {
     mcmiStructure,
     yemsqStructure,
     hisaTestStructure,
+    hisdTestStructure,
+    mmpiStructure,
   } = testStructures;
   const mbti = {
     id: mbtiStructure.id,
@@ -54,17 +56,29 @@ export function buildRetrieveTests() {
     title: hisaTestStructure.title,
     shortName: hisaTestStructure.shortName,
   };
+  const hisd = {
+    id: hisdTestStructure.id,
+    title: hisdTestStructure.title,
+    shortName: hisdTestStructure.shortName,
+  };
+  const mmpi = {
+    id: mmpiStructure.id,
+    title: mmpiStructure.title,
+    shortName: mmpiStructure.shortName,
+  };
   return function retrieveTests() {
     return ok({
       payload: [
+        mmpi,
+        mcmi,
+        neopir,
         mbti,
+        garyWilson,
+        yemsq,
         beckAnxiety,
         beckDepressionII,
-        neopir,
-        garyWilson,
-        mcmi,
-        yemsq,
         hisa,
+        hisd,
       ],
     });
   };
