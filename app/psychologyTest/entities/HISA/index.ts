@@ -10,3 +10,5 @@ export function buildMakeHISA() {
     return { expressingSexualEmotions, sexualIntercourse };
   };
 }
+
+export { testStructure as hisaTestStructure } from "./testStructure";
