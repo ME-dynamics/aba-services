@@ -12,6 +12,7 @@ export function buildRetrieveTests() {
     mbtiStructure,
     mcmiStructure,
     yemsqStructure,
+    hisaTestStructure,
   } = testStructures;
   const mbti = {
     id: mbtiStructure.id,
@@ -48,6 +49,11 @@ export function buildRetrieveTests() {
     title: yemsqStructure.title,
     shortName: yemsqStructure.shortName,
   };
+  const hisa = {
+    id: hisaTestStructure.id,
+    title: hisaTestStructure.title,
+    shortName: hisaTestStructure.shortName,
+  };
   return function retrieveTests() {
     return ok({
       payload: [
@@ -58,6 +64,7 @@ export function buildRetrieveTests() {
         garyWilson,
         mcmi,
         yemsq,
+        hisa,
       ],
     });
   };
