@@ -11,6 +11,7 @@ export function buildSubmitTest(args: usecaseTypes.IBuildSubmitTestById) {
     submitMCMI,
     submitNEOPIR,
     submitYEMSQ,
+    submitHISA,
   } = args;
   const { notFound, badRequest } = httpResult.clientError;
   const {
@@ -21,6 +22,7 @@ export function buildSubmitTest(args: usecaseTypes.IBuildSubmitTestById) {
     mbtiStructure,
     mcmiStructure,
     yemsqStructure,
+    hisaTestStructure,
   } = testStructures;
   return async function submitTest(info: usecaseTypes.ISubmitTestById) {
     const { fields, gender, userId, testId } = info;
@@ -42,6 +44,8 @@ export function buildSubmitTest(args: usecaseTypes.IBuildSubmitTestById) {
         return await submitMCMI({ userId, fields, gender });
       case yemsqStructure.id:
         return await submitYEMSQ({ userId, fields });
+      case hisaTestStructure.id:
+        return await submitHISA({ userId, fields });
       default:
         return notFound({ error: "test not found" });
     }

@@ -16,6 +16,7 @@ import { buildSubmitGaryWilson } from "./submitGaryWilson";
 import { buildSubmitNEOPIR } from "./submitNEOPIR";
 import { buildSubmitMCMI } from "./submitMCMI";
 import { buildSubmitYEMSQ } from "./submitYEMSQ";
+import { buildSubmitHISA } from "./submitHISA";
 
 import { buildSubmitTest } from "./submitTest";
 
@@ -39,6 +40,7 @@ export const submitGaryWilson = buildSubmitGaryWilson({ insertTestData });
 export const submitNEOPIR = buildSubmitNEOPIR({ insertTestData });
 export const submitMCMI = buildSubmitMCMI({ insertTestData });
 export const submitYEMSQ = buildSubmitYEMSQ({ insertTestData });
+export const submitHISA = buildSubmitHISA({ insertTestData });
 
 export const submitTest = buildSubmitTest({
   submitBeckAnxiety,
@@ -48,4 +50,5 @@ export const submitTest = buildSubmitTest({
   submitNEOPIR,
   submitMCMI,
   submitYEMSQ,
+  submitHISA,
 });
