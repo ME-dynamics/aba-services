@@ -13,7 +13,15 @@ import type {
   tGaryWilsonFields,
   tMCMIFields,
   IMadeTestDataObject,
+  tTestFields,
 } from "./entities";
+
+// TODO: fix types, make types generalized
+
+export interface ISubmitTest {
+  userId: string;
+  fields: tTestFields;
+}
 
 // submit form structure
 // export interface IBuildSubmitFormStructure {
@@ -107,6 +115,9 @@ export interface IBuildSubmitTestById {
   ) => Promise<types.IPayloadResult<IMadeTestDataObject>>;
   submitYEMSQ: (
     info: ISubmitYEMSQ
+  ) => Promise<types.IPayloadResult<IMadeTestDataObject>>;
+  submitHISA: (
+    info: ISubmitTest
   ) => Promise<types.IPayloadResult<IMadeTestDataObject>>;
 }
 
