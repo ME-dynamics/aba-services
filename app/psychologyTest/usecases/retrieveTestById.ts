@@ -12,6 +12,7 @@ export function buildRetrieveTestById() {
     mbtiStructure,
     mcmiStructure,
     yemsqStructure,
+    hisaTestStructure,
   } = testStructures;
   return function retrieveMBTI(testId: string) {
     switch (testId) {
@@ -29,6 +30,8 @@ export function buildRetrieveTestById() {
         return ok({ payload: mcmiStructure });
       case yemsqStructure.id:
         return ok({ payload: yemsqStructure });
+      case hisaTestStructure.id:
+        return ok({ payload: hisaTestStructure });
       default:
         return notFound({ error: "test not found" });
     }
