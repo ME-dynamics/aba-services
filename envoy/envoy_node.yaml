@@ -223,6 +223,14 @@ static_resources:
                           request_headers_to_remove:
                             - x-jwt-payload
                             - Authorization
+                        - match:
+                            prefix: /
+                          route:
+                            cluster: minio
+                            host_rewrite_literal: '127.0.0.1:9000'
+                          request_headers_to_remove:
+                            - x-jwt-payload
+                            - Authorization
   clusters:
     - name: node_app
       connect_timeout: 1s
