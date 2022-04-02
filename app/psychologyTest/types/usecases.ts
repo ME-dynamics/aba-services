@@ -23,6 +23,10 @@ export interface ISubmitTest {
   fields: tTestFields;
 }
 
+export interface ISubmitTestWithGender extends ISubmitTest {
+  gender: "male" | "female"
+}
+
 // submit form structure
 // export interface IBuildSubmitFormStructure {
 //   insertFormStructure: tInsertFormStructureFunc;
