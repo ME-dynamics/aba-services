@@ -119,6 +119,9 @@ export interface IBuildSubmitTestById {
   submitHISA: (
     info: ISubmitTest
   ) => Promise<types.IPayloadResult<IMadeTestDataObject>>;
+  submitHISD: (
+    info: ISubmitTest
+  ) => Promise<types.IPayloadResult<IMadeTestDataObject>>;
 }
 
 export interface ISubmitTestById {
