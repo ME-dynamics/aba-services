@@ -9,3 +9,5 @@ export function buildMakeHISD() {
     return IndexOfSexualDesire;
   };
 }
+
+export { testStructure as hisdTestStructure } from "./testStructure";
