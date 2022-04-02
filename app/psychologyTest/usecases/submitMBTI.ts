@@ -59,7 +59,7 @@ export function buildSubmitMBTI(args: usecaseTypes.IBuildSubmitMBTI) {
       },
       {
         type: "factor",
-        variable: "i",
+        variable: "n",
         rawscore: n.score,
         baserate: n.score,
         label: {
