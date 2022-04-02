@@ -30,9 +30,10 @@ export const testStructure: entityTypes.ITestStructure = {
     en: "NEO-Personality Inventory-Revised ( NEO-PI-R )",
   },
   chartType: ["line", "pie"],
-  minutesToFill: 120,
+  minutesToFill: 40,
   shortName: "NEO",
-  description: "",
+  description:
+    "آزمون نئو یا پنج عامل بزرگ شخصیت، بیانگر روانشناسی شخصیه صفات است. این آزمایش می تواند ۵ فاکتور اصلی شخصیت انسان که شامل برون گرایی، روان رنجوری یا عصبانیت، با وجدان بودن، گشودگی به تجربه و توافق پذیری می شود را در شما بررسی کند. به هر یک از سوالات بر مبنای یک مقیاس ۵ عاملی (کاملا مخالفم، محالفم، نظری ندارم، موافقم، کاملا موافقم) پاسخ بدهید",
   fields: {
     "1": {
       question: "من آدم نگرانی نیستم.",

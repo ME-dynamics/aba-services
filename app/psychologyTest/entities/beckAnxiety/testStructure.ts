@@ -25,10 +25,11 @@ export const testStructure: entityTypes.ITestStructure = {
     fa: "پرسشنامه اضطراب بک",
     en: "Beck anxiety inventory (BAI)",
   },
-  minutesToFill: 15,
+  minutesToFill: 6,
   chartType: ["line"],
   shortName: "BAI",
-  description: "",
+  description:
+    "این تست  یک پرسشنامه خود گزارشی است که برای اندازه‌گیری شدت اضطراب در نوجوانان و بزگسالان تهیه شده‌است. این پرسشنامه یک مقیاس ۲۱ ماده‌ای است که آزمودنی در هر ماده یکی از چهار گزینه که نشان دهنده شدت اضطراب است را انتخاب می‌کند. ",
   fields: {
     "1": {
       question: "کرخی و گز گز شدن (مور مور شدن)",
