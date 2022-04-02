@@ -1,5 +1,7 @@
 import { scyllaClient } from "aba-node";
 
+import { scyllaContactPoint } from "../config";
+
 import {
   buildInitDb,
   buildFindCustomersByProviderId,
@@ -14,7 +16,7 @@ import {
 import { rowToCustomer } from "./utils";
 
 const dbClient = scyllaClient({
-  contactPoints: ["127.0.1.1"],
+  contactPoints: [scyllaContactPoint],
   localDataCenter: "datacenter1",
   keyspace: "business",
   applicationName: "business",

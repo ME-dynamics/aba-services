@@ -24,7 +24,6 @@ export function buildRetrieveSmsirToken(
   }
   async function refreshToken() {
     const token = await fetchSmsirToken();
-    console.log({token})
     if (!token) {
       return serviceUnavailable({ error: "sms service is unavailable" });
     }

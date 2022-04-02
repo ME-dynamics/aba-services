@@ -1,5 +1,5 @@
 import { scyllaClient } from "aba-node";
-import { applicationVersion } from "../config";
+import { applicationVersion, scyllaContactPoint } from "../config";
 import {
   buildFindNoteById,
   buildFindCustomerNotes,
@@ -12,7 +12,7 @@ import { rowToNote } from "./utils";
 const dbClient = scyllaClient({
   applicationName: "notes",
   applicationVersion,
-  contactPoints: ["127.0.1.1"],
+  contactPoints: [scyllaContactPoint],
   errorPath: "note, adapters, db client",
   id: undefined,
   keyspace: "note",
