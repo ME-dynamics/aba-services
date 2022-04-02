@@ -3,8 +3,9 @@ export function buildMakeToken(args: entityTypes.IBuildMakeToken) {
   const { hoursFromNow, nanoid } = args;
   const errorPath = "authnz, entities, token";
   function isPermanentlyBlocked(tokenReCreateCount: number) {
-    return tokenReCreateCount > 6;
+    return tokenReCreateCount > 9;
   }
+  const tempBlockSkew = 3e4; // 30 seconds
   return function makeToken(token: entityTypes.IToken) {
     const {
       otpId,
@@ -24,16 +25,25 @@ export function buildMakeToken(args: entityTypes.IBuildMakeToken) {
     } = token;
 
     // increase token generation count per otp id
-    // due to silent refresh technique on client side, 10 second time threshold is applied
-    if (tokenTempBlock && tokenTempBlock.getTime() - 1e4 > Date.now()) {
+    // due to silent refresh technique on client side, 30 second time threshold is applied
+    // request might be out of time
+    if (
+      tokenTempBlock &&
+      tokenTempBlock.getTime() + tempBlockSkew > Date.now()
+    ) {
       ++tokenReCreateCount;
+    }
+    // if token is refresh at correct time, reset token generation count
+    if (tokenTempBlock && tokenTempBlock.getTime() < Date.now()) {
+      tokenReCreateCount = 0;
     }
 
     // check if it's blocked
     permanentBlock = isPermanentlyBlocked(tokenReCreateCount);
 
-    // can create 6 token within two hours
-    tokenTempBlock = new Date(hoursFromNow(2, errorPath));
+    // can create 9 token within five hours
+    // jwt is valid for 313 minutes
+    tokenTempBlock = new Date(hoursFromNow(5, errorPath));
 
     // * Setters
 
