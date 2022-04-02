@@ -112,9 +112,9 @@ export const bdiChoiceMap: Record<string, Record<number, number>> = {
     2: 1,
     3: 2,
     4: 2,
-    5: 2,
+    // 5: 2,
+    5: 3,
     6: 3,
-    7: 3,
   },
   "19": {
     0: 0,
@@ -247,7 +247,7 @@ export const testStructure: entityTypes.ITestStructure = {
         },
         {
           label:
-            "ر مورد خیلی از چیزهایی که انجام داده ام و یا باید انجام می دادم احساس گناه می کنم.",
+            "در مورد خیلی از چیزهایی که انجام داده ام و یا باید انجام می دادم احساس گناه می کنم.",
           value: 1,
         },
         {
@@ -563,17 +563,17 @@ export const testStructure: entityTypes.ITestStructure = {
           label: "اشتهایم خیلی بیشتر از حد معمول است.",
           value: 4,
         },
+        // {
+        //   label: "اشتهایم خیلی بیشتر از حد معمول است.",
+        //   value: 5,
+        // },
         {
-          label: "اشتهایم خیلی بیشتر از حد معمول است.",
+          label: "اصلا اشتها ندارم.",
           value: 5,
         },
         {
-          label: "اصلا اشتها ندارم.",
-          value: 6,
-        },
-        {
           label: "همیشه میل زیادی به غذا خوردن دارم.",
-          value: 7,
+          value: 6,
         },
       ],
     },
