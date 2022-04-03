@@ -69,7 +69,7 @@ export function buildRetrieveTests() {
   return function retrieveTests() {
     return ok({
       payload: [
-        mmpi,
+        // mmpi,
         mcmi,
         neopir,
         mbti,
