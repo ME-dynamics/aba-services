@@ -29,6 +29,7 @@ import { buildPasswordlessVerify } from "./passwordlessVerify";
 import { buildRefresh } from "./refresh";
 import { buildRetrievePublicKey } from "./retrievePublicKey";
 import { buildCreateProvider } from "./createProvider";
+import { buildRemoveProvider } from "./removeProvider";
 import { buildInitAdmins } from "./initAdmins";
 import { buildRetrieveRoleByOtpId } from "./retrieveRoleByOtpId";
 
@@ -70,6 +71,12 @@ export const createProvider = buildCreateProvider({
   findOtpByPhone,
   findRole,
   insertOtp,
+  insertRole,
+});
+
+export const removeProvider = buildRemoveProvider({
+  findOtpByPhone,
+  findRole,
   insertRole,
 });
 
