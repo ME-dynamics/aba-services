@@ -22,6 +22,7 @@ import { buildUpdateCustomerInfo } from "./updateCustomerInfo";
 import { buildRetrieveCustomerProvider } from "./retrieveCustomerProvider";
 import { buildRetrieveCustomerProviderInfo } from "./retrieveCustomerProviderInfo";
 import { buildRetrieveCustomerRequest } from "./retrieveCustomerRequest";
+import { buildRemoveProviderCustomers } from "./removeProviderCustomers";
 
 export const confirmRequest = buildConfirmRequest({
   findRequestByCustomerId,
@@ -83,4 +84,10 @@ export const retrieveCustomerProvider = buildRetrieveCustomerProvider({
 export const retrieveCustomerProviderInfo = buildRetrieveCustomerProviderInfo({
   fetchUserById,
   retrieveCustomerProviderId: retrieveCustomerProvider,
+});
+
+export const removeProviderCustomers = buildRemoveProviderCustomers({
+  deleteCustomer,
+  findCustomersByProviderId,
+  findRequestsByProviderId,
 });
