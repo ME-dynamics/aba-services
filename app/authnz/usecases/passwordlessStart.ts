@@ -1,7 +1,7 @@
 import { httpResult } from "aba-node";
 import { makeOtp, makeDeviceId } from "../entities";
-// TODO: move this to network
-import { sendOtpBySms } from "../../notification"
+
+
 import { strings } from "../config";
 import { usecaseTypes, entityTypes } from "../types";
 
@@ -11,7 +11,7 @@ export function buildPasswordlessStart(
   const {
     findOtpByPhone,
     insertOtp,
-    // sendOtpBySms,
+    sendOtpBySms,
     otpGen,
     sha512,
     insertDeviceId,
