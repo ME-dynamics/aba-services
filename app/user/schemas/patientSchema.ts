@@ -64,12 +64,12 @@ export const patient = fluentSchema
   .prop("isMotherAlive", fluentSchema.boolean().required())
   .prop("fatherDeathReason", fluentSchema.string().default(undefined))
   .prop("motherDeathReason", fluentSchema.string().default(undefined))
-  .prop("cousinMarriage", fluentSchema.boolean().default(undefined))
+  .prop("cousinMarriage", fluentSchema.boolean().default(false))
   .prop(
     "siblingsPosition",
     fluentSchema.number().minimum(1).maximum(41).required()
   )
-  .prop("siblings", fluentSchema.string().required())
+  .prop("siblings", fluentSchema.string())
   .prop("siblingDiseases", fluentSchema.string());
 
 export const patientSchema = fluentSchema

@@ -28,7 +28,7 @@ export function buildSubmitYEMSQ(args: usecaseTypes.IBuildSubmitTest) {
     const results: entityTypes.ITestResult[] = [
       {
         type: "factor",
-        variable: "abandonment",
+        variable: "ab",
         rawscore: abandonment,
         baserate: abandonment,
         interpret: "",
@@ -39,7 +39,7 @@ export function buildSubmitYEMSQ(args: usecaseTypes.IBuildSubmitTest) {
       },
       {
         type: "factor",
-        variable: "mistrust",
+        variable: "ma",
         rawscore: mistrust,
         baserate: mistrust,
         interpret: "",
@@ -50,7 +50,7 @@ export function buildSubmitYEMSQ(args: usecaseTypes.IBuildSubmitTest) {
       },
       {
         type: "factor",
-        variable: "emotionalDeprivation",
+        variable: "ed",
         rawscore: emotionalDeprivation,
         baserate: emotionalDeprivation,
         interpret: "",
@@ -61,7 +61,7 @@ export function buildSubmitYEMSQ(args: usecaseTypes.IBuildSubmitTest) {
       },
       {
         type: "factor",
-        variable: "defectiveness",
+        variable: "Ds",
         rawscore: defectiveness,
         baserate: defectiveness,
         interpret: "",
@@ -72,7 +72,7 @@ export function buildSubmitYEMSQ(args: usecaseTypes.IBuildSubmitTest) {
       },
       {
         type: "factor",
-        variable: "socialIsolation",
+        variable: "si",
         rawscore: socialIsolation,
         baserate: socialIsolation,
         interpret: "",
@@ -83,7 +83,7 @@ export function buildSubmitYEMSQ(args: usecaseTypes.IBuildSubmitTest) {
       },
       {
         type: "factor",
-        variable: "dependence",
+        variable: "di",
         rawscore: dependence,
         baserate: dependence,
         interpret: "",
@@ -94,7 +94,7 @@ export function buildSubmitYEMSQ(args: usecaseTypes.IBuildSubmitTest) {
       },
       {
         type: "factor",
-        variable: "vulnerabilityToHarmOrIllness",
+        variable: "vh",
         rawscore: vulnerabilityToHarmOrIllness,
         baserate: vulnerabilityToHarmOrIllness,
         interpret: "",
@@ -105,7 +105,7 @@ export function buildSubmitYEMSQ(args: usecaseTypes.IBuildSubmitTest) {
       },
       {
         type: "factor",
-        variable: "enmeshment",
+        variable: "em",
         rawscore: enmeshment,
         baserate: enmeshment,
         interpret: "",
@@ -116,7 +116,7 @@ export function buildSubmitYEMSQ(args: usecaseTypes.IBuildSubmitTest) {
       },
       {
         type: "factor",
-        variable: "failure",
+        variable: "fa",
         rawscore: failure,
         baserate: failure,
         interpret: "",
@@ -127,7 +127,7 @@ export function buildSubmitYEMSQ(args: usecaseTypes.IBuildSubmitTest) {
       },
       {
         type: "factor",
-        variable: "entitlement",
+        variable: "et",
         rawscore: entitlement,
         baserate: entitlement,
         interpret: "",
@@ -138,7 +138,7 @@ export function buildSubmitYEMSQ(args: usecaseTypes.IBuildSubmitTest) {
       },
       {
         type: "factor",
-        variable: "selfDiscipline",
+        variable: "is",
         rawscore: selfDiscipline,
         baserate: selfDiscipline,
         interpret: "",
@@ -149,7 +149,7 @@ export function buildSubmitYEMSQ(args: usecaseTypes.IBuildSubmitTest) {
       },
       {
         type: "factor",
-        variable: "subjugation",
+        variable: "sb",
         rawscore: subjugation,
         baserate: subjugation,
         interpret: "",
@@ -160,7 +160,7 @@ export function buildSubmitYEMSQ(args: usecaseTypes.IBuildSubmitTest) {
       },
       {
         type: "factor",
-        variable: "selfSacrifice",
+        variable: "ss",
         rawscore: selfSacrifice,
         baserate: selfSacrifice,
         interpret: "",
@@ -171,7 +171,7 @@ export function buildSubmitYEMSQ(args: usecaseTypes.IBuildSubmitTest) {
       },
       {
         type: "factor",
-        variable: "emotionalInhibition",
+        variable: "ei",
         rawscore: emotionalInhibition,
         baserate: emotionalInhibition,
         interpret: "",
@@ -182,7 +182,7 @@ export function buildSubmitYEMSQ(args: usecaseTypes.IBuildSubmitTest) {
       },
       {
         type: "factor",
-        variable: "unrelentingStandards",
+        variable: "us",
         rawscore: unrelentingStandards,
         baserate: unrelentingStandards,
         interpret: "",

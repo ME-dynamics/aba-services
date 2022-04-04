@@ -7,16 +7,21 @@ import {
   sRefresh,
   sRetrievePublicKey,
   sCreateProvider,
+  sRemoveProvider,
 } from "../schemas";
 import { passwordlessStart } from "./passwordlessStart";
 import { passwordlessVerify } from "./passwordlessVerify";
 import { createProvider } from "./createProvider";
+import { removeProvider } from "./removeProvider";
 import { retrievePublicKey } from "./retrievePublicKey";
 
 import { refresh } from "./refresh";
 
 export function startAuthnzServer(app: types.tHttpInstance) {
-  const routeGen = buildRouteGenerator({ service: "authnz", version: applicationVersion });
+  const routeGen = buildRouteGenerator({
+    service: "authnz",
+    version: applicationVersion,
+  });
   app.post(
     routeGen(["passwordless", "start"]),
     { schema: sPasswordlessStart },
@@ -27,16 +32,14 @@ export function startAuthnzServer(app: types.tHttpInstance) {
     { schema: sPasswordlessVerify },
     passwordlessVerify
   );
-  app.post(
-    routeGen(["provider"]),
-    { schema: sCreateProvider },
-    createProvider
+  app.post(routeGen(["provider"]), { schema: sCreateProvider }, createProvider);
+  app.delete(
+    routeGen(["provider", ":providerPhoneNumber"]),
+    { schema: sRemoveProvider },
+    removeProvider
   );
-  app.post(
-    routeGen(["refresh"]),
-    { schema: sRefresh },
-    refresh
-  );
+
+  app.post(routeGen(["refresh"]), { schema: sRefresh }, refresh);
 
   app.get(
     routeGen(["jwt", "key", "public"]),

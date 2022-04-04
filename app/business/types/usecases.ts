@@ -120,3 +120,21 @@ export interface IUpdateCustomerInfo {
   description: string | undefined;
   profilePictureUrl: string | undefined;
 }
+
+// remove provider customers -- internal
+
+export interface IBuildRemoveProviderCustomers {
+  findCustomersByProviderId: tFindCustomersByProviderIdFunc;
+  findRequestsByProviderId: tFindRequestsByProviderIdFunc;
+  deleteCustomer: tDeleteCustomerFunc;
+}
+
+export interface IRemoveProviderCustomers {
+  providerId: string;
+}
+
+export interface ICustomerIds {
+  customerId: string;
+  providerId: string;
+  businessId: string;
+}

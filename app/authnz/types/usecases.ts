@@ -129,6 +129,18 @@ export interface ICreateProviderResult {
   phoneNumber: string;
 }
 
+// remove provider
+
+export interface IBuildRemoveProvider {
+  findOtpByPhone: tFindOtpByPhoneFunc;
+  findRole: tFindRoleFunc;
+  insertRole: tInsertRoleFunc;
+}
+
+export interface IRemoveProvider {
+  providerPhoneNumber: string;
+}
+
 // initialize admin
 
 export interface IBuildInitAdmin {

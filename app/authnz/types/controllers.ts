@@ -32,3 +32,15 @@ export interface IPostCreateProvider {
 }
 
 export type tPostCreateProvider = types.tRequest<IPostCreateProvider>;
+
+export interface IBuildDeleteProvider {
+  validatePhoneNumber: (phoneNumber: string) => IValidatePhoneNumberResult;
+}
+
+export interface IDeleteProvider {
+  Params: {
+    providerPhoneNumber: string;
+  };
+}
+
+export type tDeleteProvider = types.tRequest<IDeleteProvider>;
