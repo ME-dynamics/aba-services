@@ -229,7 +229,10 @@ export type tCreateUserFunc = (
 ) => Promise<string | undefined>;
 
 export interface ISendOtpSms {
+  userId: string;
   phoneNumber: string;
   otpCode: number;
 }
-export type tSendOtpSms = (info: ISendOtpSms) => Promise<boolean>;
+export type tSendOtpSms = (
+  info: ISendOtpSms
+) => Promise<types.IPayloadResult<string> | types.IErrorResult>;
