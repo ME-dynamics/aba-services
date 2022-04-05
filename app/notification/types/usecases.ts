@@ -5,6 +5,7 @@ import {
   tInsertNotificationTokenFunc,
   tInsertNotificationFunc,
   tFetchSendSmsirOtpFunc,
+  tFetchSendKavenegarOtpFunc
 } from "./adapters";
 
 export interface IBuildRetrieveSmsirToken {
@@ -21,6 +22,7 @@ export interface IBuildSendOtpSms {
   insertNotification: tInsertNotificationFunc;
   retrieveSmsirToken: tRetrieveSmsirTokenFunc;
   fetchSendOtpBySmsir: tFetchSendSmsirOtpFunc;
+  fetchSendOtpByKavenegar: tFetchSendKavenegarOtpFunc;
 }
 
 export interface ISendOtpSms {

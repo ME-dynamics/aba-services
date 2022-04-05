@@ -1,7 +1,7 @@
 import fetch from "node-fetch";
-
+import { smsirApiKey, smsirSecretKey } from "../../config";
 function body() {
-  return '{"UserApiKey":"f86ff9e75397cb3d11f9e7","SecretKey":"117351d784c5596dc4804ac7050c03195b3048ece93f21f783144a3d9ff407c6"}';
+  return `{"UserApiKey":${smsirApiKey},"SecretKey":${smsirSecretKey}}`;
 }
 
 export async function fetchSmsirToken(): Promise<string | undefined> {

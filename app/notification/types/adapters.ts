@@ -54,14 +54,31 @@ export interface ISmsirOtpRequest {
     }[];
     TemplateId: string;
     Mobile: string;
-  }
+  };
   token: string;
 }
 
-export interface ISmsirOtpResponse {
+export interface IFetchOtpResponse {
   verificationId: number;
   success: boolean;
 }
 export type tFetchSendSmsirOtpFunc = (
   info: ISmsirOtpRequest
-) => Promise<ISmsirOtpResponse>;
+) => Promise<IFetchOtpResponse>;
+
+export interface IKavenegarOtpRequest {
+  phoneNumber: string;
+  otpCode: string;
+  template: string;
+}
+
+export type tFetchSendKavenegarOtpFunc = (
+  info: IKavenegarOtpRequest
+) => Promise<IFetchOtpResponse>;
+
+// kave negar verify
+export interface IKavenegarVerifyLookup {
+  receptor: string;
+  token: string;
+  template: string;
+}
