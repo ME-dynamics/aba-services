@@ -1,2 +1,3 @@
-export { fetchSendOtpBySmsir } from "./fetchSendOtpBySmsir"
-export { fetchSmsirToken } from "./fetchSmsirToken"
+export { fetchSendOtpBySmsir } from "./fetchSendOtpBySmsir";
+export { fetchSendOtpByKavenegar } from "./fetchSendOtpByKavenegar";
+export { fetchSmsirToken } from "./fetchSmsirToken";
