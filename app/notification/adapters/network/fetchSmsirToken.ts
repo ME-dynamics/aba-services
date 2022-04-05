@@ -1,7 +1,7 @@
 import fetch from "node-fetch";
 import { smsirApiKey, smsirSecretKey } from "../../config";
 function body() {
-  return `{"UserApiKey":${smsirApiKey},"SecretKey":${smsirSecretKey}}`;
+  return `{"UserApiKey":"${smsirApiKey}","SecretKey":"${smsirSecretKey}"}`;
 }
 
 export async function fetchSmsirToken(): Promise<string | undefined> {
