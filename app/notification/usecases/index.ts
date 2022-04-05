@@ -4,6 +4,7 @@ import {
   insertNotificationToken,
   fetchSendOtpBySmsir,
   fetchSmsirToken,
+  fetchSendOtpByKavenegar,
 } from "../adapters";
 
 import { buildRetrieveSmsirToken } from "./retrieveSmsirToken";
@@ -19,4 +20,5 @@ export const sendOtpBySms = buildSendOtpBySms({
   fetchSendOtpBySmsir,
   insertNotification,
   retrieveSmsirToken,
+  fetchSendOtpByKavenegar,
 });
