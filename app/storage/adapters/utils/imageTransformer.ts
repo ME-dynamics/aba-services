@@ -9,7 +9,7 @@ export function buildImageTransformer(
     const { width, height } = info;
     return sharp()
       .resize(width, height, {
-        fit: "fill",
+        fit: "contain",
         background: { r: 255, g: 255, b: 255, alpha: 1 },
       })
       .jpeg({ quality: 90, optimiseCoding: true });
