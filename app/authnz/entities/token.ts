@@ -43,7 +43,7 @@ export function buildMakeToken(args: entityTypes.IBuildMakeToken) {
 
     // can create 9 token within five hours
     // jwt is valid for 313 minutes
-    tokenTempBlock = new Date(hoursFromNow(5, errorPath));
+    tokenTempBlock = new Date(hoursFromNow(4, errorPath));
 
     // * Setters
 
