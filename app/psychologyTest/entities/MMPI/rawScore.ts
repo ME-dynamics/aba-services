@@ -477,6 +477,7 @@ export function PaFormula(fields: Record<string, number>) {
     shouldBeCorrect(fields["144"]) +
     shouldBeCorrect(fields["145"]) +
     shouldBeCorrect(fields["146"]) +
+    shouldBeCorrect(fields["162"]) +
     shouldBeCorrect(fields["234"]) +
     shouldBeCorrect(fields["259"]) +
     shouldBeCorrect(fields["271"]) +
