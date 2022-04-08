@@ -257,7 +257,7 @@ export const tWithKMen: Record<string, Record<string, number>> = {
     "50": 117,
     "51": 120,
   },
-  "Mf": {
+  "Mm": {
     "16": 30,
     "17": 32,
     "18": 34,
