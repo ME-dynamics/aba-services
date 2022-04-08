@@ -129,6 +129,9 @@ export interface IBuildSubmitTestById {
   submitMMPI: (
     info: ISubmitTestWithGender
   ) => Promise<types.IPayloadResult<IMadeTestDataObject>>;
+  submitBIS: (
+    info: ISubmitTest
+  ) => Promise<types.IPayloadResult<IMadeTestDataObject>>;
 }
 
 export interface ISubmitTestById {
