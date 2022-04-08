@@ -32,6 +32,10 @@ import { buildMakeYEMSQ, yemsqStructure } from "./YEMSQ";
 import { hisaTestStructure, buildMakeHISA } from "./HISA";
 import { buildMakeHISD, hisdTestStructure } from "./HISD";
 import { buildMakeMMPI, mmpiStructure } from "./MMPI";
+import {
+  bisStructure,
+  buildMakeBarretImpulsiveness,
+} from "./barretImpulsiveness";
 
 export const makeTestData = buildMakeTestData({ uuid: v4 });
 export const makeNEOPIR = buildMakeNEOPIR({
@@ -60,6 +64,7 @@ export const makeYEMSQ = buildMakeYEMSQ();
 export const makeHISA = buildMakeHISA();
 export const makeHISD = buildMakeHISD();
 export const makeMMPI = buildMakeMMPI();
+export const makeBarretImpulsiveness = buildMakeBarretImpulsiveness();
 
 export const testStructures = {
   NEOPIRStructure,
@@ -72,4 +77,38 @@ export const testStructures = {
   hisaTestStructure,
   hisdTestStructure,
   mmpiStructure,
+  bisStructure,
 };
+
+// console.log(makeBarretImpulsiveness({
+//   "1": 2,
+//   "2": 3,
+//   "3": 4,
+//   "4": 1,
+//   "5": 2,
+//   "6": 3,
+//   "7": 4,
+//   "8": 1,
+//   "9": 2,
+//   "10": 3,
+//   "11": 4,
+//   "12": 1,
+//   "13": 2,
+//   "14": 3,
+//   "15": 4,
+//   "16": 1,
+//   "17": 2,
+//   "18": 3,
+//   "19": 4,
+//   "20": 1,
+//   "21": 2,
+//   "22": 3,
+//   "23": 4,
+//   "24": 1,
+//   "25": 2,
+//   "26": 3,
+//   "27": 4,
+//   "28": 1,
+//   "29": 2,
+//   "30": 3,
+// }))
