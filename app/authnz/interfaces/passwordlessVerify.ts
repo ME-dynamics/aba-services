@@ -8,6 +8,9 @@ export async function passwordlessVerify(
   try {
     const response = await postPasswordlessVerify(request);
     reply.code(response.code);
+
+    reply.setCookie("authnzjwt", response.payload?.jwtToken || "");
+    reply.setCookie("refresh", response.payload?.refreshToken || "");
     return response;
   } catch (error) {
     reply.code(500);
