@@ -46,17 +46,19 @@
   "dependencies": {
     "aba-node": "0.4.6",
     "argon2": "^0.28.5",
+    "fastify-cookie": "^5.6.0",
+    "fastify-cors": "^6.0.3",
     "fastify-multipart": "5.3.1",
     "file-type": "16.5.3",
-    "jose": "^4.6.0",
+    "jose": "^4.8.1",
     "kavenegar": "^1.1.4",
-    "libphonenumber-js": "^1.9.50",
+    "libphonenumber-js": "^1.9.52",
     "make-promises-safe": "5.1.0",
-    "minio": "7.0.26",
-    "mnemonist": "^0.39.0",
-    "nanoid": "3.3.2",
+    "minio": "7.0.28",
+    "mnemonist": "^0.39.1",
+    "nanoid": "3.3.4",
     "node-fetch": "2.6.7",
-    "sharp": "0.30.3",
+    "sharp": "0.30.4",
     "uuid": "8.3.2"
   }
 }
