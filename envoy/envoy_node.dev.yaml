@@ -197,6 +197,8 @@ static_resources:
                   virtual_hosts:
                     - name: node_service
                       domains: ["*"]
+                      # cors:
+                      #   allow_origin_string_match: []
                       #   - taskyn.ir
                       #   - www.taskyn.ir
                       routes:
@@ -213,6 +215,8 @@ static_resources:
                     - name: minio_service
                       domains:
                         - storage.taskyn.ir
+                      # cors:
+                      #   allow_origin_string_match: ["*"]
                       routes:
                         - match:
                             prefix: "/private/"
