@@ -21,7 +21,6 @@ import { tWithOutKMen } from "./tWithOutKMen";
 import { tWithOutKWomen } from "./tWithOutKWomen";
 
 export function buildMakeMMPI() {
-  console.log("mmpi running: ");
   // calculation min,max for baseRate
   function minAndMaxCal(min: number, max: number, value: number) {
     if (value > max) {
