@@ -1,4 +1,6 @@
 import { httpClient } from "aba-node";
+import FastifyCors from "fastify-cors";
+import FastifyCookie from "fastify-cookie";
 import {
   startAuthnzServer,
   initDb as initAuthnzDb,
@@ -20,7 +22,11 @@ import {
   retrieveSmsirToken,
 } from "./app/notification";
 const app = httpClient({ logger: true });
-
+app.register(FastifyCors, {
+  origin: process.env.NODE_ENV === "production" ? "https://taskyn.ir" : "*", // TODO: use server url from env here
+  // credentials: true,
+});
+app.register(FastifyCookie);
 export async function startService() {
   try {
     await Promise.all([
