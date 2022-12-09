@@ -7,4 +7,5 @@ docker exec -it taskynDb cqlsh $1 $2 -e "CREATE KEYSPACE storage WITH replicatio
 docker exec -it taskynDb cqlsh $1 $2 -e "CREATE KEYSPACE task WITH replication = {'class': 'NetworkTopologyStrategy', 'replication_factor': 3 };" &&
 docker exec -it taskynDb cqlsh $1 $2 -e "CREATE KEYSPACE user WITH replication = {'class': 'NetworkTopologyStrategy', 'replication_factor': 3 };" &&
 docker exec -it taskynDb cqlsh $1 $2 -e "CREATE KEYSPACE notification WITH replication = {'class': 'NetworkTopologyStrategy', 'replication_factor': 3 };" &&
+docker exec -it taskynDb cqlsh $1 $2 -e "CREATE KEYSPACE booking WITH replication = {'class': 'NetworkTopologyStrategy', 'replication_factor': 3 };" &&
 echo "keyspaces created"
