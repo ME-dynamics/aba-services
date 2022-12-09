@@ -1,5 +1,5 @@
 import { queryGen } from "aba-node";
-import { adaptersTypes } from "../../types";
+import type { adaptersTypes } from "../../types";
 
 export function buildInitDb(args: adaptersTypes.IBuildInit) {
   const { init } = args;
