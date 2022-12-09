@@ -1,7 +1,7 @@
 FROM node:16.14.2-alpine3.15 as builder
 RUN apk add --no-cache vips-dev build-base 
 RUN mkdir -p /home/node/app
-RUN mkdir /home/node/.npm-global
+# RUN mkdir /home/node/.npm-global
 RUN chown -R node:node /home/node
 WORKDIR /home/node
 COPY app/ ./app
