@@ -1,18 +1,18 @@
-import fetch from "node-fetch";
+import { request } from "undici";
 import { smsirApiKey, smsirSecretKey } from "../../config";
-function body() {
+function bodyGen() {
   return `{"UserApiKey":"${smsirApiKey}","SecretKey":"${smsirSecretKey}"}`;
 }
 
 export async function fetchSmsirToken(): Promise<string | undefined> {
-  const result = await fetch("https://RestfulSms.com/api/Token", {
+  const { body } = await request("https://RestfulSms.com/api/Token", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
     },
-    body: body(),
+    body: bodyGen(),
   });
-  const data = Object(await result.json());
+  const data = Object(await body.json());
   // console.log(data);
   const success = Boolean(data.IsSuccessful);
   const token = `${data.TokenKey}`;

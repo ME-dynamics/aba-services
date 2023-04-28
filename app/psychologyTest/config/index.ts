@@ -1,4 +1,4 @@
-if (process.env.NODE_ENV !== "production") {
+if (process.env["NODE_ENV"] !== "production") {
   try {
     // eslint-disable-next-line @typescript-eslint/no-var-requires
     const { config } = require("dotenv");
@@ -13,6 +13,6 @@ if (process.env.NODE_ENV !== "production") {
 }
 
 export const scyllaContactPoint =
-  process.env.SCYLLA_CONTACT_POINT || "127.0.1.1";
+  process.env["SCYLLA_CONTACT_POINT"] || "127.0.1.1";
 
 export const applicationVersion = "v1";

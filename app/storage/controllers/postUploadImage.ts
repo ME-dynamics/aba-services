@@ -20,7 +20,7 @@ export function buildPostUploadImage() {
         transform: "profile" | "note";
       }
     | false {
-    if (!fileData.fields.access) {
+    if (!fileData.fields["access"]) {
       return false;
     }
     // eslint-disable-next-line @typescript-eslint/ban-ts-comment
@@ -63,6 +63,11 @@ export function buildPostUploadImage() {
     }
     try {
       const fileData = await httpRequest.file();
+      if(!fileData) {
+        return badRequest({
+          error: fieldNotDefinedError,
+        });
+      }
       fileData.file.on("limit", function onFileLimit() {
         fileData.file.unpipe();
         const { code, error } = forbidden({ error: "reach files limit" });

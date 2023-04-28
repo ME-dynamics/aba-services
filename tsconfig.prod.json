@@ -35,6 +35,8 @@
     "**/*.d.ts",
     "build",
     "node_modules",
+    "**/benchmarks",
+    "**/__tests__",
     "jest.config.js",
     ".eslintrc.js"
   ]

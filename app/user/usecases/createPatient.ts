@@ -1,6 +1,6 @@
 import { httpResult } from "aba-node";
 import { makePatient } from "../entities";
-import { usecaseTypes, entityTypes } from "../types";
+import { usecaseTypes } from "../types";
 
 export function buildCreatePatient(args: usecaseTypes.IBuildCreatePatient) {
   const { findUserById, findPatientByUserId, insertPatient } = args;

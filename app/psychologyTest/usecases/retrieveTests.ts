@@ -14,7 +14,7 @@ export function buildRetrieveTests() {
     yemsqStructure,
     hisaTestStructure,
     hisdTestStructure,
-    mmpiStructure,
+    // mmpiStructure,
   } = testStructures;
   const mbti = {
     id: mbtiStructure.id,
@@ -61,11 +61,11 @@ export function buildRetrieveTests() {
     title: hisdTestStructure.title,
     shortName: hisdTestStructure.shortName,
   };
-  const mmpi = {
-    id: mmpiStructure.id,
-    title: mmpiStructure.title,
-    shortName: mmpiStructure.shortName,
-  };
+  // const mmpi = {
+  //   id: mmpiStructure.id,
+  //   title: mmpiStructure.title,
+  //   shortName: mmpiStructure.shortName,
+  // };
   return function retrieveTests() {
     return ok({
       payload: [

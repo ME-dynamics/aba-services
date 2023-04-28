@@ -3,7 +3,7 @@ import { adsIdQueue, requestQueue } from "../adapters";
 import { processAdsList } from "../usecases";
 export async function startDivarDataExtractorServer() {
   requestQueue.process(async (job) => {
-    const { type, postId } = job.data;
+    const { type } = job.data;
     if (type === "root") {
       await processAdsList(); // process root ads
     } else if (type === "post") {

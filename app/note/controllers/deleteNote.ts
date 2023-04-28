@@ -2,7 +2,8 @@ import { auth, types } from "aba-node";
 import { removeNote } from "../usecases";
 import { controllerTypes } from "../types";
 
-export function buildDeleteNote(args: controllerTypes.IBuildDeleteNote) {
+// args: controllerTypes.IBuildDeleteNote
+export function buildDeleteNote() {
   const roles: types.IRoles = {
     customer: false,
     provider: true,

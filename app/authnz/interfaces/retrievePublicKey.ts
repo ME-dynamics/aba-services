@@ -4,6 +4,9 @@ export async function retrievePublicKey(
   request: types.tRequest<unknown>,
   reply: types.tReply
 ) {
+  if (request) {
+    console.log(request);
+  }
   try {
     const response = await getRetrievePublicKey();
     reply.code(200);

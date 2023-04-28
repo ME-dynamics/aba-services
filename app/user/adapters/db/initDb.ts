@@ -1,5 +1,5 @@
 import { queryGen } from "aba-node";
-import { applicationVersion } from "../../config";
+// import { applicationVersion } from "../../config";
 
 import { adapterTypes } from "../../types";
 
@@ -11,7 +11,7 @@ export function buildInitDb(args: adapterTypes.IBuildInitDb) {
     const {
       createTableQuery,
       createIndexQuery,
-      createTypeQuery,
+      // createTypeQuery,
       createMaterialView,
       selectQuery,
       operators,

@@ -1,6 +1,6 @@
 // start your http, grpc, kafka , etc interface here
 import { types, buildRouteGenerator } from "aba-node";
-import multipart from "fastify-multipart";
+import multipart from "@fastify/multipart";
 import { uploadImage } from "./uploadImage";
 // import { uploadSession } from "./fileSession";
 import { retrievePrivateImage } from "./retrievePrivateImage";

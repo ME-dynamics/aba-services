@@ -7,4 +7,4 @@ import { buildDeleteNote } from "./deleteNote";
 export const postCreateNote = buildPostCreateNote({ fetchCustomerProvider });
 export const putUpdateNote = buildPutUpdateNote();
 export const getCustomerNotes = buildGetCustomerNotes({ fetchCustomerProvider });
-export const deleteNote = buildDeleteNote({ fetchCustomerProvider });
+export const deleteNote = buildDeleteNote();

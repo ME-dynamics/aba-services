@@ -1,7 +1,7 @@
 import { entityTypes } from "../types";
 
 export function buildMakeUser(args: entityTypes.IBuildMakeUser) {
-  const { uuid, nanoid } = args;
+  const { nanoid } = args;
 
   return function makeUser(
     user: entityTypes.IUser
