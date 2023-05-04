@@ -1,1 +1,0 @@
-export { rowToTestData } from "./rowToTestData";
